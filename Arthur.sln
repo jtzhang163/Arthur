@@ -3,9 +3,31 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2026
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Arthur", "Arthur", "{C2C176EE-22C1-49F5-AA4A-0E992B157E73}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{4C106B58-3347-436A-9FB1-393F0BBB6400}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SzYitong", "SzYitong", "{A713AAD6-D63F-4E71-BBDA-8347BC5C49EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arthur", "Arthur\Arthur.csproj", "{1090299D-1C85-4E87-B155-B28AB93985FA}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1090299D-1C85-4E87-B155-B28AB93985FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1090299D-1C85-4E87-B155-B28AB93985FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1090299D-1C85-4E87-B155-B28AB93985FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1090299D-1C85-4E87-B155-B28AB93985FA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A713AAD6-D63F-4E71-BBDA-8347BC5C49EB} = {4C106B58-3347-436A-9FB1-393F0BBB6400}
+		{1090299D-1C85-4E87-B155-B28AB93985FA} = {C2C176EE-22C1-49F5-AA4A-0E992B157E73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF2402D6-D30C-40A9-A451-F623E774C1AA}
