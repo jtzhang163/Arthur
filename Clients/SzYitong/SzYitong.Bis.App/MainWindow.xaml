@@ -9,17 +9,118 @@
     <Window.Resources>
         <Style x:Key="FontAwesome">
             <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/#FontAwesome" />
-            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
-            <!--<Setter Property="TextBlock.FontSize" Value="30"></Setter>-->
+            <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
+          
             <Setter Property="TextBlock.Foreground" Value="White"></Setter>
             <Setter Property="TextBlock.Width" Value="40"></Setter>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
         </Style>
+
+
+        <Style TargetType="{x:Type Expander}">
+            <Setter Property="TextBlock.FontSize" Value="24"></Setter>
+            <Setter Property="Foreground" Value="#D0D0D0"></Setter>
+            <Setter Property="Background" Value="#FF2C3B41"></Setter>
+            <Setter Property="TextBlock.Background" Value="Blue"></Setter>
+            <Setter Property="TextBlock.Foreground" Value="#D0D0D0"></Setter>
+            <Setter Property="Margin" Value="0,0,0,0"></Setter>
+            <Setter Property="TextBlock.Margin" Value="0,0,0,0"></Setter>
+        </Style>
+
+        <!--<Style TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="#D0D0D0"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Margin" Value="20,0,0,0"></Setter>
+        </Style>-->
+
+
+        <LinearGradientBrush x:Key="CheckRadioFillNormal">
+            <GradientStop Color="#FFD2D4D2" Offset="0"/>
+            <GradientStop Color="#FFFFFFFF" Offset="1"/>
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="CheckRadioStrokeNormal">
+            <GradientStop Color="#FF004C94" Offset="0"/>
+            <GradientStop Color="#FF003C74" Offset="1"/>
+        </LinearGradientBrush>
+        <Style x:Key="CheckRadioFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
+            <Setter Property="Foreground" Value="#D0D0D0"></Setter>
+            <Setter Property="FontSize" Value="20"></Setter>
+            <Setter Property="Margin" Value="20,0,0,0"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <!--<Setter Property="Background" Value="{StaticResource CheckRadioFillNormal}"/>-->
+            <Setter Property="BorderBrush" Value="{StaticResource CheckRadioStrokeNormal}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid>
+                            <!--背景颜色 透明度 边框弧度-->
+                            <!--<Rectangle x:Name="rectangle" Fill="LightGray" Stroke="Black" Opacity="1" RadiusX="0" RadiusY="0" StrokeThickness="0"/>-->
+                            <!--字体颜色, 字体大小-->
+                            <TextBlock x:Name="textBlock" Margin="8,0" Text="{TemplateBinding Content}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <!--鼠标点击触发器, 背景颜色-->
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="FontWeight" Value="Bold"></Setter>
+                                <Setter Property="Foreground" TargetName="textBlock">
+                                    <Setter.Value>
+                                        <LinearGradientBrush>
+                                            <!--鼠标点击触发器, 修改字体颜色-->
+                                            <GradientStop Color="#FFFFFF" Offset="0"/>
+                                            <GradientStop Color="#FFFFFF" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="FontWeight" Value="Normal"></Setter>
+                                <Setter Property="Foreground" TargetName="textBlock">
+                                    <Setter.Value>
+                                        <LinearGradientBrush>
+                                            <!--鼠标点击触发器, 修改字体颜色-->
+                                            <GradientStop Color="#FFFFFF" Offset="0"/>
+                                            <GradientStop Color="#FFFFFF" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            
+                            <!--鼠标移入移出触发器--><!--
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Effect" TargetName="rectangle" Value="{x:Null}"/>
+                                <Setter Property="Fill" TargetName="rectangle" Value="#AAAAAA"/>
+                            </Trigger>
+                            <Trigger Property="HasContent" Value="true">
+                                <Setter Property="FocusVisualStyle" Value="{StaticResource CheckRadioFocusVisual}"/>
+                                <Setter Property="Padding" Value="2,0,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>-->
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
+
     <Grid>
         <DockPanel>
-            <DockPanel DockPanel.Dock="Top" Background="#FF2B579A" Height="40">
-                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+            <DockPanel DockPanel.Dock="Top" Background="#FF2B579A" Height="60">
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Width="130">
                     <TextBlock Text="&#xf2d1;" Style="{DynamicResource FontAwesome}" FontSize="20" MouseDown="Minimized_MouseDown">
                         <TextBlock.ToolTip>
                             <Label Content="最小化"/>
@@ -36,13 +137,214 @@
                         </TextBlock.ToolTip>
                     </TextBlock>
                 </StackPanel>
-                <Label Content="烯晶碳能" FontSize="22" Foreground="White"/>
+                <Label Content="烯晶碳能" FontSize="30" Foreground="White" VerticalAlignment="Center" FontWeight="Bold" Margin="10,0,0,0"/>
             </DockPanel>
+
+            <StackPanel DockPanel.Dock="Left"  Width="200" Background="#FF222D32">
+                
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
+                    <Expander.Header>
+                        <TextBlock Text="个人信息"/>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0">会员管理</RadioButton>
+                            <RadioButton Grid.Row="1">角色管理</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+                <Separator Height="2" Background="White"/>
+                
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
+                    <Expander.Header>
+                        <TextBlock Text="后台"/>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0">会员管理</RadioButton>
+                            <RadioButton Grid.Row="1">角色管理</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+                <Separator Height="2" Background="White"/>
+
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
+                    <Expander.Header>
+                        <TextBlock Text="系统"/>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0">系统参数</RadioButton>
+                            <RadioButton Grid.Row="1">系统事件</RadioButton>
+                            <RadioButton Grid.Row="2">系统日志</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+                <Separator Height="2" Background="White"/>
+
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
+                    <Expander.Header>
+                        <TextBlock Text="设备"/>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0">设备厂家</RadioButton>
+                            <RadioButton Grid.Row="1">托盘</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+                <Separator Height="2" Background="White"/>
+
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
+                    <Expander.Header>
+                        <TextBlock Text="生产"/>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0">产线</RadioButton>
+                            <RadioButton Grid.Row="1">项目</RadioButton>
+                            <RadioButton Grid.Row="2">批次</RadioButton>
+                            <RadioButton Grid.Row="3">流程文件</RadioButton>
+                            <RadioButton Grid.Row="4">电池类型</RadioButton>
+                            <RadioButton Grid.Row="5">NG代码</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+                <Separator Height="2" Background="White"/>
+
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
+                    <Expander.Header>
+                        <TextBlock Text="数据分析"/>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0">产能与合格率</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+                <Separator Height="2" Background="White"/>
+
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
+                    <Expander.Header>
+                        <TextBlock Text="数据查询"/>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0">基本数据</RadioButton>
+                            <RadioButton Grid.Row="1">静置数据</RadioButton>
+                            <RadioButton Grid.Row="2">OCV数据</RadioButton>
+                            <RadioButton Grid.Row="3">化成数据</RadioButton>
+                            <RadioButton Grid.Row="4">分容数据</RadioButton>
+
+                            <RadioButton Grid.Row="5">DCIR数据</RadioButton>
+                            <RadioButton Grid.Row="6">高速缓存</RadioButton>
+                            <RadioButton Grid.Row="7">电池追溯</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+                <Separator Height="2" Background="White"/>
+
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">
+                    <Expander.Header>
+                        <TextBlock Text="实时监控" />
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0">部门资料</RadioButton>
+                            <RadioButton Grid.Row="1">员工资料</RadioButton>
+                            <RadioButton Grid.Row="2">职位资料</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+
+                <Separator Height="2" Background="White"/>
+
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">
+                    <Expander.Header>
+                        <TextBlock Text="调度"/>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0">采购计划</RadioButton>
+                            <RadioButton Grid.Row="1">需求分析</RadioButton>
+                            <RadioButton Grid.Row="2">采购单</RadioButton>
+                            <RadioButton Grid.Row="3">入库验收</RadioButton>
+                            <RadioButton Grid.Row="4">入库退回</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+
+                <Separator Height="2" Background="White"/>
+
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">
+                    <Expander.Header>
+                        <TextBlock Text="工具"/>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0">基本资料</RadioButton>
+                            <RadioButton Grid.Row="1">往来单位</RadioButton>
+                            <RadioButton Grid.Row="2">上游供应商</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+            </StackPanel>
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="127*"/>
-                    <ColumnDefinition Width="5*"/>
-                </Grid.ColumnDefinitions>
 
             </Grid>
         </DockPanel>
