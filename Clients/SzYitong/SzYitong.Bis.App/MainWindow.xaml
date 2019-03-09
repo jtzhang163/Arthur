@@ -4,9 +4,47 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SzYitong.Bis.App"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowState="Maximized" WindowStyle="None"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="FontAwesome">
+            <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/#FontAwesome" />
+            <Setter Property="TextBlock.TextAlignment" Value="Center"></Setter>
+            <!--<Setter Property="TextBlock.FontSize" Value="30"></Setter>-->
+            <Setter Property="TextBlock.Foreground" Value="White"></Setter>
+            <Setter Property="TextBlock.Width" Value="40"></Setter>
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <DockPanel>
+            <DockPanel DockPanel.Dock="Top" Background="#FF2B579A" Height="40">
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal">
+                    <TextBlock Text="&#xf2d1;" Style="{DynamicResource FontAwesome}" FontSize="20" MouseDown="Minimized_MouseDown">
+                        <TextBlock.ToolTip>
+                            <Label Content="最小化"/>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+                    <TextBlock Text="&#xf2d0;" Style="{DynamicResource FontAwesome}" FontSize="20" MouseDown="Maximized_MouseDown">
+                        <TextBlock.ToolTip>
+                            <Label Content="最大化"/>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+                    <TextBlock Text="&#xf00d;" Style="{DynamicResource FontAwesome}" FontSize="30" MouseDown="Exit_MouseDown">
+                        <TextBlock.ToolTip>
+                            <Label Content="安全退出"/>
+                        </TextBlock.ToolTip>
+                    </TextBlock>
+                </StackPanel>
+                <Label Content="烯晶碳能" FontSize="22" Foreground="White"/>
+            </DockPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="127*"/>
+                    <ColumnDefinition Width="5*"/>
+                </Grid.ColumnDefinitions>
+
+            </Grid>
+        </DockPanel>
     </Grid>
 </Window>

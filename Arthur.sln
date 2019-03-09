@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arthur.Test.WinForm", "Clie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arthur.App", "Arthur.App\Arthur.App.csproj", "{8EE84E4D-AC41-4622-B1D1-7088DF600E49}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arthur.View", "Arthur.View\Arthur.View.csproj", "{1B0A54CC-658B-4ECC-AEE3-B2B3FEB87ACD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{8EE84E4D-AC41-4622-B1D1-7088DF600E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EE84E4D-AC41-4622-B1D1-7088DF600E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EE84E4D-AC41-4622-B1D1-7088DF600E49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B0A54CC-658B-4ECC-AEE3-B2B3FEB87ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B0A54CC-658B-4ECC-AEE3-B2B3FEB87ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B0A54CC-658B-4ECC-AEE3-B2B3FEB87ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B0A54CC-658B-4ECC-AEE3-B2B3FEB87ACD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{B63712DF-45FE-4A51-880D-E7C85D4F66CD} = {25DC6AA5-F373-4655-A47A-FF4DDEEF0366}
 		{FFFC1B41-655E-4F98-916A-4C73DC13095F} = {25DC6AA5-F373-4655-A47A-FF4DDEEF0366}
 		{8EE84E4D-AC41-4622-B1D1-7088DF600E49} = {C2C176EE-22C1-49F5-AA4A-0E992B157E73}
+		{1B0A54CC-658B-4ECC-AEE3-B2B3FEB87ACD} = {C2C176EE-22C1-49F5-AA4A-0E992B157E73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF2402D6-D30C-40A9-A451-F623E774C1AA}

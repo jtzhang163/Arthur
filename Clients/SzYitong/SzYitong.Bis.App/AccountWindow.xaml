@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SzYitong.Bis.App"
+        xmlns:account="clr-namespace:Arthur.View.Account;assembly=Arthur.View"
         mc:Ignorable="d" WindowState="Maximized"
         Title="欢迎来到烯晶碳能BIS" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="grid">
         <Grid.Background>
-            <ImageBrush ImageSource="Images/nightsky.jpg"/>
+            <ImageBrush ImageSource="Images/nightsky2.jpg"/>
         </Grid.Background>
     </Grid>
 </Window>
