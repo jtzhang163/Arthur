@@ -10,7 +10,7 @@ namespace Arthur.App
     /// <summary>
     /// 基类
     /// </summary>
-    public abstract class Service : BindableObject
+    public abstract class Service
     {
         [ReadOnly(true), DisplayName("ID"), Category("基本信息")]
         public int Id { get; set; }

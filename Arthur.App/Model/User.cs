@@ -35,7 +35,7 @@ namespace Arthur.App
         /// <summary>
         /// 用户登录密码
         /// </summary>
-        [Required, MaxLength(100)]
+        [Required, MaxLength(255)]
         public string Password { get; set; }
 
         /// <summary>
@@ -96,87 +96,6 @@ namespace Arthur.App
             Id = id;
         }
 
-
-        public static bool Register(string name, string password, out string msg)
-        {
-            return Register(name, "", password, false, out msg);
-        }
-
-        public static bool Register(string name, string number, string password, bool isEnabled, out string msg)
-        {
-
-            User user = new User();
-            if (Context.UserContext.Users.Where(u => u.Name == name).Count() > 0)
-            {
-                msg = "系统中已存在用户：" + name;
-                return false;
-            }
-            user.Name = name;
-            user.Nickname = name;
-            user.Number = number;
-            user.Password = Base64.EncodeBase64(password);
-            user.IsEnabled = isEnabled;
-            user.RegisterTime = DateTime.Now;
-            user.RoleId = Context.UserContext.Roles.Single(r => r.Name == "操作员").Id;
-            user.ProfilePicture = "/Images/Profiles/001.jpg";
-            Context.UserContext.Users.Add(user);
-            Context.UserContext.SaveChanges();
-
-            msg = string.Empty;
-            return true;
-        }
-
-
-        public static bool Login(string name, string password, out string msg)
-        {
-            var user = new User();
-
-
-            var entityPassword = Base64.EncodeBase64(password);
-            user = Context.UserContext.Users.FirstOrDefault(u => u.Name == name && u.Password == entityPassword) ?? new User();
-            user.LastLoginTime = DateTime.Now;
-            user.LoginTimes++;
-            Context.UserContext.SaveChanges();
-
-            if (!user.IsEnabled)
-            {
-                msg = user.Name + "尚未审核或已被禁用";
-                return false;
-            }
-
-            AppCurrent.User = user;
-
-            if (AppCurrent.User.Id > 0)
-            {
-                msg = string.Empty;
-                return true;
-            }
-            msg = "用户名或密码错误";
-            return false;
-        }
-
-        public static bool Logout()
-        {
-            OperationHelper.ShowTips(AppCurrent.User.Name + "成功注销");
-            AppCurrent.User = new User(-1);
-            return true;
-        }
-
-    }
-
-    public class UserFactory
-    {
-        private ObservableCollection<User> users = new ObservableCollection<User>();
-
-        public UserFactory()
-        {
-            Context.UserContext.Users.ToList().ForEach(u => users.Add(u));
-        }
-
-        public IEnumerable<User> GetUsers()
-        {
-            return users;
-        }
     }
 
 }

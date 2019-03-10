@@ -57,5 +57,15 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Arthur.App\Arthur.App.csproj">
+      <Project>{8ee84e4d-ac41-4622-b1d1-7088df600e49}</Project>
+      <Name>Arthur.App</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Arthur\Arthur.csproj">
+      <Project>{1090299d-1c85-4e87-b155-b28ab93985fa}</Project>
+      <Name>Arthur</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

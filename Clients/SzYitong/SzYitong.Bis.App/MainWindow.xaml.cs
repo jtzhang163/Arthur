@@ -24,20 +24,5 @@ namespace SzYitong.Bis.App
         {
             InitializeComponent();
         }
-
-        private void Minimized_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.WindowState = this.WindowState == WindowState.Minimized ? WindowState.Normal : WindowState.Minimized;
-        }
-
-        private void Maximized_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.WindowState = this.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-        }
-
-        private void Exit_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            this.Close();
-        }
     }
 }

@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arthur.App
+namespace Arthur.App.Data
 {
-    public static class Current
+    public class Context
     {
-
-        public static User User = new User();
-
+        public static AccountContext AccountContext = new AccountContext();
     }
 }

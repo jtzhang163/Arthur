@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SzYitong.Bis.Data;
 
 namespace SzYitong.Bis.App
 {
@@ -34,6 +35,17 @@ namespace SzYitong.Bis.App
         /// <param name="option">登录：login; 注册：register</param>
         public AccountWindow(string option)
         {
+            //往数据库播种数据
+            new DbInitializer().Initialize();
+
+            //如果重复启动该程序，弹窗提示
+            if (Arthur.App.Utility.Application.ThisAppIsAlreadyRunning())
+            {
+                MessageBox.Show("程序已经在运行，请勿重复启动！");
+                Application.Current.Shutdown();
+                return;
+            }
+
             this.Option = option;
             InitializeComponent();
 
@@ -49,7 +61,6 @@ namespace SzYitong.Bis.App
             }
 
         }
-
 
         public void LoginSuccessInvoke()
         {

@@ -41,8 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Battery.cs" />
+    <Compile Include="Model\Battery.cs" />
+    <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Arthur.App\Arthur.App.csproj">
+      <Project>{8EE84E4D-AC41-4622-B1D1-7088DF600E49}</Project>
+      <Name>Arthur.App</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

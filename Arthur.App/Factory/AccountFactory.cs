@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arthur.App
+namespace Arthur.App.Factory
 {
-    public static class Current
+
+
+    public class UserFactory
     {
 
-        public static User User = new User();
+    }
+
+    public class RoleFactory
+    {
+
 
     }
 }

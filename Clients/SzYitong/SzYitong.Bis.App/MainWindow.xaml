@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SzYitong.Bis.App"
-        mc:Ignorable="d" WindowState="Maximized" WindowStyle="None"
+        xmlns:local="clr-namespace:SzYitong.Bis.App" WindowState="Maximized"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <Style x:Key="FontAwesome">
@@ -120,7 +120,8 @@
     <Grid>
         <DockPanel>
             <DockPanel DockPanel.Dock="Top" Background="#FF2B579A" Height="60">
-                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Width="130">
+                <!--Background="#FF2B579A"-->
+                <!--<StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Width="130">
                     <TextBlock Text="&#xf2d1;" Style="{DynamicResource FontAwesome}" FontSize="20" MouseDown="Minimized_MouseDown">
                         <TextBlock.ToolTip>
                             <Label Content="最小化"/>
@@ -136,7 +137,7 @@
                             <Label Content="安全退出"/>
                         </TextBlock.ToolTip>
                     </TextBlock>
-                </StackPanel>
+                </StackPanel>-->
                 <Label Content="烯晶碳能" FontSize="30" Foreground="White" VerticalAlignment="Center" FontWeight="Bold" Margin="10,0,0,0"/>
             </DockPanel>
 
