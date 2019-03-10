@@ -13,34 +13,59 @@ namespace Arthur.Business
 {
     public class Account
     {
-        //public static bool Register(string name, string password, out string msg)
-        //{
-        //    return Register(name, "", password, false, out msg);
-        //}
+        public static Result Register(string name, string password, string confirm_pwd)
+        {
+            name = name.Trim();
+            password = password.Trim();
+            confirm_pwd = confirm_pwd.Trim();
 
-        //public static bool Register(string name, string number, string password, bool isEnabled, out string msg)
-        //{
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return new Result("请输入用户名！");
+            }
 
-        //    User user = new User();
-        //    if (Context.UserContext.Users.Where(u => u.Name == name).Count() > 0)
-        //    {
-        //        msg = "系统中已存在用户：" + name;
-        //        return false;
-        //    }
-        //    user.Name = name;
-        //    user.Nickname = name;
-        //    user.Number = number;
-        //    user.Password = Base64.EncodeBase64(password);
-        //    user.IsEnabled = isEnabled;
-        //    user.RegisterTime = DateTime.Now;
-        //    user.RoleId = Context.UserContext.Roles.Single(r => r.Name == "操作员").Id;
-        //    user.ProfilePicture = "/Images/Profiles/001.jpg";
-        //    Context.UserContext.Users.Add(user);
-        //    Context.UserContext.SaveChanges();
+            if (string.IsNullOrWhiteSpace(password))
+            {
+                return new Result("请输入密码！");
+            }
 
-        //    msg = string.Empty;
-        //    return true;
-        //}
+            if (string.IsNullOrWhiteSpace(confirm_pwd))
+            {
+                return new Result("再次输入密码！");
+            }
+
+            if (string.IsNullOrWhiteSpace(confirm_pwd))
+            {
+                return new Result("再次输入密码！");
+            }
+
+            if (password != confirm_pwd)
+            {
+                return new Result("两次输入密码不一致！");
+            }
+
+            return Register(name, "", password, false);
+        }
+
+        public static Result Register(string name, string number, string password, bool isEnabled)
+        {
+
+            User user = new User();
+            if (Context.AccountContext.Users.Where(u => u.Name == name).Count() > 0)
+            {
+                return new Result("系统中已存在用户：" + name);
+            }
+            user.Name = name;
+            user.Number = number;
+            user.Password = EncryptHelper.EncodeBase64(password);
+            user.IsEnabled = isEnabled;
+            user.RegisterTime = DateTime.Now;
+            user.RoleId = Context.AccountContext.Roles.Single(r => r.Name == "操作员").Id;
+            Context.AccountContext.Users.Add(user);
+            Context.AccountContext.SaveChanges();
+
+            return Result.OK;
+        }
 
 
         public static Result Login(string name, string password)
@@ -68,7 +93,7 @@ namespace Arthur.Business
 
             if (!user.IsEnabled)
             {
-                return new Result(user.Name + "尚未审核或已被禁用！");
+                return new Result(user.Name + "尚未激活或被禁用！");
             }
 
             Current.User = user;

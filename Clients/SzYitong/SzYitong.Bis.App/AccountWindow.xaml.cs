@@ -49,15 +49,9 @@ namespace SzYitong.Bis.App
             this.Option = option;
             InitializeComponent();
 
-            //----------------------动态添加用户控件 登录/注册-------------------------
             if(this.Option == "login")
             {
-                LoginUC loginUC = new LoginUC();
-                loginUC.Height = 300;
-                loginUC.Width = 450;
-                loginUC.HorizontalAlignment = HorizontalAlignment.Center;
-                loginUC.VerticalAlignment = VerticalAlignment.Center;
-                grid.Children.Add(loginUC);
+                LoadLoginUC();
             }
 
         }
@@ -66,6 +60,42 @@ namespace SzYitong.Bis.App
         {
             new MainWindow().Show();
             this.Close();
+        }
+
+        public void SwitchWindow()
+        {
+            if (this.Option == "login")
+            {
+                grid.Children.Clear();
+                LoadRegisterUC();
+                this.Option = "register";
+            }
+            else
+            {
+                grid.Children.Clear();
+                LoadLoginUC();
+                this.Option = "login";
+            }
+        }
+
+        private void LoadRegisterUC()
+        {
+            RegisterUC registerUC = new RegisterUC();
+            registerUC.Height = 350;
+            registerUC.Width = 450;
+            registerUC.HorizontalAlignment = HorizontalAlignment.Center;
+            registerUC.VerticalAlignment = VerticalAlignment.Center;
+            grid.Children.Add(registerUC);
+        }
+
+        private void LoadLoginUC()
+        {
+            LoginUC loginUC = new LoginUC();
+            loginUC.Height = 350;
+            loginUC.Width = 450;
+            loginUC.HorizontalAlignment = HorizontalAlignment.Center;
+            loginUC.VerticalAlignment = VerticalAlignment.Center;
+            grid.Children.Add(loginUC);
         }
     }
 }

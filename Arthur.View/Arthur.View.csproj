@@ -45,13 +45,22 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\Helper.cs" />
     <Compile Include="Account\IAccountView.cs" />
+    <Compile Include="Account\PasswordBoxMonitor.cs" />
+    <Compile Include="Account\RegisterUC.xaml.cs">
+      <DependentUpon>RegisterUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Account\LoginUC.xaml.cs">
       <DependentUpon>LoginUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Account\RegisterUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Account\LoginUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
