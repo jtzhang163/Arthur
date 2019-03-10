@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SzYitong.Bis.App.UserControls;
 
 namespace SzYitong.Bis.App
 {
@@ -31,7 +32,22 @@ namespace SzYitong.Bis.App
             RadioButton radio = sender as RadioButton;
             if(radio.Content.ToString() == "个人中心")
             {
+                var a = new TabItemClose();
+               // a.Cursor = new Cursor("Hand");
+                a.Header = "个人中心";
+                a.Height = 30;
+                a.Width = 100;
 
+                var g = new Grid();
+
+                var t = new CurrentUserInfoUC
+                {
+                };
+                g.Children.Add(t);
+                g.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#aaffffff"));
+
+                a.Content = g;
+                this.tabControl.Items.Add(a);
             }
         }
     }
@@ -337,6 +353,10 @@ namespace SzYitong.Bis.App
             if (!string.IsNullOrEmpty(Name) && Name == "PART_Close_TabItem")
             {
                 TabItemClose itemclose = FindVisualParent<TabItemClose>(this);
+                if(itemclose.Header.ToString() == "主界面")
+                {
+                    return;
+                }
                 (itemclose.Parent as TabControl).Items.Remove(itemclose);
                 RoutedEventArgs args = new RoutedEventArgs(TabItemClose.CloseItemEvent, itemclose);
                 itemclose.RaiseEvent(args);

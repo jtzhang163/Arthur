@@ -59,6 +59,11 @@
     <Compile Include="Data\Contexts\OptionContext.cs" />
     <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="Factory\AccountFactory.cs" />
+    <Compile Include="Migrations\201903101257409_InitialCreate.cs" />
+    <Compile Include="Migrations\201903101257409_InitialCreate.Designer.cs">
+      <DependentUpon>201903101257409_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Option.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\User.cs" />
@@ -76,6 +81,11 @@
       <Project>{1090299D-1C85-4E87-B155-B28AB93985FA}</Project>
       <Name>Arthur</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201903101257409_InitialCreate.resx">
+      <DependentUpon>201903101257409_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

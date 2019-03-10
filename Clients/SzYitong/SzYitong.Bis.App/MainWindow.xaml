@@ -377,6 +377,7 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition x:Name="_col_close" Width="20" />
+                                        <ColumnDefinition Width="1" />
                                     </Grid.ColumnDefinitions>
                                     <Border Grid.ColumnSpan="2" Background="White" Opacity="0"/>
                                     <TextBlock   x:Name="_txt" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"  Margin="3 0 3 0"   Foreground="{TemplateBinding NormalForeground}" TextAlignment="Center" HorizontalAlignment="Center"   Text="{TemplateBinding Header}"  />
@@ -387,6 +388,7 @@
                                         <local:ButtonEx x:Name="PART_Close_TabItem" HorizontalAlignment="Center"  VerticalAlignment="Center" Background="Transparent" Visibility="Visible" Icon="{TemplateBinding CloseIcon}"  ButtonType="Icon">
                                         </local:ButtonEx>
                                     </Grid>
+                                    <Canvas Background="Blue"  Grid.Column="2"/>
                                 </Grid>
                             </DockPanel>
 
@@ -448,7 +450,7 @@
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
                     <Expander.Header>
-                        <TextBlock Text="个人信息"/>
+                        <TextBlock Text="用户管理"/>
                     </Expander.Header>
                     <Expander.Content>
                         <Grid>
@@ -652,25 +654,19 @@
             </StackPanel>
             <Grid>
                 <DockPanel>
-                    <Canvas DockPanel.Dock="Left" Width="10" Background="#FF2B579A"/>
+                    <Canvas DockPanel.Dock="Left" Width="5" Background="#FF2B579A"/>
                     <Grid Background="#858586">
-                        <TabControl  Foreground="Black" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                            <local:TabItemClose  Cursor="Hand" Header="音乐电台" Height="30"  Width="100">
+                        <TabControl x:Name="tabControl"  Foreground="Black" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
+                            <local:TabItemClose Cursor="Hand" Header="主界面" Height="30"  Width="100">
                                 <Grid Background="#aaffffff">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="88*"/>
-                                        <ColumnDefinition Width="115*"/>
-                                        <ColumnDefinition Width="14*"/>
-                                        <ColumnDefinition Width="83*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="音乐电台"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Margin="38,82,29,82"/>
+                                    <TextBlock Text="主页"/>
                                 </Grid>
                             </local:TabItemClose>
-                            <local:TabItemClose  Cursor="Hand" Header="Mv电台" Height="30" Width="100">
+                            <!--<local:TabItemClose  Cursor="Hand" Header="Mv电台" Height="30" Width="100">
                                 <Grid Background="#aaffffff">
                                     <TextBlock Text="Mv电台" VerticalAlignment="Center" HorizontalAlignment="Center"/>
                                 </Grid>
-                            </local:TabItemClose>
+                            </local:TabItemClose>-->
                         </TabControl>
                     </Grid>
                 </DockPanel>

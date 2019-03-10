@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using Arthur.App.Model;
 
-namespace Arthur.App.Data
+namespace Arthur.App
 {
     /// <summary>
     /// 用户上下文

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Arthur.Security;
 using Arthur.App.Model;
 
-namespace Arthur.App.Data
+namespace Arthur.App
 {
 
     /// <summary>

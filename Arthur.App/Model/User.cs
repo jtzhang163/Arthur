@@ -20,6 +20,8 @@ namespace Arthur.App.Model
         [Required, MaxLength(50)]
         public string Name { get; set; }
 
+        public Gender Gender { get; set; }
+
         /// <summary>
         /// 昵称
         /// </summary>
@@ -98,4 +100,10 @@ namespace Arthur.App.Model
 
     }
 
+    public enum Gender
+    {
+        Unknown = 0,
+        Male = 1,
+        Female = 2
+    }
 }
