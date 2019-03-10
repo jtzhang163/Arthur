@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Arthur.App;
+using Arthur.App.Model;
 
-namespace Arthur.App
+namespace Arthur.Business
 {
     public class Account
     {
@@ -76,6 +78,11 @@ namespace Arthur.App
                 return Result.OK;
             }
             return new Result("用户名或密码错误！");
+        }
+
+        public static User GetUser(int id)
+        {
+            return Context.AccountContext.Users.FirstOrDefault(u => u.Id == id) ?? new User();
         }
 
 

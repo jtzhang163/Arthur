@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Collections.Generic;
 using Arthur.Security;
+using Arthur.App.Model;
 
 namespace Arthur.App.Data
 {
@@ -57,6 +58,18 @@ namespace Arthur.App.Data
                             RegisterTime = DateTime.Now,
                         }
                     }
+                },
+
+                new Role
+                {
+                    Name = "维护员",
+                    Level = 2,
+                },
+
+                new Role
+                {
+                    Name = "操作员",
+                    Level = 1,
                 },
             };
             Roles.ForEach(g => context.Roles.Add(g));

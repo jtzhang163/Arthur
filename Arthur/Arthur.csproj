@@ -45,6 +45,7 @@
     <Compile Include="Result.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\EncryptHelper.cs" />
+    <Compile Include="Utility\_Convert.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

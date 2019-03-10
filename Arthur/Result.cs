@@ -27,6 +27,11 @@ namespace Arthur
 
         }
 
+        public Result(Exception ex) : this(ex.Message)
+        {
+            //写入异常日志：ex.ToString();
+        }
+
         public Result(string msg) : this(-1, msg)
         {
 

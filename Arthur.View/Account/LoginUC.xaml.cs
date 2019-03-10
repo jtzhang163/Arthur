@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Arthur.App;
+using Arthur.Security;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -24,13 +26,36 @@ namespace Arthur.View.Account
         public LoginUC()
         {
             InitializeComponent();
+
+            if (Current.Option.RememberUserId < 1)
+            {
+                this.remember_me.IsChecked = false;
+            }
+            else
+            {
+                var user = Arthur.Business.Account.GetUser(Current.Option.RememberUserId);
+                if (user.Id > 0)
+                {
+                    this.username.Text = user.Name;
+                    this.password.Password = EncryptHelper.DecodeBase64(user.Password);
+                }
+            }
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            var ret = Arthur.App.Account.Login(this.username.Text, this.password.Password);
+            var ret = Arthur.Business.Account.Login(this.username.Text, this.password.Password);
             if (ret.IsOk)
             {
+                if (this.remember_me.IsChecked.Value)
+                {
+                    Current.Option.RememberUserId = Current.User.Id;
+                }
+                else
+                {
+                    Current.Option.RememberUserId = -1;
+                }
+
                 Window parentWindow = Window.GetWindow(this);
                 Type type = parentWindow.GetType();
                 MethodInfo mi = type.GetMethod("LoginSuccessInvoke");

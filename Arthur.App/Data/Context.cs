@@ -9,5 +9,6 @@ namespace Arthur.App.Data
     public class Context
     {
         public static AccountContext AccountContext = new AccountContext();
+        public static OptionContext OptionContext = new OptionContext();
     }
 }

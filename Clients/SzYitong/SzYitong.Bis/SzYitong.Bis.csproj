@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Model\Battery.cs" />
     <Compile Include="Data\DbInitializer.cs" />
+    <Compile Include="AppOption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
