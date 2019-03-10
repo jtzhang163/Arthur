@@ -37,5 +37,33 @@ namespace Arthur.App
                 }
             }
         }
+
+        private string appName = null;
+
+        public string AppName
+        {
+            get
+            {
+                if (appName == null)
+                {
+                    appName = Business.Application.GetOption("AppName");
+                    if (appName == null)
+                    {
+                        appName = "XXXX系统";
+                        Business.Application.SetOption("AppName", appName, "应用程序名称");
+                    }
+                }
+                return appName;
+            }
+            set
+            {
+                if (appName != value)
+                {
+                    Business.Application.SetOption("AppName", value);
+                    appName = value;
+                    // SetProperty(ref checkTesterInfoInterval, value);
+                }
+            }
+        }
     }
 }

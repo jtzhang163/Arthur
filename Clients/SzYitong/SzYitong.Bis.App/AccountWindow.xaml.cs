@@ -26,7 +26,7 @@ namespace SzYitong.Bis.App
 
         public AccountWindow() : this("login")
         {
-
+            this.Title = new Utility().AppTitle;
         }
 
         /// <summary>
