@@ -1,5 +1,6 @@
 ﻿using Arthur.App;
 using Arthur.Security;
+using Arthur.View.Utils;
 using System;
 using System.Reflection;
 using System.Threading;

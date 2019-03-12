@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Arthur.View.Utils;
+using System;
 using System.Reflection;
 using System.Threading;
 using System.Windows;

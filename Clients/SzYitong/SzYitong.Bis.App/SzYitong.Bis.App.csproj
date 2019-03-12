@@ -65,8 +65,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="UserControls\Account\CurrentUserInfoUC.xaml.cs">
-      <DependentUpon>CurrentUserInfoUC.xaml</DependentUpon>
+    <Compile Include="UserControls\Account\CurrentUserUC.xaml.cs">
+      <DependentUpon>CurrentUserUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Account\RoleManageUC.xaml.cs">
+      <DependentUpon>RoleManageUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utility.cs" />
     <Page Include="AccountWindow.xaml">
@@ -88,7 +91,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UserControls\Account\CurrentUserInfoUC.xaml">
+    <Page Include="Style\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Account\CurrentUserUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Account\RoleManageUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,6 +162,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Windows\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

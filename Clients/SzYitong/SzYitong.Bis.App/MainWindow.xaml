@@ -461,7 +461,7 @@
                             </Grid.RowDefinitions>
                             <RadioButton Grid.Row="0" Checked="RadioButton_Checked">个人中心</RadioButton>
                             <RadioButton Grid.Row="1">用户管理</RadioButton>
-                            <RadioButton Grid.Row="2">角色管理</RadioButton>
+                            <RadioButton Grid.Row="2" Checked="RadioButton_Checked">角色管理</RadioButton>
                         </Grid>
                     </Expander.Content>
                 </Expander>

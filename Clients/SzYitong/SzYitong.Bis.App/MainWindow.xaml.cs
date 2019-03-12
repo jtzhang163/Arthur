@@ -29,28 +29,64 @@ namespace SzYitong.Bis.App
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
+
             RadioButton radio = sender as RadioButton;
-            if(radio.Content.ToString() == "个人中心")
+
+            var tabName = radio.Content.ToString();
+
+
+            var isContain = false;
+            foreach (TabItem tabItem in this.tabControl.Items)
             {
+                if (tabItem.Header.ToString() == tabName) { isContain = true; }
+            }
+
+            if (!isContain)
+            {
+
                 var a = new TabItemClose();
-               // a.Cursor = new Cursor("Hand");
-                a.Header = "个人中心";
+                // a.Cursor = new Cursor("Hand");
+                a.Header = tabName;
                 a.Height = 30;
                 a.Width = 100;
 
                 var g = new Grid();
-
-                var t = new CurrentUserInfoUC
-                {
-                };
-                g.Children.Add(t);
+                g.Children.Add(GetTabItem(tabName));
                 g.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#aaffffff"));
 
                 a.Content = g;
-                this.tabControl.Items.Add(a);
+                //this.tabControl.Items.Add(a);
+
+                this.tabControl.SelectedIndex = this.tabControl.Items.Add(a);
+            }
+            else
+            {
+                for (var i = 0; i < this.tabControl.Items.Count; i++)
+                {
+                    if ((this.tabControl.Items[i] as TabItem).Header.ToString() == tabName)
+                    {
+                        this.tabControl.SelectedIndex = i;
+                        return;
+                    }
+                }
+            }
+        }
+
+
+        private UIElement GetTabItem(string tabName)
+        {
+            switch (tabName)
+            {
+                case "个人中心":
+                    return new CurrentUserInfoUC();
+                case "角色管理":
+                    return new RoleManageUC();
+                default:
+                    return null;
             }
         }
     }
+
 
     public class TabItemClose : TabItem
     {
