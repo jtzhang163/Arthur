@@ -1,4 +1,5 @@
 ﻿using Arthur.App;
+using Arthur.View.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,16 @@ namespace SzYitong.Bis.App.UserControls
         {
             InitializeComponent();
             this.DataContext = Current.User;
+        }
+
+        private void change_pwd_Click(object sender, RoutedEventArgs e)
+        {
+            new ChangePasswordWindow().ShowDialog();
+        }
+
+        private void change_info_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

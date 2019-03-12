@@ -63,7 +63,7 @@
         <Label Grid.Row="6" Grid.Column="1" Content="{Binding Email}"/>
         <TextBlock Grid.Row="2" Grid.Column="2">注册时间：</TextBlock>
         <Label Grid.Row="2" Grid.Column="3" Content="{Binding RegisterTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm:ss}"/>
-        <TextBlock Grid.Row="3" Grid.Column="2">上次登录：</TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="2">最近登录：</TextBlock>
         <Label Grid.Row="3" Grid.Column="3" Content="{Binding LastLoginTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm:ss}"/>
         <TextBlock Grid.Row="4" Grid.Column="2">登录次数：</TextBlock>
         <Label Grid.Row="4" Grid.Column="3" Content="{Binding LoginTimes}"/>
@@ -71,5 +71,7 @@
         <Label Grid.Row="5" Grid.Column="3" Content="{Binding IsEnabled}"/>
         <TextBlock Grid.Row="6" Grid.Column="2">所属组别：</TextBlock>
         <Label Grid.Row="6" Grid.Column="3" Content="{Binding Role.Name}"/>
+        <TextBlock Grid.Row="8" Grid.Column="0" ><Hyperlink x:Name="change_info" Click="change_info_Click">编辑信息</Hyperlink></TextBlock>
+        <TextBlock Grid.Row="9" Grid.Column="0" ><Hyperlink x:Name="change_pwd" Click="change_pwd_Click">修改密码</Hyperlink></TextBlock>
     </Grid>
 </UserControl>

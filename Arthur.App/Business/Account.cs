@@ -67,7 +67,6 @@ namespace Arthur.Business
             return Result.OK;
         }
 
-
         public static Result Login(string name, string password)
         {
             name = name.Trim();
@@ -104,6 +103,58 @@ namespace Arthur.Business
             }
             return new Result("用户名或密码错误！");
         }
+
+        public static Result ChangePassword(string username, string old_pwd, string new_pwd, string confirm_new_pwd)
+        {
+            #region 输入校验
+            if (string.IsNullOrWhiteSpace(username))
+            {
+                return new Result("请输入用户名！");
+            }
+
+            if (string.IsNullOrWhiteSpace(old_pwd))
+            {
+                return new Result("请输入原密码！");
+            }
+
+            if (string.IsNullOrWhiteSpace(new_pwd))
+            {
+                return new Result("请输入新密码！");
+            }
+
+            if (string.IsNullOrWhiteSpace(confirm_new_pwd))
+            {
+                return new Result("请再次输入新密码！");
+            }
+
+            if (new_pwd != confirm_new_pwd)
+            {
+                return new Result("两次输入的新密码不一致！");
+            }
+
+            if (old_pwd == new_pwd)
+            {
+                return new Result("输入的新密码和原密码不能相同！");
+            }
+            #endregion
+
+            var user = Context.AccountContext.Users.FirstOrDefault(u => u.Name == username) ?? new User();
+            if (user.Id < 1)
+            {
+                return new Result("不存在用户：" + username);
+            }
+
+            if (user.Password != EncryptHelper.EncodeBase64(old_pwd))
+            {
+                return new Result("原密码输入错误！");
+            }
+
+            user.Password = EncryptHelper.EncodeBase64(new_pwd);
+            Context.AccountContext.SaveChanges();
+
+            return Result.OK;
+        }
+
 
         public static User GetUser(int id)
         {
