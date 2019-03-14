@@ -26,7 +26,8 @@ namespace SzYitong.Bis.App
 
         public AccountWindow() : this("login")
         {
-            this.Title = new Utility().AppTitle;
+            // this.Title = new Utility().AppTitle;
+            this.DataContext = Current.App;
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace SzYitong.Bis.App
             new DbInitializer().Initialize();
 
             //如果重复启动该程序，弹窗提示
-            if (Arthur.App.Utility.Application.ThisAppIsAlreadyRunning())
+            if (Arthur.App.Utils.Application.ThisAppIsAlreadyRunning())
             {
                 MessageBox.Show("程序已经在运行，请勿重复启动！");
                 Application.Current.Shutdown();

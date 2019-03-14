@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arthur.App.Utility
+namespace Arthur.App.Utils
 {
     public class Application
     {

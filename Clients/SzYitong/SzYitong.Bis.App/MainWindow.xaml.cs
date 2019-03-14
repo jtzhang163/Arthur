@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SzYitong.Bis.App.UserControls;
+using SzYitong.Bis.App.UserControls.SystemUC;
 
 namespace SzYitong.Bis.App
 {
@@ -24,7 +25,8 @@ namespace SzYitong.Bis.App
         public MainWindow()
         {
             InitializeComponent();
-            this.Title = new Utility().AppTitle;
+            //this.Title = new Utility().AppTitle;
+            this.DataContext = Current.App;
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
@@ -81,6 +83,8 @@ namespace SzYitong.Bis.App
                     return new CurrentUserInfoUC();
                 case "角色管理":
                     return new RoleManageUC();
+                case "系统参数":
+                    return new ParamUC();
                 default:
                     return null;
             }

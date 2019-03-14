@@ -62,8 +62,8 @@
     <Compile Include="Account\Role\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Account\Utility\IAccountView.cs" />
-    <Compile Include="Account\Utility\PasswordBoxMonitor.cs" />
+    <Compile Include="Account\Utils\IAccountView.cs" />
+    <Compile Include="Account\Utils\PasswordBoxMonitor.cs" />
     <Compile Include="Account\RegisterUC.xaml.cs">
       <DependentUpon>RegisterUC.xaml</DependentUpon>
     </Compile>

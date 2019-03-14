@@ -1,4 +1,5 @@
-﻿using Arthur.App.Data;
+﻿using Arthur.App;
+using Arthur.App.Data;
 using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,6 @@ namespace Arthur.View.Account.Role
             InitializeComponent();
         }
 
-        private int PageSize = 15;
         private int PageIndex = 1;
 
         private List<Arthur.App.Model.Role> Roles
@@ -56,12 +56,12 @@ namespace Arthur.View.Account.Role
 
         private void UpdateDataGrid(int index)
         {
-            var dtos = PaginatedList<Arthur.App.Model.Role>.Create(Roles, PageIndex, PageSize);
+            var dtos = PaginatedList<Arthur.App.Model.Role>.Create(Roles, PageIndex, Current.Option.DataGridPageSize);
 
             this.count.Content = Roles.Count();
             this.pageIndex.Content = PageIndex;
             this.totalPages.Content = dtos.TotalPages;
-            this.size.Content = PageSize;
+            this.size.Content = Current.Option.DataGridPageSize;
             this.tbPageIndex.Text = PageIndex.ToString();
             this.preview_page.IsEnabled = dtos.HasPreviousPage;
             this.next_page.IsEnabled = dtos.HasNextPage;

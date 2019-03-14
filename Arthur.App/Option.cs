@@ -65,5 +65,34 @@ namespace Arthur.App
                 }
             }
         }
+
+
+        private int dataGridPageSize = -1;
+
+        public int DataGridPageSize
+        {
+            get
+            {
+                if (dataGridPageSize < 0)
+                {
+                    dataGridPageSize = _Convert.StrToInt(Business.Application.GetOption("DataGridPageSize"), -1);
+                    if (dataGridPageSize < 0)
+                    {
+                        dataGridPageSize = 15;
+                        Business.Application.SetOption("DataGridPageSize", dataGridPageSize.ToString(), "数据表每页的数据个数");
+                    }
+                }
+                return dataGridPageSize;
+            }
+            set
+            {
+                if (dataGridPageSize != value)
+                {
+                    Business.Application.SetOption("DataGridPageSize", value.ToString());
+                    dataGridPageSize = value;
+                    // SetProperty(ref checkTesterInfoInterval, value);
+                }
+            }
+        }
     }
 }

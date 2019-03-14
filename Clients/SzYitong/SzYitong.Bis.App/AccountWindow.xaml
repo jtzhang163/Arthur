@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SzYitong.Bis.App"
         xmlns:account="clr-namespace:Arthur.View.Account;assembly=Arthur.View"
         mc:Ignorable="d" WindowState="Maximized"
-        Title="欢迎来到烯晶碳能BIS" Height="450" Width="800">
+        Title="{Binding AppTitle}" Height="450" Width="800">
     <Grid x:Name="grid">
         <Grid.Background>
             <ImageBrush ImageSource="Images/nightsky2.jpg"/>

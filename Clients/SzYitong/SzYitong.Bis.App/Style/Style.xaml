@@ -19,9 +19,41 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="Width" Value="60"/>
         <Setter Property="Height" Value="25"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Margin" Value="0,0,20,0"/>
+    </Style>
+
+    <!--页面标题-->
+    <Style x:Key="PageTitleTextBlock" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="#09a3de"/>
+    </Style>
+
+    <Style x:Key="property_title" TargetType="{x:Type TextBlock}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="180"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Margin" Value="20"/>
+    </Style>
+
+    <Style x:Key="property_TextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Margin" Value="20"/>
+        <Setter Property="Foreground" Value="#FF2B579A"/>
+    </Style>
+
+    <Style x:Key="property_Label" TargetType="{x:Type Label}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Width" Value="300"/>
+        <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Margin" Value="20"/>
+        <Setter Property="Foreground" Value="#FF2B579A"/>
     </Style>
 
 </ResourceDictionary>

@@ -3,10 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:utils="clr-namespace:SzYitong.Bis.App.Utils"
         xmlns:local="clr-namespace:SzYitong.Bis.App" WindowState="Maximized"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="450" Width="800">
+        Title="{Binding AppTitle}" Height="450" Width="800">
     <Window.Resources>
+
+        <!--<utils:AppNameToTitleConverter x:Key="appNameToTitleConverter"/>-->
+
         <Style x:Key="FontAwesome">
             <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/#FontAwesome" />
             <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
@@ -425,7 +429,7 @@
     <Grid>
         <DockPanel>
             <DockPanel DockPanel.Dock="Top" Background="#FF2B579A" Height="60">
-                <Label Content="烯晶碳能" FontSize="30" Foreground="White" VerticalAlignment="Center" FontWeight="Bold" Margin="10,0,0,0"/>
+                <Label Content="{Binding AppName}" FontSize="30" Foreground="White" VerticalAlignment="Center" FontWeight="Bold" Margin="10,0,0,0"/>
             </DockPanel>
 
             <StackPanel DockPanel.Dock="Left"  Width="200" Background="#FF222D32">
@@ -477,7 +481,7 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0">系统参数</RadioButton>
+                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">系统参数</RadioButton>
                             <RadioButton Grid.Row="1">系统事件</RadioButton>
                             <RadioButton Grid.Row="2">系统日志</RadioButton>
                         </Grid>
