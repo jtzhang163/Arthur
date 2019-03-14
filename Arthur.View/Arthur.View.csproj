@@ -121,5 +121,10 @@
   <ItemGroup>
     <Folder Include="Account\User\" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="fontawesome.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

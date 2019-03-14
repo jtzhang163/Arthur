@@ -47,23 +47,19 @@ namespace Arthur.View.Account.Role
         }
 
 
-
-        private void edit_Click(object sender, RoutedEventArgs e)
+        private void query_Click(object sender, RoutedEventArgs e)
         {
-            var id = Convert.ToInt32((sender as Hyperlink).Tag);
-            Helper.ExecuteParentUserControlMethod(this, "RoleManage", "SwitchWindow", "Edit", id);
+            var roles = Context.AccountContext.Roles.ToList();
+            if (!string.IsNullOrWhiteSpace(this.queryText.Text))
+            {
+                roles = roles.Where(r => r.Name.Contains(this.queryText.Text.Trim())).ToList();
+            }
+            dataGrid.ItemsSource = roles;
         }
 
-        private void details_Click(object sender, RoutedEventArgs e)
+        private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var id = Convert.ToInt32((sender as Hyperlink).Tag);
-            Helper.ExecuteParentUserControlMethod(this, "RoleManage", "SwitchWindow", "Details", id);
-        }
-
-
-        private void delete_Click(object sender, RoutedEventArgs e)
-        {
-            var id = Convert.ToInt32((sender as Hyperlink).Tag);
+            var id = Convert.ToInt32((sender as TextBlock).Tag);
             var role = Context.AccountContext.Roles.SingleOrDefault(r => r.Id == id);
             // int count = Context.AccountContext.Roles.Count(r => r.Id == id);
             if (role == null)
@@ -80,6 +76,18 @@ namespace Arthur.View.Account.Role
                 Context.AccountContext.SaveChanges();
                 UserControl_Loaded(null, null);
             }
+        }
+
+        private void edit_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var id = Convert.ToInt32((sender as TextBlock).Tag);
+            Helper.ExecuteParentUserControlMethod(this, "RoleManage", "SwitchWindow", "Edit", id);
+        }
+
+        private void details_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var id = Convert.ToInt32((sender as TextBlock).Tag);
+            Helper.ExecuteParentUserControlMethod(this, "RoleManage", "SwitchWindow", "Details", id);
         }
     }
 }

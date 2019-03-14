@@ -8,19 +8,20 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style x:Key="property_title" TargetType="{x:Type TextBlock}">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Width" Value="180"/>
-        </Style>
-        <Style TargetType="{x:Type TextBox}">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="180"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Style/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Width" Value="180"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <DockPanel>
-            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="新增角色"/>
+            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="新增角色" Foreground="#09a3de" Style="{StaticResource PageTitleTextBlock}"/>
             <TextBlock DockPanel.Dock="Bottom" FontSize="30" Height="35"><Hyperlink x:Name="create" Click="create_Click">新增</Hyperlink> <Hyperlink x:Name="cancel" Click="cancel_Click">返回</Hyperlink></TextBlock>
             <DockPanel>
                 <TextBlock x:Name="tip" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Hidden"/>

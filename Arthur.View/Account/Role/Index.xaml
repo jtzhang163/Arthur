@@ -6,11 +6,33 @@
              xmlns:local="clr-namespace:Arthur.View.Account.Role"
              mc:Ignorable="d" Loaded="UserControl_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Style/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="FontAwesome">
+                <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/#FontAwesome" />
+                <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
+
+                <Setter Property="TextBlock.Foreground" Value="#09a3de"></Setter>
+                <Setter Property="TextBlock.Width" Value="40"></Setter>
+                <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <DockPanel>
-            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="角色信息"/>
-            <DockPanel>
-                <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" HorizontalAlignment="Right"><Hyperlink x:Name="create" Click="create_Click">新增</Hyperlink></TextBlock>
+            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="角色信息" Style="{StaticResource PageTitleTextBlock}"/>
+            <DockPanel Margin="0,10">
+                <DockPanel DockPanel.Dock="Top" Height="40">
+                    <Button DockPanel.Dock="Right" Style="{DynamicResource ChamferButton}" Click="create_Click" Width="60">新增</Button>
+                    <WrapPanel VerticalAlignment="Center">
+                        <TextBox x:Name="queryText" Width="200" Height="28" Margin="0" VerticalContentAlignment="Center"></TextBox>
+                        <Button x:Name="query" Style="{DynamicResource ChamferButton}" Click="query_Click" Margin="10,0">查询</Button>
+                    </WrapPanel>
+                </DockPanel>
+
                 <DataGrid x:Name="dataGrid" AutoGenerateColumns="False"  ColumnHeaderHeight="40" SelectionUnit="FullRow" Background="Transparent" SelectionMode="Single" CanUserAddRows="False">
                     <!--数据网格的样式属性-->
                     <DataGrid.Style>
@@ -161,22 +183,16 @@
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
                                         <!--框-->
 
-                                        <Border VerticalAlignment="Center" Margin="5,0">
-                                            <TextBlock>
-                                                <Hyperlink x:Name="details" FontSize="14" Tag="{Binding Id}" Click="details_Click">详情</Hyperlink>
-                                            </TextBlock>
+                                        <Border VerticalAlignment="Center" Margin="3,0">
+                                            <TextBlock x:Name="details" Text="&#xf15c;" Style="{DynamicResource FontAwesome}" FontSize="18" MouseDown="details_MouseDown"  Tag="{Binding Id}" Cursor="Hand"/>
                                         </Border>
 
-                                        <Border VerticalAlignment="Center" Margin="5,0">
-                                            <TextBlock>
-                                                <Hyperlink x:Name="edit" FontSize="14" Tag="{Binding Id}" Click="edit_Click">编辑</Hyperlink>
-                                            </TextBlock>
+                                        <Border VerticalAlignment="Center" Margin="3,0">
+                                            <TextBlock x:Name="edit" Text="&#xf044;" Style="{DynamicResource FontAwesome}" FontSize="20" MouseDown="edit_MouseDown"  Tag="{Binding Id}" Cursor="Hand"/>
                                         </Border>
 
-                                        <Border VerticalAlignment="Center" Margin="5,0">
-                                            <TextBlock>
-                                                <Hyperlink x:Name="delete"  FontSize="14" Tag="{Binding Id}" Click="delete_Click">删除</Hyperlink>
-                                            </TextBlock>
+                                        <Border VerticalAlignment="Center" Margin="3,0">
+                                            <TextBlock x:Name="delete" Text="&#xf1f8;" Style="{DynamicResource FontAwesome}" FontSize="20" MouseDown="delete_MouseDown"  Tag="{Binding Id}" Cursor="Hand"/>
                                         </Border>
                                     </StackPanel>
                                 </DataTemplate>

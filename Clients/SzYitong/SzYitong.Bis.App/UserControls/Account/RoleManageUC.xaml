@@ -7,8 +7,13 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="10">
         <DockPanel>
-            <TextBlock DockPanel.Dock="Top" FontSize="24" FontFamily="Times New Roman,宋体" Foreground="#FF222D32" FontWeight="Bold" Height="30" Text="用户管理 > 角色管理"></TextBlock>
-            <Grid x:Name="grid">
+            <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
+                <TextBlock FontSize="24" FontFamily="Times New Roman,宋体" Foreground="#FF222D32" FontWeight="Bold" Height="40">
+                    <Label Content="用户管理 > 角色管理"/>
+                </TextBlock>
+                <Canvas Height="1" Background="WhiteSmoke"/>
+            </StackPanel>
+            <Grid x:Name="grid" Margin="5,10,0,0">
                 
             </Grid>
         </DockPanel>

@@ -34,7 +34,8 @@ namespace Arthur.View.Account.Role
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-
+            var id = Convert.ToInt32((sender as Button).Tag);
+            Helper.ExecuteParentUserControlMethod(this, "RoleManage", "SwitchWindow", "Edit", id);
         }
     }
 }

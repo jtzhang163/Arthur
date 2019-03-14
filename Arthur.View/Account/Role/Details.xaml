@@ -7,20 +7,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style x:Key="property_title" TargetType="{x:Type TextBlock}">
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Width" Value="180"/>
-        </Style>
-        <Style TargetType="{x:Type Label}">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="180"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Style/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <DockPanel>
-            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="角色详情"/>
-            <TextBlock DockPanel.Dock="Bottom" FontSize="30" Height="35"><Hyperlink x:Name="create" Click="edit_Click">编辑</Hyperlink> <Hyperlink x:Name="cancel" Click="cancel_Click">返回</Hyperlink></TextBlock>
+            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="角色详情"  Style="{StaticResource PageTitleTextBlock}"/>
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <Button x:Name="edit" Tag="{Binding Id}" Click="edit_Click" Style="{StaticResource ChamferButton}">编辑</Button>
+                <Button x:Name="cancel" Click="cancel_Click" Style="{StaticResource ChamferButton}">返回</Button>
+            </StackPanel>
             <DockPanel>
                 <TextBlock x:Name="tip" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Hidden"/>
                 <Grid x:Name="grid">
@@ -34,12 +33,12 @@
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="编号" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
-                    <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1"/>
-                    <TextBlock Text="名称" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
-                    <Label Content="{Binding Name}" x:Name="level" Grid.Row="1" Grid.Column="1"/>
-                    <TextBlock Text="等级" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
-                    <Label Content="{Binding Level}" Grid.Row="2" Grid.Column="1"/>
+                    <TextBlock Text="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <TextBlock Text="名称：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding Name}" x:Name="level" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <TextBlock Text="等级：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding Level}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>
