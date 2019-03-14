@@ -32,29 +32,41 @@ namespace Arthur.View.Account.Role
 
         private int PageSize = 15;
         private int PageIndex = 1;
-        private List<Arthur.App.Model.Role> roles;
+
+        private List<Arthur.App.Model.Role> Roles
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(this.queryText.Text))
+                {
+                    return Context.AccountContext.Roles.ToList();
+                }
+                else
+                {
+                    return Context.AccountContext.Roles.Where(r => r.Name.Contains(this.queryText.Text.Trim())).ToList();
+                }
+            }
+        }
 
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            roles = Context.AccountContext.Roles.ToList();
             UpdateDataGrid(PageIndex);
         }
 
         private void UpdateDataGrid(int index)
         {
-            var dtos = PaginatedList<Arthur.App.Model.Role>.Create(roles, PageIndex, PageSize);
+            var dtos = PaginatedList<Arthur.App.Model.Role>.Create(Roles, PageIndex, PageSize);
 
-            this.count.Content = roles.Count();
+            this.count.Content = Roles.Count();
             this.pageIndex.Content = PageIndex;
             this.totalPages.Content = dtos.TotalPages;
             this.size.Content = PageSize;
             this.tbPageIndex.Text = PageIndex.ToString();
-            this.dataGrid.ItemsSource = dtos;
-
             this.preview_page.IsEnabled = dtos.HasPreviousPage;
             this.next_page.IsEnabled = dtos.HasNextPage;
 
+            this.dataGrid.ItemsSource = dtos;
         }
 
         private void create_Click(object sender, RoutedEventArgs e)
@@ -65,10 +77,6 @@ namespace Arthur.View.Account.Role
 
         private void query_Click(object sender, RoutedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(this.queryText.Text))
-            {
-                roles = roles.Where(r => r.Name.Contains(this.queryText.Text.Trim())).ToList();
-            }
             UpdateDataGrid(PageIndex);
         }
 
@@ -89,7 +97,7 @@ namespace Arthur.View.Account.Role
                 //Context.AccountContext.Entry(role).State = EntityState.Deleted;
                 Context.AccountContext.Roles.Remove(role);
                 Context.AccountContext.SaveChanges();
-                UserControl_Loaded(null, null);
+                UpdateDataGrid(PageIndex);
             }
         }
 
