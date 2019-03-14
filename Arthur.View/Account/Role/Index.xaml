@@ -109,6 +109,7 @@
                             <Setter Property="FontSize" Value="16"/>
                             <Setter Property="Background" Value="#FF2B579A"/>
                             <Setter Property="Foreground" Value="#E1F1FF"/>
+                            <Setter Property="Cursor" Value="Hand"/>
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
                             <!--设置边框笔刷（BorderBrush）-->
                             <Setter Property="BorderBrush">
@@ -176,20 +177,8 @@
 
                     <DataGrid.Columns>
 
-                        <!--用这种的话，单元格不能放多个可点击的控件，这个可以：DataGridTemplateColumn-->
-                        <!--<DataGridTextColumn Header="单位" Width="*" Binding="{Binding Company}" IsReadOnly="True">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                            <Setter Property="FontSize" Value="14" />
-                            <Setter Property="FontFamily" Value="微软雅黑" />
-                            <Setter Property="Height" Value="40" />
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>-->
-
                         <!--数据表格模板列;Header:标题，Width：{比例（*），固定值（int）}-->
-                        <DataGridTemplateColumn Header="编号" Width="*">
+                        <DataGridTemplateColumn Header="编号" Width="*" CanUserSort="True" SortMemberPath="Id">
                             <!--数据表格模板列的单元格模板属性-->
                             <DataGridTemplateColumn.CellTemplate>
                                 <!--数据模板-->
@@ -202,7 +191,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="名称" Width="*">
+                        <DataGridTemplateColumn Header="名称" Width="*"  CanUserSort="True" SortMemberPath="Name">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -212,7 +201,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="等级" Width="*">
+                        <DataGridTemplateColumn Header="等级" Width="*"  CanUserSort="True" SortMemberPath="Level">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -243,12 +232,6 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-
-                            <!--<DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Label Content="修改" MouseDoubleClick="s_MouseLeftButtonDown" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>-->
 
                         </DataGridTemplateColumn>
 
