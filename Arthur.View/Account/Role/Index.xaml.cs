@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,16 +30,31 @@ namespace Arthur.View.Account.Role
             InitializeComponent();
         }
 
+        private int PageSize = 15;
+        private int PageIndex = 1;
+        private List<Arthur.App.Model.Role> roles;
+
+
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
-            dataGrid.ItemsSource = Context.AccountContext.Roles.ToList();
-            //var item = new ListBoxItem();
+            roles = Context.AccountContext.Roles.ToList();
+            UpdateDataGrid(PageIndex);
+        }
 
-            //var label = new Label();
-            //label.Content = "aaaaa";
+        private void UpdateDataGrid(int index)
+        {
+            var dtos = PaginatedList<Arthur.App.Model.Role>.Create(roles, PageIndex, PageSize);
 
-            //item.Content = label;
-            //listView.Items.Add(item);
+            this.count.Content = roles.Count();
+            this.pageIndex.Content = PageIndex;
+            this.totalPages.Content = dtos.TotalPages;
+            this.size.Content = PageSize;
+            this.tbPageIndex.Text = PageIndex.ToString();
+            this.dataGrid.ItemsSource = dtos;
+
+            this.preview_page.IsEnabled = dtos.HasPreviousPage;
+            this.next_page.IsEnabled = dtos.HasNextPage;
+
         }
 
         private void create_Click(object sender, RoutedEventArgs e)
@@ -49,12 +65,11 @@ namespace Arthur.View.Account.Role
 
         private void query_Click(object sender, RoutedEventArgs e)
         {
-            var roles = Context.AccountContext.Roles.ToList();
             if (!string.IsNullOrWhiteSpace(this.queryText.Text))
             {
                 roles = roles.Where(r => r.Name.Contains(this.queryText.Text.Trim())).ToList();
             }
-            dataGrid.ItemsSource = roles;
+            UpdateDataGrid(PageIndex);
         }
 
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
@@ -89,5 +104,37 @@ namespace Arthur.View.Account.Role
             var id = Convert.ToInt32((sender as TextBlock).Tag);
             Helper.ExecuteParentUserControlMethod(this, "RoleManage", "SwitchWindow", "Details", id);
         }
+
+        private void go_page_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (int.TryParse(this.tbPageIndex.Text.Trim(), out int index))
+            {
+                if (index > 0 && index <= Convert.ToUInt32(this.totalPages.Content))
+                {
+                    PageIndex = index;
+                }
+            }
+            UpdateDataGrid(PageIndex);
+        }
+
+        private void preview_page_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PageIndex--;
+            UpdateDataGrid(PageIndex);
+        }
+
+        private void next_page_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            PageIndex++;
+            UpdateDataGrid(PageIndex);
+        }
+
+        private void level_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex re = new Regex("[^0-9]+");
+            e.Handled = re.IsMatch(e.Text);
+        }
+
     }
 }

@@ -425,24 +425,6 @@
     <Grid>
         <DockPanel>
             <DockPanel DockPanel.Dock="Top" Background="#FF2B579A" Height="60">
-                <!--Background="#FF2B579A"-->
-                <!--<StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Width="130">
-                    <TextBlock Text="&#xf2d1;" Style="{DynamicResource FontAwesome}" FontSize="20" MouseDown="Minimized_MouseDown">
-                        <TextBlock.ToolTip>
-                            <Label Content="最小化"/>
-                        </TextBlock.ToolTip>
-                    </TextBlock>
-                    <TextBlock Text="&#xf2d0;" Style="{DynamicResource FontAwesome}" FontSize="20" MouseDown="Maximized_MouseDown">
-                        <TextBlock.ToolTip>
-                            <Label Content="最大化"/>
-                        </TextBlock.ToolTip>
-                    </TextBlock>
-                    <TextBlock Text="&#xf00d;" Style="{DynamicResource FontAwesome}" FontSize="30" MouseDown="Exit_MouseDown">
-                        <TextBlock.ToolTip>
-                            <Label Content="安全退出"/>
-                        </TextBlock.ToolTip>
-                    </TextBlock>
-                </StackPanel>-->
                 <Label Content="烯晶碳能" FontSize="30" Foreground="White" VerticalAlignment="Center" FontWeight="Bold" Margin="10,0,0,0"/>
             </DockPanel>
 

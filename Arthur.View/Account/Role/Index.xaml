@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Arthur.View.Account.Role"
+             xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              mc:Ignorable="d" Loaded="UserControl_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -15,16 +16,32 @@
                 <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/#FontAwesome" />
                 <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
 
-                <Setter Property="TextBlock.Foreground" Value="#09a3de"></Setter>
-                <Setter Property="TextBlock.Width" Value="40"></Setter>
+                <!--<Setter Property="TextBlock.Foreground" Value="#09a3de"></Setter>-->
+                <Setter Property="TextBlock.Margin" Value="0,0,10,0"></Setter>
                 <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="TextBlock.Cursor" Value="Hand"></Setter>
+                <Style.Triggers>
+                    <Trigger Property="TextBlock.IsEnabled" Value="True">
+                        <Setter Property="TextBlock.Foreground" Value="#09a3de"></Setter>
+                    </Trigger>
+                    <Trigger Property="TextBlock.IsEnabled"  Value="False">
+                        <Setter Property="TextBlock.Foreground" Value="Gray"></Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+                <Setter Property="Margin" Value="00"/>
+                <Setter Property="Padding" Value="2,0,2,0"/>
+                <!--<Setter Property="Foreground" Value="#09a3de"/>-->
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="角色信息" Style="{StaticResource PageTitleTextBlock}"/>
-            <DockPanel Margin="0,10">
+            <DockPanel Margin="0,10,0,0">
                 <DockPanel DockPanel.Dock="Top" Height="40">
                     <Button DockPanel.Dock="Right" Style="{DynamicResource ChamferButton}" Click="create_Click" Width="60">新增</Button>
                     <WrapPanel VerticalAlignment="Center">
@@ -32,8 +49,36 @@
                         <Button x:Name="query" Style="{DynamicResource ChamferButton}" Click="query_Click" Margin="10,0">查询</Button>
                     </WrapPanel>
                 </DockPanel>
-
-                <DataGrid x:Name="dataGrid" AutoGenerateColumns="False"  ColumnHeaderHeight="40" SelectionUnit="FullRow" Background="Transparent" SelectionMode="Single" CanUserAddRows="False">
+                <DockPanel DockPanel.Dock="Bottom" Margin="0,5,0,0" Height="16" VerticalAlignment="Center">
+                    <WrapPanel DockPanel.Dock="Right">
+                        <Label>每页</Label>
+                        <Label x:Name="size"></Label>
+                        <Label>条记录 第</Label>
+                        <TextBox x:Name="tbPageIndex" Width="15" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Foreground="#09a3de"/>
+                        <Label>页</Label>
+                        <Button x:Name="go_page" Click="go_page_Click" Style="{DynamicResource ChamferButton}" FontSize="10" Width="25" Height="14" VerticalContentAlignment="Center" VerticalAlignment="Center">GO</Button>
+                        <TextBlock x:Name="preview_page" Text="&#xf0a8;" FontSize="16" Style="{DynamicResource FontAwesome}" MouseDown="preview_page_MouseDown">
+                            <TextBlock.ToolTip>
+                                上一页
+                            </TextBlock.ToolTip>
+                        </TextBlock>
+                        <TextBlock x:Name="next_page" Text="&#xf0a9;" FontSize="16" Style="{DynamicResource FontAwesome}" MouseDown="next_page_MouseDown">
+                            <TextBlock.ToolTip>
+                                下一页
+                            </TextBlock.ToolTip>
+                        </TextBlock>
+                    </WrapPanel>
+                    <WrapPanel>
+                        <Label>共</Label>
+                        <Label x:Name="count" Foreground="#09a3de"></Label>
+                        <Label>条记录 第</Label>
+                        <Label x:Name="pageIndex" Foreground="#09a3de"></Label>
+                        <Label>/</Label>
+                        <Label x:Name="totalPages" Foreground="#09a3de"></Label>
+                        <Label>页</Label>
+                    </WrapPanel>
+                </DockPanel>
+                <DataGrid x:Name="dataGrid" AutoGenerateColumns="False"  ColumnHeaderHeight="36" SelectionUnit="FullRow" Background="Transparent" SelectionMode="Single" CanUserAddRows="False">
                     <!--数据网格的样式属性-->
                     <DataGrid.Style>
                         <!--DataGrid样式-->
@@ -61,8 +106,9 @@
                     <DataGrid.ColumnHeaderStyle>
                         <!--样式类型：DataGridColumnHeader（数据网格列标题）-->
                         <Style TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="Background" Value="#E1F1FF"/>
-                            <Setter Property="Foreground" Value="#000"/>
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="Background" Value="#FF2B579A"/>
+                            <Setter Property="Foreground" Value="#E1F1FF"/>
                             <Setter Property="HorizontalContentAlignment" Value="Center"/>
                             <!--设置边框笔刷（BorderBrush）-->
                             <Setter Property="BorderBrush">
@@ -180,19 +226,19 @@
                         <DataGridTemplateColumn Header="操作" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="25">
                                         <!--框-->
 
                                         <Border VerticalAlignment="Center" Margin="3,0">
-                                            <TextBlock x:Name="details" Text="&#xf15c;" Style="{DynamicResource FontAwesome}" FontSize="18" MouseDown="details_MouseDown"  Tag="{Binding Id}" Cursor="Hand"/>
+                                            <TextBlock x:Name="details" Text="&#xf15c;" Style="{DynamicResource FontAwesome}" FontSize="16" MouseDown="details_MouseDown"  Tag="{Binding Id}" Cursor="Hand"/>
                                         </Border>
 
                                         <Border VerticalAlignment="Center" Margin="3,0">
-                                            <TextBlock x:Name="edit" Text="&#xf044;" Style="{DynamicResource FontAwesome}" FontSize="20" MouseDown="edit_MouseDown"  Tag="{Binding Id}" Cursor="Hand"/>
+                                            <TextBlock x:Name="edit" Text="&#xf044;" Style="{DynamicResource FontAwesome}" FontSize="18" MouseDown="edit_MouseDown"  Tag="{Binding Id}" Cursor="Hand"/>
                                         </Border>
 
                                         <Border VerticalAlignment="Center" Margin="3,0">
-                                            <TextBlock x:Name="delete" Text="&#xf1f8;" Style="{DynamicResource FontAwesome}" FontSize="20" MouseDown="delete_MouseDown"  Tag="{Binding Id}" Cursor="Hand"/>
+                                            <TextBlock x:Name="delete" Text="&#xf1f8;" Style="{DynamicResource FontAwesome}" FontSize="18" MouseDown="delete_MouseDown"  Tag="{Binding Id}" Cursor="Hand"/>
                                         </Border>
                                     </StackPanel>
                                 </DataTemplate>

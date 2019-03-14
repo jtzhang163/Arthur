@@ -12,17 +12,15 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Style/Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <Style TargetType="{x:Type TextBox}">
-                <Setter Property="Height" Value="30"/>
-                <Setter Property="Width" Value="180"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="新增角色" Foreground="#09a3de" Style="{StaticResource PageTitleTextBlock}"/>
-            <TextBlock DockPanel.Dock="Bottom" FontSize="30" Height="35"><Hyperlink x:Name="create" Click="create_Click">新增</Hyperlink> <Hyperlink x:Name="cancel" Click="cancel_Click">返回</Hyperlink></TextBlock>
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <Button x:Name="create" Click="create_Click" Style="{StaticResource ChamferButton}">新增</Button>
+                <Button x:Name="cancel" Click="cancel_Click" Style="{StaticResource ChamferButton}">返回</Button>
+            </StackPanel>
             <DockPanel>
                 <TextBlock x:Name="tip" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Hidden"/>
                 <Grid x:Name="grid">
@@ -36,9 +34,9 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="等级" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
-                    <TextBox x:Name="level" Grid.Row="0" Grid.Column="1" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
+                    <TextBox x:Name="level" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
                     <TextBlock Text="名称" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
-                    <TextBox x:Name="name" Grid.Row="1" Grid.Column="1" GotFocus="textbox_GotFocus"/>
+                    <TextBox x:Name="name" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                 </Grid>
             </DockPanel>
         </DockPanel>
