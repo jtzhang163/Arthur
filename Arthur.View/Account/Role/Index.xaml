@@ -8,12 +8,190 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <DockPanel>
-            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="角色列表"/>
+            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="角色信息"/>
             <DockPanel>
                 <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" HorizontalAlignment="Right"><Hyperlink x:Name="create" Click="create_Click">新增</Hyperlink></TextBlock>
-                <ListView x:Name="listView">
-                    
-                </ListView>
+                <DataGrid x:Name="dataGrid" AutoGenerateColumns="False"  ColumnHeaderHeight="40" SelectionUnit="FullRow" Background="Transparent" SelectionMode="Single" CanUserAddRows="False">
+                    <!--数据网格的样式属性-->
+                    <DataGrid.Style>
+                        <!--DataGrid样式-->
+                        <Style TargetType="DataGrid">
+                            <!--设置HeadersVisibility：头部可见性，Column-->
+                            <Setter Property="HeadersVisibility" Value="Column"/>
+                            <!--水平网格线刷能见度-->
+                            <Setter Property="HorizontalGridLinesBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#333" Opacity="0.2"/>
+                                </Setter.Value>
+                            </Setter>
+
+                            <!--垂直网格线刷-->
+                            <Setter Property="VerticalGridLinesBrush">
+                                <Setter.Value>
+                                    <SolidColorBrush Color="#333" Opacity="0.2"/>
+                                    <!--Transparent-->
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.Style>
+
+                    <!--数据网格的列标题样式属性-->
+                    <DataGrid.ColumnHeaderStyle>
+                        <!--样式类型：DataGridColumnHeader（数据网格列标题）-->
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background" Value="#E1F1FF"/>
+                            <Setter Property="Foreground" Value="#000"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            <!--设置边框笔刷（BorderBrush）-->
+                            <Setter Property="BorderBrush">
+                                <!--值-->
+                                <Setter.Value>
+                                    <!--色刷，Opacity：透明度-->
+                                    <SolidColorBrush Color="#333" Opacity="0.2"></SolidColorBrush>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+
+                    <!--DataGrid的Rowstyle属性（数据表格的行样式）-->
+                    <DataGrid.RowStyle>
+                        <!--设置样式，类型：DataGridRow（数据表格行）-->
+                        <Style TargetType="DataGridRow">
+                            <!--设置BorderThickness：边框粗细，value：值0-->
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <!--<Setter Property="Background" Value="Transparent"/>Transparent：透明-->
+                            <!--创建样式触发器-->
+                            <Style.Triggers>
+                                <!--是否是鼠标经过触发-->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <!--触发：背景颜色-->
+                                    <Setter Property="Background">
+                                        <!--Color：背景颜色值；Opacity：透明度-->
+                                        <Setter.Value>
+                                            <SolidColorBrush Color="#E1F1FF" Opacity="1"></SolidColorBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                                <!--是否选中时触发-->
+                                <Trigger Property="IsSelected" Value="True">
+                                    <!--触发：Foreground（字体颜色）；Value：颜色值：Red-->
+                                    <Setter Property="Foreground" Value="Red"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+
+                    <!--DataGrid的CellStyle属性（数据表格的单元格样式）-->
+                    <DataGrid.CellStyle >
+                        <!--设置样式，类型：DataGridCell（数据表格的单元格）-->
+                        <Style TargetType="DataGridCell">
+                            <!--设置BorderThickness：边框粗细，value：值0-->
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <!--样式的触发器-->
+                            <Style.Triggers>
+                                <!--是否选中是触发-->
+                                <Trigger Property="IsSelected" Value="True">
+                                    <!--触发：背景-->
+                                    <Setter Property="Background">
+                                        <!--设置触发背景的值-->
+                                        <Setter.Value>
+                                            <!--Color：颜色，Opacity：透明度-->
+                                            <SolidColorBrush Color="AntiqueWhite" Opacity="0.9"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <!--设置字体颜色（Foreground）：红色（Red）-->
+                                    <Setter Property="Foreground" Value="Red"></Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+
+                    <DataGrid.Columns>
+
+                        <!--用这种的话，单元格不能放多个可点击的控件，这个可以：DataGridTemplateColumn-->
+                        <!--<DataGridTextColumn Header="单位" Width="*" Binding="{Binding Company}" IsReadOnly="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                            <Setter Property="FontSize" Value="14" />
+                            <Setter Property="FontFamily" Value="微软雅黑" />
+                            <Setter Property="Height" Value="40" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>-->
+
+                        <!--数据表格模板列;Header:标题，Width：{比例（*），固定值（int）}-->
+                        <DataGridTemplateColumn Header="编号" Width="*">
+                            <!--数据表格模板列的单元格模板属性-->
+                            <DataGridTemplateColumn.CellTemplate>
+                                <!--数据模板-->
+                                <DataTemplate>
+                                    <!--堆叠盘-->
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Id}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="名称" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="等级" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding Level}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
+                        <DataGridTemplateColumn Header="操作" Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="40">
+                                        <!--框-->
+
+                                        <Border VerticalAlignment="Center" Margin="5,0">
+                                            <TextBlock>
+                                                <Hyperlink x:Name="details" FontSize="14" Tag="{Binding Id}" Click="details_Click">详情</Hyperlink>
+                                            </TextBlock>
+                                        </Border>
+
+                                        <Border VerticalAlignment="Center" Margin="5,0">
+                                            <TextBlock>
+                                                <Hyperlink x:Name="edit" FontSize="14" Tag="{Binding Id}" Click="edit_Click">编辑</Hyperlink>
+                                            </TextBlock>
+                                        </Border>
+
+                                        <Border VerticalAlignment="Center" Margin="5,0">
+                                            <TextBlock>
+                                                <Hyperlink x:Name="delete"  FontSize="14" Tag="{Binding Id}" Click="delete_Click">删除</Hyperlink>
+                                            </TextBlock>
+                                        </Border>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+
+                            <!--<DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="修改" MouseDoubleClick="s_MouseLeftButtonDown" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>-->
+
+                        </DataGridTemplateColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
             </DockPanel>
         </DockPanel>
     </Grid>

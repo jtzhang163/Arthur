@@ -29,12 +29,12 @@ namespace Arthur.View.Utils
         /// </summary>
         /// <param name="uc"></param>
         /// <param name="method_name"></param>
-        public static void ExecuteParentUserControlMethod(UserControl uc, string parentUserControlName,string methodName, string pageName)
+        public static void ExecuteParentUserControlMethod(UserControl uc, string parentUserControlName, string methodName, string pageName, int id)
         {
             UserControl parentUc = ControlsSearchHelper.GetParentObject<UserControl>(uc, parentUserControlName);
             Type type = parentUc.GetType();
             MethodInfo mi = type.GetMethod(methodName);
-            mi.Invoke(parentUc, new object[] { pageName });
+            mi.Invoke(parentUc, new object[] { pageName, id });
         }
     }
 }

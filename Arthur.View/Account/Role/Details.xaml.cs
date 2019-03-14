@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Arthur.View.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,20 @@ namespace Arthur.View.Account.Role
     /// </summary>
     public partial class Details : UserControl
     {
-        public Details()
+        public Details(int id)
         {
             InitializeComponent();
+            this.DataContext = Arthur.Business.Account.GetRole(id);
+        }
+
+        private void cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.ExecuteParentUserControlMethod(this, "RoleManage", "SwitchWindow", "Index", 0);
+        }
+
+        private void edit_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

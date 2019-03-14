@@ -9,8 +9,7 @@ namespace Arthur.App.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "Arthur.App.OptionContext";
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Arthur.App.OptionContext context)

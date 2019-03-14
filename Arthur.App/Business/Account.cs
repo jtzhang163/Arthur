@@ -155,10 +155,14 @@ namespace Arthur.Business
             return Result.OK;
         }
 
-
         public static User GetUser(int id)
         {
             return Context.AccountContext.Users.FirstOrDefault(u => u.Id == id) ?? new User();
+        }
+
+        public static Role GetRole(int id)
+        {
+            return Context.AccountContext.Roles.FirstOrDefault(u => u.Id == id) ?? new Role();
         }
 
 

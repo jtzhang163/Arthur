@@ -4,9 +4,50 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Arthur.View.Account.Role"
+             xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="property_title" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Width" Value="180"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="180"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-            
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="编辑角色"/>
+            <TextBlock DockPanel.Dock="Bottom" FontSize="30" Height="35"><Hyperlink x:Name="edit" Click="edit_Click">确定</Hyperlink> <Hyperlink x:Name="cancel" Click="cancel_Click">返回</Hyperlink></TextBlock>
+            <DockPanel>
+                <TextBlock x:Name="tip" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Hidden"/>
+                <Grid x:Name="grid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="编号" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1"/>
+                    <TextBlock Text="名称" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <TextBox x:Name="name" Grid.Row="1" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}" GotFocus="textbox_GotFocus"/>
+                    <TextBlock Text="等级" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <TextBox x:Name="level" Grid.Row="2" Grid.Column="1" Text="{Binding Level, Mode=TwoWay}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
+                </Grid>
+            </DockPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

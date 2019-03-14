@@ -47,9 +47,9 @@ namespace SzYitong.Bis.App.UserControls
             this.grid.Children.Add(new Index());
         }
 
-        private void LoadDetailsUC()
+        private void LoadDetailsUC(int id)
         {
-            this.grid.Children.Add(new Details());
+            this.grid.Children.Add(new Details(id));
         }
 
         private void LoadCreateUC()
@@ -57,7 +57,12 @@ namespace SzYitong.Bis.App.UserControls
             this.grid.Children.Add(new Create());
         }
 
-        public void SwitchWindow(string option)
+        private void LoadEditUC(int id)
+        {
+            this.grid.Children.Add(new Edit(id));
+        }
+
+        public void SwitchWindow(string option, int id)
         {
             grid.Children.Clear();
             this.Option = option;
@@ -67,11 +72,15 @@ namespace SzYitong.Bis.App.UserControls
             }
             else if (this.Option == "Details")
             {
-                LoadDetailsUC();
+                LoadDetailsUC(id);
             }
             else if (this.Option == "Create")
             {
                 LoadCreateUC();
+            }
+            else if (this.Option == "Edit")
+            {
+                LoadEditUC(id);
             }
 
         }
