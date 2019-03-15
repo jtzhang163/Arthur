@@ -81,6 +81,8 @@ namespace SzYitong.Bis.App
             {
                 case "个人中心":
                     return new CurrentUserInfoUC();
+                case "用户管理":
+                    return new UserManageUC();
                 case "角色管理":
                     return new RoleManageUC();
                 case "系统参数":

@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:utils="clr-namespace:SzYitong.Bis.App.Utils"
         xmlns:local="clr-namespace:SzYitong.Bis.App" WindowState="Maximized"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="{Binding AppTitle}" Height="450" Width="800">
@@ -446,7 +445,7 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
                             <RadioButton Grid.Row="0" Checked="RadioButton_Checked">个人中心</RadioButton>
-                            <RadioButton Grid.Row="1">用户管理</RadioButton>
+                            <RadioButton Grid.Row="1" Checked="RadioButton_Checked">用户管理</RadioButton>
                             <RadioButton Grid.Row="2" Checked="RadioButton_Checked">角色管理</RadioButton>
                         </Grid>
                     </Expander.Content>

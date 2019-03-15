@@ -54,6 +54,7 @@
     <Compile Include="Business\Account.cs" />
     <Compile Include="Business\Application.cs" />
     <Compile Include="Business\IManage.cs" />
+    <Compile Include="Business\UserManage.cs" />
     <Compile Include="Business\RoleManage.cs" />
     <Compile Include="Current.cs" />
     <Compile Include="Data\Contexts\AccountContext.cs" />

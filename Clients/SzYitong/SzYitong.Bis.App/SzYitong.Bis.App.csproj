@@ -72,6 +72,9 @@
     <Compile Include="UserControls\Account\CurrentUserUC.xaml.cs">
       <DependentUpon>CurrentUserUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Account\UserManageUC.xaml.cs">
+      <DependentUpon>UserManageUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SystemUC\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
@@ -111,6 +114,10 @@
     <Page Include="UserControls\Account\CurrentUserUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Account\UserManageUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\SystemUC\Details.xaml">
       <Generator>MSBuild:Compile</Generator>
