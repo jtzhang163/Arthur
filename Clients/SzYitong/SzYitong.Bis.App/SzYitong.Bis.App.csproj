@@ -44,6 +44,10 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -175,6 +179,10 @@
     <ProjectReference Include="..\..\..\Arthur.View\Arthur.View.csproj">
       <Project>{1b0a54cc-658b-4ecc-aee3-b2b3feb87acd}</Project>
       <Name>Arthur.View</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Arthur\Arthur.csproj">
+      <Project>{1090299d-1c85-4e87-b155-b28ab93985fa}</Project>
+      <Name>Arthur</Name>
     </ProjectReference>
     <ProjectReference Include="..\SzYitong.Bis\SzYitong.Bis.csproj">
       <Project>{2A09CA22-80D4-4624-A507-CF348F015E49}</Project>
