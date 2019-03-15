@@ -22,10 +22,13 @@ namespace Arthur.View.Account.Role
     /// </summary>
     public partial class Edit : UserControl
     {
+        private Arthur.App.Model.Role Role;
+
         public Edit(int id)
         {
             InitializeComponent();
-            this.DataContext = Arthur.Business.Account.GetRole(id);
+            this.Role = Arthur.Business.Account.GetRole(id);
+            this.DataContext = this.Role;
         }
 
         private void textbox_GotFocus(object sender, RoutedEventArgs e)
@@ -46,10 +49,10 @@ namespace Arthur.View.Account.Role
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            var level = this.level.Text.Trim();
             var name = this.name.Text.Trim();
+            var level = this.level.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(level) || string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(level))
             {
                 tip.Foreground = new SolidColorBrush(Colors.Red);
                 tip.Text = "请填写数据！";
@@ -58,6 +61,9 @@ namespace Arthur.View.Account.Role
             {
                 try
                 {
+                    this.Role.Name = name;
+                    this.Role.Level = int.Parse(level);
+
                     Arthur.App.Data.Context.AccountContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";

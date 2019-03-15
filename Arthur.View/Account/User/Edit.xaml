@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Arthur.View.Account.User"
+             xmlns:utils="clr-namespace:Arthur.View.Utils"
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -12,6 +13,9 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Style/Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            <utils:GenderToRadioButtonConverter x:Key="genderToRadioButtonConverter"/>
+
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -28,18 +32,40 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="120"/>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="名称：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
-                    <TextBox x:Name="name" Grid.Row="1" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <TextBlock Text="等级：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
-                    <TextBox x:Name="level" Grid.Row="2" Grid.Column="1" Text="{Binding Level, Mode=TwoWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
+                    <Label Content="用户名：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Name}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="所属角色：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+
+                    <Label Content="性别：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+
+                    <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Name="gender">
+                        <RadioButton x:Name="gender1" Content="男" GroupName="genderType" IsChecked="{Binding Gender,Mode=OneWay, Converter={StaticResource genderToRadioButtonConverter},ConverterParameter=1}" Style="{StaticResource property_RadioButton}"/>
+                        <RadioButton x:Name="gender2" Content="女" GroupName="genderType" IsChecked="{Binding Gender,Mode=OneWay, Converter={StaticResource genderToRadioButtonConverter},ConverterParameter=2}"  Style="{StaticResource property_RadioButton}"/>
+                        <RadioButton x:Name="gender0" Content="未知" GroupName="genderType" IsChecked="{Binding Gender,Mode=OneWay, Converter={StaticResource genderToRadioButtonConverter},ConverterParameter=0}" Style="{StaticResource property_RadioButton}" />
+                    </StackPanel>
+
+                    <Label Content="工号：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="number" Grid.Row="4" Grid.Column="1" Text="{Binding Number, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="电话：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="phoneNumber" Grid.Row="5" Grid.Column="1" Text="{Binding PhoneNumber, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="邮箱：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="email" Grid.Row="6" Grid.Column="1" Text="{Binding Email, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="是否激活：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <CheckBox x:Name="isEnabled" IsChecked="{Binding IsEnabled, Mode=OneWay}" Grid.Row="7" Grid.Column="1" VerticalContentAlignment="Center"/>
+
                 </Grid>
             </DockPanel>
         </DockPanel>

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Arthur.View.Account.User"
+             xmlns:utils="clr-namespace:Arthur.View.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -11,6 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Style/Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <utils:GenderToStringConverter x:Key="genderToStringConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -37,32 +39,31 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="120"/>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="用户名：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="用户名：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Name}" x:Name="level" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="所属角色：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="所属角色：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Role.Name}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="性别：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
-                    <Label Content="{Binding Gender}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="工号：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="性别：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Gender, Converter={StaticResource genderToStringConverter}}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="工号：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Number}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="电话：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="电话：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding PhoneNumber}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="邮箱：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="邮箱：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Email}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
-
-                    <TextBlock Text="注册时间：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="注册时间：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding RegisterTime}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="最近登录：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="最近登录：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding LastLoginTime}" Grid.Row="8" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="登录次数：" Grid.Row="9" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="登录次数：" Grid.Row="9" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding LoginTimes}" Grid.Row="9" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="是否激活：" Grid.Row="10" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="是否激活：" Grid.Row="10" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding IsEnabled}" Grid.Row="10" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>

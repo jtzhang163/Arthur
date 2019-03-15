@@ -36,6 +36,7 @@
                 <Setter Property="Padding" Value="2,0,2,0"/>
                 <!--<Setter Property="Foreground" Value="#09a3de"/>-->
             </Style>
+
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>

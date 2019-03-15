@@ -33,11 +33,11 @@
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="名称：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="名称：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Name}" x:Name="level" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="等级：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="等级：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Level}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>

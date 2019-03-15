@@ -33,9 +33,9 @@
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="等级" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="等级：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="level" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
-                    <TextBlock Text="名称" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="名称：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="name" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                 </Grid>
             </DockPanel>

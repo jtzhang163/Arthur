@@ -33,10 +33,9 @@
         <Setter Property="Foreground" Value="#09a3de"/>
     </Style>
 
-    <Style x:Key="property_title" TargetType="{x:Type TextBlock}">
-        <!--<Setter Property="HorizontalAlignment" Value="Right"/>-->
+    <Style x:Key="property_title" TargetType="{x:Type Label}">
+        <Setter Property="HorizontalContentAlignment" Value="Right"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Width" Value="280"/>
         <Setter Property="FontSize" Value="22"/>
 
     </Style>
@@ -51,9 +50,14 @@
 
     <Style x:Key="property_Label" TargetType="{x:Type Label}">
         <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="Width" Value="280"/>
         <Setter Property="FontSize" Value="22"/>
+        <Setter Property="Foreground" Value="#FF2B579A"/>
+    </Style>
 
+    <Style x:Key="property_RadioButton" TargetType="{x:Type RadioButton}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="Foreground" Value="#FF2B579A"/>
     </Style>
 

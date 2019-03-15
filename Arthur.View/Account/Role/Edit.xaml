@@ -34,12 +34,12 @@
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="名称：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
-                    <TextBox x:Name="name" Grid.Row="1" Grid.Column="1" Text="{Binding Name, Mode=TwoWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <TextBlock Text="等级：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
-                    <TextBox x:Name="level" Grid.Row="2" Grid.Column="1" Text="{Binding Level, Mode=TwoWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
+                    <Label Content="名称：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="name" Grid.Row="1" Grid.Column="1" Text="{Binding Name, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="等级：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="level" Grid.Row="2" Grid.Column="1" Text="{Binding Level, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
                 </Grid>
             </DockPanel>
         </DockPanel>
