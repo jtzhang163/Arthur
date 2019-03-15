@@ -455,23 +455,6 @@
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
                     <Expander.Header>
-                        <TextBlock Text="后台"/>
-                    </Expander.Header>
-                    <Expander.Content>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0">会员管理</RadioButton>
-                            <RadioButton Grid.Row="1">角色管理</RadioButton>
-                        </Grid>
-                    </Expander.Content>
-                </Expander>
-                <Separator Height="2" Background="White"/>
-
-                <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
-                    <Expander.Header>
                         <TextBlock Text="系统"/>
                     </Expander.Header>
                     <Expander.Content>

@@ -49,7 +49,7 @@ namespace Arthur.App
                     appName = Business.Application.GetOption("AppName");
                     if (appName == null)
                     {
-                        appName = "XXXX系统";
+                        appName = string.Empty;
                         Business.Application.SetOption("AppName", appName, "应用程序名称");
                     }
                 }

@@ -23,7 +23,7 @@ namespace Arthur.View.Account.Role
     /// </summary>
     public partial class Create : UserControl
     {
-        public Create()
+        public Create(int id)
         {
             InitializeComponent();
         }

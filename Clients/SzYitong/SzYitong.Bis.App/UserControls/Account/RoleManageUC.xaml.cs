@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,59 +31,21 @@ namespace SzYitong.Bis.App.UserControls
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="option">显示选项 Index, Create, Details ,Edit</param>
+        /// <param name="option">页面选项 Index, Create, Details ,Edit</param>
         public RoleManageUC(string option)
         {
-            this.Option = option;
             InitializeComponent();
-
-            if (this.Option == "Index")
-            {
-                LoadIndexUC();
-            }
-        }
-
-        private void LoadIndexUC()
-        {
-            this.grid.Children.Add(new Index());
-        }
-
-        private void LoadDetailsUC(int id)
-        {
-            this.grid.Children.Add(new Details(id));
-        }
-
-        private void LoadCreateUC()
-        {
-            this.grid.Children.Add(new Create());
-        }
-
-        private void LoadEditUC(int id)
-        {
-            this.grid.Children.Add(new Edit(id));
+            SwitchWindow(option, 0);
         }
 
         public void SwitchWindow(string option, int id)
         {
-            grid.Children.Clear();
             this.Option = option;
-            if (this.Option == "Index")
-            {
-                LoadIndexUC();
-            }
-            else if (this.Option == "Details")
-            {
-                LoadDetailsUC(id);
-            }
-            else if (this.Option == "Create")
-            {
-                LoadCreateUC();
-            }
-            else if (this.Option == "Edit")
-            {
-                LoadEditUC(id);
-            }
-
+            Assembly assembly = Assembly.LoadFile(AppDomain.CurrentDomain.BaseDirectory + "Arthur.View.dll");
+            Type type = assembly.GetType("Arthur.View.Account.Role." + this.Option);
+            object page = Activator.CreateInstance(type, new object[] { id });
+            grid.Children.Clear();
+            this.grid.Children.Add((UIElement)page);
         }
     }
 }

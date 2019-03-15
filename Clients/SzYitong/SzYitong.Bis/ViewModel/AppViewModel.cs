@@ -18,6 +18,10 @@ namespace SzYitong.Bis.ViewModel
             {
                 if (appName == null)
                 {
+                    if (string.IsNullOrWhiteSpace(Current.Option.AppName))
+                    {
+                        Current.Option.AppName = "烯晶碳能分选机调度系统";
+                    }
                     appName = Current.Option.AppName;
                 }
                 return appName;
