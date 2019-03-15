@@ -22,8 +22,16 @@
             </StackPanel>
             <DockPanel>
                 <TextBlock x:Name="tip" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Hidden"/>
-                <Grid x:Name="grid">
+                <Grid x:Name="grid" Margin="0,10,0,0">
                     <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -35,10 +43,27 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
                     <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="名称：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <TextBlock Text="用户名：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
                     <Label Content="{Binding Name}" x:Name="level" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <TextBlock Text="等级：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
-                    <Label Content="{Binding Level}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <TextBlock Text="所属角色：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding Role.Name}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <TextBlock Text="性别：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding Gender}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <TextBlock Text="工号：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding Number}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <TextBlock Text="电话：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding PhoneNumber}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <TextBlock Text="邮箱：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding Email}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
+
+                    <TextBlock Text="注册时间：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding RegisterTime}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <TextBlock Text="最近登录：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding LastLoginTime}" Grid.Row="8" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <TextBlock Text="登录次数：" Grid.Row="9" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding LoginTimes}" Grid.Row="9" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <TextBlock Text="是否激活：" Grid.Row="10" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
+                    <Label Content="{Binding IsEnabled}" Grid.Row="10" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

@@ -201,7 +201,7 @@
                         </DataGridTemplateColumn>
 
 
-                        <DataGridTemplateColumn Header="性别" Width="70"  CanUserSort="True" SortMemberPath="Gender">
+                        <!--<DataGridTemplateColumn Header="性别" Width="70"  CanUserSort="True" SortMemberPath="Gender">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -209,7 +209,7 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
+                        </DataGridTemplateColumn>-->
 
                         <DataGridTemplateColumn Header="工号" Width="*"  CanUserSort="True" SortMemberPath="Number">
                             <DataGridTemplateColumn.CellTemplate>
