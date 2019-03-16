@@ -185,7 +185,7 @@
                         <!--数据表格模板列;Header:标题，Width：{比例（*），固定值（int）}-->
 
 
-                        <DataGridTemplateColumn Header="用户名" Width="*"  CanUserSort="True" SortMemberPath="Name">
+                        <DataGridTemplateColumn Header="用户名" Width="120"  CanUserSort="True" SortMemberPath="Name">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

@@ -59,7 +59,6 @@ namespace Arthur.View.Account.CurrentUser
             var number = this.number.Text.Trim();
             var phoneNumber = this.phoneNumber.Text.Trim();
             var email = this.email.Text.Trim();
-            var isEnabled = this.isEnabled.IsChecked;
 
             try
             {
@@ -67,13 +66,6 @@ namespace Arthur.View.Account.CurrentUser
                 this.User.Number = number;
                 this.User.PhoneNumber = phoneNumber;
                 this.User.Email = email;
-                this.User.IsEnabled = isEnabled.Value;
-
-                var roleSelectedIndex = this.role.SelectedIndex;
-                if (roleSelectedIndex >= 0)
-                {
-                    this.User.Role = Context.Roles.ToList()[roleSelectedIndex];
-                }
 
                 Arthur.App.Data.Context.AccountContext.SaveChanges();
                 tip.Foreground = new SolidColorBrush(Colors.Green);

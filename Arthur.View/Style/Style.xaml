@@ -60,8 +60,8 @@
     </Style>
 
     <Style x:Key="property_ComboBox" TargetType="{x:Type ComboBox}">
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Height" Value="38"/>
+        <Setter Property="FontSize" Value="16"/>
     </Style>
 
 </ResourceDictionary>

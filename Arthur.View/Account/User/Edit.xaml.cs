@@ -34,6 +34,12 @@ namespace Arthur.View.Account.User
             this.DataContext = this.User;
 
             this.role.SelectedIndex = Context.Roles.ToList().IndexOf(this.User.Role);
+
+            if (this.User.Role.Level >= Current.User.Role.Level)
+            {
+                this.role.IsHitTestVisible = false;
+                this.isEnabled.IsEnabled = false;
+            }
         }
 
         private void textbox_GotFocus(object sender, RoutedEventArgs e)
@@ -59,20 +65,20 @@ namespace Arthur.View.Account.User
             var phoneNumber = this.phoneNumber.Text.Trim();
             var email = this.email.Text.Trim();
             var isEnabled = this.isEnabled.IsChecked;
+            var role = Context.Roles.ToList()[this.role.SelectedIndex];
 
             try
             {
+                if (role.Level > Current.User.Role.Level)
+                {
+                    throw new Exception("用户角色等级不能大于当前用户角色！");
+                }    
                 this.User.Gender = gender;
                 this.User.Number = number;
                 this.User.PhoneNumber = phoneNumber;
                 this.User.Email = email;
                 this.User.IsEnabled = isEnabled.Value;
-
-                var roleSelectedIndex = this.role.SelectedIndex;
-                if (roleSelectedIndex >= 0)
-                {
-                    this.User.Role = Context.Roles.ToList()[roleSelectedIndex];
-                }
+                this.User.Role = role;
 
                 Arthur.App.Data.Context.AccountContext.SaveChanges();
                 tip.Foreground = new SolidColorBrush(Colors.Green);

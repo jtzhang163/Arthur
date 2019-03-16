@@ -54,7 +54,8 @@
                     <Label Content="用户名：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Name}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="所属角色：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <ComboBox x:Name="role" Grid.Row="2" Grid.Column="1" DataContext="{StaticResource roles}" ItemsSource="{Binding}" ItemTemplate="{StaticResource ResourceKey=roleDataTemplate}" Style="{StaticResource property_ComboBox}"/>
+                    <ComboBox x:Name="role" Grid.Row="2" Grid.Column="1" DataContext="{StaticResource roles}" ItemsSource="{Binding}" ItemTemplate="{StaticResource ResourceKey=roleDataTemplate}" 
+                              Style="{StaticResource property_ComboBox}"/>
                     <Label Content="性别：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Name="gender">
                         <RadioButton x:Name="gender1" Content="男" GroupName="genderType" IsChecked="{Binding Gender,Mode=OneWay, Converter={StaticResource genderToRadioButtonConverter},ConverterParameter=1}" Style="{StaticResource property_RadioButton}"/>
@@ -65,7 +66,7 @@
                     <Label Content="工号：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="number" Grid.Row="4" Grid.Column="1" Text="{Binding Number, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                     <Label Content="电话：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <TextBox x:Name="phoneNumber" Grid.Row="5" Grid.Column="1" Text="{Binding PhoneNumber, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <TextBox x:Name="phoneNumber" Grid.Row="5" Grid.Column="1" Text="{Binding PhoneNumber, Mode=OneWay}" Style="{StaticResource property_TextBox}"  PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False"  GotFocus="textbox_GotFocus"/>
                     <Label Content="邮箱：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="email" Grid.Row="6" Grid.Column="1" Text="{Binding Email, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                     <Label Content="是否激活：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>

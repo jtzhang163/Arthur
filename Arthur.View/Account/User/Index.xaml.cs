@@ -75,12 +75,6 @@ namespace Arthur.View.Account.User
             this.dataGrid.ItemsSource = dtos;
         }
 
-        //private void create_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Helper.ExecuteParentUserControlMethod(this, "UserManage", "SwitchWindow", "Create", 0);
-        //}
-
-
         private void query_Click(object sender, RoutedEventArgs e)
         {
             UpdateDataGrid(PageIndex);
@@ -97,6 +91,18 @@ namespace Arthur.View.Account.User
                 return;
             }
 
+            if (user == Current.User)
+            {
+                MessageBox.Show("不能删除当前用户！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (Current.User.Role.Level <= Context.Users.Single(r => r.Id == id).Role.Level)
+            {
+                MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             if (MessageBox.Show(string.Format("确定要删除用户【{0}】吗？", user.Name), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 Context.Users.Remove(user);
@@ -108,6 +114,11 @@ namespace Arthur.View.Account.User
         private void edit_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
+            if (Current.User != Context.Users.Single(r => r.Id == id) && Current.User.Role.Level <= Context.Users.Single(r => r.Id == id).Role.Level)
+            {
+                MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
             Helper.ExecuteParentUserControlMethod(this, "UserManage", "SwitchWindow", "Edit", id);
         }
 

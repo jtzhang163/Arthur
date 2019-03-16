@@ -1,4 +1,6 @@
-﻿using Arthur.View.Utils;
+﻿using Arthur.App;
+using Arthur.App.Data;
+using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +37,13 @@ namespace Arthur.View.Account.User
         private void edit_Click(object sender, RoutedEventArgs e)
         {
             var id = Convert.ToInt32((sender as Button).Tag);
+
+            if (Current.User != Context.Users.Single(r => r.Id == id) && Current.User.Role.Level <= Context.Users.Single(r => r.Id == id).Role.Level)
+            {
+                MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             Helper.ExecuteParentUserControlMethod(this, "UserManage", "SwitchWindow", "Edit", id);
         }
     }

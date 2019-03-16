@@ -1,4 +1,5 @@
-﻿using Arthur.View.Utils;
+﻿using Arthur.App.Data;
+using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,12 +58,22 @@ namespace Arthur.View.Account.Role
                 tip.Foreground = new SolidColorBrush(Colors.Red);
                 tip.Text = "请填写数据！";
             }
+            else if (!int.TryParse(level, out int iLevel))
+            {
+                tip.Foreground = new SolidColorBrush(Colors.Red);
+                tip.Text = "角色等级输入有误！";
+            }
+            else if (iLevel > Context.Roles.Single(r => r.Name == "系统管理员").Level)
+            {
+                tip.Foreground = new SolidColorBrush(Colors.Red);
+                tip.Text = "角色等级不能大于管理员等级！";
+            }
             else
             {
                 try
                 {
                     this.Role.Name = name;
-                    this.Role.Level = int.Parse(level);
+                    this.Role.Level = iLevel;
 
                     Arthur.App.Data.Context.AccountContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);
