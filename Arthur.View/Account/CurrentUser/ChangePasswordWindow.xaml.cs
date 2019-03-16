@@ -1,4 +1,5 @@
 ﻿using Arthur.App;
+using Arthur.App.Data;
 using System.Windows;
 using System.Windows.Media;
 
@@ -9,10 +10,13 @@ namespace Arthur.View.Account
     /// </summary>
     public partial class ChangePasswordWindow : Window
     {
-        public ChangePasswordWindow()
+        private Arthur.App.Model.User User;
+
+        public ChangePasswordWindow(int id)
         {
             InitializeComponent();
-            this.username.Content = Current.User.Name;
+            this.User = Arthur.Business.Account.GetUser(id);
+            this.DataContext = this.User;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -21,7 +25,7 @@ namespace Arthur.View.Account
             var new_pwd = this.new_pwd.Password.Trim();
             var confirm_new_pwd = this.confirm_new_pwd.Password.Trim();
 
-            var ret = Arthur.Business.Account.ChangePassword(Current.User.Name, old_pwd, new_pwd, confirm_new_pwd);
+            var ret = Arthur.Business.Account.ChangePassword(this.User.Name, old_pwd, new_pwd, confirm_new_pwd);
             if (ret.IsOk)
             {
                 lbTip.Text = "修改密码成功！";

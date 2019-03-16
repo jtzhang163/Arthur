@@ -11,7 +11,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Style/Style.xaml"/>
+                <ResourceDictionary Source="/Style/Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <Style x:Key="FontAwesome">
                 <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/#FontAwesome" />

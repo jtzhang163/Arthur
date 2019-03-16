@@ -80,7 +80,7 @@ namespace SzYitong.Bis.App
             switch (tabName)
             {
                 case "个人中心":
-                    return new CurrentUserInfoUC();
+                    return new CurrentUserUC();
                 case "用户管理":
                     return new UserManageUC();
                 case "角色管理":

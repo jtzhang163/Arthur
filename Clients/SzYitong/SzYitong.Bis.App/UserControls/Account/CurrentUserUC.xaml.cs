@@ -1,8 +1,8 @@
-﻿using Arthur.App;
-using Arthur.View.Account;
+﻿using Arthur.View.Account.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,24 +18,34 @@ using System.Windows.Shapes;
 namespace SzYitong.Bis.App.UserControls
 {
     /// <summary>
-    /// CurrentUserInfoUC.xaml 的交互逻辑
+    /// UserManageUC.xaml 的交互逻辑
     /// </summary>
-    public partial class CurrentUserInfoUC : UserControl
+    public partial class CurrentUserUC : UserControl
     {
-        public CurrentUserInfoUC()
+
+        public string Option { get; set; }
+
+        public CurrentUserUC() : this("Details")
+        {
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="option">页面选项 Index, Create, Details ,Edit</param>
+        public CurrentUserUC(string option)
         {
             InitializeComponent();
-            this.DataContext = Current.User;
+            SwitchWindow(option, Current.User.Id);
         }
 
-        private void change_pwd_Click(object sender, RoutedEventArgs e)
+        public void SwitchWindow(string option, int id)
         {
-            new ChangePasswordWindow().ShowDialog();
-        }
-
-        private void change_info_Click(object sender, RoutedEventArgs e)
-        {
-
+            this.Option = option;
+            Assembly assembly = Assembly.LoadFile(AppDomain.CurrentDomain.BaseDirectory + "Arthur.View.dll");
+            Type type = assembly.GetType("Arthur.View.Account.CurrentUser." + this.Option);
+            object page = Activator.CreateInstance(type, new object[] { id });
+            grid.Children.Clear();
+            this.grid.Children.Add((UIElement)page);
         }
     }
 }

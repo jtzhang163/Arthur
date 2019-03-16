@@ -50,8 +50,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account\ChangePasswordWindow.xaml.cs">
+    <Compile Include="Account\CurrentUser\ChangePasswordWindow.xaml.cs">
       <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Account\CurrentUser\Details.xaml.cs">
+      <DependentUpon>Details.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Account\CurrentUser\Edit.xaml.cs">
+      <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Account\User\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
@@ -89,7 +95,15 @@
     <Compile Include="Utils\PaginatedList.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Account\ChangePasswordWindow.xaml">
+    <Page Include="Account\CurrentUser\ChangePasswordWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Account\CurrentUser\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Account\CurrentUser\Edit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
