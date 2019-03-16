@@ -165,6 +165,13 @@ namespace Arthur.Business
             return Context.AccountContext.Roles.FirstOrDefault(u => u.Id == id) ?? new Role();
         }
 
+        public static IEnumerable<Role> GetRoles()
+        {
+            var roles = Context.AccountContext.Roles.ToList();
+            return roles;
+            //return roles.Where(r => r.Level <= Current.User.Role.Level);
+        }
+
 
         //public static bool Logout()
         //{

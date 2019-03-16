@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="../../Style/Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <utils:GenderToStringConverter x:Key="genderToStringConverter"/>
+            <utils:BoolToStringConverter x:Key="boolToStringConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -40,7 +41,7 @@
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="120"/>
-                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="300"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
@@ -58,13 +59,13 @@
                     <Label Content="邮箱：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Email}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="注册时间：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding RegisterTime}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="{Binding RegisterTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="最近登录：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding LastLoginTime}" Grid.Row="8" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="{Binding LastLoginTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm}" Grid.Row="8" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="登录次数：" Grid.Row="9" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding LoginTimes}" Grid.Row="9" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="是否激活：" Grid.Row="10" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding IsEnabled}" Grid.Row="10" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="{Binding IsEnabled, Converter={StaticResource boolToStringConverter}}" Grid.Row="10" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

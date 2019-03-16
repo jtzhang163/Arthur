@@ -41,4 +41,17 @@ namespace Arthur.View.Utils
             return (Gender)int.Parse(parameter.ToString());
         }
     }
+
+    public class BoolToStringConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (bool)value ? "是" : "否";
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

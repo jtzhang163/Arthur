@@ -53,9 +53,6 @@
     <Compile Include="Account\ChangePasswordWindow.xaml.cs">
       <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Account\User\Create.xaml.cs">
-      <DependentUpon>Create.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Account\User\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
@@ -103,10 +100,6 @@
     <Page Include="Account\LoginUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Account\User\Create.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Account\User\Details.xaml">
       <Generator>MSBuild:Compile</Generator>

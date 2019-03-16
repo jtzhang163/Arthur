@@ -18,7 +18,7 @@
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="编辑角色"  Style="{StaticResource PageTitleTextBlock}"/>
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-                <Button x:Name="edit" Click="edit_Click" Style="{StaticResource ChamferButton}">确定</Button>
+                <Button x:Name="edit" Click="edit_Click" Style="{StaticResource ChamferButton}">保存</Button>
                 <Button x:Name="cancel" Click="cancel_Click" Style="{StaticResource ChamferButton}">返回</Button>
             </StackPanel>
             <DockPanel>

@@ -37,13 +37,14 @@ namespace Arthur.View.Account.Role
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(this.queryText.Text))
+                var queryText = this.queryText.Text.Trim();
+                if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return Context.AccountContext.Roles.ToList();
+                    return Context.Roles.ToList();
                 }
                 else
                 {
-                    return Context.AccountContext.Roles.Where(r => r.Name.Contains(this.queryText.Text.Trim())).ToList();
+                    return Context.Roles.Where(r => r.Name.Contains(queryText)).ToList();
                 }
             }
         }
@@ -83,7 +84,7 @@ namespace Arthur.View.Account.Role
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            var role = Context.AccountContext.Roles.SingleOrDefault(r => r.Id == id);
+            var role = Context.Roles.SingleOrDefault(r => r.Id == id);
 
             if (role == null)
             {
@@ -93,7 +94,7 @@ namespace Arthur.View.Account.Role
 
             if (MessageBox.Show(string.Format("确定要删除角色【{0}】吗？", role.Name), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Context.AccountContext.Roles.Remove(role);
+                Context.Roles.Remove(role);
                 Context.AccountContext.SaveChanges();
                 UpdateDataGrid(PageIndex);
             }

@@ -1,4 +1,6 @@
-﻿using Arthur.App.Model;
+﻿using Arthur.App;
+using Arthur.App.Data;
+using Arthur.App.Model;
 using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;
@@ -30,6 +32,8 @@ namespace Arthur.View.Account.User
             InitializeComponent();
             this.User = Arthur.Business.Account.GetUser(id);
             this.DataContext = this.User;
+
+            this.role.SelectedIndex = Context.Roles.ToList().IndexOf(this.User.Role);
         }
 
         private void textbox_GotFocus(object sender, RoutedEventArgs e)
@@ -50,29 +54,37 @@ namespace Arthur.View.Account.User
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            //var level = this.level.Text.Trim();
-            //var name = this.name.Text.Trim();
+            var gender = GetGender();
+            var number = this.number.Text.Trim();
+            var phoneNumber = this.phoneNumber.Text.Trim();
+            var email = this.email.Text.Trim();
+            var isEnabled = this.isEnabled.IsChecked;
 
-            //if (string.IsNullOrWhiteSpace(level) || string.IsNullOrWhiteSpace(name))
-            //{
-            //    tip.Foreground = new SolidColorBrush(Colors.Red);
-            //    tip.Text = "请填写数据！";
-            //}
-            //else
-            //{
-            //    try
-            //    {
-            //        Arthur.App.Data.Context.AccountContext.SaveChanges();
-            //        tip.Foreground = new SolidColorBrush(Colors.Green);
-            //        tip.Text = "修改信息成功！";
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        tip.Foreground = new SolidColorBrush(Colors.Red);
-            //        tip.Text = "修改信息失败：" + ex.Message;
-            //    }
-            //}
-            //tip.Visibility = Visibility.Visible;
+            try
+            {
+                this.User.Gender = gender;
+                this.User.Number = number;
+                this.User.PhoneNumber = phoneNumber;
+                this.User.Email = email;
+                this.User.IsEnabled = isEnabled.Value;
+
+                var roleSelectedIndex = this.role.SelectedIndex;
+                if (roleSelectedIndex >= 0)
+                {
+                    this.User.Role = Context.Roles.ToList()[roleSelectedIndex];
+                }
+
+                Arthur.App.Data.Context.AccountContext.SaveChanges();
+                tip.Foreground = new SolidColorBrush(Colors.Green);
+                tip.Text = "修改信息成功！";
+            }
+            catch (Exception ex)
+            {
+                tip.Foreground = new SolidColorBrush(Colors.Red);
+                tip.Text = "修改信息失败：" + ex.Message;
+            }
+
+            tip.Visibility = Visibility.Visible;
         }
 
         public Gender GetGender()

@@ -37,13 +37,19 @@ namespace Arthur.View.Account.User
         {
             get
             {
-                if (string.IsNullOrWhiteSpace(this.queryText.Text))
+                var queryText = this.queryText.Text.Trim();
+                if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return Context.AccountContext.Users.ToList();
+                    return Context.Users.ToList();
                 }
                 else
                 {
-                    return Context.AccountContext.Users.Where(r => r.Name.Contains(this.queryText.Text.Trim())).ToList();
+                    return Context.Users.Where(r => r.Name.Contains(queryText) 
+                    || r.Role.Name.Contains(queryText)
+                    || r.Number.Contains(queryText)
+                    || r.PhoneNumber.Contains(queryText)
+                    || r.Email.Contains(queryText)
+                    ).ToList();
                 }
             }
         }
@@ -69,10 +75,10 @@ namespace Arthur.View.Account.User
             this.dataGrid.ItemsSource = dtos;
         }
 
-        private void create_Click(object sender, RoutedEventArgs e)
-        {
-            Helper.ExecuteParentUserControlMethod(this, "UserManage", "SwitchWindow", "Create", 0);
-        }
+        //private void create_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Helper.ExecuteParentUserControlMethod(this, "UserManage", "SwitchWindow", "Create", 0);
+        //}
 
 
         private void query_Click(object sender, RoutedEventArgs e)
@@ -83,7 +89,7 @@ namespace Arthur.View.Account.User
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            var user = Context.AccountContext.Users.SingleOrDefault(r => r.Id == id);
+            var user = Context.Users.SingleOrDefault(r => r.Id == id);
 
             if (user == null)
             {
@@ -93,7 +99,7 @@ namespace Arthur.View.Account.User
 
             if (MessageBox.Show(string.Format("确定要删除用户【{0}】吗？", user.Name), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Context.AccountContext.Users.Remove(user);
+                Context.Users.Remove(user);
                 Context.AccountContext.SaveChanges();
                 UpdateDataGrid(PageIndex);
             }

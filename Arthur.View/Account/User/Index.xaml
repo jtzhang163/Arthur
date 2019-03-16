@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Arthur.View.Account.User"
+             xmlns:utils="clr-namespace:Arthur.View.Utils"
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              mc:Ignorable="d" Loaded="UserControl_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -37,6 +38,9 @@
                 <!--<Setter Property="Foreground" Value="#09a3de"/>-->
             </Style>
 
+            <utils:BoolToStringConverter x:Key="boolToStringConverter"/>
+            <utils:GenderToStringConverter x:Key="genderToStringConverter"/>
+
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -44,7 +48,7 @@
             <!--<TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="用户信息" Style="{StaticResource PageTitleTextBlock}"/>-->
             <DockPanel Margin="0,0,0,0">
                 <DockPanel DockPanel.Dock="Top" Height="40">
-                    <Button DockPanel.Dock="Right" Style="{DynamicResource ChamferButton}" Click="create_Click" Width="60">新增</Button>
+                    <!--<Button DockPanel.Dock="Right" Style="{DynamicResource ChamferButton}" Click="create_Click" Width="60">新增</Button>-->
                     <WrapPanel VerticalAlignment="Center">
                         <TextBox x:Name="queryText" Width="200" Height="28" Margin="0" VerticalContentAlignment="Center"></TextBox>
                         <Button x:Name="query" Style="{DynamicResource ChamferButton}" Click="query_Click" Margin="10,0">查询</Button>
@@ -191,7 +195,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="角色" Width="*"  CanUserSort="True" SortMemberPath="Role.Name">
+                        <DataGridTemplateColumn Header="角色" Width="100"  CanUserSort="True" SortMemberPath="Role.Name">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -202,17 +206,17 @@
                         </DataGridTemplateColumn>
 
 
-                        <!--<DataGridTemplateColumn Header="性别" Width="70"  CanUserSort="True" SortMemberPath="Gender">
+                        <DataGridTemplateColumn Header="性别" Width="50"  CanUserSort="True" SortMemberPath="Gender">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding Gender}"></TextBlock>
+                                        <TextBlock Text="{Binding Gender, Converter={StaticResource genderToStringConverter}}"></TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>-->
+                        </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="工号" Width="*"  CanUserSort="True" SortMemberPath="Number">
+                        <DataGridTemplateColumn Header="工号" Width="100"  CanUserSort="True" SortMemberPath="Number">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -223,7 +227,7 @@
                         </DataGridTemplateColumn>
 
 
-                        <DataGridTemplateColumn Header="电话" Width="*"  CanUserSort="True" SortMemberPath="PhoneNumber">
+                        <DataGridTemplateColumn Header="电话" Width="100"  CanUserSort="True" SortMemberPath="PhoneNumber">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -278,7 +282,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding IsEnabled}"></TextBlock>
+                                        <TextBlock Text="{Binding IsEnabled, Converter={StaticResource boolToStringConverter}}"></TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
