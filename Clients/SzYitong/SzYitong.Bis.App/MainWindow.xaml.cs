@@ -91,6 +91,12 @@ namespace SzYitong.Bis.App
                     return null;
             }
         }
+
+        private void currentUser_Click(object sender, RoutedEventArgs e)
+        {
+            var radio = new RadioButton() { Content = "个人中心" };
+            RadioButton_Checked(radio, null);
+        }
     }
 
 
