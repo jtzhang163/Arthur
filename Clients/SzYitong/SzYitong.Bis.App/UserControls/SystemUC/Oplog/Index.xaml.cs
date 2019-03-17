@@ -1,5 +1,6 @@
 ﻿using Arthur.App;
 using Arthur.App.Data;
+using Arthur.Utils;
 using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,17 @@ namespace SzYitong.Bis.App.UserControls.SystemUC.Oplog
         public Index(int id)
         {
             InitializeComponent();
+
+            this.start_time.Value = DateTime.Now.AddDays(-1);
+            this.end_time.Value = DateTime.Now;
+
+            this.op_type.Items.Add("全部");
+            var list = EnumberHelper.EnumToList<Arthur.App.Model.OpType>();
+            foreach (var obj in list)
+            {
+                this.op_type.Items.Add(obj.EnumName);
+            }
+            this.op_type.SelectedIndex = 0;
         }
 
         private int PageIndex = 1;
@@ -37,15 +49,19 @@ namespace SzYitong.Bis.App.UserControls.SystemUC.Oplog
         {
             get
             {
-                var queryText = this.queryText.Text.Trim();
-                if (string.IsNullOrWhiteSpace(queryText))
+                var logs = new List<Arthur.App.Model.Oplog>();
+                var startTime = this.start_time.Value;
+                var endTime = this.end_time.Value;
+                if (this.op_type.SelectedIndex > 0)
                 {
-                    return Context.Oplogs.ToList();
+                    var type = (Arthur.App.Model.OpType)Enum.Parse(typeof(Arthur.App.Model.OpType), this.op_type.SelectedItem.ToString());
+                    logs = Context.Oplogs.Where(r => r.Time > startTime && r.Time < endTime && r.OpType == type).ToList();
                 }
                 else
                 {
-                    return Context.Oplogs.Where(r => r.Content.Contains(queryText)).ToList();
+                    logs = Context.Oplogs.Where(r => r.Time > startTime && r.Time < endTime).ToList();
                 }
+                return logs;
             }
         }
 

@@ -1,5 +1,7 @@
 ﻿using Arthur.App;
 using Arthur.App.Data;
+using Arthur.App.Model;
+using Arthur.Utils;
 using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;
@@ -29,6 +31,17 @@ namespace SzYitong.Bis.App.UserControls.SystemUC.EventLog
         public Index(int id)
         {
             InitializeComponent();
+
+            this.start_time.Value = DateTime.Now.AddDays(-1);
+            this.end_time.Value = DateTime.Now;
+
+            this.event_type.Items.Add("全部");
+            var list = EnumberHelper.EnumToList<EventType>();
+            foreach (var obj in list)
+            {
+                this.event_type.Items.Add(obj.EnumName);
+            }
+            this.event_type.SelectedIndex = 0;
         }
 
         private int PageIndex = 1;
@@ -37,15 +50,19 @@ namespace SzYitong.Bis.App.UserControls.SystemUC.EventLog
         {
             get
             {
-                var queryText = this.queryText.Text.Trim();
-                if (string.IsNullOrWhiteSpace(queryText))
+                var logs = new List<Arthur.App.Model.EventLog>();
+                var startTime = this.start_time.Value;
+                var endTime = this.end_time.Value;
+                if (this.event_type.SelectedIndex > 0)
                 {
-                    return Context.EventLogs.ToList();
+                    var type = (Arthur.App.Model.EventType)Enum.Parse(typeof(Arthur.App.Model.EventType), this.event_type.SelectedItem.ToString());
+                    logs = Context.EventLogs.Where(r => r.Time > startTime && r.Time < endTime && r.EventType == type).ToList();
                 }
                 else
                 {
-                    return Context.EventLogs.Where(r => r.Content.Contains(queryText)).ToList();
+                    logs = Context.EventLogs.Where(r => r.Time > startTime && r.Time < endTime).ToList();
                 }
+                return logs;
             }
         }
 
@@ -93,7 +110,7 @@ namespace SzYitong.Bis.App.UserControls.SystemUC.EventLog
             } 
 
 
-            if (MessageBox.Show(string.Format("确定要删除该条日志吗？", ""), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            if (MessageBox.Show(string.Format("确定要删除该记录吗？", ""), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 Context.EventLogs.Remove(EventLog);
                 Context.LoggingContext.SaveChanges();

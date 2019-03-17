@@ -49,7 +49,8 @@
     <Compile Include="Result.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\EncryptHelper.cs" />
-    <Compile Include="Utility\_Convert.cs" />
+    <Compile Include="Utils\EnumberHelper.cs" />
+    <Compile Include="Utils\_Convert.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="log4net.config">

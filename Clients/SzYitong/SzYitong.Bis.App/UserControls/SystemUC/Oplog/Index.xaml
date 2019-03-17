@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SzYitong.Bis.App.UserControls.SystemUC.Oplog"
              xmlns:utils="clr-namespace:Arthur.View.Utils;assembly=Arthur.View"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              mc:Ignorable="d" Loaded="UserControl_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -48,7 +49,12 @@
                 <DockPanel DockPanel.Dock="Top" Height="40">
                     <!--<Button DockPanel.Dock="Right" Style="{DynamicResource ChamferButton}" Click="create_Click" Width="60">新增</Button>-->
                     <WrapPanel VerticalAlignment="Center">
-                        <TextBox x:Name="queryText" Width="200" Height="28" Margin="0" VerticalContentAlignment="Center"></TextBox>
+                        <Label Content="日志类型：" VerticalAlignment="Center"/>
+                        <ComboBox x:Name="op_type" Width="60" FontSize="14" Margin="0,0,20,0"/>
+                        <Label Content="时间：" VerticalAlignment="Center"/>
+                        <xctk:DateTimePicker x:Name="start_time"/>
+                        <Label Content="到" VerticalAlignment="Center"/>
+                        <xctk:DateTimePicker x:Name="end_time" Margin="0,0,20,0"/>
                         <Button x:Name="query" Style="{DynamicResource ChamferButton}" Click="query_Click" Margin="10,0">查询</Button>
                     </WrapPanel>
                 </DockPanel>

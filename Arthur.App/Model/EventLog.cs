@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -45,6 +46,12 @@ namespace Arthur.App.Model
         信息 = 1,
         警告 = 2,
         错误 = 3
+        //[Description("信息")]
+        //Info = 1,
+        //[Description("警告")]
+        //Warn = 2,
+        //[Description("错误")]
+        //Error = 3
     }
 
 }
