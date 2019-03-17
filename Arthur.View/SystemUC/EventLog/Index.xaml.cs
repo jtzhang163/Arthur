@@ -21,7 +21,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SzYitong.Bis.App.UserControls.SystemUC.EventLog
+namespace Arthur.View.SystemUC.EventLog
 {
     /// <summary>
     /// Index.xaml 的交互逻辑

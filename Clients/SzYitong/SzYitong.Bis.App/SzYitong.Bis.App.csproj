@@ -84,12 +84,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="UserControls\SystemUC\EventLog\Index.xaml.cs">
-      <DependentUpon>Index.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\SystemUC\Oplog\Index.xaml.cs">
-      <DependentUpon>Index.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Account\CurrentUserUC.xaml.cs">
       <DependentUpon>CurrentUserUC.xaml</DependentUpon>
     </Compile>
@@ -115,14 +109,6 @@
       <DependentUpon>RoleManageUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Converter.cs" />
-    <Page Include="UserControls\SystemUC\EventLog\Index.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\SystemUC\Oplog\Index.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\SystemUC\EventLogUC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

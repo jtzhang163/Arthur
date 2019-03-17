@@ -20,7 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SzYitong.Bis.App.UserControls.SystemUC.Oplog
+namespace Arthur.View.SystemUC.Oplog
 {
     /// <summary>
     /// Index.xaml 的交互逻辑

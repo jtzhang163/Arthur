@@ -43,8 +43,8 @@ namespace SzYitong.Bis.App.Views.SystemUC
         public void SwitchWindow(string option, int id)
         {
             this.Option = option;
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            Type type = assembly.GetType("SzYitong.Bis.App.UserControls.SystemUC.Oplog." + this.Option);
+            Assembly assembly = Assembly.LoadFile(AppDomain.CurrentDomain.BaseDirectory + "Arthur.View.dll");
+            Type type = assembly.GetType("Arthur.View.SystemUC.Oplog." + this.Option);
             object page = Activator.CreateInstance(type, new object[] { id });
             grid.Children.Clear();
             this.grid.Children.Add((UIElement)page);
