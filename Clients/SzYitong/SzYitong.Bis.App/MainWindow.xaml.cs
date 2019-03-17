@@ -47,7 +47,7 @@ namespace SzYitong.Bis.App
             {
 
                 var a = new TabItemClose();
-                // a.Cursor = new Cursor("Hand");
+                //a.Cursor = Cursors.Hand;
                 a.Header = tabName;
                 a.Height = 30;
                 a.Width = 100;

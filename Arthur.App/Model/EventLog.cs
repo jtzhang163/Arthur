@@ -9,37 +9,35 @@ using System.Threading.Tasks;
 namespace Arthur.App.Model
 {
     /// <summary>
-    /// 用户角色
+    /// 系统事件日志
     /// </summary>
-    public class Role : Service
+    public class EventLog : Service
     {
 
-        public Role() : this(-1)
+        public EventLog() : this(-1)
         {
 
         }
 
-        public Role(int id)
+        public EventLog(int id)
         {
             Id = id;
         }
 
 
         #region 属性
-        /// <summary>
-        /// 等级
-        /// </summary>
-        public int Level { get; set; }
-        /// <summary>
-        /// 用户组别名称
-        /// </summary>
-        [MaxLength(50)]
-        public string Name { get; set; }
 
         /// <summary>
-        /// 该用户组别下所有用户
+        /// 事件内容
         /// </summary>
-        public virtual ICollection<User> Users { get; set; }
+        [MaxLength(255)]
+        public string Content { get; set; }
+
+        public int Level { get; set; }
+
+        public DateTime Time { get; set; }
+
         #endregion
     }
+
 }

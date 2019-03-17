@@ -51,19 +51,22 @@
   <ItemGroup>
     <Compile Include="Application.cs" />
     <Compile Include="BindableObject.cs" />
+    <Compile Include="Business\Logging.cs" />
     <Compile Include="Business\Account.cs" />
     <Compile Include="Business\Application.cs" />
     <Compile Include="Business\IManage.cs" />
     <Compile Include="Business\UserManage.cs" />
     <Compile Include="Business\RoleManage.cs" />
     <Compile Include="Current.cs" />
+    <Compile Include="Data\Contexts\LoggingContext.cs" />
     <Compile Include="Data\Contexts\AccountContext.cs" />
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\Contexts\OptionContext.cs" />
     <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="Factory\AccountFactory.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\EventLog.cs" />
     <Compile Include="Model\Option.cs" />
+    <Compile Include="Model\Oplog.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Option.cs" />
@@ -82,6 +85,5 @@
       <Name>Arthur</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
