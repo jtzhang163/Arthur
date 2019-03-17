@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SzYitong.Bis.App.UserControls
+namespace SzYitong.Bis.App.Views
 {
     /// <summary>
     /// UserManageUC.xaml 的交互逻辑

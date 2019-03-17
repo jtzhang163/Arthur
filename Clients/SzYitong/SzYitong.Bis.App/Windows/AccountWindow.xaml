@@ -9,7 +9,7 @@
         Title="{Binding AppTitle}" Height="450" Width="800">
     <Grid x:Name="grid">
         <Grid.Background>
-            <ImageBrush ImageSource="Images/nightsky2.jpg"/>
+            <ImageBrush ImageSource="/Images/nightsky2.jpg"/>
         </Grid.Background>
     </Grid>
 </Window>

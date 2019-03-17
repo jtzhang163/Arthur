@@ -54,4 +54,18 @@ namespace Arthur.View.Utils
             throw new NotImplementedException();
         }
     }
+
+    public class UserIdToNameConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var id = (int)value;
+            return Arthur.Business.Account.GetUser(id).Name;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

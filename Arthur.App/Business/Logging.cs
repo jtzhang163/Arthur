@@ -13,12 +13,12 @@ namespace Arthur.Business
 {
     public class Logging
     {
-        public static Result AddEvent(string content, int level)
+        public static Result AddEvent(string content, EventType type)
         {
             var log = new EventLog()
             {
                 Content = content,
-                Level = level,
+                EventType = type,
                 Time = DateTime.Now
             };
             try

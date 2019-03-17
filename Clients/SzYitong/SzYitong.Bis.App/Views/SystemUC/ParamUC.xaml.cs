@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,10 +14,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SzYitong.Bis.App.UserControls.SystemUC
+namespace SzYitong.Bis.App.Views.SystemUC
 {
     /// <summary>
-    /// SystemParamUC.xaml 的交互逻辑
+    /// ParamUC.xaml 的交互逻辑
     /// </summary>
     public partial class ParamUC : UserControl
     {
@@ -35,35 +36,18 @@ namespace SzYitong.Bis.App.UserControls.SystemUC
         {
             this.Option = option;
             InitializeComponent();
-            if (this.Option == "Details")
-            {
-                LoadDetailsUC(0);
-            }
+            SwitchWindow(option, 0);
         }
 
-        private void LoadDetailsUC(int id)
-        {
-            this.grid.Children.Add(new Details(id));
-        }
-
-        private void LoadEditUC(int id)
-        {
-            this.grid.Children.Add(new Edit(id));
-        }
 
         public void SwitchWindow(string option, int id)
         {
-            grid.Children.Clear();
             this.Option = option;
-            if (this.Option == "Details")
-            {
-                LoadDetailsUC(id);
-            }
-            else if (this.Option == "Edit")
-            {
-                LoadEditUC(id);
-            }
-
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Type type = assembly.GetType("SzYitong.Bis.App.UserControls.SystemUC.ParamUC." + this.Option);
+            object page = Activator.CreateInstance(type, new object[] { id });
+            grid.Children.Clear();
+            this.grid.Children.Add((UIElement)page);
         }
     }
 }

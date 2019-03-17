@@ -63,36 +63,75 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="UserControls\Account\CurrentUserUC.xaml.cs">
+    <Compile Include="UserControls\SystemUC\EventLog\Index.xaml.cs">
+      <DependentUpon>Index.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SystemUC\Oplog\Index.xaml.cs">
+      <DependentUpon>Index.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\CurrentUserUC.xaml.cs">
       <DependentUpon>CurrentUserUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Account\UserManageUC.xaml.cs">
+    <Compile Include="Views\Account\UserManageUC.xaml.cs">
       <DependentUpon>UserManageUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\SystemUC\Details.xaml.cs">
+    <Compile Include="UserControls\SystemUC\ParamUC\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\SystemUC\Edit.xaml.cs">
+    <Compile Include="UserControls\SystemUC\ParamUC\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\SystemUC\ParamUC.xaml.cs">
+    <Compile Include="Views\SystemUC\EventLogUC.xaml.cs">
+      <DependentUpon>EventLogUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SystemUC\OplogUC.xaml.cs">
+      <DependentUpon>OplogUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SystemUC\ParamUC.xaml.cs">
       <DependentUpon>ParamUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Account\RoleManageUC.xaml.cs">
+    <Compile Include="Views\Account\RoleManageUC.xaml.cs">
       <DependentUpon>RoleManageUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Converter.cs" />
-    <Page Include="AccountWindow.xaml">
+    <Page Include="UserControls\SystemUC\EventLog\Index.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="UserControls\SystemUC\Oplog\Index.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SystemUC\EventLogUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\AccountWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -100,10 +139,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AccountWindow.xaml.cs">
+    <Compile Include="Windows\AccountWindow.xaml.cs">
       <DependentUpon>AccountWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -111,27 +150,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\Account\CurrentUserUC.xaml">
+    <Page Include="Views\Account\CurrentUserUC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Account\UserManageUC.xaml">
+    <Page Include="Views\Account\UserManageUC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\SystemUC\Details.xaml">
+    <Page Include="UserControls\SystemUC\ParamUC\Details.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\SystemUC\Edit.xaml">
+    <Page Include="UserControls\SystemUC\ParamUC\Edit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\SystemUC\ParamUC.xaml">
+    <Page Include="Views\SystemUC\OplogUC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Account\RoleManageUC.xaml">
+    <Page Include="Views\SystemUC\ParamUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Account\RoleManageUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -199,8 +242,6 @@
   <ItemGroup>
     <Resource Include="Images\close.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Windows\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

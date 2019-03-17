@@ -46,7 +46,7 @@ namespace Arthur.View.Account
                 {
                     Current.Option.RememberUserId = -1;
                 }
-                Arthur.Business.Logging.AddEvent(string.Format("{0}登录", this.username.Text), 1);
+                Arthur.Business.Logging.AddEvent(string.Format("{0}登录", this.username.Text), App.Model.EventType.信息);
                 Helper.ExecuteParentWindowMethod(this, "LoginSuccessInvoke");
             }
             else

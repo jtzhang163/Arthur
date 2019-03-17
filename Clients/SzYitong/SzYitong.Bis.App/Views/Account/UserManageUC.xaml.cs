@@ -1,4 +1,4 @@
-﻿using Arthur.View.Account.Role;
+﻿using Arthur.View.Account.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,24 +15,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SzYitong.Bis.App.UserControls
+namespace SzYitong.Bis.App.Views
 {
     /// <summary>
-    /// RoleManageUC.xaml 的交互逻辑
+    /// UserManageUC.xaml 的交互逻辑
     /// </summary>
-    public partial class RoleManageUC : UserControl
+    public partial class UserManageUC : UserControl
     {
 
         public string Option { get; set; }
 
-        public RoleManageUC() : this("Index")
+        public UserManageUC() : this("Index")
         {
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="option">页面选项 Index, Create, Details ,Edit</param>
-        public RoleManageUC(string option)
+        public UserManageUC(string option)
         {
             InitializeComponent();
             SwitchWindow(option, 0);
@@ -42,7 +42,7 @@ namespace SzYitong.Bis.App.UserControls
         {
             this.Option = option;
             Assembly assembly = Assembly.LoadFile(AppDomain.CurrentDomain.BaseDirectory + "Arthur.View.dll");
-            Type type = assembly.GetType("Arthur.View.Account.Role." + this.Option);
+            Type type = assembly.GetType("Arthur.View.Account.User." + this.Option);
             object page = Activator.CreateInstance(type, new object[] { id });
             grid.Children.Clear();
             this.grid.Children.Add((UIElement)page);

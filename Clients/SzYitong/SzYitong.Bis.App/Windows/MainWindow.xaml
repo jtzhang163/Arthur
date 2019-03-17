@@ -466,8 +466,8 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
                             <RadioButton Grid.Row="0" Checked="RadioButton_Checked">系统参数</RadioButton>
-                            <RadioButton Grid.Row="1">系统事件</RadioButton>
-                            <RadioButton Grid.Row="2">系统日志</RadioButton>
+                            <RadioButton Grid.Row="1" Checked="RadioButton_Checked">系统事件</RadioButton>
+                            <RadioButton Grid.Row="2" Checked="RadioButton_Checked">系统日志</RadioButton>
                         </Grid>
                     </Expander.Content>
                 </Expander>

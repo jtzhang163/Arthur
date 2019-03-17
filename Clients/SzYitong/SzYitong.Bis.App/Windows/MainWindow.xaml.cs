@@ -12,8 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using SzYitong.Bis.App.UserControls;
-using SzYitong.Bis.App.UserControls.SystemUC;
+using SzYitong.Bis.App.Views;
+using SzYitong.Bis.App.Views.SystemUC;
 
 namespace SzYitong.Bis.App
 {
@@ -87,6 +87,10 @@ namespace SzYitong.Bis.App
                     return new RoleManageUC();
                 case "系统参数":
                     return new ParamUC();
+                case "系统事件":
+                    return new EventLogUC();
+                case "系统日志":
+                    return new OplogUC();
                 default:
                     return null;
             }

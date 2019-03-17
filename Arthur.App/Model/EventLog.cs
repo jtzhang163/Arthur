@@ -33,11 +33,18 @@ namespace Arthur.App.Model
         [MaxLength(255)]
         public string Content { get; set; }
 
-        public int Level { get; set; }
+        public EventType EventType { get; set; }
 
         public DateTime Time { get; set; }
 
         #endregion
+    }
+
+    public enum EventType
+    {
+        信息 = 1,
+        警告 = 2,
+        错误 = 3
     }
 
 }
