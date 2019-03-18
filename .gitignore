@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 /.docs
 /Clients/SzYitong/.docs
+/Clients/GMCC/.docs
