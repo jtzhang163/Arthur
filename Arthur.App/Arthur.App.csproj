@@ -64,11 +64,6 @@
     <Compile Include="Data\Contexts\OptionContext.cs" />
     <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="Factory\AccountFactory.cs" />
-    <Compile Include="Migrations\201903170509243_InitialCreate.cs" />
-    <Compile Include="Migrations\201903170509243_InitialCreate.Designer.cs">
-      <DependentUpon>201903170509243_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\EventLog.cs" />
     <Compile Include="Model\Option.cs" />
     <Compile Include="Model\Oplog.cs" />
@@ -89,11 +84,6 @@
       <Project>{1090299D-1C85-4E87-B155-B28AB93985FA}</Project>
       <Name>Arthur</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903170509243_InitialCreate.resx">
-      <DependentUpon>201903170509243_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

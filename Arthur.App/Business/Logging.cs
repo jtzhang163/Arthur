@@ -33,11 +33,12 @@ namespace Arthur.Business
             return Result.OK;
         }
 
-        public static Result AddOplog(string content, OpType type)
+
+        public static Result AddOplog(int userId, string content, OpType type)
         {
             var log = new Oplog()
             {
-                UserId = Current.User.Id,
+                UserId = userId,
                 Content = content,
                 OpType = type,
                 Time = DateTime.Now
@@ -52,6 +53,11 @@ namespace Arthur.Business
                 return new Result(ex.Message);
             }
             return Result.OK;
+        }
+
+        public static Result AddOplog(string content, OpType type)
+        {
+            return AddOplog(Current.User.Id, content, type);
         }
     }
 }

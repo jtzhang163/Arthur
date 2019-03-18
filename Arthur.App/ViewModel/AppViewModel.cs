@@ -43,6 +43,7 @@ namespace Arthur.ViewModel
                 if (dataGridPageSize != value)
                 {
                     Current.Option.DataGridPageSize = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("系统参数. 表格每页显示数: [{0}] 修改为 [{1}]", dataGridPageSize, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref dataGridPageSize, value);
                 }
             }

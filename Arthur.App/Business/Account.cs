@@ -57,13 +57,17 @@ namespace Arthur.Business
             }
             user.Name = name;
             user.Number = number;
+            user.Email = string.Empty;
+            user.Gender = Gender.Unknown;
+            user.Nickname = name;
+            user.PhoneNumber = string.Empty;
             user.Password = EncryptHelper.EncodeBase64(password);
             user.IsEnabled = isEnabled;
             user.RegisterTime = DateTime.Now;
             user.RoleId = Context.AccountContext.Roles.Single(r => r.Name == "操作员").Id;
             Context.AccountContext.Users.Add(user);
             Context.AccountContext.SaveChanges();
-
+            Arthur.Business.Logging.AddOplog(user.Id, string.Format("注册用户[{0}]", user.Name), App.Model.OpType.创建);
             return Result.OK;
         }
 

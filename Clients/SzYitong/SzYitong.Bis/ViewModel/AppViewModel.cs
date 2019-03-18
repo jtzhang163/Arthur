@@ -35,6 +35,8 @@ namespace SzYitong.Bis.ViewModel
                     //更新AppName时同步更新AppTitle，使窗体标题栏变化
                     AppTitle = AppNameToTitle(value);
 
+                    Arthur.Business.Logging.AddOplog(string.Format("系统参数. 程序名称: [{0}] 修改为 [{1}]", appName, value), Arthur.App.Model.OpType.编辑);
+
                     SetProperty(ref appName, value);
                 }
             }

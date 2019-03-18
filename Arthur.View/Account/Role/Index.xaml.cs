@@ -113,6 +113,7 @@ namespace Arthur.View.Account.Role
             {
                 Context.Roles.Remove(role);
                 Context.AccountContext.SaveChanges();
+                Arthur.Business.Logging.AddOplog(string.Format("删除角色[{0}]", role.Name), App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }
         }

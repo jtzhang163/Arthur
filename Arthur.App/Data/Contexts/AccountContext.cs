@@ -41,6 +41,12 @@ namespace Arthur.App
                             Name = "Administrator",
                             Password = EncryptHelper.EncodeBase64("Administrator"),
                             RegisterTime = DateTime.Now,
+                            Email = string.Empty,
+                            Number = string.Empty,
+                            PhoneNumber = string.Empty,
+                            Nickname = string.Empty,
+                            Gender = Gender.Unknown,
+                            IsEnabled = true,
                         }
                     }
                 },
@@ -56,6 +62,12 @@ namespace Arthur.App
                             Name = "Admin",
                             Password =  EncryptHelper.EncodeBase64("Admin"),
                             RegisterTime = DateTime.Now,
+                            Email = string.Empty,
+                            Number = string.Empty,
+                            PhoneNumber = string.Empty,
+                            Nickname = string.Empty,
+                            Gender = Gender.Unknown,
+                            IsEnabled = true,
                         }
                     }
                 },

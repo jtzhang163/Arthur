@@ -70,6 +70,7 @@ namespace Arthur.View.Account.CurrentUser
                 Arthur.App.Data.Context.AccountContext.SaveChanges();
                 tip.Foreground = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";
+
             }
             catch (Exception ex)
             {

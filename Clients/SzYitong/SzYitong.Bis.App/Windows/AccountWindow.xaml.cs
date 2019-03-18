@@ -50,7 +50,7 @@ namespace SzYitong.Bis.App
             this.Option = option;
             InitializeComponent();
 
-            if(this.Option == "login")
+            if (this.Option == "login")
             {
                 LoadLoginUC();
             }

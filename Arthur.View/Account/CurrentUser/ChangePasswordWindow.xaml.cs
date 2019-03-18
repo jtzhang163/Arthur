@@ -30,6 +30,7 @@ namespace Arthur.View.Account
             {
                 lbTip.Text = "修改密码成功！";
                 lbTip.Foreground = new SolidColorBrush(Colors.Green);
+                Arthur.Business.Logging.AddOplog(string.Format("用户中心. 修改密码", "", ""), Arthur.App.Model.OpType.编辑);
             }
             else
             {

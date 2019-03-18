@@ -107,9 +107,8 @@ namespace Arthur.View.Account.User
             {
                 Context.Users.Remove(user);
                 Context.AccountContext.SaveChanges();
+                Arthur.Business.Logging.AddOplog(string.Format("删除用户[{0}]", user.Name), App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
-
-                Arthur.Business.Logging.AddOplog(string.Format("删除用户【{0}】", user.Name), App.Model.OpType.删除);
             }
         }
 

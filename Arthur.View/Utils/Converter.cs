@@ -60,7 +60,9 @@ namespace Arthur.View.Utils
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var id = (int)value;
-            return Arthur.Business.Account.GetUser(id).Name;
+            var name = Arthur.Business.Account.GetUser(id).Name;
+            if (string.IsNullOrEmpty(name)) name = "Unknown";
+            return name;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -27,6 +27,7 @@ namespace SzYitong.Bis.App
             InitializeComponent();
             //this.Title = new Utility().AppTitle;
             this.DataContext = Current.App;
+            Arthur.Business.Logging.AddEvent(string.Format("打开软件", ""), Arthur.App.Model.EventType.信息);
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
@@ -100,6 +101,19 @@ namespace SzYitong.Bis.App
         {
             var radio = new RadioButton() { Content = "个人中心" };
             RadioButton_Checked(radio, null);
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var result = MessageBox.Show("确定要退出当前程序？", "关闭确认", MessageBoxButton.OKCancel);
+            if (result == MessageBoxResult.Cancel)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                Arthur.Business.Logging.AddEvent(string.Format("关闭软件", ""), Arthur.App.Model.EventType.信息);
+            }
         }
     }
 
