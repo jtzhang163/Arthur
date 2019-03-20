@@ -26,7 +26,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
@@ -37,8 +36,6 @@
                     <Label Content="{Binding AppName}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="表格每页个数：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding DataGridPageSize}" x:Name="level" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <!--<TextBlock Text="等级：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></TextBlock>
-                    <Label Content="{Binding Level}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>-->
                 </Grid>
             </DockPanel>
         </DockPanel>

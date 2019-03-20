@@ -33,7 +33,7 @@ namespace Arthur.View.SystemUC.EventLog
             InitializeComponent();
 
             this.start_time.Value = DateTime.Now.AddDays(-1);
-            this.end_time.Value = DateTime.Now;
+            this.end_time.Value = DateTime.Now.AddDays(1);
 
             this.event_type.Items.Add("全部");
             var list = EnumberHelper.EnumToList<EventType>();

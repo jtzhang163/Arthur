@@ -23,6 +23,12 @@ namespace GMCC.Sorter.Data
 
             modelBuilder.Entity<Battery>().ToTable("t_battery");
             modelBuilder.Entity<ProcTray>().ToTable("t_proc_tray");
+
+            modelBuilder.Entity<BatteryScaner>().ToTable("t_battery_scaner");
+            modelBuilder.Entity<TrayScaner>().ToTable("t_tray_scaner");
+
+            modelBuilder.Entity<MES>().ToTable("t_mes");
+            modelBuilder.Entity<PLC>().ToTable("t_plc");
         }
 
         public DbSet<Tray> Trays { get; set; }
@@ -30,6 +36,12 @@ namespace GMCC.Sorter.Data
 
         public DbSet<Battery> Batteries { get; set; }
         public DbSet<ProcTray> ProcTrays { get; set; }
+
+        public DbSet<MES> MESs { get; set; }
+        public DbSet<PLC> PLCs { get; set; }
+
+        public DbSet<BatteryScaner> BatteryScaners { get; set; }
+        public DbSet<TrayScaner> TrayScaners { get; set; }
     }
 
     public class AppInitializer : DropCreateDatabaseIfModelChanges<AppContext>
@@ -75,6 +87,82 @@ namespace GMCC.Sorter.Data
                 }
             }
             storages.ForEach(o => context.Storages.Add(o));
+
+            var mes = new MES()
+            {
+                Name = "MES",
+                Host = "127.0.0.1",
+                Company = "GMCC",
+                CreateTime = DateTime.Now,
+                IsEnabled = true,
+                Location = "",
+                SerialNumber = "",
+                ModelNumber = "",
+            };
+            context.MESs.Add(mes);
+
+            var plc = new PLC()
+            {
+                Name = "PLC",
+                IP = "192.168.1.239",
+                Port = 9600,
+                Company = "OMRON",
+                ModelNumber = "CJ2M-CP33",
+                CreateTime = DateTime.Now,
+                IsEnabled = true,
+                Location = "",
+                SerialNumber = "",
+            };
+            context.PLCs.Add(plc);
+
+            var batteryScaner = new BatteryScaner()
+            {
+                Name = "电池扫码枪",
+                IP = "192.168.1.1",
+                Port = 9999,
+                Company = "Datalogic",
+                ModelNumber = "MATRIX 300N 482-011",
+                CreateTime = DateTime.Now,
+                IsEnabled = true,
+                Location = "",
+                SerialNumber = "",
+            };
+            context.BatteryScaners.Add(batteryScaner);
+
+            var trayScaners = new List<TrayScaner>()
+            {
+                new TrayScaner()
+                {
+                    Name = "托盘扫码枪1",
+                    PortName = "COM1",
+                    BaudRate = 9600,
+                    Parity = System.IO.Ports.Parity.None,
+                    DataBits = 8,
+                    StopBits = System.IO.Ports.StopBits.None,
+                    Company = "Honeywell",
+                    ModelNumber = "3320G-2-INT",
+                    CreateTime = DateTime.Now,
+                    IsEnabled = true,
+                    Location = "",
+                    SerialNumber = "",
+                },
+                new TrayScaner()
+                {
+                    Name = "托盘扫码枪2",
+                    PortName = "COM2",
+                    BaudRate = 9600,
+                    Parity = System.IO.Ports.Parity.None,
+                    DataBits = 8,
+                    StopBits = System.IO.Ports.StopBits.None,
+                    Company = "Honeywell",
+                    ModelNumber = "3320G-2-INT",
+                    CreateTime = DateTime.Now,
+                    IsEnabled = true,
+                    Location = "",
+                    SerialNumber = "",
+                }
+            };
+            trayScaners.ForEach(o => context.TrayScaners.Add(o));
         }
     }
 }

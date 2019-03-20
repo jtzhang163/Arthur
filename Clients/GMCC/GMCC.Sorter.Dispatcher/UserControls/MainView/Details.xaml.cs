@@ -26,7 +26,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
         public Details(int id)
         {
             InitializeComponent();
-            //;
 
             for (var i = 0; i < Common.STOR_COL_COUNT; i++)
             {
