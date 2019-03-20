@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher" WindowState="Maximized"
+        xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher"
+        WindowState="Maximized"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" Closing="Window_Closing"
         Title="{Binding AppTitle}" Height="450" Width="800">
     <Window.Resources>
@@ -627,9 +628,9 @@
                     <Canvas DockPanel.Dock="Left" Width="5" Background="#FF2B579A"/>
                     <Grid Background="#858586">
                         <TabControl x:Name="tabControl"  Foreground="Black" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                            <local:TabItemClose Cursor="Hand" Header="主界面" Height="30"  Width="100">
-                                <Grid Background="#aaffffff">
-                                    <TextBlock Text="主页"/>
+                            <local:TabItemClose Header="主界面" Height="30"  Width="100">
+                                <Grid x:Name="grid_mainview" Background="#aaffffff">
+
                                 </Grid>
                             </local:TabItemClose>
                             <!--<local:TabItemClose  Cursor="Hand" Header="Mv电台" Height="30" Width="100">

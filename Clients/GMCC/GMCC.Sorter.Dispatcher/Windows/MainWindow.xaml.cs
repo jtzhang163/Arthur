@@ -26,6 +26,9 @@ namespace GMCC.Sorter.Dispatcher
         {
             InitializeComponent();
             //this.Title = new Utility().AppTitle;
+
+            grid_mainview.Children.Add(new MainViewUC());
+
             this.DataContext = Current.App;
             Arthur.Business.Logging.AddEvent(string.Format("打开软件", ""), Arthur.App.Model.EventType.信息);
         }
