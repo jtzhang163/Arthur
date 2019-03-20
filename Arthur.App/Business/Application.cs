@@ -13,7 +13,7 @@ namespace Arthur.Business
     {
         public static string GetOption(string key)
         {
-            return Context.OptionContext.Options.Where(o => o.Key == key).FirstOrDefault()?.Value;
+            return Context.Options.Where(o => o.Key == key).FirstOrDefault()?.Value;
         }
 
         public static void SetOption(string key, string value)
@@ -24,20 +24,20 @@ namespace Arthur.Business
         public static Result SetOption(string key, string value, string remark)
         {
 
-            Option option = Context.OptionContext.Options.Where(o => o.Key == key).FirstOrDefault();
+            Option option = Context.Options.Where(o => o.Key == key).FirstOrDefault();
             if (option != null)
             {
-                Context.OptionContext.Options.Where(o => o.Key == key).First().Value = value;
+                Context.Options.Where(o => o.Key == key).First().Value = value;
             }
             else
             {
-                Context.OptionContext.Options.Add(new Option { Key = key, Value = value, Remark = remark });
+                Context.Options.Add(new Option { Key = key, Value = value, Remark = remark });
             }
 
             try
             {
                 // 写数据库
-                Context.OptionContext.SaveChanges();
+                Context.AppContext.SaveChanges();
             }
             catch (DbEntityValidationException dbEx)
             {

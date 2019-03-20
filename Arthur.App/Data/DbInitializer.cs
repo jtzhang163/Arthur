@@ -11,8 +11,7 @@ namespace Arthur.App.Data
     {
         public virtual void Initialize()
         {
-            Database.SetInitializer(new AcconutInitializer());
-            Database.SetInitializer(new OptionInitializer());
+            Database.SetInitializer(new AppInitializer());
         }
     }
 }

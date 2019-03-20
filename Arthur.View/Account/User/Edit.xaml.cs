@@ -80,7 +80,7 @@ namespace Arthur.View.Account.User
                 this.User.IsEnabled = isEnabled.Value;
                 this.User.Role = role;
 
-                Arthur.App.Data.Context.AccountContext.SaveChanges();
+                Arthur.App.Data.Context.AppContext.SaveChanges();
                 tip.Foreground = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";
 

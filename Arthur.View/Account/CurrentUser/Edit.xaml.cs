@@ -67,7 +67,7 @@ namespace Arthur.View.Account.CurrentUser
                 this.User.PhoneNumber = phoneNumber;
                 this.User.Email = email;
 
-                Arthur.App.Data.Context.AccountContext.SaveChanges();
+                Arthur.App.Data.Context.AppContext.SaveChanges();
                 tip.Foreground = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";
 

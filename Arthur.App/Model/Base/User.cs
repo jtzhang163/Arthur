@@ -152,7 +152,7 @@ namespace Arthur.App.Model
             get => _role;
             set
             {
-                if (_role != value && _role != null && this.Id > 0)
+                if (_role != value && _role != null && value != null && this.Id > 0)
                 {
                     Arthur.Business.Logging.AddOplog(string.Format("用户[{2}]. 角色: [{0}] 修改为 [{1}]", _role.Name, value.Name, this.Name), Arthur.App.Model.OpType.编辑);
                 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Arthur.App.Model
 {
     /// <summary>
-    /// 基类
+    /// 实体基类
     /// </summary>
     public abstract class Service
     {

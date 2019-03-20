@@ -6,29 +6,40 @@ using Arthur.App.Model;
 
 namespace Arthur.App
 {
-
     /// <summary>
-    /// 用户上下文
+    /// 上下文
     /// </summary>
-    public class AccountContext : DbContext
+    public class AppContext : DbContext
     {
-        public AccountContext() : base(Application.ConnectionString)
+        public AppContext() : base(Application.ConnectionString)
         {
         }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("t_user");
             modelBuilder.Entity<Role>().ToTable("t_role");
+
+            modelBuilder.Entity<EventLog>().ToTable("t_event_log");
+            modelBuilder.Entity<Oplog>().ToTable("t_oplog");
+
+            modelBuilder.Entity<Option>().ToTable("t_option");
         }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
+
+        public DbSet<EventLog> EventLogs { get; set; }
+        public DbSet<Oplog> Oplogs { get; set; }
+
+        public DbSet<Option> Options { get; set; }
     }
 
-    public class AcconutInitializer : DropCreateDatabaseIfModelChanges<AccountContext>
+    public class AppInitializer : DropCreateDatabaseIfModelChanges<AppContext>
     {
-        protected override void Seed(AccountContext context)
+        protected override void Seed(AppContext context)
         {
-            var Roles = new List<Role>
+            var roles = new List<Role>
             {
                 new Role
                 {
@@ -84,7 +95,14 @@ namespace Arthur.App
                     Level = 1,
                 },
             };
-            Roles.ForEach(g => context.Roles.Add(g));
+            roles.ForEach(g => context.Roles.Add(g));
+
+            var options = new List<Option>()
+            {
+                new Option("AppName","XXXXXX系统","应用程序名称"),
+                new Option("RememberUserId","-1","记住的用户Id"),
+            };
+            options.ForEach(o => context.Options.Add(o));
         }
     }
 }

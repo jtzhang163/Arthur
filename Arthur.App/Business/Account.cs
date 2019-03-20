@@ -51,7 +51,7 @@ namespace Arthur.Business
         {
 
             User user = new User();
-            if (Context.AccountContext.Users.Where(u => u.Name == name).Count() > 0)
+            if (Context.Users.Where(u => u.Name == name).Count() > 0)
             {
                 return new Result("系统中已存在用户：" + name);
             }
@@ -64,10 +64,20 @@ namespace Arthur.Business
             user.Password = EncryptHelper.EncodeBase64(password);
             user.IsEnabled = isEnabled;
             user.RegisterTime = DateTime.Now;
-            user.RoleId = Context.AccountContext.Roles.Single(r => r.Name == "操作员").Id;
-            Context.AccountContext.Users.Add(user);
-            Context.AccountContext.SaveChanges();
-            Arthur.Business.Logging.AddOplog(user.Id, string.Format("注册用户[{0}]", user.Name), App.Model.OpType.创建);
+            user.RoleId = Context.Roles.Single(r => r.Name == "操作员").Id;
+            try
+            {
+                Context.Users.Add(user);
+                Context.AppContext.SaveChanges();
+                Arthur.Business.Logging.AddOplog(user.Id, string.Format("注册用户[{0}]", user.Name), App.Model.OpType.创建);
+            }
+            catch (Exception ex)
+            {
+                Arthur.Business.Logging.AddEvent(string.Format("注册用户[{0}]出错", user.Name), EventType.错误);
+                LogHelper.WriteError(ex);
+                return new Result(ex.Message);
+            }
+
             return Result.OK;
         }
 
@@ -89,10 +99,20 @@ namespace Arthur.Business
             var user = new User();
 
             var entityPassword = EncryptHelper.EncodeBase64(password);
-            user = Context.AccountContext.Users.FirstOrDefault(u => u.Name == name && u.Password == entityPassword) ?? new User();
+            user = Context.Users.FirstOrDefault(u => u.Name == name && u.Password == entityPassword) ?? new User();
             user.LastLoginTime = DateTime.Now;
             user.LoginTimes++;
-            Context.AccountContext.SaveChanges();
+
+            try
+            {
+                Context.AppContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Business.Logging.AddEvent(string.Format("登录时出现错误，{0}", ex.Message), EventType.错误);
+                LogHelper.WriteError(ex);
+                return new Result("登录失败，msg：" + ex.Message);
+            }
 
             if (!user.IsEnabled)
             {
@@ -142,7 +162,7 @@ namespace Arthur.Business
             }
             #endregion
 
-            var user = Context.AccountContext.Users.FirstOrDefault(u => u.Name == username) ?? new User();
+            var user = Context.Users.FirstOrDefault(u => u.Name == username) ?? new User();
             if (user.Id < 1)
             {
                 return new Result("不存在用户：" + username);
@@ -154,24 +174,24 @@ namespace Arthur.Business
             }
 
             user.Password = EncryptHelper.EncodeBase64(new_pwd);
-            Context.AccountContext.SaveChanges();
+            Context.AppContext.SaveChanges();
 
             return Result.OK;
         }
 
         public static User GetUser(int id)
         {
-            return Context.AccountContext.Users.FirstOrDefault(u => u.Id == id) ?? new User();
+            return Context.Users.FirstOrDefault(u => u.Id == id) ?? new User();
         }
 
         public static Role GetRole(int id)
         {
-            return Context.AccountContext.Roles.FirstOrDefault(u => u.Id == id) ?? new Role();
+            return Context.Roles.FirstOrDefault(u => u.Id == id) ?? new Role();
         }
 
         public static IEnumerable<Role> GetRoles()
         {
-            var roles = Context.AccountContext.Roles.ToList();
+            var roles = Context.Roles.ToList();
             return roles;
             //return roles.Where(r => r.Level <= Current.User.Role.Level);
         }

@@ -106,7 +106,7 @@ namespace Arthur.View.Account.User
             if (MessageBox.Show(string.Format("确定要删除用户【{0}】吗？", user.Name), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 Context.Users.Remove(user);
-                Context.AccountContext.SaveChanges();
+                Context.AppContext.SaveChanges();
                 Arthur.Business.Logging.AddOplog(string.Format("删除用户[{0}]", user.Name), App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }

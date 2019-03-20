@@ -109,10 +109,17 @@ namespace Arthur.View.Account.Role
                 return;
             }
 
-            if (MessageBox.Show(string.Format("确定要删除角色【{0}】吗？", role.Name), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            var preTip = string.Empty;
+            var userCount = role.Users.Count;
+            if (userCount > 0)
+            {
+                preTip = string.Format("该角色关联着{0}个用户，删除角色时这些用户也会被删除！\r\n", userCount);
+            }
+
+            if (MessageBox.Show(preTip + string.Format("确定要删除角色【{0}】吗？", role.Name), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 Context.Roles.Remove(role);
-                Context.AccountContext.SaveChanges();
+                Context.AppContext.SaveChanges();
                 Arthur.Business.Logging.AddOplog(string.Format("删除角色[{0}]", role.Name), App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }

@@ -112,7 +112,7 @@ namespace Arthur.View.SystemUC.Oplog
             if (MessageBox.Show(string.Format("确定要删除该条日志吗？", ""), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 Context.Oplogs.Remove(Oplog);
-                Context.LoggingContext.SaveChanges();
+                Context.AppContext.SaveChanges();
                 UpdateDataGrid(PageIndex);
             }
         }

@@ -20,7 +20,7 @@ namespace Arthur.Business
             try
             {
                 Context.Roles.Add(new App.Model.Role() { Level = role.Level, Name = role.Name });
-                Context.AccountContext.SaveChanges();
+                Context.AppContext.SaveChanges();
                 Arthur.Business.Logging.AddOplog(string.Format("新增角色[{0}]", role.Name), App.Model.OpType.创建);
                 return Result.OK;
             }

@@ -113,7 +113,7 @@ namespace Arthur.View.SystemUC.EventLog
             if (MessageBox.Show(string.Format("确定要删除该记录吗？", ""), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
                 Context.EventLogs.Remove(EventLog);
-                Context.LoggingContext.SaveChanges();
+                Context.AppContext.SaveChanges();
                 UpdateDataGrid(PageIndex);
             }
         }

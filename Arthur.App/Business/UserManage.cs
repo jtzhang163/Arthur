@@ -13,14 +13,14 @@ namespace Arthur.Business
 
         public Result Create(User user)
         {
-            if (Context.AccountContext.Users.Count(r => r.Name == user.Name) > 0)
+            if (Context.Users.Count(r => r.Name == user.Name) > 0)
             {
                 return new Result(string.Format("系统中已存在名为{0}的角色！", user.Name));
             }
             try
             {
-                Context.AccountContext.Users.Add(new App.Model.User() { Name = user.Name });
-                Context.AccountContext.SaveChanges();
+                Context.Users.Add(new App.Model.User() { Name = user.Name });
+                Context.AppContext.SaveChanges();
                 return Result.OK;
             }
             catch (Exception ex)

@@ -24,7 +24,7 @@ namespace Arthur.Business
             try
             {
                 Context.EventLogs.Add(log);
-                Context.LoggingContext.SaveChanges();
+                Context.AppContext.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -46,7 +46,7 @@ namespace Arthur.Business
             try
             {
                 Context.Oplogs.Add(log);
-                Context.LoggingContext.SaveChanges();
+                Context.AppContext.SaveChanges();
             }
             catch (Exception ex)
             {
