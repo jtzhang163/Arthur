@@ -62,7 +62,6 @@
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="Factory\AccountFactory.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Base\EventLog.cs" />
     <Compile Include="Model\Base\Option.cs" />
     <Compile Include="Model\Base\Oplog.cs" />

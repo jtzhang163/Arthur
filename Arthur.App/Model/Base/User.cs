@@ -128,7 +128,15 @@ namespace Arthur.App.Model
         /// </summary>
         public bool IsEnabled
         {
-            get => _isEnabled.Value;
+            get
+            {
+                if (_isEnabled == null)
+                {
+                    _isEnabled = false;
+                }
+                return _isEnabled.Value;
+            }
+
             set
             {
                 if (_isEnabled != null && _isEnabled != value && this.Id > 0)
