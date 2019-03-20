@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 
 namespace Arthur.App
 {
-
     public abstract class BindableObject : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -32,5 +31,4 @@ namespace Arthur.App
             return false;
         }
     }
-
 }

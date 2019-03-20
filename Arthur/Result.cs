@@ -14,6 +14,8 @@ namespace Arthur
 
         public string Msg { get; set; }
 
+        public object Data { get; set; }
+
         public bool IsOk
         {
             get

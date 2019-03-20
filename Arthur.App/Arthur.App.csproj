@@ -57,18 +57,23 @@
     <Compile Include="Business\IManage.cs" />
     <Compile Include="Business\UserManage.cs" />
     <Compile Include="Business\RoleManage.cs" />
+    <Compile Include="Comm\Communicate.cs" />
     <Compile Include="Current.cs" />
     <Compile Include="Data\AppContext.cs" />
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="Factory\AccountFactory.cs" />
-    <Compile Include="Model\Base\EventLog.cs" />
-    <Compile Include="Model\Base\Option.cs" />
-    <Compile Include="Model\Base\Oplog.cs" />
-    <Compile Include="Model\Base\Role.cs" />
-    <Compile Include="Model\Base\User.cs" />
-    <Compile Include="Model\Machine.cs" />
-    <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\Base\EthernetCommor.cs" />
+    <Compile Include="Model\Base\Server.cs" />
+    <Compile Include="Model\Base\SerialCommor.cs" />
+    <Compile Include="Model\EventLog.cs" />
+    <Compile Include="Model\Option.cs" />
+    <Compile Include="Model\Oplog.cs" />
+    <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\User.cs" />
+    <Compile Include="Model\Base\Commor.cs" />
+    <Compile Include="Model\Base\Machine.cs" />
+    <Compile Include="Model\Base\Product.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Model\Base\Service.cs" />
@@ -85,5 +90,6 @@
       <Name>Arthur</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
