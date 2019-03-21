@@ -31,7 +31,7 @@ namespace Arthur.Business
             }
             else
             {
-                Context.Options.Add(new Option { Key = key, Value = value, Remark = remark });
+                Context.Options.Add(new Option() { Key = key, Value = value, Remark = remark });
             }
 
             try
@@ -41,6 +41,14 @@ namespace Arthur.Business
             }
             catch (DbEntityValidationException dbEx)
             {
+                foreach (var validationErrors in dbEx.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        LogHelper.WriteError(string.Format("Property: {0} Error: {1}", validationError.PropertyName, validationError.ErrorMessage));
+                    }
+                }
+                Logging.AddEvent(dbEx.Message, EventType.错误);
                 return new Result(dbEx);
             }
             return Result.OK;

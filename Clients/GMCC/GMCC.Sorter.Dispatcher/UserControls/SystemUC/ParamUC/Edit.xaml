@@ -36,8 +36,10 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="应用程序名称：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="app_name" Grid.Row="0" Grid.Column="1" Text="{Binding AppName, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <Label Content="表格每页个数：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <TextBox x:Name="grid_page_size" Grid.Row="1" Grid.Column="1" Text="{Binding DataGridPageSize, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
+                    <Label Content="公司名：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="company_name" Grid.Row="1" Grid.Column="1" Text="{Binding CompanyName, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="表格每页个数：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="grid_page_size" Grid.Row="2" Grid.Column="1" Text="{Binding DataGridPageSize, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

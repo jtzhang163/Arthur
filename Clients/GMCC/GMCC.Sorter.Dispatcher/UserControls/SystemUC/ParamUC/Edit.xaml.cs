@@ -47,9 +47,10 @@ namespace GMCC.Sorter.Dispatcher.UserControls.SystemUC.ParamUC
         private void edit_Click(object sender, RoutedEventArgs e)
         {
             var appName = this.app_name.Text.Trim();
+            var companyName = this.company_name.Text.Trim();
             var gridPageSize = this.grid_page_size.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(appName) || string.IsNullOrWhiteSpace(gridPageSize))
+            if (string.IsNullOrWhiteSpace(appName) || string.IsNullOrWhiteSpace(companyName) || string.IsNullOrWhiteSpace(gridPageSize))
             {
                 tip.Foreground = new SolidColorBrush(Colors.Red);
                 tip.Text = "请填写数据！";
@@ -59,8 +60,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.SystemUC.ParamUC
                 try
                 {
                     var pageSize = int.Parse(gridPageSize);
-                    //Arthur.App.Data.Context.AccountContext.SaveChanges();
+
                     Current.App.AppName = appName;
+                    Current.App.CompanyName = companyName;
                     Current.App.DataGridPageSize = pageSize;
 
                     tip.Foreground = new SolidColorBrush(Colors.Green);

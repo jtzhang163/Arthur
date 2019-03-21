@@ -22,7 +22,6 @@ namespace Arthur.App.Model
         /// <summary>
         /// 值
         /// </summary>
-        [Required]
         [MaxLength(200)]
         public string Value { get; set; }
 

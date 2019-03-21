@@ -95,6 +95,9 @@ namespace GMCC.Sorter.Dispatcher
                     return new EventLogUC();
                 case "系统日志":
                     return new OplogUC();
+
+                case "关于":
+                    return new AboutView();
                 default:
                     return null;
             }

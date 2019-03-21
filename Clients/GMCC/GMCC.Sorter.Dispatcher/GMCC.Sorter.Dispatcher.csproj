@@ -84,6 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserControls\Help\About\Details.xaml.cs">
+      <DependentUpon>Details.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Machine\StorageUC.xaml.cs">
       <DependentUpon>StorageUC.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,9 @@
     <Compile Include="UserControls\SystemUC\ParamUC\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Help\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainViewUC.xaml.cs">
       <DependentUpon>MainViewUC.xaml</DependentUpon>
     </Compile>
@@ -118,11 +124,19 @@
       <DependentUpon>RoleManageUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Converter.cs" />
+    <Page Include="UserControls\Help\About\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UserControls\Machine\StorageUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\MainView\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Help\AboutView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

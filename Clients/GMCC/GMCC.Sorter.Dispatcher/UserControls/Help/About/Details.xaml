@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="GMCC.Sorter.Dispatcher.UserControls.Help.About.Details"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.Help.About"
+             xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <utils:RightInfoConverter x:Key="rightInfoConverter"/>
+            <utils:VersionConverter x:Key="versionConverter"/>
+            <utils:UpdateTimeConverter x:Key="updateTimeConverter"/>
+
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="FontFamily" Value="Times New Roman,宋体"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Foreground" Value="#2b579a"/>
+            </Style>
+            <Style TargetType="{x:Type Label}">
+                <Setter Property="FontFamily" Value="Times New Roman,宋体"/>
+                <Setter Property="FontSize" Value="20"/>
+                <Setter Property="Foreground" Value="#2b579a"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+            <!--<TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="关于"  Style="{StaticResource PageTitleTextBlock}"/>-->
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <!--<Button x:Name="edit" Tag="{Binding Id}" Click="edit_Click" Style="{StaticResource ChamferButton}">编辑</Button>-->
+                <!--<Button x:Name="cancel" Click="cancel_Click" Style="{StaticResource ChamferButton}">返回</Button>-->
+            </StackPanel>
+            <DockPanel>
+                <!--<TextBlock x:Name="tip" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Hidden"/>-->
+                <Grid x:Name="grid" DockPanel.Dock="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{Binding AppName}" FontFamily="黑体" FontSize="32" Height="35" Margin="5,15,0,15"></TextBlock>
+                    <TextBlock Grid.Row="1"><Label>版本：</Label><Label Content="{Binding Converter={StaticResource versionConverter}}"></Label></TextBlock>
+                    <TextBlock Grid.Row="2"><Label>更新时间：</Label><Label Content="{Binding Converter={StaticResource updateTimeConverter}}"></Label></TextBlock>
+                    <TextBlock Grid.Row="3"><Label Content="{Binding CompanyName, Converter={StaticResource rightInfoConverter}}"></Label></TextBlock>
+                    <TextBlock Grid.Row="4"><Label Content="保留所有权利。"></Label></TextBlock>
+                </Grid>
+                <Grid/>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

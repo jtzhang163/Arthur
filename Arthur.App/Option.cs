@@ -33,7 +33,6 @@ namespace Arthur.App
                 {              
                     Business.Application.SetOption("RememberUserId", value.ToString());
                     rememberUserId = value;
-                    // SetProperty(ref checkTesterInfoInterval, value);
                 }
             }
         }
@@ -67,6 +66,35 @@ namespace Arthur.App
         }
 
 
+
+        private string companyName = null;
+
+        public string CompanyName
+        {
+            get
+            {
+                if (companyName == null)
+                {
+                    companyName = Business.Application.GetOption("CompanyName");
+                    if (companyName == null)
+                    {
+                        companyName = string.Empty;
+                        Business.Application.SetOption("CompanyName", companyName, "公司名");
+                    }
+                }
+                return companyName;
+            }
+            set
+            {
+                if (companyName != value)
+                {
+                    Business.Application.SetOption("CompanyName", value);
+                    companyName = value;
+                }
+            }
+        }
+
+
         private int dataGridPageSize = -1;
 
         public int DataGridPageSize
@@ -90,7 +118,6 @@ namespace Arthur.App
                 {
                     Business.Application.SetOption("DataGridPageSize", value.ToString());
                     dataGridPageSize = value;
-                    // SetProperty(ref checkTesterInfoInterval, value);
                 }
             }
         }

@@ -476,7 +476,7 @@
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
                     <Expander.Header>
-                        <TextBlock Text="设备"/>
+                        <TextBlock Text="设备管理"/>
                     </Expander.Header>
                     <Expander.Content>
                         <Grid>
@@ -619,6 +619,24 @@
                             <RadioButton Grid.Row="0">基本资料</RadioButton>
                             <RadioButton Grid.Row="1">往来单位</RadioButton>
                             <RadioButton Grid.Row="2">上游供应商</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+
+                <Separator Height="2" Background="White"/>
+
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">
+                    <Expander.Header>
+                        <TextBlock Text="帮助"/>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0">帮助</RadioButton>
+                            <RadioButton Grid.Row="1" Checked="RadioButton_Checked">关于</RadioButton>
                         </Grid>
                     </Expander.Content>
                 </Expander>
