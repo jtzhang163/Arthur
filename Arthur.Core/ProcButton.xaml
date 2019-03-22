@@ -1,0 +1,25 @@
+﻿<Button x:Class="Arthur.Core.ProcButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Arthur.Core"
+             mc:Ignorable="d" BorderThickness="0" Cursor="Hand" Background="Transparent"
+             d:DesignHeight="60" d:DesignWidth="50">
+    <Button.Resources>
+        <Style x:Key="FontAwesome">
+            <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/#FontAwesome" />
+            <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
+            <Setter Property="TextBlock.FontSize" Value="40"></Setter>
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+        </Style>
+    </Button.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Name="AwesomeContent" Grid.Row="0" Text="&#xf144;" Style="{DynamicResource FontAwesome}" HorizontalAlignment="Center"/>
+        <TextBlock Name="ProcContent" Grid.Row="1" Text="启动" HorizontalAlignment="Center"/>
+    </Grid>
+</Button>

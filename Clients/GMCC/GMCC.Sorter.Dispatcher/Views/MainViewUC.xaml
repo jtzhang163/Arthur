@@ -4,14 +4,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" x:Name="MainView"
+             xmlns:core="clr-namespace:Arthur.Core;assembly=Arthur.Core"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="10,10,10,5">
+    <UserControl.Resources>
+        <Style x:Key="FontAwesome">
+            <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/#FontAwesome" />
+            <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
+
+            <Setter Property="TextBlock.FontSize" Value="40"></Setter>
+            <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="0" Background="White">
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
-                <TextBlock FontSize="24" FontFamily="Times New Roman,宋体" Foreground="#FF222D32" FontWeight="Bold" Height="40">
-                    <Label Content="运行状态主页面"/>
-                </TextBlock>
-                <Canvas Height="1" Background="WhiteSmoke"/>
+                <Grid Height="70">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="100"/>
+                    </Grid.ColumnDefinitions>
+                    <core:ProcButton x:Name="btnStart" Grid.Column="0" ContentCore="启动" AwesomeText="&#xf011;" ForegroundCore="Green" Click="ProcButton_Click"/>
+                    <core:ProcButton x:Name="btnPause" Grid.Column="1" ContentCore="停止" AwesomeText="&#xf28c;" ForegroundCore="Green" Click="ProcButton_Click"/>
+                    <core:ProcButton x:Name="btnReset" Grid.Column="2" ContentCore="复位" AwesomeText="&#xf0e2;" ForegroundCore="Green" Click="ProcButton_Click"/>
+                    <core:ProcButton x:Name="btnTaskSwitch" Grid.Column="3" ContentCore="切换自动" AwesomeText="&#xf021;" ForegroundCore="Blue" Click="ProcButton_Click"/>
+                    <core:ProcButton x:Name="btnTaskReset" Grid.Column="4" ContentCore="任务复位" AwesomeText="&#xf01e;" ForegroundCore="Blue" Click="ProcButton_Click"/>
+                    <TextBlock Grid.Column="6" Text="{Binding TaskMode}" FontSize="40" VerticalAlignment="Center" Foreground="Blue"/>
+                    <TextBlock Grid.Column="7" Text="{Binding RunStatus}" FontSize="40" VerticalAlignment="Center" Foreground="Green"/>
+                </Grid>
+                <!--<Canvas Height="1" Background="WhiteSmoke"/>&#xf144;-->
             </StackPanel>
             <Grid x:Name="grid" Margin="5,10,0,0">
                 

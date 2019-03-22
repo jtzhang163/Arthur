@@ -118,6 +118,16 @@ namespace GMCC.Sorter.ViewModel
                 SetProperty(ref runStatus, value);
             }
         }
+
+        private TaskMode taskMode = TaskMode.手动任务;
+        public TaskMode TaskMode
+        {
+            get => taskMode;
+            set
+            {
+                SetProperty(ref taskMode, value);
+            }
+        }
     }
 
     public enum RunStatus
@@ -127,5 +137,12 @@ namespace GMCC.Sorter.ViewModel
         运行 = 2,
         暂停 = 3,
         异常 = 4
+    }
+
+    public enum TaskMode
+    {
+        未知 = 0,
+        手动任务 = 1,
+        自动任务 = 2
     }
 }

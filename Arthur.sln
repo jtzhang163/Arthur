@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMCC.Sorter", "Clients\GMCC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GMCC.Sorter.Dispatcher", "Clients\GMCC\GMCC.Sorter.Dispatcher\GMCC.Sorter.Dispatcher.csproj", "{F54894ED-4B94-4FF2-985C-864AECFA4AB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arthur.Core", "Arthur.Core\Arthur.Core.csproj", "{8C406FDA-5E02-4FF2-B2E3-D7C5C71C4278}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{F54894ED-4B94-4FF2-985C-864AECFA4AB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F54894ED-4B94-4FF2-985C-864AECFA4AB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F54894ED-4B94-4FF2-985C-864AECFA4AB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C406FDA-5E02-4FF2-B2E3-D7C5C71C4278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C406FDA-5E02-4FF2-B2E3-D7C5C71C4278}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C406FDA-5E02-4FF2-B2E3-D7C5C71C4278}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C406FDA-5E02-4FF2-B2E3-D7C5C71C4278}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{07873C37-9E0B-4009-A258-CD6A93870693} = {4C106B58-3347-436A-9FB1-393F0BBB6400}
 		{2A09CA22-80D4-4624-A507-CF348F015E49} = {07873C37-9E0B-4009-A258-CD6A93870693}
 		{F54894ED-4B94-4FF2-985C-864AECFA4AB2} = {07873C37-9E0B-4009-A258-CD6A93870693}
+		{8C406FDA-5E02-4FF2-B2E3-D7C5C71C4278} = {C2C176EE-22C1-49F5-AA4A-0E992B157E73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF2402D6-D30C-40A9-A451-F623E774C1AA}

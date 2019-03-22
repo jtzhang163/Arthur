@@ -247,6 +247,10 @@
       <Project>{8ee84e4d-ac41-4622-b1d1-7088df600e49}</Project>
       <Name>Arthur.App</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\Arthur.Core\Arthur.Core.csproj">
+      <Project>{8c406fda-5e02-4ff2-b2e3-d7c5c71c4278}</Project>
+      <Name>Arthur.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Arthur.View\Arthur.View.csproj">
       <Project>{1b0a54cc-658b-4ecc-aee3-b2b3feb87acd}</Project>
       <Name>Arthur.View</Name>

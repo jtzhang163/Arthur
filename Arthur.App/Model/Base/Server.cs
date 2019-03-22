@@ -10,7 +10,7 @@ namespace Arthur.App.Model
     /// <summary>
     /// 服务器
     /// </summary>
-    public abstract class Server : Commor
+    public abstract class Server : Communicator
     {
         /// <summary>
         /// 主机名

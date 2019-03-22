@@ -26,7 +26,7 @@ namespace GMCC.Sorter.Dispatcher.Views
 
         public MainViewUC() : this("Details")
         {
-
+            this.DataContext = Current.App;
         }
         /// <summary>
         /// 
@@ -48,6 +48,11 @@ namespace GMCC.Sorter.Dispatcher.Views
             object page = Activator.CreateInstance(type, new object[] { id });
             grid.Children.Clear();
             this.grid.Children.Add((UIElement)page);
+        }
+
+        private void ProcButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

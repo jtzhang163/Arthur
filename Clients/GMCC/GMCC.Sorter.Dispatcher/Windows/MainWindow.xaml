@@ -364,13 +364,15 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="CloseIcon" Value="/Images/close.png"/>
             <!--TextBlock Text="&#xf00d;" Style="{DynamicResource FontAwesome}"-->
-            <!--<Setter Property="CloseIcon" Value=""/>-->
-            <Setter Property="NormalBackground" Value="White"/>
+
+            <Setter Property="NormalBackground" Value="#ca5100"/>
             <Setter Property="OverBackgound" Value="#33ca5100"/>
-            <Setter Property="SelectedBackgound" Value="#ca5100"/>
-            <Setter Property="NormalForeground" Value="#555558"/>
+            <Setter Property="SelectedBackgound" Value="WhiteSmoke"/>
+
+            <Setter Property="NormalForeground" Value="White"/>
             <Setter Property="OverForeground" Value="White"/>
-            <Setter Property="SelectedForeground" Value="White"/>
+            <Setter Property="SelectedForeground" Value="#555558"/>
+            
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type local:TabItemClose}">
@@ -430,7 +432,7 @@
         <DockPanel>
             <DockPanel DockPanel.Dock="Top" Background="#FF2B579A" Height="60">
                 <TextBlock VerticalAlignment="Bottom" Foreground="White" DockPanel.Dock="Right" Margin="0,0,5,5">
-                    欢迎你，<Hyperlink x:Name="currentUser" Click="currentUser_Click"><TextBlock Text="{Binding UserName}" Foreground="White" FontStyle="Italic"/></Hyperlink></TextBlock>
+                    欢迎你，<Hyperlink x:Name="currentUser" Click="currentUser_Click"><TextBlock Text="{Binding UserName}" Foreground="White" FontStyle="Italic" TextDecorations="Underline"/></Hyperlink></TextBlock>
                 <Label Content="{Binding AppName}" FontSize="30" Foreground="White" VerticalAlignment="Center" FontWeight="Bold" Margin="10,0,0,0"/>
             </DockPanel>
 
