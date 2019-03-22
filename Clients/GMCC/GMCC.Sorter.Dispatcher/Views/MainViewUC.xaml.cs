@@ -27,6 +27,7 @@ namespace GMCC.Sorter.Dispatcher.Views
         public MainViewUC() : this("Details")
         {
             this.DataContext = Current.App;
+            this.commorList.DataContext = GMCC.Sorter.Factory.Commor.GetCommors();
         }
         /// <summary>
         /// 

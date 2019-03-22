@@ -20,5 +20,8 @@ namespace GMCC.Sorter.Data
 
         public static DbSet<PLC> PLCs = AppContext.PLCs;
         public static DbSet<MES> MESs = AppContext.MESs;
+
+        public static DbSet<BatteryScaner> BatteryScaners = AppContext.BatteryScaners;
+        public static DbSet<TrayScaner> TrayScaners = AppContext.TrayScaners;
     }
 }

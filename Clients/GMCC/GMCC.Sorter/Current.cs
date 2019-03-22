@@ -59,5 +59,67 @@ namespace GMCC.Sorter
                 return mainMachine;
             }
         }
+
+        private static BatteryScanerViewModel batteryScaner = null;
+        public static BatteryScanerViewModel BatteryScaner
+        {
+            get
+            {
+                if (batteryScaner == null)
+                {
+                    var _batteryScaner = Context.BatteryScaners.FirstOrDefault();
+                    var commor = new Commor(_batteryScaner);
+                    batteryScaner = new BatteryScanerViewModel(commor);
+                }
+                return batteryScaner;
+            }
+        }
+
+
+        private static TrayScanerViewModel formerTrayScaner = null;
+        public static TrayScanerViewModel FormerTrayScaner
+        {
+            get
+            {
+                if (formerTrayScaner == null)
+                {
+                    var _trayScaner = Context.TrayScaners.ToList()[0];
+                    var commor = new Commor(_trayScaner);
+                    formerTrayScaner = new TrayScanerViewModel(commor);
+                }
+                return formerTrayScaner;
+            }
+        }
+
+        private static TrayScanerViewModel latterTrayScaner = null;
+        public static TrayScanerViewModel LatterTrayScaner
+        {
+            get
+            {
+                if (latterTrayScaner == null)
+                {
+                    var _trayScaner = Context.TrayScaners.ToList()[1];
+                    var commor = new Commor(_trayScaner);
+                    latterTrayScaner = new TrayScanerViewModel(commor);
+                }
+                return latterTrayScaner;
+            }
+        }
+
+
+        private static MesViewModel mes = null;
+        public static MesViewModel Mes
+        {
+            get
+            {
+                if (mes == null)
+                {
+                    var _mes = Context.MESs.FirstOrDefault();
+                    var commor = new Commor(_mes);
+                    mes = new MesViewModel(commor);
+                }
+                return mes;
+            }
+        }
     }
 }

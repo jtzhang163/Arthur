@@ -22,7 +22,7 @@ namespace Arthur.App.Comm
             if(this.Communicator is SerialCommor)
             {
                 var serialCommor = (SerialCommor)this.Communicator;
-                this.Connector = new SerialPort(serialCommor.PortName, serialCommor.BaudRate, serialCommor.Parity, serialCommor.DataBits, serialCommor.StopBits);
+                this.Connector = new SerialPort(serialCommor.PortName, serialCommor.BaudRate, serialCommor.Parity, serialCommor.DataBits);
             }
             else if (this.Communicator.Company == "OMRON" && this.Communicator is EthernetCommor)
             {
