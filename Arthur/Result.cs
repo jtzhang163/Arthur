@@ -39,10 +39,16 @@ namespace Arthur
 
         }
 
-        public Result(int code, string msg)
+        public Result(int code, string msg) : this(code, msg, null)
+        {
+
+        }
+
+        public Result(int code, string msg, object data)
         {
             this.Code = code;
             this.Msg = msg;
+            this.Data = data;
         }
 
         public static Result OK
@@ -51,6 +57,11 @@ namespace Arthur
             {
                 return new Result(0, string.Empty);
             }
+        }
+
+        public static Result OkHasData(object data)
+        {
+            return new Result(0, "", data);
         }
 
     }

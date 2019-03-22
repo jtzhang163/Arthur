@@ -9,7 +9,7 @@ namespace Arthur.App.Model
     /// <summary>
     /// 以太网通信设备
     /// </summary>
-    public abstract class EthernetCommor : Commor
+    public abstract class EthernetCommor : Communicator
     {
         public string IP { get; set; }
 

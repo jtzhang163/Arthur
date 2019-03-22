@@ -10,7 +10,7 @@ namespace Arthur.App.Model
     /// <summary>
     /// RS232串口通信设备
     /// </summary>
-    public abstract class SerialCommor : Commor
+    public abstract class SerialCommor : Communicator
     {
         /// <summary>
         /// 端口号

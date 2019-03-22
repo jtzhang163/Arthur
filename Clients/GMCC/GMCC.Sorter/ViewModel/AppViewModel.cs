@@ -108,5 +108,24 @@ namespace GMCC.Sorter.ViewModel
                 }
             }
         }
+
+        private RunStatus runStatus = RunStatus.闲置;
+        public RunStatus RunStatus
+        {
+            get => runStatus;
+            set
+            {
+                SetProperty(ref runStatus, value);
+            }
+        }
+    }
+
+    public enum RunStatus
+    {
+        未知 = 0,
+        闲置 = 1,
+        运行 = 2,
+        暂停 = 3,
+        异常 = 4
     }
 }

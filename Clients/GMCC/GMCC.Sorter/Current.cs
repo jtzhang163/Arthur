@@ -1,5 +1,7 @@
-﻿using Arthur.ViewModel;
+﻿using Arthur.App.Comm;
+using Arthur.ViewModel;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +24,8 @@ namespace GMCC.Sorter
 
         public static GMCC.Sorter.ViewModel.AppViewModel App = new GMCC.Sorter.ViewModel.AppViewModel();
 
-        private static GMCC.Sorter.ViewModel.StorageViewModel[,] storages = null;
-        public static GMCC.Sorter.ViewModel.StorageViewModel[,] Storages
+        private static StorageViewModel[,] storages = null;
+        public static StorageViewModel[,] Storages
         {
             get
             {
@@ -40,6 +42,21 @@ namespace GMCC.Sorter
                     }
                 }
                 return storages;
+            }
+        }
+
+        private static MainMachineViewModel mainMachine = null;
+        public static MainMachineViewModel MainMachine
+        {
+            get
+            {
+                if(mainMachine == null)
+                {
+                    var plc = Context.PLCs.FirstOrDefault();
+                    var commor = new Commor(plc);
+                    mainMachine = new MainMachineViewModel(commor);
+                }
+                return mainMachine;
             }
         }
     }

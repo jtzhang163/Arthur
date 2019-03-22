@@ -559,70 +559,7 @@
                         </Grid>
                     </Expander.Content>
                 </Expander>
-                <Separator Height="2" Background="White"/>
-
-                <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">
-                    <Expander.Header>
-                        <TextBlock Text="实时监控" />
-                    </Expander.Header>
-                    <Expander.Content>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0">部门资料</RadioButton>
-                            <RadioButton Grid.Row="1">员工资料</RadioButton>
-                            <RadioButton Grid.Row="2">职位资料</RadioButton>
-                        </Grid>
-                    </Expander.Content>
-                </Expander>
-
-                <Separator Height="2" Background="White"/>
-
-                <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">
-                    <Expander.Header>
-                        <TextBlock Text="调度"/>
-                    </Expander.Header>
-                    <Expander.Content>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0">采购计划</RadioButton>
-                            <RadioButton Grid.Row="1">需求分析</RadioButton>
-                            <RadioButton Grid.Row="2">采购单</RadioButton>
-                            <RadioButton Grid.Row="3">入库验收</RadioButton>
-                            <RadioButton Grid.Row="4">入库退回</RadioButton>
-                        </Grid>
-                    </Expander.Content>
-                </Expander>
-
-                <Separator Height="2" Background="White"/>
-
-                <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">
-                    <Expander.Header>
-                        <TextBlock Text="工具"/>
-                    </Expander.Header>
-                    <Expander.Content>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0">基本资料</RadioButton>
-                            <RadioButton Grid.Row="1">往来单位</RadioButton>
-                            <RadioButton Grid.Row="2">上游供应商</RadioButton>
-                        </Grid>
-                    </Expander.Content>
-                </Expander>
-
+                
                 <Separator Height="2" Background="White"/>
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">

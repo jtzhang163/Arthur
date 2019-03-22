@@ -57,6 +57,7 @@
     <Compile Include="Business\IManage.cs" />
     <Compile Include="Business\UserManage.cs" />
     <Compile Include="Business\RoleManage.cs" />
+    <Compile Include="Comm\Commor.cs" />
     <Compile Include="Comm\Communicate.cs" />
     <Compile Include="Current.cs" />
     <Compile Include="Data\AppContext.cs" />
@@ -71,7 +72,7 @@
     <Compile Include="Model\Oplog.cs" />
     <Compile Include="Model\Role.cs" />
     <Compile Include="Model\User.cs" />
-    <Compile Include="Model\Base\Commor.cs" />
+    <Compile Include="Model\Base\Communicator.cs" />
     <Compile Include="Model\Base\Machine.cs" />
     <Compile Include="Model\Base\Product.cs" />
     <Compile Include="Option.cs" />

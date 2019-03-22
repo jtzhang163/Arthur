@@ -18,5 +18,7 @@ namespace GMCC.Sorter.Data
         public static DbSet<Battery> Batteries = AppContext.Batteries;
         public static DbSet<ProcTray> ProcTrays = AppContext.ProcTrays;
 
+        public static DbSet<PLC> PLCs = AppContext.PLCs;
+        public static DbSet<MES> MESs = AppContext.MESs;
     }
 }

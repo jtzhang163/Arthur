@@ -9,7 +9,7 @@ namespace Arthur.App.Model
     /// <summary>
     /// 通信器
     /// </summary>
-    public abstract class Commor : Machine
+    public abstract class Communicator : Machine
     {
     }
 }
