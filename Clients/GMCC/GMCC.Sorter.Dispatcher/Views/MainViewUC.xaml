@@ -6,6 +6,7 @@
              mc:Ignorable="d" x:Name="MainView"
              xmlns:core="clr-namespace:Arthur.Core;assembly=Arthur.Core"
              xmlns:factory="clr-namespace:GMCC.Sorter.Factory;assembly=GMCC.Sorter"
+             xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              xmlns:vm="clr-namespace:GMCC.Sorter.ViewModel;assembly=GMCC.Sorter"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -18,7 +19,7 @@
         </Style>
 
         <DataTemplate x:Key="commTemplate" DataType="{x:Type vm:CommorViewModel}">
-            <Border Margin="0" Width="140" Background="LightCyan">
+            <Border Margin="5" Width="145" Background="LightCyan">
                 <StackPanel Margin="5">
                     <StackPanel Orientation="Horizontal">
                         <CheckBox IsChecked="{Binding IsEnabled}" Margin="0,5,0,5"/>
@@ -30,11 +31,19 @@
             </Border>
         </DataTemplate>
 
+        <utils:RunStatusBackgroundConverter x:Key="runStatusBackgroundConverter"/>
+        <utils:TaskModeSwitchBtnBackgroundConverter x:Key="taskModeSwitchBtnBackgroundConverter"/>
+        <utils:TaskModeSwitchBtnContentConverter x:Key="taskModeSwitchBtnContentConverter"/>
+
     </UserControl.Resources>
-    <Grid Margin="0" Background="White">
-        <DockPanel>
+    <Grid Background="White">
+        <DockPanel Margin="10,0,0,0">
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
-                <Grid Height="70">
+                <Grid Height="80">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="7*"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60"/>
                         <ColumnDefinition Width="60"/>
@@ -45,20 +54,20 @@
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <core:ProcButton x:Name="btnStart" Grid.Column="0" ContentCore="启动" AwesomeText="&#xf011;" ForegroundCore="Green" Click="ProcButton_Click"/>
-                    <core:ProcButton x:Name="btnPause" Grid.Column="1" ContentCore="停止" AwesomeText="&#xf28c;" ForegroundCore="Green" Click="ProcButton_Click"/>
-                    <core:ProcButton x:Name="btnReset" Grid.Column="2" ContentCore="复位" AwesomeText="&#xf0e2;" ForegroundCore="Green" Click="ProcButton_Click"/>
-                    <core:ProcButton x:Name="btnTaskSwitch" Grid.Column="3" ContentCore="切换自动" AwesomeText="&#xf021;" ForegroundCore="Blue" Click="ProcButton_Click"/>
-                    <core:ProcButton x:Name="btnTaskReset" Grid.Column="4" ContentCore="任务复位" AwesomeText="&#xf01e;" ForegroundCore="Blue" Click="ProcButton_Click"/>
-                    <TextBlock Grid.Column="6" Text="{Binding TaskMode}" FontSize="40" VerticalAlignment="Center" Foreground="Blue"/>
-                    <TextBlock Grid.Column="7" Text="{Binding RunStatus}" FontSize="40" VerticalAlignment="Center" Foreground="Green"/>
+                    <core:ProcButton x:Name="start" Grid.Row="1" Grid.Column="0" ContentCore="启动" AwesomeText="&#xf011;" ForegroundCore="Green" Click="RunningControl_Click"/>
+                    <core:ProcButton x:Name="stop" Grid.Row="1" Grid.Column="1" ContentCore="停止" AwesomeText="&#xf28c;" ForegroundCore="Green" Click="RunningControl_Click"/>
+                    <core:ProcButton x:Name="reset" Grid.Row="1" Grid.Column="2" ContentCore="复位" AwesomeText="&#xf0e2;" ForegroundCore="Green" Click="RunningControl_Click"/>
+                    <core:ProcButton x:Name="task_mode_switch" Grid.Row="1" Grid.Column="3" ContentCore="{Binding TaskMode, Converter={StaticResource taskModeSwitchBtnContentConverter}}" AwesomeText="&#xf021;" ForegroundCore="Blue" Click="TaskControl_Click"/>
+                    <core:ProcButton x:Name="task_reset" Grid.Row="1" Grid.Column="4" ContentCore="任务复位" AwesomeText="&#xf01e;" ForegroundCore="Blue" Click="TaskControl_Click"/>
+                    <TextBlock Background="{Binding TaskMode, Converter={StaticResource taskModeSwitchBtnBackgroundConverter}}" Padding="5" Grid.Row="1" Grid.Column="6" Text="{Binding TaskMode}" FontSize="40" VerticalAlignment="Center" Foreground="Blue" HorizontalAlignment="Center"/>
+                    <TextBlock Background="{Binding RunStatus, Converter={StaticResource runStatusBackgroundConverter}}" Padding="5" Grid.Row="1" Grid.Column="7" Text="{Binding RunStatus}" FontSize="40" VerticalAlignment="Center" Foreground="Green" HorizontalAlignment="Center" Margin="0,0,10,0"/>
                 </Grid>
                 <!--<Canvas Height="1" Background="WhiteSmoke"/>&#xf144;-->
             </StackPanel>
 
-            <DockPanel DockPanel.Dock="Left" Margin="5,10,0,5">
-                <Label Content="通信设备选择 / 设备状态：" Height="30" DockPanel.Dock="Top" VerticalAlignment="Center"/>
-                <ListBox x:Name="commorList" Width="170" ItemsSource="{Binding}" ItemTemplate="{StaticResource commTemplate}" Padding="5,10,5,10">
+            <DockPanel DockPanel.Dock="Left" Margin="0,10,0,5">
+                <Label Content="通信设备选择 / 设备状态：" Height="30" DockPanel.Dock="Top" VerticalAlignment="Center" FontSize="14"/>
+                <ListBox x:Name="commorList" Width="170" ItemsSource="{Binding}" ItemTemplate="{StaticResource commTemplate}" Padding="0,5,0,5">
                 </ListBox>
             </DockPanel>
             <Grid x:Name="grid" Margin="5,10,0,0">

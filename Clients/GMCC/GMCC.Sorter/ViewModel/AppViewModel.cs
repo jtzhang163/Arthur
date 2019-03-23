@@ -128,6 +128,8 @@ namespace GMCC.Sorter.ViewModel
                 SetProperty(ref taskMode, value);
             }
         }
+
+        public bool IsTerminalInitFinished { get; set; }
     }
 
     public enum RunStatus
@@ -135,7 +137,7 @@ namespace GMCC.Sorter.ViewModel
         未知 = 0,
         闲置 = 1,
         运行 = 2,
-        暂停 = 3,
+        停止 = 3,
         异常 = 4
     }
 
