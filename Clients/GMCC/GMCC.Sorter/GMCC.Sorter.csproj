@@ -52,7 +52,7 @@
     <Compile Include="Current.cs" />
     <Compile Include="Data\AppContext.cs" />
     <Compile Include="Data\Context.cs" />
-    <Compile Include="Factory\Commor.cs" />
+    <Compile Include="Factory\CommorHelper.cs" />
     <Compile Include="Model\BatteryScaner.cs" />
     <Compile Include="Model\MES.cs" />
     <Compile Include="Model\PLC.cs" />

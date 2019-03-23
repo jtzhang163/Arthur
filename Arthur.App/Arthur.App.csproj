@@ -37,6 +37,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="HslCommunication, Version=6.0.2.0, Culture=neutral, PublicKeyToken=cdb2261fa039ed67, processorArchitecture=MSIL">
+      <HintPath>..\packages\HslCommunication.6.0.2\lib\net451\HslCommunication.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -58,7 +64,10 @@
     <Compile Include="Business\UserManage.cs" />
     <Compile Include="Business\RoleManage.cs" />
     <Compile Include="Comm\Commor.cs" />
-    <Compile Include="Comm\Communicate.cs" />
+    <Compile Include="Comm\OmronFinsTcpComm.cs" />
+    <Compile Include="Comm\EthernetComm.cs" />
+    <Compile Include="Comm\IComm.cs" />
+    <Compile Include="Comm\SerialComm.cs" />
     <Compile Include="Current.cs" />
     <Compile Include="Data\AppContext.cs" />
     <Compile Include="Data\Context.cs" />
@@ -83,7 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Arthur\Arthur.csproj">

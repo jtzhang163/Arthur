@@ -30,7 +30,7 @@ namespace GMCC.Sorter.Dispatcher.Views
         public MainViewUC() : this("Details")
         {
             this.DataContext = Current.App;
-            this.commorList.DataContext = GMCC.Sorter.Factory.Commor.GetCommors();
+            this.commorList.DataContext = GMCC.Sorter.Factory.CommorHelper.GetCommors();
         }
         /// <summary>
         /// 
@@ -71,9 +71,14 @@ namespace GMCC.Sorter.Dispatcher.Views
                     return;
                 }
 
-                if (Running.Start().IsOk)
+                var result = Running.Start();
+                if (result.IsOk)
                 {
                     MessageBox.Show("成功启动运行！", "提示", MessageBoxButton.OK);
+                }
+                else
+                {
+                    MessageBox.Show(result.Msg, "提示", MessageBoxButton.OK);
                 }
 
             }

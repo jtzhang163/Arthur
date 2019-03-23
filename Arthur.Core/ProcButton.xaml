@@ -19,7 +19,7 @@
             <RowDefinition Height="3*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Name="AwesomeContent" Grid.Row="0" Text="&#xf144;" Style="{DynamicResource FontAwesome}" HorizontalAlignment="Center"/>
-        <TextBlock Name="ProcContent" Grid.Row="1" Text="启动" HorizontalAlignment="Center"/>
+        <TextBlock Name="AwesomeContent" Grid.Row="0" Text="&#xf2c6;" Style="{DynamicResource FontAwesome}" HorizontalAlignment="Center"/>
+        <TextBlock Name="ProcContent" Grid.Row="1" Text="内容" HorizontalAlignment="Center"/>
     </Grid>
 </Button>

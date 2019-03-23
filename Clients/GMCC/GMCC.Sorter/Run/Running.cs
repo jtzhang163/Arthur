@@ -12,15 +12,22 @@ namespace GMCC.Sorter.Run
     {
         public static Result Start()
         {
-            if (Current.MainMachine.Commor.Connect().IsOk)
+            var commors = Factory.CommorHelper.GetCommors();
+            for (var i = 0; i < commors.Count; i++)
             {
-                //暂时放置在此处
-                Current.App.IsTerminalInitFinished = true;
+                if (commors[i].IsEnabled)
+                {
+                    var result = commors[i].Commor.Connect();
+                    if (!result.IsOk)
+                    {
+                        Current.App.RunStatus = RunStatus.异常;
+                        return result;
+                    }
+                }
             }
-            else
-            {
-                Current.App.RunStatus = RunStatus.异常;
-            }
+
+            //暂时放置在此处
+            Current.App.IsTerminalInitFinished = true;
             Current.App.RunStatus = RunStatus.运行;
             TimerExec.IsRunning = true;
             return Result.OK;

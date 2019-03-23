@@ -115,7 +115,12 @@ namespace GMCC.Sorter.ViewModel
             get => runStatus;
             set
             {
-                SetProperty(ref runStatus, value);
+                if(runStatus != value)
+                {
+                    var selectedEnabled = value == RunStatus.闲置;
+                    Factory.CommorHelper.GetCommors().ForEach(c => c.SelectedEnabled = selectedEnabled);
+                    SetProperty(ref runStatus, value);
+                }
             }
         }
 

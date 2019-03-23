@@ -11,32 +11,22 @@ using System.Threading.Tasks;
 
 namespace Arthur.App.Comm
 {
-    public static class Communicate
+    public class EthernetComm : IComm
     {
-        public static Result SerialConnect(Commor commor)
-        {
-            var serialPort = (SerialPort)commor.Connector;
-            try
-            {
-                if (!serialPort.IsOpen)
-                {
-                    serialPort.Open();
-                }
-            }
-            catch (Exception ex)
-            {
-                return new Result(ex.Message);
-            }
-            return Result.OK;
-        }
-
-        public static Result EthernetConnect(Commor commor)
+        public Result Connect(Commor commor)
         {
             var socket = (Socket)commor.Connector;
             var ethernetCommor = (EthernetCommor)commor.Communicator;
             try
             {
-                socket.Connect(ethernetCommor.IP, ethernetCommor.Port);
+                ConnectSocketDelegate connect = ConnectSocket;
+                IAsyncResult asyncResult = connect.BeginInvoke(socket, ethernetCommor.IP, ethernetCommor.Port, null, null);
+                bool success = asyncResult.AsyncWaitHandle.WaitOne(1000, false);
+                if (!success)
+                {
+                    return new Result(string.Format("连接{0}失败({1} ：{2})", ethernetCommor.Name, ethernetCommor.IP, ethernetCommor.Port));
+                }
+                //socket.Connect(ethernetCommor.IP, ethernetCommor.Port); 连接失败时卡死 超时(20s)
             }
             catch (Exception ex)
             {
@@ -49,25 +39,7 @@ namespace Arthur.App.Comm
             return Result.OK;
         }
 
-        public static Result SerialEndConnect(Commor commor)
-        {
-            var serialPort = (SerialPort)commor.Connector;
-            try
-            {
-                if (serialPort.IsOpen)
-                {
-                    serialPort.Close();
-                }
-                serialPort.Dispose();
-            }
-            catch (Exception ex)
-            {
-                return new Result(ex.Message);
-            }
-            return Result.OK;
-        }
-
-        public static Result EthernetEndConnect(Commor commor)
+        public Result EndConnect(Commor commor)
         {
             var socket = (Socket)commor.Connector;
             if (socket != null)
@@ -78,7 +50,7 @@ namespace Arthur.App.Comm
             return Result.OK;
         }
 
-        public static Result EthernetComm(Commor commor, string input)
+        public Result Comm(Commor commor, string input)
         {
             var socket = (Socket)commor.Connector;
             var ethernetCommor = (EthernetCommor)commor.Communicator;
@@ -156,29 +128,19 @@ namespace Arthur.App.Comm
             return Result.OK;
         }
 
-        public static Result SerialComm(Commor commor, string input)
+        private delegate string ConnectSocketDelegate(Socket socket, string ip, int port);
+        private string ConnectSocket(Socket socket, string ip, int port)
         {
-            var ethernetCommor = (EthernetCommor)commor.Communicator;
-            var recvData = string.Empty;
-            var serialPort = (SerialPort)commor.Connector;
+            string exmessage = "";
             try
             {
-                serialPort.Write(input);
-                Thread.Sleep(500);
-                Byte[] InputBuf = new Byte[128];
-                serialPort.Read(InputBuf, 0, serialPort.BytesToRead);
-                recvData = Encoding.ASCII.GetString(InputBuf).Trim('\0');
-
-                if (string.IsNullOrEmpty(recvData))
-                {
-                    return new Result("规定时间内串口未返回数据:" + serialPort.PortName);
-                }
+                socket.Connect(ip, port);
             }
             catch (Exception ex)
             {
-                return new Result(ex.Message);
+                exmessage = ex.Message;
             }
-            return Result.OkHasData(recvData);
+            return exmessage;
         }
     }
 }

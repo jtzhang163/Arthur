@@ -1,6 +1,7 @@
 ﻿using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
+using GMCC.Sorter.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,10 +52,19 @@ namespace GMCC.Sorter.ViewModel
         private bool isEnabled;
         public bool IsEnabled
         {
-            get => isEnabled;
+            get
+            {
+                isEnabled = this.Commor.Communicator.IsEnabled;
+                return isEnabled;
+            }
             set
             {
-                SetProperty(ref isEnabled, value);
+                if(isEnabled != value)
+                {
+                    this.Commor.Communicator.IsEnabled = value;
+                    Context.AppContext.SaveChanges();
+                    SetProperty(ref isEnabled, value);
+                }
             }
         }
 
@@ -95,6 +105,17 @@ namespace GMCC.Sorter.ViewModel
             if (this.Commor.Connected)
             {
 
+            }
+        }
+
+
+        private bool selectedEnabled = true;
+        public bool SelectedEnabled
+        {
+            get => selectedEnabled;
+            set
+            {
+                SetProperty(ref selectedEnabled, value);
             }
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Factory
 {
-    public class Commor
+    public class CommorHelper
     {
         public static List<CommorViewModel> GetCommors()
         {

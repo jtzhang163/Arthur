@@ -1,4 +1,5 @@
 ﻿using Arthur.App.Model;
+using HslCommunication.Profinet.Omron;
 using System.IO.Ports;
 using System.Net.Sockets;
 
@@ -9,9 +10,14 @@ namespace Arthur.App.Comm
     /// </summary>
     public class Commor
     {
-
+        /// <summary>
+        /// 连接器
+        /// </summary>
         public object Connector { get; set; }
 
+        /// <summary>
+        /// 通信器
+        /// </summary>
         public Communicator Communicator { get; set; }
 
         public bool Connected { get; private set; }
@@ -24,9 +30,10 @@ namespace Arthur.App.Comm
                 var serialCommor = (SerialCommor)this.Communicator;
                 this.Connector = new SerialPort(serialCommor.PortName, serialCommor.BaudRate, serialCommor.Parity, serialCommor.DataBits);
             }
-            else if (this.Communicator.Company == "OMRON" && this.Communicator is EthernetCommor)
+            else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
             {
-
+                var ethernetCommor = (EthernetCommor)this.Communicator;
+                this.Connector = new OmronFinsNet();
             }
             else if (this.Communicator is EthernetCommor)
             {
@@ -40,15 +47,15 @@ namespace Arthur.App.Comm
             var result = new Result();
             if (this.Communicator is SerialCommor)
             {
-                result = Communicate.SerialConnect(this);
+                result = new SerialComm().Connect(this);
             }
-            else if (this.Communicator.Company == "OMRON" && this.Communicator is EthernetCommor)
+            else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
             {
-
+                result = new OmronFinsTcpComm().Connect(this);
             }
             else if (this.Communicator is EthernetCommor)
             {
-                result = Communicate.EthernetConnect(this);
+                result = new EthernetComm().Connect(this);
             }
 
             this.Connected = result.IsOk;
@@ -60,15 +67,15 @@ namespace Arthur.App.Comm
             var result = new Result();
             if (this.Communicator is SerialCommor)
             {
-                result = Communicate.SerialEndConnect(this);
+                result = new SerialComm().EndConnect(this);
             }
-            else if (this.Communicator.Company == "OMRON" && this.Communicator is EthernetCommor)
+            else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
             {
 
             }
             else if (this.Communicator is EthernetCommor)
             {
-                result = Communicate.EthernetEndConnect(this);
+                result = new EthernetComm().EndConnect(this);
             }
             Connected = false;
             return Result.OK;
@@ -79,16 +86,16 @@ namespace Arthur.App.Comm
 
             if (this.Communicator is SerialCommor)
             {
-                return Communicate.SerialComm(this, input);
+                return new SerialComm().Comm(this, input);
 
             }
-            else if (this.Communicator.Company == "OMRON" && this.Communicator is EthernetCommor)
+            else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
             {
 
             }
             else if (this.Communicator is EthernetCommor)
             {
-                return Communicate.EthernetComm(this, input);
+                return new EthernetComm().Comm(this, input);
             }
             return new Result("连接为未知类型！");
         }
