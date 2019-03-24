@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Machine
+namespace GMCC.Sorter.Dispatcher.Controls.Machine
 {
     /// <summary>
     /// StorageUC.xaml 的交互逻辑

@@ -1,6 +1,5 @@
 ﻿using Arthur.View.Utils;
 using GMCC.Sorter.Data;
-using GMCC.Sorter.Dispatcher.UserControls.Machine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +31,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
                 for (var j = 0; j < Common.STOR_FLOOR_COUNT; j++)
                 {
 
-                    var storageUC = new StorageUC(i, j);
+                    var storageUC = new Controls.Machine.StorageUC(i, j);
                     this.grid.Children.Add(storageUC);
                     SetRowCol(storageUC);
 
@@ -40,7 +39,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
             }
         }
 
-        private void SetRowCol(StorageUC storageUC)
+        private void SetRowCol(Controls.Machine.StorageUC storageUC)
         {
 
             var row = 0;

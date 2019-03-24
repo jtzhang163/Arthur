@@ -1,5 +1,7 @@
 ﻿using Arthur.App;
 using Arthur.App.Comm;
+using Arthur.App.Model;
+using GMCC.Sorter.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,28 @@ namespace GMCC.Sorter.ViewModel
     /// </summary>
     public class MesViewModel : CommorViewModel
     {
+
+        private string host = null;
+        public string Host
+        {
+            get
+            {
+                host = ((Server)this.Commor.Communicator).Host;
+                return host;
+            }
+            set
+            {
+                if (host != value)
+                {
+                    ((Server)this.Commor.Communicator).Host = value;
+                    Context.AppContext.SaveChanges();
+                    SetProperty(ref host, value);
+
+                    this.CommorInfo = null;
+                }
+            }
+        }
+
         public MesViewModel(Commor commor) : base(commor)
         {
 

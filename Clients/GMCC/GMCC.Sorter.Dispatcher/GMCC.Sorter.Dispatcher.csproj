@@ -84,14 +84,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\Machine\StorageUC.xaml.cs">
+      <DependentUpon>StorageUC.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Help\About\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Machine\StorageUC.xaml.cs">
-      <DependentUpon>StorageUC.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\MainView\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Platform\MES\Details.xaml.cs">
+      <DependentUpon>Details.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Platform\MES\Edit.xaml.cs">
+      <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Account\CurrentUserUC.xaml.cs">
       <DependentUpon>CurrentUserUC.xaml</DependentUpon>
@@ -111,6 +117,9 @@
     <Compile Include="Views\MainViewUC.xaml.cs">
       <DependentUpon>MainViewUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Platform\MESView.xaml.cs">
+      <DependentUpon>MESView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SystemUC\EventLogUC.xaml.cs">
       <DependentUpon>EventLogUC.xaml</DependentUpon>
     </Compile>
@@ -124,15 +133,23 @@
       <DependentUpon>RoleManageUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Converter.cs" />
+    <Page Include="Controls\Machine\StorageUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UserControls\Help\About\Details.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Machine\StorageUC.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\MainView\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Platform\MES\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Platform\MES\Edit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -141,6 +158,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainViewUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Platform\MESView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -267,6 +288,8 @@
   <ItemGroup>
     <Resource Include="Images\close.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UserControls\Platform\BtsClient\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

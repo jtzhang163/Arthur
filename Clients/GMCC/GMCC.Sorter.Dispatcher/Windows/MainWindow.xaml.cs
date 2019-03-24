@@ -96,6 +96,9 @@ namespace GMCC.Sorter.Dispatcher
                 case "系统日志":
                     return new OplogUC();
 
+                case "MES":
+                    return new MESView();
+
                 case "关于":
                     return new AboutView();
                 default:

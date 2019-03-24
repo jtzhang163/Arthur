@@ -485,9 +485,16 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0">设备厂家</RadioButton>
-                            <RadioButton Grid.Row="1">托盘</RadioButton>
+                            <RadioButton Grid.Row="0">PLC</RadioButton>
+                            <RadioButton Grid.Row="1">电池扫码枪</RadioButton>
+                            <RadioButton Grid.Row="2">托盘扫码枪</RadioButton>
+                            <RadioButton Grid.Row="3">托盘</RadioButton>
+                            <RadioButton Grid.Row="4">料仓</RadioButton>
+
                         </Grid>
                     </Expander.Content>
                 </Expander>
@@ -561,7 +568,25 @@
                         </Grid>
                     </Expander.Content>
                 </Expander>
-                
+
+                <Separator Height="2" Background="White"/>
+
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">
+                    <Expander.Header>
+                        <TextBlock Text="交互平台"/>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0">BTS客户端</RadioButton>
+                            <RadioButton Grid.Row="1" Checked="RadioButton_Checked">MES</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+
                 <Separator Height="2" Background="White"/>
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">

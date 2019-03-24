@@ -12,12 +12,25 @@ namespace GMCC.Sorter.ViewModel
 {
     public abstract class CommorViewModel : BindableObject
     {
-
+        private string name = null;
         public string Name
         {
             get
             {
-                return this.Commor.Communicator.Name;
+                if(name == null)
+                {
+                    name = this.Commor.Communicator.Name;
+                }
+                return name;
+            }
+            set
+            {
+                if (name != value)
+                {
+                    this.Commor.Communicator.Name = value;
+                    Context.AppContext.SaveChanges();
+                    SetProperty(ref name, value);
+                }
             }
         }
 
@@ -45,6 +58,10 @@ namespace GMCC.Sorter.ViewModel
                     }
                 }
                 return commorInfo;
+            }
+            set
+            {
+                SetProperty(ref commorInfo, value);
             }
         }
 
