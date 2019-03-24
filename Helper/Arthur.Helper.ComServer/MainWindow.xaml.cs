@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -16,7 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Arthur.Helper.TcpServer
+namespace Arthur.Helper.ComServer
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
@@ -29,9 +30,7 @@ namespace Arthur.Helper.TcpServer
             this.DataContext = Current.App;
         }
 
-        TcpListener server = null;
-        byte[] bytes = new byte[256];
-        string data = null;
+        SerialPort serialPort = null;
 
         public void Run()
         {
@@ -40,58 +39,55 @@ namespace Arthur.Helper.TcpServer
             {
                 while (Current.App.IsRunning)
                 {
-                    ReceiveSendDataAdd("Waiting for a connection... ");
-                    TcpClient client = server.AcceptTcpClient();
-                    ReceiveSendDataAdd("Connected!");
-                    data = null;
-                    NetworkStream stream = client.GetStream();
-
-                    int i;
-                    while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
+                    if (serialPort.BytesToRead > 0)
                     {
-                        data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                        ReceiveSendDataAdd("Received: " + data.Trim(new char[] { '\r', '\n' }));
-                        if (data.Contains(Current.App.Receive1))
+                        var receiveString = string.Empty;
+                        do
                         {
-                            byte[] send = System.Text.Encoding.ASCII.GetBytes(Current.App.Send1 + "\r");
-                            stream.Write(send, 0, send.Length);
+                            int count = serialPort.BytesToRead;
+                            if (count <= 0)
+                                break;
+                            byte[] readBuffer = new byte[count];
+                            serialPort.Read(readBuffer, 0, count);
+                            receiveString += System.Text.Encoding.Default.GetString(readBuffer).Trim('\0').Trim('\r').Trim('\n');
+                            Thread.Sleep(10);
+                        } while (serialPort.BytesToRead > 0);
+
+                        //Byte[] InputBuf = new Byte[128];
+                        //serialPort.Read(InputBuf, 0, serialPort.BytesToRead);
+                        //receiveString = Encoding.ASCII.GetString(InputBuf).Trim('\0');
+
+                        ReceiveSendDataAdd("Received: " + receiveString.Trim(new char[] { '\r', '\n' }));
+                        if (receiveString.Contains(Current.App.Receive1))
+                        {
+                            serialPort.Write(Current.App.Send1);
                             ReceiveSendDataAdd("Sent: " + Current.App.Send1);
                         }
-                        else if (data.Contains(Current.App.Receive2))
+                        else if (receiveString.Contains(Current.App.Receive2))
                         {
-                            byte[] send = System.Text.Encoding.ASCII.GetBytes(Current.App.Send2 + "\r");
-                            stream.Write(send, 0, send.Length);
+                            serialPort.Write(Current.App.Send2);
                             ReceiveSendDataAdd("Sent: " + Current.App.Send2);
                         }
-                        else if (data.Contains(Current.App.Receive3))
+                        else if (receiveString.Contains(Current.App.Receive3))
                         {
-                            byte[] send = System.Text.Encoding.ASCII.GetBytes(Current.App.Send3 + "\r");
-                            stream.Write(send, 0, send.Length);
+                            serialPort.Write(Current.App.Send3);
                             ReceiveSendDataAdd("Sent: " + Current.App.Send3);
                         }
-                        else if (data.Contains(Current.App.Receive4))
+                        else if (receiveString.Contains(Current.App.Receive4))
                         {
-                            byte[] send = System.Text.Encoding.ASCII.GetBytes(Current.App.Send4 + "\r");
-                            stream.Write(send, 0, send.Length);
+                            serialPort.Write(Current.App.Send4);
                             ReceiveSendDataAdd("Sent: " + Current.App.Send4);
                         }
-
                     }
-
-                    client.Close();
                 }
             }
             catch (Exception e)
             {
-                ReceiveSendDataAdd("SocketException:" + e);
-                ReceiveSendDataAdd("Hit enter to continue...");
+                ReceiveSendDataAdd("com Exception:" + e);
             }
             finally
             {
-                if (server != null)
-                {
-                    server.Stop();
-                }
+
             }
 
         }
@@ -101,16 +97,15 @@ namespace Arthur.Helper.TcpServer
             Current.App.Tip += info + "\r\n";
         }
 
-
-        private void btnListen_Click(object sender, RoutedEventArgs e)
+        private void btnOpenOrClose_Click(object sender, RoutedEventArgs e)
         {
 
             Current.App.IsRunning = !Current.App.IsRunning;
 
             if (Current.App.IsRunning)
             {
-                server = new TcpListener(IPAddress.Parse(Current.App.IP), Current.App.Port);
-                server.Start();
+                serialPort = new SerialPort((string)selectedCom.SelectedItem);
+                serialPort.Open();
 
                 var t = new Thread(() => {
                     Run();
@@ -119,9 +114,8 @@ namespace Arthur.Helper.TcpServer
             }
             else
             {
-
-                server.Stop();
-                server = null;
+                serialPort.Close();
+                serialPort = null;
             }
         }
 

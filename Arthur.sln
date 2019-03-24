@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helper", "Helper", "{02595D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arthur.Helper.TcpServer", "Helper\Arthur.Helper.TcpServer\Arthur.Helper.TcpServer.csproj", "{9C1F8379-C696-4B74-9AC8-26EB8F3852E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arthur.Helper.ComServer", "Helper\Arthur.Helper.ComServer\Arthur.Helper.ComServer.csproj", "{9C9AE23F-CBE7-4BED-AF45-B57A3A9FF487}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{9C1F8379-C696-4B74-9AC8-26EB8F3852E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C1F8379-C696-4B74-9AC8-26EB8F3852E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C1F8379-C696-4B74-9AC8-26EB8F3852E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C9AE23F-CBE7-4BED-AF45-B57A3A9FF487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C9AE23F-CBE7-4BED-AF45-B57A3A9FF487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C9AE23F-CBE7-4BED-AF45-B57A3A9FF487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C9AE23F-CBE7-4BED-AF45-B57A3A9FF487}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +95,7 @@ Global
 		{F54894ED-4B94-4FF2-985C-864AECFA4AB2} = {07873C37-9E0B-4009-A258-CD6A93870693}
 		{8C406FDA-5E02-4FF2-B2E3-D7C5C71C4278} = {C2C176EE-22C1-49F5-AA4A-0E992B157E73}
 		{9C1F8379-C696-4B74-9AC8-26EB8F3852E2} = {02595D0E-6C83-45C5-A887-137D421F2A55}
+		{9C9AE23F-CBE7-4BED-AF45-B57A3A9FF487} = {02595D0E-6C83-45C5-A887-137D421F2A55}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF2402D6-D30C-40A9-A451-F623E774C1AA}
