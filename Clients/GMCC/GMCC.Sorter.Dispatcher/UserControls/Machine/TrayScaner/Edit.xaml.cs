@@ -1,4 +1,5 @@
 ﻿using Arthur.View.Utils;
+using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +16,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
+namespace GMCC.Sorter.Dispatcher.UserControls.Machine.TrayScaner
 {
     /// <summary>
     /// Edit.xaml 的交互逻辑
     /// </summary>
     public partial class Edit : UserControl
     {
+        private TrayScanerViewModel TrayScaner = null;
+
         public Edit(int id)
         {
             InitializeComponent();
-            this.DataContext = Current.Mes;
+            this.TrayScaner = Current.TrayScaners.FirstOrDefault(o => o.Id == id);
+            this.DataContext = this.TrayScaner;
         }
 
         private void textbox_GotFocus(object sender, RoutedEventArgs e)
@@ -41,15 +45,15 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteParentUserControlMethod(this, "MesView", "SwitchWindow", "Details", 0);
+            Helper.ExecuteParentUserControlMethod(this, "TrayScaner", "SwitchWindow", "Index", 0);
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            var host = this.host.Text.Trim();
+            var portname = this.portname.Text.Trim();
             var company = this.company.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(host))
+            if (string.IsNullOrWhiteSpace(portname))
             {
                 tip.Foreground = new SolidColorBrush(Colors.Red);
                 tip.Text = "请填写数据！";
@@ -58,8 +62,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
             {
                 try
                 {
-                    Current.Mes.Host = host;
-                    Current.Mes.Company = company;
+                    this.TrayScaner.PortName = portname;
+                    this.TrayScaner.Company = company;
 
                     tip.Foreground = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";

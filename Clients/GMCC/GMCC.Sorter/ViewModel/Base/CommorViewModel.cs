@@ -12,6 +12,10 @@ namespace GMCC.Sorter.ViewModel
 {
     public abstract class CommorViewModel : BindableObject
     {
+
+        public int Id => this.Commor.Communicator.Id;
+
+
         private string name = null;
         public string Name
         {
@@ -33,6 +37,100 @@ namespace GMCC.Sorter.ViewModel
                 }
             }
         }
+
+        private string company = null;
+        public string Company
+        {
+            get
+            {
+                if (company == null)
+                {
+                    company = this.Commor.Communicator.Company;
+                }
+                return company;
+            }
+            set
+            {
+                if (company != value)
+                {
+                    this.Commor.Communicator.Company = value;
+                    Context.AppContext.SaveChanges();
+                    SetProperty(ref company, value);
+                }
+            }
+        }
+
+
+        private string location = null;
+        public string Location
+        {
+            get
+            {
+                if (location == null)
+                {
+                    location = this.Commor.Communicator.Location;
+                }
+                return location;
+            }
+            set
+            {
+                if (location != value)
+                {
+                    this.Commor.Communicator.Location = value;
+                    Context.AppContext.SaveChanges();
+                    SetProperty(ref location, value);
+                }
+            }
+        }
+
+
+        private string modelNumber = null;
+        public string ModelNumber
+        {
+            get
+            {
+                if (modelNumber == null)
+                {
+                    modelNumber = this.Commor.Communicator.ModelNumber;
+                }
+                return modelNumber;
+            }
+            set
+            {
+                if (modelNumber != value)
+                {
+                    this.Commor.Communicator.ModelNumber = value;
+                    Context.AppContext.SaveChanges();
+                    SetProperty(ref modelNumber, value);
+                }
+            }
+        }
+
+
+
+        private string serialNumber = null;
+        public string SerialNumber
+        {
+            get
+            {
+                if (serialNumber == null)
+                {
+                    serialNumber = this.Commor.Communicator.SerialNumber;
+                }
+                return serialNumber;
+            }
+            set
+            {
+                if (serialNumber != value)
+                {
+                    this.Commor.Communicator.SerialNumber = value;
+                    Context.AppContext.SaveChanges();
+                    SetProperty(ref serialNumber, value);
+                }
+            }
+        }
+
+
 
         private string commorInfo = null;
         public string CommorInfo

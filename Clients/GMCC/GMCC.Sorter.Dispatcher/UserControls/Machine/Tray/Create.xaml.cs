@@ -1,7 +1,9 @@
-﻿using Arthur.View.Utils;
+﻿using Arthur.App.Data;
+using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -15,22 +17,49 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
+namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
 {
     /// <summary>
-    /// Edit.xaml 的交互逻辑
+    /// Create.xaml 的交互逻辑
     /// </summary>
-    public partial class Edit : UserControl
+    public partial class Create : UserControl
     {
-        public Edit(int id)
+        public Create(int id)
         {
             InitializeComponent();
-            this.DataContext = Current.Mes;
         }
 
-        private void textbox_GotFocus(object sender, RoutedEventArgs e)
+        private void cancel_Click(object sender, RoutedEventArgs e)
         {
-            tip.Visibility = Visibility.Hidden;
+            Helper.ExecuteParentUserControlMethod(this, "Tray", "SwitchWindow", "Index", 0);
+        }
+
+        private void create_Click(object sender, RoutedEventArgs e)
+        {
+            var code = this.code.Text.Trim();
+            var company = this.company.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                tip.Foreground = new SolidColorBrush(Colors.Red);
+                tip.Text = "请填写数据！";
+            }
+            else
+            {
+                var ret = new Business.TrayManage().Create(new Model.Tray() { Code = code, Company = company });
+                if (ret.IsOk)
+                {
+                    tip.Foreground = new SolidColorBrush(Colors.Green);
+                    tip.Text = "新增托盘成功！";
+                }
+                else
+                {
+                    tip.Foreground = new SolidColorBrush(Colors.Red);
+                    tip.Text = ret.Msg;
+                }
+            }
+
+            tip.Visibility = Visibility.Visible;
         }
 
         private void level_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -39,38 +68,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
             e.Handled = re.IsMatch(e.Text);
         }
 
-        private void cancel_Click(object sender, RoutedEventArgs e)
+        private void textbox_GotFocus(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteParentUserControlMethod(this, "MesView", "SwitchWindow", "Details", 0);
-        }
-
-        private void edit_Click(object sender, RoutedEventArgs e)
-        {
-            var host = this.host.Text.Trim();
-            var company = this.company.Text.Trim();
-
-            if (string.IsNullOrWhiteSpace(host))
-            {
-                tip.Foreground = new SolidColorBrush(Colors.Red);
-                tip.Text = "请填写数据！";
-            }
-            else
-            {
-                try
-                {
-                    Current.Mes.Host = host;
-                    Current.Mes.Company = company;
-
-                    tip.Foreground = new SolidColorBrush(Colors.Green);
-                    tip.Text = "修改信息成功！";
-                }
-                catch (Exception ex)
-                {
-                    tip.Foreground = new SolidColorBrush(Colors.Red);
-                    tip.Text = "修改信息失败：" + ex.Message;
-                }
-            }
-            tip.Visibility = Visibility.Visible;
+            tip.Visibility = Visibility.Hidden;
         }
     }
 }

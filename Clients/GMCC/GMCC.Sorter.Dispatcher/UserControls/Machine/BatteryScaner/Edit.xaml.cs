@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
+namespace GMCC.Sorter.Dispatcher.UserControls.Machine.BatteryScaner
 {
     /// <summary>
     /// Edit.xaml 的交互逻辑
@@ -25,7 +25,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
         public Edit(int id)
         {
             InitializeComponent();
-            this.DataContext = Current.Mes;
+            this.DataContext = Current.BatteryScaner;
         }
 
         private void textbox_GotFocus(object sender, RoutedEventArgs e)
@@ -41,15 +41,15 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteParentUserControlMethod(this, "MesView", "SwitchWindow", "Details", 0);
+            Helper.ExecuteParentUserControlMethod(this, "BatteryScaner", "SwitchWindow", "Details", 0);
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            var host = this.host.Text.Trim();
+            var ip = this.ip.Text.Trim();
             var company = this.company.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(host))
+            if (string.IsNullOrWhiteSpace(ip))
             {
                 tip.Foreground = new SolidColorBrush(Colors.Red);
                 tip.Text = "请填写数据！";
@@ -58,8 +58,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
             {
                 try
                 {
-                    Current.Mes.Host = host;
-                    Current.Mes.Company = company;
+                    Current.BatteryScaner.IP = ip;
+                    Current.BatteryScaner.Company = company;
 
                     tip.Foreground = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";

@@ -489,11 +489,11 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0">PLC</RadioButton>
-                            <RadioButton Grid.Row="1">电池扫码枪</RadioButton>
-                            <RadioButton Grid.Row="2">托盘扫码枪</RadioButton>
-                            <RadioButton Grid.Row="3">托盘</RadioButton>
-                            <RadioButton Grid.Row="4">料仓</RadioButton>
+                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">PLC</RadioButton>
+                            <RadioButton Grid.Row="1" Checked="RadioButton_Checked">电池扫码枪</RadioButton>
+                            <RadioButton Grid.Row="2" Checked="RadioButton_Checked">托盘扫码枪</RadioButton>
+                            <RadioButton Grid.Row="3" Checked="RadioButton_Checked">托盘管理</RadioButton>
+                            <RadioButton Grid.Row="4" Checked="RadioButton_Checked">料仓管理</RadioButton>
 
                         </Grid>
                     </Expander.Content>

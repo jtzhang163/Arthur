@@ -1,4 +1,6 @@
 ﻿using Arthur.View.Utils;
+using GMCC.Sorter.Data;
+using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +17,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
+namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
 {
     /// <summary>
     /// Edit.xaml 的交互逻辑
     /// </summary>
     public partial class Edit : UserControl
     {
+        private GMCC.Sorter.Model.Storage Storage;
+
         public Edit(int id)
         {
             InitializeComponent();
-            this.DataContext = Current.Mes;
+            this.Storage = Context.Storages.Single(t => t.Id == id);
+            this.DataContext = this.Storage;
         }
 
         private void textbox_GotFocus(object sender, RoutedEventArgs e)
@@ -41,15 +46,15 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteParentUserControlMethod(this, "MesView", "SwitchWindow", "Details", 0);
+            Helper.ExecuteParentUserControlMethod(this, "Storage", "SwitchWindow", "Index", 0);
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            var host = this.host.Text.Trim();
+            var name = this.name.Text.Trim();
             var company = this.company.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(host))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 tip.Foreground = new SolidColorBrush(Colors.Red);
                 tip.Text = "请填写数据！";
@@ -58,11 +63,13 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
             {
                 try
                 {
-                    Current.Mes.Host = host;
-                    Current.Mes.Company = company;
+                    this.Storage.Name = name;
+                    this.Storage.Company = company;
 
+                    Context.AppContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
+
                 }
                 catch (Exception ex)
                 {

@@ -75,6 +75,17 @@ namespace GMCC.Sorter
             }
         }
 
+        public static List<TrayScanerViewModel> TrayScaners
+        {
+            get
+            {
+                return new List<TrayScanerViewModel>()
+                {
+                    FormerTrayScaner,
+                    LatterTrayScaner
+                };
+            }
+        }
 
         private static TrayScanerViewModel formerTrayScaner = null;
         public static TrayScanerViewModel FormerTrayScaner

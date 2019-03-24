@@ -1,5 +1,7 @@
 ﻿using Arthur.App;
 using Arthur.App.Comm;
+using Arthur.App.Model;
+using GMCC.Sorter.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,28 @@ namespace GMCC.Sorter.ViewModel
     /// </summary>
     public class MainMachineViewModel : CommorViewModel
     {
+
+        private string ip = null;
+        public string IP
+        {
+            get
+            {
+                ip = ((EthernetCommor)this.Commor.Communicator).IP;
+                return ip;
+            }
+            set
+            {
+                if (ip != value)
+                {
+                    ((EthernetCommor)this.Commor.Communicator).IP = value;
+                    Context.AppContext.SaveChanges();
+                    SetProperty(ref ip, value);
+
+                    this.CommorInfo = null;
+                }
+            }
+        }
+
         public MainMachineViewModel(Commor commor) : base(commor)
         {
 
