@@ -548,23 +548,23 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
+                                <!--<RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>-->
                             </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0">基本数据</RadioButton>
+                            <!--<RadioButton Grid.Row="0">基本数据</RadioButton>
                             <RadioButton Grid.Row="1">静置数据</RadioButton>
                             <RadioButton Grid.Row="2">OCV数据</RadioButton>
                             <RadioButton Grid.Row="3">化成数据</RadioButton>
                             <RadioButton Grid.Row="4">分容数据</RadioButton>
 
                             <RadioButton Grid.Row="5">DCIR数据</RadioButton>
-                            <RadioButton Grid.Row="6">高速缓存</RadioButton>
-                            <RadioButton Grid.Row="7">电池追溯</RadioButton>
+                            <RadioButton Grid.Row="6">高速缓存</RadioButton>-->
+                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">电池追溯</RadioButton>
                         </Grid>
                     </Expander.Content>
                 </Expander>

@@ -87,6 +87,18 @@
     <Compile Include="Controls\Machine\StorageUC.xaml.cs">
       <DependentUpon>StorageUC.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Query\Battery\Create.xaml.cs">
+      <DependentUpon>Create.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Query\Battery\Details.xaml.cs">
+      <DependentUpon>Details.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Query\Battery\Edit.xaml.cs">
+      <DependentUpon>Edit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Query\Battery\Index.xaml.cs">
+      <DependentUpon>Index.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Help\About\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
@@ -153,6 +165,9 @@
     <Compile Include="UserControls\SystemUC\ParamUC\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Query\BatteryView.xaml.cs">
+      <DependentUpon>BatteryView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Help\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
@@ -191,6 +206,22 @@
     </Compile>
     <Compile Include="Utils\Converter.cs" />
     <Page Include="Controls\Machine\StorageUC.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Query\Battery\Create.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Query\Battery\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Query\Battery\Edit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Query\Battery\Index.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -263,6 +294,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\Platform\MES\Edit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Query\BatteryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

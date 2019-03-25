@@ -23,6 +23,7 @@ namespace GMCC.Sorter.Run
                         Current.App.RunStatus = RunStatus.异常;
                         return result;
                     }
+                    commors[i].RealtimeStatus = "连接成功！";
                 }
             }
 
@@ -35,6 +36,14 @@ namespace GMCC.Sorter.Run
 
         public static Result Stop()
         {
+            var commors = Factory.CommorHelper.GetCommors();
+            for (var i = 0; i < commors.Count; i++)
+            {
+                if (commors[i].IsEnabled)
+                {
+                    commors[i].RealtimeStatus = "运行停止！";
+                }
+            }
             TimerExec.IsRunning = false;
             Current.App.RunStatus = RunStatus.停止;
             return Result.OK;
@@ -42,6 +51,15 @@ namespace GMCC.Sorter.Run
 
         public static Result Reset()
         {
+            var commors = Factory.CommorHelper.GetCommors();
+            for (var i = 0; i < commors.Count; i++)
+            {
+                if (commors[i].IsEnabled)
+                {
+                    commors[i].Commor.EndConnect();
+                    commors[i].RealtimeStatus = "尚未连接！";
+                }
+            }
             TimerExec.IsRunning = false;
             Current.App.RunStatus = RunStatus.闲置;
             return Result.OK;

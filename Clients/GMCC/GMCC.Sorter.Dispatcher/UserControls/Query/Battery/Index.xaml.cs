@@ -18,7 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
+namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
 {
     /// <summary>
     /// Index.xaml 的交互逻辑
@@ -32,18 +32,18 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
 
         private int PageIndex = 1;
 
-        private List<Model.Tray> Trays
+        private List<Model.Battery> Batteries
         {
             get
             {
                 var queryText = this.queryText.Text.Trim();
                 if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return Context.Trays.ToList();
+                    return Context.Batteries.ToList();
                 }
                 else
                 {
-                    return Context.Trays.Where(r => r.Code.Contains(queryText)).ToList();
+                    return Context.Batteries.Where(r => r.Code.Contains(queryText)).ToList();
                 }
             }
         }
@@ -56,9 +56,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
 
         private void UpdateDataGrid(int index)
         {
-            var dtos = PaginatedList<Model.Tray>.Create(Trays, PageIndex, Current.Option.DataGridPageSize);
+            var dtos = PaginatedList<Model.Battery>.Create(Batteries, PageIndex, Current.Option.DataGridPageSize);
 
-            this.count.Content = Trays.Count();
+            this.count.Content = Batteries.Count();
             this.pageIndex.Content = PageIndex;
             this.totalPages.Content = dtos.TotalPages;
             this.size.Content = Current.Option.DataGridPageSize;
@@ -76,7 +76,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            Helper.ExecuteParentUserControlMethod(this, "Tray", "SwitchWindow", "Create", 0);
+            Helper.ExecuteParentUserControlMethod(this, "Battery", "SwitchWindow", "Create", 0);
         }
 
 
@@ -88,11 +88,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            var tray = Context.Trays.SingleOrDefault(r => r.Id == id);
+            var battery = Context.Batteries.SingleOrDefault(r => r.Id == id);
 
-            if (tray == null)
+            if (battery == null)
             {
-                MessageBox.Show("不存在该托盘，删除失败！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("不存在该电池，删除失败！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -103,11 +103,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
             } 
 
 
-            if (MessageBox.Show(string.Format("确定要删除托盘【{0}】吗？", tray.Code), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            if (MessageBox.Show(string.Format("确定要删除电池【{0}】吗？", battery.Code), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Context.Trays.Remove(tray);
+                Context.Batteries.Remove(battery);
                 Context.AppContext.SaveChanges();
-                Arthur.Business.Logging.AddOplog(string.Format("删除托盘[{0}]", tray.Code), Arthur.App.Model.OpType.删除);
+                Arthur.Business.Logging.AddOplog(string.Format("删除电池[{0}]", battery.Code), Arthur.App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }
         }
@@ -120,13 +120,13 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
                 return;
             }
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            Helper.ExecuteParentUserControlMethod(this, "Tray", "SwitchWindow", "Edit", id);
+            Helper.ExecuteParentUserControlMethod(this, "Battery", "SwitchWindow", "Edit", id);
         }
 
         private void details_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            Helper.ExecuteParentUserControlMethod(this, "Tray", "SwitchWindow", "Details", id);
+            Helper.ExecuteParentUserControlMethod(this, "Battery", "SwitchWindow", "Details", id);
         }
 
         private void go_page_Click(object sender, RoutedEventArgs e)
