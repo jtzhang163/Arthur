@@ -51,6 +51,11 @@ namespace Arthur.Business
                 Logging.AddEvent(dbEx.Message, EventType.错误);
                 return new Result(dbEx);
             }
+            catch(Exception ex)
+            {
+                Logging.AddEvent(ex.Message, EventType.错误);
+                return new Result(ex);
+            }
             return Result.OK;
         }
     }

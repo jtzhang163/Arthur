@@ -42,7 +42,7 @@ namespace GMCC.Sorter.ViewModel
 
         }
 
-        public override void Comm()
+        public override void Comm(object o)
         {
             if (this.Commor.Connected)
             {

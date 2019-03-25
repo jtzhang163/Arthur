@@ -50,7 +50,7 @@ namespace Arthur.App.Comm
 
         public Result Comm(Commor commor, string input)
         {
-            var ethernetCommor = (EthernetCommor)commor.Communicator;
+            var ethernetCommor = (SerialCommor)commor.Communicator;
             var recvData = string.Empty;
             var serialPort = (SerialPort)commor.Connector;
             try

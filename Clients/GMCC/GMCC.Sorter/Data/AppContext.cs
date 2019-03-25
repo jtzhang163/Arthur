@@ -133,7 +133,7 @@ namespace GMCC.Sorter.Data
             {
                 new TrayScaner()
                 {
-                    Name = "托盘扫码枪1",
+                    Name = "绑盘托盘扫码枪",
                     PortName = "COM1",
                     BaudRate = 9600,
                     Parity = System.IO.Ports.Parity.None,
@@ -148,7 +148,7 @@ namespace GMCC.Sorter.Data
                 },
                 new TrayScaner()
                 {
-                    Name = "托盘扫码枪2",
+                    Name = "解盘托盘扫码枪",
                     PortName = "COM2",
                     BaudRate = 9600,
                     Parity = System.IO.Ports.Parity.None,

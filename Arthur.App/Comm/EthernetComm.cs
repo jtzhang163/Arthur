@@ -125,7 +125,7 @@ namespace Arthur.App.Comm
                 var msg = string.Format("和{0}通信出现异常！原因：{1}", ethernetCommor.Name, ex.Message);
                 return new Result(msg);
             }
-            return Result.OK;
+            return Result.OkHasData(recvData);
         }
 
         private delegate string ConnectSocketDelegate(Socket socket, string ip, int port);

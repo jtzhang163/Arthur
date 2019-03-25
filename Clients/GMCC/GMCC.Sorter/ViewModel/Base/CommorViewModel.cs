@@ -1,11 +1,14 @@
 ﻿using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
+using Arthur.Utility;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Run;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GMCC.Sorter.ViewModel
@@ -208,18 +211,69 @@ namespace GMCC.Sorter.ViewModel
         }
 
 
+        private int commInterval = -1;
+
+        /// <summary>
+        /// 上位机通讯时间间隔（单位：ms）
+        /// </summary>
+        public int CommInterval
+        {
+            get
+            {
+                if (commInterval < 0)
+                {
+                    commInterval = _Convert.StrToInt(Arthur.Business.Application.GetOption(string.Format("CommInterval_{0}", this.Name)), -1);
+                    if (commInterval < 0)
+                    {
+                        commInterval = 3000;
+                        Arthur.Business.Application.SetOption(string.Format("CommInterval_{0}", this.Name), commInterval.ToString(), string.Format("上位机-{0}通讯时间间隔", this.Name));
+                    }
+                }
+                return commInterval;
+            }
+            set
+            {
+                if (commInterval != value)
+                {
+                    Arthur.Business.Application.SetOption(string.Format("CommInterval_{0}", this.Name), value.ToString());
+                    SetProperty(ref commInterval, value);
+                }
+            }
+        }
+
+
+        private System.Threading.Timer Timer = null;// new System.Threading.Timer(new System.Threading.TimerCallback(obj.Method3), null, 0, 100);
+
+
         public Commor Commor { get; private set; }
 
         public CommorViewModel(Commor commor)
         {
             this.Commor = commor;
+
+            this.Timer = new System.Threading.Timer(new TimerCallback(Comm), null, 5000, this.CommInterval);
         }
 
-        public virtual void Comm()
+        public virtual void Comm(object o)
         {
-            if (this.Commor.Connected)
-            {
+            if (!TimerExec.IsRunning || !this.IsEnabled)
+                return;
 
+            if (this is MainMachineViewModel)
+            {
+                (this as MainMachineViewModel).Comm(null);
+            }
+            else if (this is TrayScanerViewModel)
+            {
+                (this as TrayScanerViewModel).Comm(null);
+            }
+            else if (this is BatteryScanerViewModel)
+            {
+                (this as BatteryScanerViewModel).Comm(null);
+            }
+            else if (this is MesViewModel)
+            {
+                (this as MesViewModel).Comm(null);
             }
         }
 

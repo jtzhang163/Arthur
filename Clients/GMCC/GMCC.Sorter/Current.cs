@@ -85,39 +85,45 @@ namespace GMCC.Sorter
             {
                 return new List<TrayScanerViewModel>()
                 {
-                    FormerTrayScaner,
-                    LatterTrayScaner
+                    bindTrayScaner,
+                    UnbindTrayScaner
                 };
             }
         }
 
-        private static TrayScanerViewModel formerTrayScaner = null;
-        public static TrayScanerViewModel FormerTrayScaner
+        private static TrayScanerViewModel bindTrayScaner = null;
+        /// <summary>
+        /// 绑盘托盘扫码枪
+        /// </summary>
+        public static TrayScanerViewModel BindTrayScaner
         {
             get
             {
-                if (formerTrayScaner == null)
+                if (bindTrayScaner == null)
                 {
                     var _trayScaner = Context.TrayScaners.ToList()[0];
                     var commor = new Commor(_trayScaner);
-                    formerTrayScaner = new TrayScanerViewModel(commor);
+                    bindTrayScaner = new TrayScanerViewModel(commor);
                 }
-                return formerTrayScaner;
+                return bindTrayScaner;
             }
         }
 
-        private static TrayScanerViewModel latterTrayScaner = null;
-        public static TrayScanerViewModel LatterTrayScaner
+        private static TrayScanerViewModel unbindTrayScaner = null;
+        /// <summary>
+        /// 解盘托盘扫码枪
+        /// </summary>
+        public static TrayScanerViewModel UnbindTrayScaner
         {
             get
             {
-                if (latterTrayScaner == null)
+                if (unbindTrayScaner == null)
                 {
                     var _trayScaner = Context.TrayScaners.ToList()[1];
                     var commor = new Commor(_trayScaner);
-                    latterTrayScaner = new TrayScanerViewModel(commor);
+                    unbindTrayScaner = new TrayScanerViewModel(commor);
                 }
-                return latterTrayScaner;
+                return unbindTrayScaner;
             }
         }
 

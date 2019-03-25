@@ -15,8 +15,8 @@ namespace GMCC.Sorter.Factory
             {
                 Current.MainMachine,
                 Current.BatteryScaner,
-                Current.FormerTrayScaner,
-                Current.LatterTrayScaner,
+                Current.BindTrayScaner,
+                Current.UnbindTrayScaner,
                 Current.Mes,
             };
         }

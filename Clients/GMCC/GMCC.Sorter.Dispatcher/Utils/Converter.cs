@@ -100,4 +100,18 @@ namespace GMCC.Sorter.Dispatcher.Utils
         }
     }
 
+    public class MachineIsAliveToBackgroundConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var isAlive = (bool)value;
+            return isAlive ? Brushes.Lime : Brushes.LightCyan;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }

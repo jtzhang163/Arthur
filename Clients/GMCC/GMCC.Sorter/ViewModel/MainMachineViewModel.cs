@@ -2,6 +2,7 @@
 using Arthur.App.Comm;
 using Arthur.App.Model;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Run;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,25 +38,57 @@ namespace GMCC.Sorter.ViewModel
             }
         }
 
+        /// <summary>
+        /// 电池扫码准备就绪
+        /// </summary>
+        public bool IsBatteryScanReady { get; set; }
+
+        /// <summary>
+        /// 绑盘托盘扫码准备就绪
+        /// </summary>
+        public bool IsBindTrayScanReady { get; set; }
+
+        /// <summary>
+        /// 解盘托盘扫码准备就绪
+        /// </summary>
+        public bool IsUnbindTrayScanReady { get; set; }
+
+        /// <summary>
+        /// 横移上料完成
+        /// </summary>
+        public bool IsFeedingFinished { get; set; }
+
+        /// <summary>
+        /// 横移下料完成
+        /// </summary>
+        public bool IsBlankingFinished { get; set; }
+
+
+
         public MainMachineViewModel(Commor commor) : base(commor)
         {
 
         }
 
-        public override void Comm()
+        public override void Comm(object o)
         {
+
+            Console.WriteLine("MainMachineViewModel: Comm");
             if (this.Commor.Connected)
             {
                 if (this.Commor.Comm("").IsOk)
                 {
-
+                   // this.IsBatteryScanReady = true;
+                    //...
                 }
-                this.IsAlive = true;
             }
             else
             {
                 this.IsAlive = false;
             }
+
+            this.IsBatteryScanReady = true;
+            this.IsAlive = true;
         }
     }
 }
