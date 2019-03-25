@@ -24,22 +24,26 @@ namespace GMCC.Sorter
 
         public static GMCC.Sorter.ViewModel.AppViewModel App = new GMCC.Sorter.ViewModel.AppViewModel();
 
-        private static StorageViewModel[,] storages = null;
-        public static StorageViewModel[,] Storages
+        private static List<StorageViewModel> storages = null;
+        public static List<StorageViewModel> Storages
         {
             get
             {
                 if (storages == null)
                 {
-                    storages = new ViewModel.StorageViewModel[Common.STOR_COL_COUNT, Common.STOR_FLOOR_COUNT];
-                    for (var i = 0; i < Common.STOR_COL_COUNT; i++)
+                    storages = new List<StorageViewModel>();
+
+                    Context.Storages.ToList().ForEach(o =>
                     {
-                        for (int j = 0; j < Common.STOR_FLOOR_COUNT; j++)
+                        storages.Add(new StorageViewModel()
                         {
-                            storages[i, j] = new ViewModel.StorageViewModel(i + 1, j + 1);
-                            storages[i, j].Name = Context.Storages.FirstOrDefault(o => o.Column == i + 1 && o.Floor == j + 1).Name;
-                        }
-                    }
+                            Id = o.Id,
+                            Column = o.Column,
+                            Floor = o.Floor,
+                            Name = o.Name,
+                            Company = o.Company
+                        });
+                    });
                 }
                 return storages;
             }

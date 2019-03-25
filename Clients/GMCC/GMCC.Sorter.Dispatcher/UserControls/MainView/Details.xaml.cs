@@ -26,17 +26,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
         {
             InitializeComponent();
 
-            for (var i = 0; i < Common.STOR_COL_COUNT; i++)
+            Current.Storages.ForEach(o =>
             {
-                for (var j = 0; j < Common.STOR_FLOOR_COUNT; j++)
-                {
-
-                    var storageUC = new Controls.Machine.StorageUC(i, j);
-                    this.grid.Children.Add(storageUC);
-                    SetRowCol(storageUC);
-
-                }
-            }
+                var storageUC = new Controls.Machine.StorageUC(o.Id);
+                this.grid.Children.Add(storageUC);
+                SetRowCol(storageUC);
+            });
         }
 
         private void SetRowCol(Controls.Machine.StorageUC storageUC)
@@ -45,15 +40,15 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
             var row = 0;
             var col = 0;
 
-            if (storageUC.Col < Common.STOR_COL_COUNT / 2)
+            if (storageUC.Col < Common.STOR_COL_COUNT / 2 + 1)
             {
-                row = 5 - storageUC.Floor;
-                col = 2 + storageUC.Col;
+                row = 6 - storageUC.Floor;
+                col = 1 + storageUC.Col;
             }
             else
             {
-                row = 12 - storageUC.Floor;
-                col = storageUC.Col - 7;
+                row = 13 - storageUC.Floor;
+                col = storageUC.Col - 8;
             }
 
             Grid.SetRow(storageUC, row);

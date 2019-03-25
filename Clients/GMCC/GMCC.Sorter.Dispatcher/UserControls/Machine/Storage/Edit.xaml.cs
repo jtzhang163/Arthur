@@ -24,12 +24,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
     /// </summary>
     public partial class Edit : UserControl
     {
-        private GMCC.Sorter.Model.Storage Storage;
+        private StorageViewModel Storage;
 
         public Edit(int id)
         {
             InitializeComponent();
-            this.Storage = Context.Storages.Single(t => t.Id == id);
+            this.Storage = Current.Storages.Single(t => t.Id == id);
             this.DataContext = this.Storage;
         }
 
@@ -66,7 +66,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
                     this.Storage.Name = name;
                     this.Storage.Company = company;
 
-                    Context.AppContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
 

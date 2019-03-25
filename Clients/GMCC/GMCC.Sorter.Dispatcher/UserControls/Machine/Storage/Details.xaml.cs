@@ -1,6 +1,7 @@
 ﻿using Arthur.App;
 using Arthur.View.Utils;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +24,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
     /// </summary>
     public partial class Details : UserControl
     {
-        private GMCC.Sorter.Model.Storage Storage;
+        private StorageViewModel Storage;
         public Details(int id)
         {
             InitializeComponent();
-            this.Storage = Context.Storages.Single(t => t.Id == id);
+            this.Storage = Current.Storages.Single(t => t.Id == id);
             this.DataContext = this.Storage;
         }
 

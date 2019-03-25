@@ -1,5 +1,6 @@
 ﻿using Arthur.View.Utils;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -32,18 +33,18 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
 
         private int PageIndex = 1;
 
-        private List<Model.Storage> Storages
+        private List<StorageViewModel> Storages
         {
             get
             {
                 var queryText = this.queryText.Text.Trim();
                 if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return Context.Storages.ToList();
+                    return Current.Storages.ToList();
                 }
                 else
                 {
-                    return Context.Storages.Where(r => r.Name.Contains(queryText)).ToList();
+                    return Current.Storages.Where(r => r.Name.Contains(queryText)).ToList();
                 }
             }
         }
@@ -56,7 +57,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
 
         private void UpdateDataGrid(int index)
         {
-            var dtos = PaginatedList<Model.Storage>.Create(Storages, PageIndex, Current.Option.DataGridPageSize);
+            var dtos = PaginatedList<StorageViewModel>.Create(Storages, PageIndex, Current.Option.DataGridPageSize);
 
             this.count.Content = Storages.Count();
             this.pageIndex.Content = PageIndex;

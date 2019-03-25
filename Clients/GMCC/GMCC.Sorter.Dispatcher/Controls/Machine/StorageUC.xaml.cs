@@ -22,12 +22,15 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
     {
         public int Col;
         public int Floor;
-        public StorageUC(int col, int floor)
+
+        public StorageUC(int id)
         {
-            this.Col = col;
-            this.Floor = floor;
+
             InitializeComponent();
-            this.DataContext = Current.Storages[col, floor];
+            var storage = Current.Storages.FirstOrDefault(o => o.Id == id);
+            this.DataContext = storage;
+            this.Col = storage.Column;
+            this.Floor = storage.Floor;
         }
     }
 }
