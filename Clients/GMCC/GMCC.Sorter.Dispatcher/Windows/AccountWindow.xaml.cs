@@ -40,7 +40,7 @@ namespace GMCC.Sorter.Dispatcher
             new DbInitializer().Initialize();
 
             //如果重复启动该程序，弹窗提示
-            if (Arthur.App.Utils.Application.ThisAppIsAlreadyRunning())
+            if (Arthur.App.Application.ThisAppIsAlreadyRunning())
             {
                 MessageBox.Show("程序已经在运行，请勿重复启动！");
                 Application.Current.Shutdown();

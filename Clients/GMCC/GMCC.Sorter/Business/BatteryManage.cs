@@ -2,6 +2,7 @@
 using Arthur.Business;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Model;
+using GMCC.Sorter.Run;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,15 +25,18 @@ namespace GMCC.Sorter.Business
         /// <returns></returns>
         public Result Create(Battery battery, bool isScan)
         {
-            //if (Context.Batteries.Count(r => r.Code == battery.Code) > 0)
-            //{
-            //    return new Result(string.Format("系统中已存在条码为{0}的电池！", battery.Code));
-            //}
             try
             {
-                Context.Batteries.Add(new Battery() { Code = battery.Code, ScanTime = DateTime.Now });
-                Context.AppContext.SaveChanges();
-                if(isScan)
+                //if (Context.Batteries.Count(r => r.Code == battery.Code) > 0)
+                //{
+                //    return new Result(string.Format("系统中已存在条码为{0}的电池！", battery.Code));
+                //}
+                lock (Arthur.App.Application.DbLocker)
+                {
+                    Context.Batteries.Add(new Battery() { Code = battery.Code, ScanTime = DateTime.Now });
+                    Context.AppContext.SaveChanges();
+                }
+                if (isScan)
                 {
                     LogHelper.WriteInfo("电池扫码：" + battery.Code);
                 }

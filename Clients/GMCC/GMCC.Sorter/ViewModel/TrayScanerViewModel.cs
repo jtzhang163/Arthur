@@ -1,11 +1,14 @@
-﻿using Arthur.App;
+﻿using Arthur;
+using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Run;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GMCC.Sorter.ViewModel
@@ -73,23 +76,42 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
-            if (this.Commor.Connected)
+            //if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady)
+            //{
+            var ret = this.Commor.Comm(this.ScanCommand);
+            if (ret.IsOk)
             {
-                if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady)
+                this.RealtimeStatus = "+" + ret.Data;
+                var t = new Thread(() =>
                 {
-                    var ret = this.Commor.Comm(this.ScanCommand);
-                    if (ret.IsOk)
-                    {
-                        Console.WriteLine(ret.Data);
-                    }
-                }
+                    var saveRet = Result.OK;
 
+                    if(this == Current.BindTrayScaner)
+                    {
+                        //把托盘条码保存进数据库
+                        saveRet = new Business.ProcTrayManage().Create(new Model.ProcTray() { Code = ret.Data.ToString() }, true);
+                    }
+
+                    if (!saveRet.IsOk)
+                    {
+                        Current.App.ErrorMsg = saveRet.Msg;
+                        Current.App.RunStatus = RunStatus.异常;
+                        TimerExec.IsRunning = false;
+                    }
+
+                    //界面交替显示扫码状态
+                    Thread.Sleep(this.CommInterval / 2);
+                    this.RealtimeStatus = "等待扫码...";
+                });
+                t.Start();
                 this.IsAlive = true;
             }
             else
             {
+                this.RealtimeStatus = ret.Msg;
                 this.IsAlive = false;
             }
+            //}
         }
     }
 }

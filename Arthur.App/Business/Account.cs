@@ -100,6 +100,17 @@ namespace Arthur.Business
 
             var entityPassword = EncryptHelper.EncodeBase64(password);
             user = Context.Users.FirstOrDefault(u => u.Name == name && u.Password == entityPassword) ?? new User();
+
+            if (user.Id < 1)
+            {
+                return new Result("用户名或密码错误！");
+            }
+
+            if (!user.IsEnabled)
+            {
+                return new Result(user.Name + "尚未激活或被禁用！");
+            }
+
             user.LastLoginTime = DateTime.Now;
             user.LoginTimes++;
 
@@ -114,18 +125,8 @@ namespace Arthur.Business
                 return new Result("登录失败，msg：" + ex.Message);
             }
 
-            if (!user.IsEnabled)
-            {
-                return new Result(user.Name + "尚未激活或被禁用！");
-            }
-
             Current.User = user;
-
-            if (Current.User.Id > 0)
-            {
-                return Result.OK;
-            }
-            return new Result("用户名或密码错误！");
+            return Result.OK;
         }
 
         public static Result ChangePassword(string username, string old_pwd, string new_pwd, string confirm_new_pwd)

@@ -79,8 +79,8 @@ namespace GMCC.Sorter.ViewModel
         public void Comm()
         {
 
-            if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady)
-            {
+            //if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady)
+            //{
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
                 {
@@ -108,7 +108,7 @@ namespace GMCC.Sorter.ViewModel
                     this.RealtimeStatus = ret.Msg;
                     this.IsAlive = false;
                 }
-            }
+            //}
         }
     }
 }

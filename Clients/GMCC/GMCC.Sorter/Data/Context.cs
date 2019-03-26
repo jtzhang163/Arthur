@@ -1,4 +1,5 @@
-﻿using GMCC.Sorter.Model;
+﻿using Arthur;
+using GMCC.Sorter.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,18 +11,74 @@ namespace GMCC.Sorter.Data
 {
     public class Context
     {
-        public static AppContext AppContext = new AppContext();
+        public static AppContext appContext = new AppContext();
+        public static AppContext AppContext
+        {
+            get
+            {
+                lock (Arthur.App.Application.DbLocker)
+                {
+                    return appContext;
+                }
+            }
+        }
 
-        public static DbSet<Storage> Storages = AppContext.Storages;
-        public static DbSet<Tray> Trays = AppContext.Trays;
+        public static DbSet<Storage> Storages
+        {
+            get
+            {
+                return AppContext.Storages;
+            }
+        }
+        public static DbSet<Tray> Trays
+        {
+            get
+            {
+                return AppContext.Trays;
+            }
+        }
+        public static DbSet<Battery> Batteries
+        {
+            get
+            {
+                return AppContext.Batteries;
+            }
+        }
+        public static DbSet<ProcTray> ProcTrays
+        {
+            get
+            {
+                return AppContext.ProcTrays;
+            }
+        }
+        public static DbSet<PLC> PLCs
+        {
+            get
+            {
+                return AppContext.PLCs;
+            }
+        }
+        public static DbSet<MES> MESs
+        {
+            get
+            {
+                return AppContext.MESs;
+            }
+        }
 
-        public static DbSet<Battery> Batteries = AppContext.Batteries;
-        public static DbSet<ProcTray> ProcTrays = AppContext.ProcTrays;
-
-        public static DbSet<PLC> PLCs = AppContext.PLCs;
-        public static DbSet<MES> MESs = AppContext.MESs;
-
-        public static DbSet<BatteryScaner> BatteryScaners = AppContext.BatteryScaners;
-        public static DbSet<TrayScaner> TrayScaners = AppContext.TrayScaners;
+        public static DbSet<BatteryScaner> BatteryScaners
+        {
+            get
+            {
+                return AppContext.BatteryScaners;
+            }
+        }
+        public static DbSet<TrayScaner> TrayScaners
+        {
+            get
+            {
+                return AppContext.TrayScaners;
+            }
+        }
     }
 }

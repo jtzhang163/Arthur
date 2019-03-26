@@ -23,6 +23,7 @@ namespace GMCC.Sorter.Run
                         Current.App.RunStatus = RunStatus.异常;
                         return result;
                     }
+                    commors[i].IsAlive = true;
                     commors[i].RealtimeStatus = "连接成功！";
                 }
             }
