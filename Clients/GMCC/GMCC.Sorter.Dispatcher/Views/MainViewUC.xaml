@@ -22,6 +22,7 @@
         <utils:TaskModeSwitchBtnBackgroundConverter x:Key="taskModeSwitchBtnBackgroundConverter"/>
         <utils:TaskModeSwitchBtnContentConverter x:Key="taskModeSwitchBtnContentConverter"/>
         <utils:MachineIsAliveToBackgroundConverter x:Key="machineIsAliveToBackgroundConverter"/>
+        <utils:ErrorMsgToVisibilityConverter x:Key="errorMsgToVisibilityConverter"/>
 
         <DataTemplate x:Key="commTemplate" DataType="{x:Type vm:CommorViewModel}">
             <Border Margin="5" Width="145" Background="{Binding IsAlive, Converter={StaticResource machineIsAliveToBackgroundConverter}}">
@@ -65,6 +66,11 @@
                 </Grid>
                 <!--<Canvas Height="1" Background="WhiteSmoke"/>&#xf144;-->
             </StackPanel>
+
+            <WrapPanel DockPanel.Dock="Bottom" Grid.ColumnSpan="8" Visibility="{Binding ErrorMsg, Converter={StaticResource errorMsgToVisibilityConverter}}">
+                <TextBlock Text="&#xf071;" Style="{DynamicResource FontAwesome}" FontSize="16" Foreground="Red"></TextBlock>
+                <TextBlock Text="{Binding ErrorMsg}" FontSize="16" Foreground="Red" VerticalAlignment="Center"></TextBlock>
+            </WrapPanel>
 
             <DockPanel DockPanel.Dock="Left" Margin="0,10,0,5">
                 <Label Content="通信设备选择 / 设备状态：" Height="30" DockPanel.Dock="Top" VerticalAlignment="Center" FontSize="14"/>

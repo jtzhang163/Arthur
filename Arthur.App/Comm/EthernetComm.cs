@@ -15,7 +15,8 @@ namespace Arthur.App.Comm
     {
         public Result Connect(Commor commor)
         {
-            var socket = (Socket)commor.Connector;
+            commor.Connector = null;
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             var ethernetCommor = (EthernetCommor)commor.Communicator;
             try
             {
@@ -36,6 +37,7 @@ namespace Arthur.App.Comm
             {
                 return new Result(string.Format("连接失败：{0}：{1}", ethernetCommor.IP, ethernetCommor.Port));
             }
+            commor.Connector = socket;
             return Result.OK;
         }
 
@@ -45,7 +47,6 @@ namespace Arthur.App.Comm
             if (socket != null)
             {
                 socket.Close();
-                socket = null;
             }
             return Result.OK;
         }
@@ -58,13 +59,13 @@ namespace Arthur.App.Comm
             try
             {
 
-                if (!socket.Connected)
+                if (socket == null || !socket.Connected)
                 {
-                    socket = null;
-                    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                     commor.Connect();
+                    socket = (Socket)commor.Connector;
                 }
-                else
+
+                if (socket.Connected)
                 {
                     var readtimeout = 500;
 
@@ -118,6 +119,10 @@ namespace Arthur.App.Comm
                         socket.Receive(Data);
                         recvData = Encoding.ASCII.GetString(Data).Trim('\0');
                     }
+                }
+                else
+                {
+                    throw new Exception("重复连接失败");
                 }
             }
             catch (Exception ex)

@@ -30,8 +30,10 @@ namespace Arthur.Helper.TcpServer
         }
 
         TcpListener server = null;
+        TcpClient client = null;
         byte[] bytes = new byte[256];
         string data = null;
+        NetworkStream stream;
 
         public void Run()
         {
@@ -41,10 +43,10 @@ namespace Arthur.Helper.TcpServer
                 while (Current.App.IsRunning)
                 {
                     ReceiveSendDataAdd("Waiting for a connection... ");
-                    TcpClient client = server.AcceptTcpClient();
+                    client = server.AcceptTcpClient();
                     ReceiveSendDataAdd("Connected!");
                     data = null;
-                    NetworkStream stream = client.GetStream();
+                    stream = client.GetStream();
 
                     int i;
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
@@ -101,6 +103,7 @@ namespace Arthur.Helper.TcpServer
             Current.App.Tip += info + "\r\n";
         }
 
+        Thread t;
 
         private void btnListen_Click(object sender, RoutedEventArgs e)
         {
@@ -112,14 +115,13 @@ namespace Arthur.Helper.TcpServer
                 server = new TcpListener(IPAddress.Parse(Current.App.IP), Current.App.Port);
                 server.Start();
 
-                var t = new Thread(() => {
+                t = new Thread(() => {
                     Run();
                 });
                 t.Start();
             }
             else
             {
-
                 server.Stop();
                 server = null;
             }

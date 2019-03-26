@@ -12,25 +12,40 @@ namespace GMCC.Sorter.Business
 {
     public class BatteryManage : IManage<Battery>
     {
-
         public Result Create(Battery battery)
         {
-            if (Context.Trays.Count(r => r.Code == battery.Code) > 0)
-            {
-                return new Result(string.Format("系统中已存在条码为{0}的电池！", battery.Code));
-            }
+            return Create(battery, false);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="battery"></param>
+        /// <param name="isScan">扫码获得，不是手动添加的</param>
+        /// <returns></returns>
+        public Result Create(Battery battery, bool isScan)
+        {
+            //if (Context.Batteries.Count(r => r.Code == battery.Code) > 0)
+            //{
+            //    return new Result(string.Format("系统中已存在条码为{0}的电池！", battery.Code));
+            //}
             try
             {
-                Context.Batteries.Add(new Battery() { Code = battery.Code, ScanTime = DateTime.Now});
+                Context.Batteries.Add(new Battery() { Code = battery.Code, ScanTime = DateTime.Now });
                 Context.AppContext.SaveChanges();
-                Arthur.Business.Logging.AddOplog(string.Format("新增电池[{0}]", battery.Code), Arthur.App.Model.OpType.创建);
+                if(isScan)
+                {
+                    LogHelper.WriteInfo("电池扫码：" + battery.Code);
+                }
+                else
+                {
+                    Arthur.Business.Logging.AddOplog(string.Format("新增电池[{0}]", battery.Code), Arthur.App.Model.OpType.创建);
+                }
                 return Result.OK;
             }
             catch (Exception ex)
             {
-                return new Result(ex.Message);
+                return new Result(ex);
             }
-
         }
     }
 }

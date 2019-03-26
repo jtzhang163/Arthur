@@ -58,10 +58,12 @@ namespace GMCC.Sorter.Run
                 {
                     commors[i].Commor.EndConnect();
                     commors[i].RealtimeStatus = "尚未连接！";
+                    commors[i].IsAlive = false;
                 }
             }
             TimerExec.IsRunning = false;
             Current.App.RunStatus = RunStatus.闲置;
+            Current.App.ErrorMsg = "";
             return Result.OK;
         }
     }

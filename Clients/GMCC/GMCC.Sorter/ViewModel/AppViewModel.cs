@@ -134,6 +134,17 @@ namespace GMCC.Sorter.ViewModel
             }
         }
 
+
+        private string errorMsg;
+        public string ErrorMsg
+        {
+            get => errorMsg;
+            set
+            {
+                SetProperty(ref errorMsg, value);
+            }
+        }
+
         public bool IsTerminalInitFinished { get; set; }
     }
 

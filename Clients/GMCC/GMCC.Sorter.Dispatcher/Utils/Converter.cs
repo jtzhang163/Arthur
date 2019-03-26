@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -106,6 +107,20 @@ namespace GMCC.Sorter.Dispatcher.Utils
         {
             var isAlive = (bool)value;
             return isAlive ? Brushes.Lime : Brushes.LightCyan;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ErrorMsgToVisibilityConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var errorMsg = (string)value;
+            return string.IsNullOrEmpty(errorMsg) ? Visibility.Collapsed : Visibility.Visible;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

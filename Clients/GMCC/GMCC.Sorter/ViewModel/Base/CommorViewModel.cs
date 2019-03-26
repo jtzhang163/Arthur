@@ -251,7 +251,7 @@ namespace GMCC.Sorter.ViewModel
         {
             this.Commor = commor;
 
-            this.Timer = new System.Threading.Timer(new TimerCallback(Comm), null, 5000, this.CommInterval);
+            this.Timer = new System.Threading.Timer(new TimerCallback(this.Comm), null, 5000, this.CommInterval);
         }
 
         public virtual void Comm(object o)
@@ -261,19 +261,19 @@ namespace GMCC.Sorter.ViewModel
 
             if (this is MainMachineViewModel)
             {
-                (this as MainMachineViewModel).Comm(null);
+                (this as MainMachineViewModel).Comm();
             }
             else if (this is TrayScanerViewModel)
             {
-                (this as TrayScanerViewModel).Comm(null);
+                (this as TrayScanerViewModel).Comm();
             }
             else if (this is BatteryScanerViewModel)
             {
-                (this as BatteryScanerViewModel).Comm(null);
+                (this as BatteryScanerViewModel).Comm();
             }
             else if (this is MesViewModel)
             {
-                (this as MesViewModel).Comm(null);
+                (this as MesViewModel).Comm();
             }
         }
 

@@ -70,7 +70,7 @@ namespace GMCC.Sorter.ViewModel
 
         }
 
-        public override void Comm(object o)
+        public void Comm()
         {
 
             Console.WriteLine("MainMachineViewModel: Comm");

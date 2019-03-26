@@ -31,7 +31,8 @@ namespace Arthur
 
         public Result(Exception ex) : this(ex.Message)
         {
-            //写入异常日志：ex.ToString();
+            //写入异常日志
+            LogHelper.WriteError(ex);
         }
 
         public Result(string msg) : this(-1, msg)
