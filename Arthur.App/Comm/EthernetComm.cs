@@ -16,8 +16,8 @@ namespace Arthur.App.Comm
         public Result Connect(Commor commor)
         {
             commor.Connector = null;
-            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             var ethernetCommor = (EthernetCommor)commor.Communicator;
+            var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
                 ConnectSocketDelegate connect = ConnectSocket;

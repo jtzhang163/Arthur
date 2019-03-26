@@ -15,7 +15,9 @@ namespace Arthur.App.Comm
     {
         public Result Connect(Commor commor)
         {
-            var serialPort = (SerialPort)commor.Connector;
+            commor.Connector = null;
+            var serialCommor = (SerialCommor)commor.Communicator;
+            var serialPort = new SerialPort(serialCommor.PortName, serialCommor.BaudRate, serialCommor.Parity, serialCommor.DataBits);
             try
             {
                 if (!serialPort.IsOpen)
@@ -27,6 +29,7 @@ namespace Arthur.App.Comm
             {
                 return new Result(ex.Message);
             }
+            commor.Connector = serialPort;
             return Result.OK;
         }
 

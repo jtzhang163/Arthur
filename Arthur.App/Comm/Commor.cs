@@ -28,17 +28,14 @@ namespace Arthur.App.Comm
             if(this.Communicator is SerialCommor)
             {
                 var serialCommor = (SerialCommor)this.Communicator;
-                this.Connector = new SerialPort(serialCommor.PortName, serialCommor.BaudRate, serialCommor.Parity, serialCommor.DataBits);
             }
             else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
             {
                 var ethernetCommor = (EthernetCommor)this.Communicator;
-                this.Connector = new OmronFinsNet();
             }
             else if (this.Communicator is EthernetCommor)
             {
                 var ethernetCommor = (EthernetCommor)this.Communicator;
-                this.Connector = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             }
         }
 

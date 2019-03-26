@@ -17,7 +17,8 @@ namespace Arthur.App.Comm
     {
         public Result Connect(Commor commor)
         {
-            var omronFinsNet = (OmronFinsNet)commor.Connector;
+            commor.Connector = null;
+            var omronFinsNet = new OmronFinsNet();
             var ethernetCommor = (EthernetCommor)commor.Communicator;
             try
             {
@@ -31,6 +32,7 @@ namespace Arthur.App.Comm
                 OperateResult connect = omronFinsNet.ConnectServer();
                 if (connect.IsSuccess)
                 {
+                    commor.Connector = omronFinsNet;
                     return Result.OK;
                 }
                 else
