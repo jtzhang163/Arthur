@@ -65,7 +65,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
                 {
                     this.Storage.Name = name;
                     this.Storage.Company = company;
-
+                    Context.AppContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
 

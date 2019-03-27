@@ -35,7 +35,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="条码：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="code" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <Label Content="公司：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="品牌：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="company" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                     <!--PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False"-->
                 </Grid>

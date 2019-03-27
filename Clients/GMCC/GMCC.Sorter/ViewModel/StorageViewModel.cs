@@ -17,6 +17,15 @@ namespace GMCC.Sorter.ViewModel
 
         public int Floor { get; set; }
 
+        public StorageViewModel(int id, int column, int floor, string name, string company)
+        {
+            this.Id = id;
+            this.Column = column;
+            this.Floor = floor;
+            this.name = name;
+            this.company = company;
+        }
+
         private string name = null;
         public string Name
         {
@@ -29,7 +38,6 @@ namespace GMCC.Sorter.ViewModel
                 if(name != value)
                 {
                     Context.Storages.FirstOrDefault(o => o.Id == this.Id).Name = value;
-                    Context.AppContext.SaveChanges();
                     this.SetProperty(ref name, value);
                 }
             }
@@ -37,6 +45,7 @@ namespace GMCC.Sorter.ViewModel
 
 
         private string company = null;
+
         public string Company
         {
             get
@@ -48,7 +57,6 @@ namespace GMCC.Sorter.ViewModel
                 if (company != value)
                 {
                     Context.Storages.FirstOrDefault(o => o.Id == this.Id).Company = value;
-                    Context.AppContext.SaveChanges();
                     this.SetProperty(ref company, value);
                 }
             }

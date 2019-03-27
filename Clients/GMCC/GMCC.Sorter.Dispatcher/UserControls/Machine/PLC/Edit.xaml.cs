@@ -1,4 +1,6 @@
-﻿using Arthur.View.Utils;
+﻿using Arthur.Utility;
+using Arthur.View.Utils;
+using GMCC.Sorter.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,10 +48,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.PLC
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            var ip = this.ip.Text.Trim();
             var company = this.company.Text.Trim();
+            var modelNumber = this.model_number.Text.Trim();
+            var ip = this.ip.Text.Trim();
+            var port = _Convert.StrToInt(this.port.Text.Trim(), -1);
 
-            if (string.IsNullOrWhiteSpace(ip))
+            if (string.IsNullOrWhiteSpace(ip)|| string.IsNullOrWhiteSpace(this.port.Text))
             {
                 tip.Foreground = new SolidColorBrush(Colors.Red);
                 tip.Text = "请填写数据！";
@@ -58,9 +62,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.PLC
             {
                 try
                 {
-                    Current.MainMachine.IP = ip;
                     Current.MainMachine.Company = company;
+                    Current.MainMachine.ModelNumber = modelNumber;
+                    Current.MainMachine.IP = ip;
+                    Current.MainMachine.Port = port;
 
+                    Context.AppContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
                 }

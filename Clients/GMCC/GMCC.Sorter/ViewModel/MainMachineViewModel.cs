@@ -22,7 +22,10 @@ namespace GMCC.Sorter.ViewModel
         {
             get
             {
-                ip = ((EthernetCommor)this.Commor.Communicator).IP;
+                if(ip == null)
+                {
+                    ip = ((EthernetCommor)this.Commor.Communicator).IP;
+                }
                 return ip;
             }
             set
@@ -30,9 +33,29 @@ namespace GMCC.Sorter.ViewModel
                 if (ip != value)
                 {
                     ((EthernetCommor)this.Commor.Communicator).IP = value;
-                    Context.AppContext.SaveChanges();
                     SetProperty(ref ip, value);
+                    this.CommorInfo = null;
+                }
+            }
+        }
 
+        private int? port = null;
+        public int Port
+        {
+            get
+            {
+                if (port == null)
+                {
+                    port = ((EthernetCommor)this.Commor.Communicator).Port;
+                }
+                return port.Value;
+            }
+            set
+            {
+                if (port != value)
+                {
+                    ((EthernetCommor)this.Commor.Communicator).Port = value;
+                    SetProperty(ref port, value);
                     this.CommorInfo = null;
                 }
             }

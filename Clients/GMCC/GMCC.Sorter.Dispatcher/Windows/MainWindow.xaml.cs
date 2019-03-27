@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Arthur.View.Utils;
 using GMCC.Sorter.Dispatcher.Views;
 using GMCC.Sorter.Dispatcher.Views.SystemUC;
 
@@ -25,19 +26,20 @@ namespace GMCC.Sorter.Dispatcher
         public MainWindow()
         {
             InitializeComponent();
-            //this.Title = new Utility().AppTitle;
 
             grid_mainview.Children.Add(new MainViewUC());
 
             this.DataContext = Current.App;
             Arthur.Business.Logging.AddEvent(string.Format("打开软件", ""), Arthur.App.Model.EventType.信息);
+
+            WinSet.MainWindow = this;
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
 
             RadioButton radio = sender as RadioButton;
-
+            SetOtherRadioButtonNoChecked(radio);
             var tabName = radio.Content.ToString();
 
 
@@ -138,6 +140,40 @@ namespace GMCC.Sorter.Dispatcher
                 Arthur.Business.Logging.AddEvent(string.Format("关闭软件", ""), Arthur.App.Model.EventType.信息);
             }
         }
+
+        /// <summary>
+        /// 其他RadioButton去掉选中
+        /// </summary>
+        private void SetOtherRadioButtonNoChecked(RadioButton radio)
+        {
+            var content = radio.Content.ToString();
+            var objs = ControlsSearchHelper.GetChildObjects<RadioButton>(this.nav_bar, "");
+            objs.ForEach(o =>
+            {
+                if (o.Content.ToString() != content && o.IsChecked.Value)
+                {
+                    o.IsChecked = false;
+                }
+            });
+        }
+        /// <summary>
+        /// 关闭选项卡时导航栏栏目取消选中
+        /// </summary>
+        /// <param name="nav_name">栏目名称</param>
+        public void SetRadioButtonNoChecked(string nav_name)
+        {
+            var objs = ControlsSearchHelper.GetChildObjects<RadioButton>(this.nav_bar, nav_name);
+            objs.ForEach(o =>
+            {
+                o.IsChecked = false;
+            });
+        }
+    }
+
+
+    public static class WinSet
+    {
+        public static MainWindow MainWindow;
     }
 
 
@@ -442,13 +478,12 @@ namespace GMCC.Sorter.Dispatcher
             if (!string.IsNullOrEmpty(Name) && Name == "PART_Close_TabItem")
             {
                 TabItemClose itemclose = FindVisualParent<TabItemClose>(this);
-                if(itemclose.Header.ToString() == "主界面")
-                {
-                    return;
-                }
+
                 (itemclose.Parent as TabControl).Items.Remove(itemclose);
                 RoutedEventArgs args = new RoutedEventArgs(TabItemClose.CloseItemEvent, itemclose);
                 itemclose.RaiseEvent(args);
+
+                WinSet.MainWindow.SetRadioButtonNoChecked(itemclose.Header.ToString());
             }
 
         }

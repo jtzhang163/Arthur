@@ -27,6 +27,8 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
@@ -35,10 +37,14 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="名称：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Name}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="IP地址：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding IP}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="供应商名称：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding Company}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="品牌：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Company}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="型号：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding ModelNumber}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="IP地址：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding IP}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="端口：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Port}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

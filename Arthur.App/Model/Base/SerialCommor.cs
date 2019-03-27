@@ -13,7 +13,7 @@ namespace Arthur.App.Model
     public abstract class SerialCommor : Communicator
     {
         /// <summary>
-        /// 端口号
+        /// 端口
         /// </summary>
         public string PortName { get; set; } = "COM1";
 
@@ -23,14 +23,14 @@ namespace Arthur.App.Model
         public int BaudRate { get; set; } = 9600;
 
         /// <summary>
-        /// 奇偶校验位
-        /// </summary>
-        public Parity Parity { get; set; } = Parity.None;
-
-        /// <summary>
         /// 数据位
         /// </summary>
         public int DataBits { get; set; } = 8;
+
+        /// <summary>
+        /// 校验位
+        /// </summary>
+        public Parity Parity { get; set; } = Parity.None;
 
         /// <summary>
         /// 停止位

@@ -29,9 +29,7 @@ namespace GMCC.Sorter.ViewModel
                 if (host != value)
                 {
                     ((Server)this.Commor.Communicator).Host = value;
-                    Context.AppContext.SaveChanges();
                     SetProperty(ref host, value);
-
                     this.CommorInfo = null;
                 }
             }

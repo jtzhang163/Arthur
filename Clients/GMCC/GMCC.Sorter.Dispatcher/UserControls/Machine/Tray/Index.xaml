@@ -201,7 +201,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="供应商" Width="*"  CanUserSort="True" SortMemberPath="Level">
+                        <DataGridTemplateColumn Header="品牌" Width="*"  CanUserSort="True" SortMemberPath="Level">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

@@ -6,6 +6,7 @@ using GMCC.Sorter.Data;
 using GMCC.Sorter.Run;
 using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -31,13 +32,94 @@ namespace GMCC.Sorter.ViewModel
                 if (portName != value)
                 {
                     ((SerialCommor)this.Commor.Communicator).PortName = value;
-                    Context.AppContext.SaveChanges();
                     SetProperty(ref portName, value);
-
                     this.CommorInfo = null;
                 }
             }
         }
+
+        private int? baudRate = null;
+        public int BaudRate
+        {
+            get
+            {
+                if (baudRate == null)
+                {
+                    baudRate = ((SerialCommor)this.Commor.Communicator).BaudRate;
+                }
+                return baudRate.Value;
+            }
+            set
+            {
+                if (baudRate != value)
+                {
+                    ((SerialCommor)this.Commor.Communicator).BaudRate = value;
+                    SetProperty(ref baudRate, value);
+                    this.CommorInfo = null;
+                }
+            }
+        }
+
+
+        private Parity parity;
+        public Parity Parity
+        {
+            get
+            {
+                parity = ((SerialCommor)this.Commor.Communicator).Parity;
+                return parity;
+            }
+            set
+            {
+                if (parity != value)
+                {
+                    ((SerialCommor)this.Commor.Communicator).Parity = value;
+                    SetProperty(ref parity, value);
+                }
+            }
+        }
+
+
+        private int? dataBits = null;
+        public int DataBits
+        {
+            get
+            {
+                if (dataBits == null)
+                {
+                    dataBits = ((SerialCommor)this.Commor.Communicator).DataBits;
+                }
+                return dataBits.Value;
+            }
+            set
+            {
+                if (dataBits != value)
+                {
+                    ((SerialCommor)this.Commor.Communicator).DataBits = value;
+                    SetProperty(ref dataBits, value);
+                }
+            }
+        }
+
+
+        private StopBits stopBits;
+        public StopBits StopBits
+        {
+            get
+            {
+                stopBits = ((SerialCommor)this.Commor.Communicator).StopBits;
+                return stopBits;
+            }
+            set
+            {
+                if (stopBits != value)
+                {
+                    ((SerialCommor)this.Commor.Communicator).StopBits = value;
+                    SetProperty(ref stopBits, value);
+                }
+            }
+        }
+
 
         private string scanCommand = null;
         /// <summary>

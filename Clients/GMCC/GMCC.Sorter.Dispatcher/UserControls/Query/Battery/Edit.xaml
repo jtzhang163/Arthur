@@ -38,7 +38,7 @@
                     <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="条码：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="code" Grid.Row="1" Grid.Column="1" Text="{Binding Code, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <!--<Label Content="供应商：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <!--<Label Content="品牌：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="company" Grid.Row="2" Grid.Column="1" Text="{Binding Company, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>-->
                 </Grid>
             </DockPanel>

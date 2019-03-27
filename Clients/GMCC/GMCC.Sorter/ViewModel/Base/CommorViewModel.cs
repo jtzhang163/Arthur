@@ -35,7 +35,6 @@ namespace GMCC.Sorter.ViewModel
                 if (name != value)
                 {
                     this.Commor.Communicator.Name = value;
-                    Context.AppContext.SaveChanges();
                     SetProperty(ref name, value);
                 }
             }
@@ -57,7 +56,6 @@ namespace GMCC.Sorter.ViewModel
                 if (company != value)
                 {
                     this.Commor.Communicator.Company = value;
-                    Context.AppContext.SaveChanges();
                     SetProperty(ref company, value);
                 }
             }
@@ -80,7 +78,6 @@ namespace GMCC.Sorter.ViewModel
                 if (location != value)
                 {
                     this.Commor.Communicator.Location = value;
-                    Context.AppContext.SaveChanges();
                     SetProperty(ref location, value);
                 }
             }
@@ -103,7 +100,6 @@ namespace GMCC.Sorter.ViewModel
                 if (modelNumber != value)
                 {
                     this.Commor.Communicator.ModelNumber = value;
-                    Context.AppContext.SaveChanges();
                     SetProperty(ref modelNumber, value);
                 }
             }
@@ -127,7 +123,6 @@ namespace GMCC.Sorter.ViewModel
                 if (serialNumber != value)
                 {
                     this.Commor.Communicator.SerialNumber = value;
-                    Context.AppContext.SaveChanges();
                     SetProperty(ref serialNumber, value);
                 }
             }

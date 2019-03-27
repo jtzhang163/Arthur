@@ -35,14 +35,7 @@ namespace GMCC.Sorter
 
                     Context.Storages.ToList().ForEach(o =>
                     {
-                        storages.Add(new StorageViewModel()
-                        {
-                            Id = o.Id,
-                            Column = o.Column,
-                            Floor = o.Floor,
-                            Name = o.Name,
-                            Company = o.Company
-                        });
+                        storages.Add(new StorageViewModel(o.Id, o.Column, o.Floor, o.Name, o.Company));
                     });
                 }
                 return storages;

@@ -32,7 +32,7 @@
             <WrapPanel VerticalAlignment="Center">
                 <Label Content="IP地址:" Margin="10,0,10,0"/>
                 <TextBox Text="{Binding Path=IP, Mode=TwoWay}" IsEnabled="{Binding Path=IsRunning,Converter={StaticResource isEnabledConverter}}" Width="100" VerticalContentAlignment="Center"/>
-                <Label Content="端口号:" Margin="10,0,10,0"/>
+                <Label Content="端口:" Margin="10,0,10,0"/>
                 <TextBox Text="{Binding Path=Port, Mode=TwoWay}" IsEnabled="{Binding Path=IsRunning,Converter={StaticResource isEnabledConverter}}" Width="80" VerticalContentAlignment="Center"/>
                 <Button Content="{Binding IsRunning,Converter={StaticResource btnListenContentConverter}}" Margin="10,0,10,0" Width="60" Click="btnListen_Click"/>
                 <Label Content="{Binding IsRunning,Converter={StaticResource runStatusContentConverter}}" Margin="10,0,10,0"/>

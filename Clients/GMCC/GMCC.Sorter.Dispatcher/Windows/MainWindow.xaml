@@ -360,7 +360,7 @@
             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
             <Setter Property="Foreground" Value="#666666"/>
             <Setter Property="Margin" Value="0 0 0 0"/>
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="0 0 0 0"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="CloseIcon" Value="/Images/close.png"/>
             <!--TextBlock Text="&#xf00d;" Style="{DynamicResource FontAwesome}"-->
@@ -436,7 +436,7 @@
                 <Label Content="{Binding AppName}" FontSize="30" Foreground="White" VerticalAlignment="Center" FontWeight="Bold" Margin="10,0,0,0"/>
             </DockPanel>
 
-            <StackPanel DockPanel.Dock="Left"  Width="200" Background="#FF222D32">
+            <StackPanel x:Name="nav_bar" DockPanel.Dock="Left"  Width="200" Background="#FF222D32">
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
                     <Expander.Header>
@@ -610,7 +610,7 @@
                     <Canvas DockPanel.Dock="Left" Width="5" Background="#FF2B579A"/>
                     <Grid Background="#858586">
                         <TabControl x:Name="tabControl"  Foreground="Black" Background="Transparent" BorderBrush="Transparent" BorderThickness="0">
-                            <local:TabItemClose Header="主界面" Height="30"  Width="100">
+                            <local:TabItemClose Header="主界面" Height="30"  Width="100" IsCanClose="False">
                                 <Grid x:Name="grid_mainview" Background="#aaffffff">
 
                                 </Grid>

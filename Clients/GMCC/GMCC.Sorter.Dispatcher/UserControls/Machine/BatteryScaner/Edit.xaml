@@ -28,6 +28,8 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
@@ -36,10 +38,14 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="名称：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Name}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="IP地址：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <TextBox x:Name="ip" Grid.Row="1" Grid.Column="1" Text="{Binding IP, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <Label Content="供应商名称：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <TextBox x:Name="company" Grid.Row="2" Grid.Column="1" Text="{Binding Company, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="品牌：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="company" Grid.Row="1" Grid.Column="1" Text="{Binding Company, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="型号：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="model_number" Grid.Row="2" Grid.Column="1" Text="{Binding ModelNumber, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="IP地址：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="ip" Grid.Row="3" Grid.Column="1" Text="{Binding IP, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="端口：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="port" Grid.Row="4" Grid.Column="1" Text="{Binding Port, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False"  GotFocus="textbox_GotFocus"/>
                 </Grid>
             </DockPanel>
         </DockPanel>
