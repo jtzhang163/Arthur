@@ -59,7 +59,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.TrayScaner
 
         private void textbox_GotFocus(object sender, RoutedEventArgs e)
         {
-            tip.Visibility = Visibility.Hidden;
+            tip.Visibility = Visibility.Collapsed;
         }
 
         private void level_PreviewTextInput(object sender, TextCompositionEventArgs e)

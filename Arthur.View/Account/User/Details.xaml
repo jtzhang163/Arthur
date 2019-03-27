@@ -24,7 +24,7 @@
                 <Button x:Name="cancel" Click="cancel_Click" Style="{StaticResource ChamferButton}">返回</Button>
             </StackPanel>
             <DockPanel>
-                <TextBlock x:Name="tip" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Hidden"/>
+                <TextBlock x:Name="tip" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>
                 <Grid x:Name="grid" Margin="0,10,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
