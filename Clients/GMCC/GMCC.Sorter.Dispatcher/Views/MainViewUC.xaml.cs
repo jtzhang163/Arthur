@@ -1,4 +1,5 @@
-﻿using Arthur.Core;
+﻿using Arthur.Business;
+using Arthur.Core;
 using GMCC.Sorter.Run;
 using GMCC.Sorter.ViewModel;
 using System;
@@ -61,39 +62,44 @@ namespace GMCC.Sorter.Dispatcher.Views
             {
                 if (TimerExec.IsRunning)
                 {
-                    MessageBox.Show("系统已经在运行，请勿重复启动！", "提示", MessageBoxButton.OK);
+                    Current.App.ErrorMsg = "系统已经在运行，请勿重复启动！";
                     return;
                 }
 
                 if (Current.App.RunStatus == RunStatus.异常)
                 {
-                    MessageBox.Show("请先复位！", "提示", MessageBoxButton.OK);
+                    Current.App.ErrorMsg = "请先复位！";
                     return;
                 }
 
                 var result = Running.Start();
-                if (!result.IsOk)
+                if (result.IsOk)
                 {
-                    Current.App.ErrorMsg = result.Msg;
-                   // MessageBox.Show("成功启动运行！", "提示", MessageBoxButton.OK);
+                    Logging.AddEvent("启动运行", Arthur.App.Model.EventType.信息);
                 }
                 else
                 {
-                  //  MessageBox.Show(result.Msg, "提示", MessageBoxButton.OK);
+                    Current.App.ErrorMsg = result.Msg;
                 }
 
             }
             else if (btn.Name == "stop")
             {
+
                 if (!TimerExec.IsRunning)
                 {
-                    MessageBox.Show("系统没有在运行，操作无效！", "提示", MessageBoxButton.OK);
+                    Current.App.ErrorMsg = "系统没有在运行，操作无效！";
                     return;
                 }
 
-                if (Running.Stop().IsOk)
+                var result = Running.Stop();
+                if (result.IsOk)
                 {
-                    MessageBox.Show("成功停止运行！", "提示", MessageBoxButton.OK);
+                    Logging.AddEvent("停止运行", Arthur.App.Model.EventType.信息);
+                }
+                else
+                {
+                    Current.App.ErrorMsg = result.Msg;
                 }
 
             }
@@ -102,21 +108,19 @@ namespace GMCC.Sorter.Dispatcher.Views
 
                 if (Current.App.RunStatus == RunStatus.运行)
                 {
-                    MessageBox.Show("系统正在运行，复位无效，请停止运行后再执行复位操作！", "提示", MessageBoxButton.OK);
+                    Current.App.ErrorMsg = "系统正在运行，复位无效，请停止运行后再执行复位操作！";
                     return;
                 }
 
-                if (Current.App.RunStatus == RunStatus.闲置)
+                var result = Running.Reset();
+                if (result.IsOk)
                 {
-                    MessageBox.Show("系统尚未启动，复位操作无效！", "提示", MessageBoxButton.OK);
-                    return;
+                    Logging.AddEvent("成功复位", Arthur.App.Model.EventType.信息);
                 }
-
-                if (Running.Reset().IsOk)
+                else
                 {
-                    MessageBox.Show("成功复位！", "提示", MessageBoxButton.OK);
+                    Current.App.ErrorMsg = result.Msg;
                 }
-
             }
         }
 
@@ -127,19 +131,19 @@ namespace GMCC.Sorter.Dispatcher.Views
             {
                 if (Current.App.RunStatus == RunStatus.闲置)
                 {
-                    MessageBox.Show("请先启动！", "提示", MessageBoxButton.OK);
+                    Current.App.ErrorMsg = "请先启动！";
                     return;
                 }
 
                 if (Current.App.RunStatus == RunStatus.运行)
                 {
-                    MessageBox.Show("请先停止！", "提示", MessageBoxButton.OK);
+                    Current.App.ErrorMsg = "请先停止！";
                     return;
                 }
 
                 if (!Current.App.IsTerminalInitFinished)
                 {
-                    MessageBox.Show("烤箱信息初始化尚未完成，请稍后！", "提示", MessageBoxButton.OK);
+                    Current.App.ErrorMsg = "信息初始化尚未完成，请稍后！";
                     return;
                 }
 

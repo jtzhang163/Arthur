@@ -115,7 +115,7 @@ namespace GMCC.Sorter.ViewModel
             get => runStatus;
             set
             {
-                if(runStatus != value)
+                if (runStatus != value)
                 {
                     var selectedEnabled = value == RunStatus.闲置;
                     Factory.CommorHelper.GetCommors().ForEach(c => c.SelectedEnabled = selectedEnabled);
@@ -141,7 +141,14 @@ namespace GMCC.Sorter.ViewModel
             get => errorMsg;
             set
             {
-                SetProperty(ref errorMsg, value);
+                if (errorMsg != value)
+                {
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        Arthur.Business.Logging.AddEvent(value, Arthur.App.Model.EventType.警告);
+                    }
+                    SetProperty(ref errorMsg, value);
+                }
             }
         }
 
