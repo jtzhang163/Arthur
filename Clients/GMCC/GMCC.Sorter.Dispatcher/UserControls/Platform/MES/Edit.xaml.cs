@@ -1,4 +1,5 @@
 ﻿using Arthur.View.Utils;
+using GMCC.Sorter.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
         {
             var host = this.host.Text.Trim();
             var company = this.company.Text.Trim();
+            var comm_interval = this.comm_interval.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(host))
             {
@@ -60,7 +62,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
                 {
                     Current.Mes.Host = host;
                     Current.Mes.Company = company;
+                    Current.Mes.CommInterval = Convert.ToInt32(comm_interval);
 
+                    Context.AppContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
                 }

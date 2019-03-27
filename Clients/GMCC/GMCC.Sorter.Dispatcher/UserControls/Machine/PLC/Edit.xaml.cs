@@ -52,6 +52,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.PLC
             var modelNumber = this.model_number.Text.Trim();
             var ip = this.ip.Text.Trim();
             var port = _Convert.StrToInt(this.port.Text.Trim(), -1);
+            var comm_interval = this.comm_interval.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(ip)|| string.IsNullOrWhiteSpace(this.port.Text))
             {
@@ -66,6 +67,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.PLC
                     Current.MainMachine.ModelNumber = modelNumber;
                     Current.MainMachine.IP = ip;
                     Current.MainMachine.Port = port;
+                    Current.MainMachine.CommInterval = Convert.ToInt32(comm_interval);
 
                     Context.AppContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);

@@ -33,13 +33,15 @@ namespace GMCC.Sorter.Dispatcher
             Arthur.Business.Logging.AddEvent(string.Format("打开软件", ""), Arthur.App.Model.EventType.信息);
 
             WinSet.MainWindow = this;
+
+            objs = ControlsSearchHelper.GetChildObjects<RadioButton>(this.nav_bar, "");
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
 
             RadioButton radio = sender as RadioButton;
-            SetOtherRadioButtonNoChecked(radio);
+            SetOtherNavNoChecked(radio);
             var tabName = radio.Content.ToString();
 
 
@@ -64,8 +66,9 @@ namespace GMCC.Sorter.Dispatcher
 
                 a.Content = g;
                 //this.tabControl.Items.Add(a);
-
+                IsChangeNavChecked = true;
                 this.tabControl.SelectedIndex = this.tabControl.Items.Add(a);
+                IsChangeNavChecked = false;
             }
             else
             {
@@ -73,11 +76,15 @@ namespace GMCC.Sorter.Dispatcher
                 {
                     if ((this.tabControl.Items[i] as TabItem).Header.ToString() == tabName)
                     {
+                        IsChangeNavChecked = true;
                         this.tabControl.SelectedIndex = i;
+                        IsChangeNavChecked = false;
                         return;
                     }
                 }
             }
+
+            // IsChangeNavChecked = false;
         }
 
 
@@ -144,7 +151,7 @@ namespace GMCC.Sorter.Dispatcher
         /// <summary>
         /// 其他RadioButton去掉选中
         /// </summary>
-        private void SetOtherRadioButtonNoChecked(RadioButton radio)
+        private void SetOtherNavNoChecked(RadioButton radio)
         {
             var content = radio.Content.ToString();
             var objs = ControlsSearchHelper.GetChildObjects<RadioButton>(this.nav_bar, "");
@@ -160,14 +167,52 @@ namespace GMCC.Sorter.Dispatcher
         /// 关闭选项卡时导航栏栏目取消选中
         /// </summary>
         /// <param name="nav_name">栏目名称</param>
-        public void SetRadioButtonNoChecked(string nav_name)
+        public void SetNavNoChecked(string nav_name)
         {
-            var objs = ControlsSearchHelper.GetChildObjects<RadioButton>(this.nav_bar, nav_name);
+            var objs = ControlsSearchHelper.GetChildObjects<RadioButton>(this.nav_bar, "");
             objs.ForEach(o =>
             {
-                o.IsChecked = false;
+                if (o.Content.ToString() == nav_name)
+                {
+                    o.IsChecked = false;
+                }
             });
         }
+
+        private void tabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IsChangeNavChecked)
+            {
+                return;
+            }
+            var selectedTab = this.tabControl.SelectedItem as TabItemClose;
+            if (selectedTab == null)
+            {
+                return;
+            }
+
+            if (selectedTab.Header.ToString() == "主界面")
+            {
+                objs.ForEach(o =>
+                {
+                    o.IsChecked = false;
+                });
+                return;
+            }
+
+            objs = ControlsSearchHelper.GetChildObjects<RadioButton>(this.nav_bar, "");
+            objs.ForEach(o =>
+            {
+                if (o.Content.ToString() == selectedTab.Header.ToString())
+                {
+                    o.IsChecked = true;
+                }
+            });
+        }
+
+        private bool IsChangeNavChecked = false;
+
+        private List<RadioButton> objs;
     }
 
 
@@ -483,7 +528,7 @@ namespace GMCC.Sorter.Dispatcher
                 RoutedEventArgs args = new RoutedEventArgs(TabItemClose.CloseItemEvent, itemclose);
                 itemclose.RaiseEvent(args);
 
-                WinSet.MainWindow.SetRadioButtonNoChecked(itemclose.Header.ToString());
+                WinSet.MainWindow.SetNavNoChecked(itemclose.Header.ToString());
             }
 
         }
@@ -509,5 +554,4 @@ namespace GMCC.Sorter.Dispatcher
         Text,
         IconText
     }
-
 }

@@ -52,6 +52,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.BatteryScaner
             var modelNumber = this.model_number.Text.Trim();
             var ip = this.ip.Text.Trim();
             var port = _Convert.StrToInt(this.port.Text.Trim(), -1);
+            var comm_interval = this.comm_interval.Text.Trim();
+            var scan_command = this.scan_command.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(ip) || string.IsNullOrWhiteSpace(this.port.Text))
             {
@@ -66,6 +68,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.BatteryScaner
                     Current.BatteryScaner.ModelNumber = modelNumber;
                     Current.BatteryScaner.IP = ip;
                     Current.BatteryScaner.Port = port;
+                    Current.BatteryScaner.CommInterval = Convert.ToInt32(comm_interval);
+                    Current.BatteryScaner.ScanCommand = scan_command;
 
                     Context.AppContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);

@@ -27,6 +27,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
@@ -39,6 +40,8 @@
                     <Label Content="{Binding Host}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="品牌：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Company}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="通信间隔(ms)：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding CommInterval}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

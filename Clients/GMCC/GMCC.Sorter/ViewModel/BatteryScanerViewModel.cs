@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace GMCC.Sorter.ViewModel
 {
     /// <summary>
-    /// 主设备
+    /// 电池扫码枪
     /// </summary>
     public class BatteryScanerViewModel : CommorViewModel
     {
@@ -33,8 +33,8 @@ namespace GMCC.Sorter.ViewModel
                 {
                     ((EthernetCommor)this.Commor.Communicator).IP = value;
                     Context.AppContext.SaveChanges();
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}IP地址: [{1}] 修改为 [{2}]", Name, ip, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref ip, value);
-
                     this.CommorInfo = null;
                 }
             }
@@ -57,6 +57,7 @@ namespace GMCC.Sorter.ViewModel
                 if (port != value)
                 {
                     ((EthernetCommor)this.Commor.Communicator).Port = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}端口: [{1}] 修改为 [{2}]", Name, port, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref port, value);
                     this.CommorInfo = null;
                 }
@@ -88,7 +89,7 @@ namespace GMCC.Sorter.ViewModel
                 if (scanCommand != value)
                 {
                     Arthur.Business.Application.SetOption("ScanCommand_BatteryScaner", value);
-
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}扫码指令: [{1}] 修改为 [{2}]", Name, scanCommand, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref scanCommand, value);
                 }
             }
@@ -96,7 +97,7 @@ namespace GMCC.Sorter.ViewModel
 
         public BatteryScanerViewModel(Commor commor) : base(commor)
         {
-
+            Console.WriteLine(this.ScanCommand);
         }
 
         public void Comm()

@@ -260,6 +260,27 @@
                         </DataGridTemplateColumn>
 
 
+                        <DataGridTemplateColumn Header="通信间隔" Width="*"  CanUserSort="True" SortMemberPath="CommInterval">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding CommInterval}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="扫码指令" Width="*"  CanUserSort="True" SortMemberPath="ScanCommand">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding ScanCommand}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+
                         <DataGridTemplateColumn Header="操作" Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

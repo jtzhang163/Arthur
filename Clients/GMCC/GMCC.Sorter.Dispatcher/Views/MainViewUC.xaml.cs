@@ -72,13 +72,14 @@ namespace GMCC.Sorter.Dispatcher.Views
                 }
 
                 var result = Running.Start();
-                if (result.IsOk)
+                if (!result.IsOk)
                 {
-                    MessageBox.Show("成功启动运行！", "提示", MessageBoxButton.OK);
+                    Current.App.ErrorMsg = result.Msg;
+                   // MessageBox.Show("成功启动运行！", "提示", MessageBoxButton.OK);
                 }
                 else
                 {
-                    MessageBox.Show(result.Msg, "提示", MessageBoxButton.OK);
+                  //  MessageBox.Show(result.Msg, "提示", MessageBoxButton.OK);
                 }
 
             }

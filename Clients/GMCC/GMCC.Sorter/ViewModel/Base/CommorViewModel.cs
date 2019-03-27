@@ -35,6 +35,7 @@ namespace GMCC.Sorter.ViewModel
                 if (name != value)
                 {
                     this.Commor.Communicator.Name = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. [{0}] 名称修改为 [{1}]", name, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref name, value);
                 }
             }
@@ -56,6 +57,7 @@ namespace GMCC.Sorter.ViewModel
                 if (company != value)
                 {
                     this.Commor.Communicator.Company = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}品牌: [{1}] 修改为 [{2}]", Name, company, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref company, value);
                 }
             }
@@ -78,6 +80,7 @@ namespace GMCC.Sorter.ViewModel
                 if (location != value)
                 {
                     this.Commor.Communicator.Location = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}位置: [{1}] 修改为 [{2}]", Name, location, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref location, value);
                 }
             }
@@ -100,6 +103,7 @@ namespace GMCC.Sorter.ViewModel
                 if (modelNumber != value)
                 {
                     this.Commor.Communicator.ModelNumber = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}型号: [{1}] 修改为 [{2}]", Name, modelNumber, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref modelNumber, value);
                 }
             }
@@ -123,6 +127,7 @@ namespace GMCC.Sorter.ViewModel
                 if (serialNumber != value)
                 {
                     this.Commor.Communicator.SerialNumber = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}序列号: [{1}] 修改为 [{2}]", Name, serialNumber, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref serialNumber, value);
                 }
             }
@@ -176,6 +181,7 @@ namespace GMCC.Sorter.ViewModel
                 {
                     this.Commor.Communicator.IsEnabled = value;
                     Context.AppContext.SaveChanges();
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}启用状态: [{1}] 修改为 [{2}]", Name, isEnabled, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref isEnabled, value);
                 }
             }
@@ -231,6 +237,7 @@ namespace GMCC.Sorter.ViewModel
                 if (commInterval != value)
                 {
                     Arthur.Business.Application.SetOption(string.Format("CommInterval_{0}", this.Name), value.ToString());
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}与上位机通讯间隔: [{1}] 修改为 [{2}]", Name, commInterval, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref commInterval, value);
                 }
             }

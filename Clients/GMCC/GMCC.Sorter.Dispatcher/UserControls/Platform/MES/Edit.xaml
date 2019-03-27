@@ -28,6 +28,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
@@ -38,8 +39,10 @@
                     <Label Content="{Binding Name}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="IP地址：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="host" Grid.Row="1" Grid.Column="1" Text="{Binding Host, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <Label Content="提供商名称：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="品牌：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="company" Grid.Row="2" Grid.Column="1" Text="{Binding Company, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="通信间隔(ms)：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="comm_interval" Grid.Row="3" Grid.Column="1" Text="{Binding CommInterval, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" />
                 </Grid>
             </DockPanel>
         </DockPanel>

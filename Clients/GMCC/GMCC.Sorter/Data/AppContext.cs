@@ -48,24 +48,6 @@ namespace GMCC.Sorter.Data
     {
         protected override void Seed(AppContext context)
         {
-            var trays = new List<Tray>();
-            for (var i = 0; i < 100; i++)
-            {
-                var code = string.Format("TRAY{0:D4}", i + 1);
-                trays.Add(new Tray()
-                {
-                    Code = code,
-                    Name = "",
-                    Company = "SZYitong",
-                    CreateTime = DateTime.Now,
-                    Location = "",
-                    ModelNumber = "",
-                    SerialNumber = "",
-                    IsEnabled = true
-                });
-            }
-            trays.ForEach(o => context.Trays.Add(o));
-
             var storages = new List<Storage>();
             for (var i = 0; i < Common.STOR_COL_COUNT; i++)
             {

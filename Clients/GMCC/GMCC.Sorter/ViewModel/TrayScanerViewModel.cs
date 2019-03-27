@@ -32,6 +32,7 @@ namespace GMCC.Sorter.ViewModel
                 if (portName != value)
                 {
                     ((SerialCommor)this.Commor.Communicator).PortName = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}端口: [{1}] 修改为 [{2}]", Name, portName, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref portName, value);
                     this.CommorInfo = null;
                 }
@@ -54,6 +55,7 @@ namespace GMCC.Sorter.ViewModel
                 if (baudRate != value)
                 {
                     ((SerialCommor)this.Commor.Communicator).BaudRate = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}波特率: [{1}] 修改为 [{2}]", Name, baudRate, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref baudRate, value);
                     this.CommorInfo = null;
                 }
@@ -74,6 +76,7 @@ namespace GMCC.Sorter.ViewModel
                 if (parity != value)
                 {
                     ((SerialCommor)this.Commor.Communicator).Parity = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}校验位: [{1}] 修改为 [{2}]", Name, parity, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref parity, value);
                 }
             }
@@ -96,6 +99,7 @@ namespace GMCC.Sorter.ViewModel
                 if (dataBits != value)
                 {
                     ((SerialCommor)this.Commor.Communicator).DataBits = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}数据位: [{1}] 修改为 [{2}]", Name, dataBits, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref dataBits, value);
                 }
             }
@@ -115,6 +119,7 @@ namespace GMCC.Sorter.ViewModel
                 if (stopBits != value)
                 {
                     ((SerialCommor)this.Commor.Communicator).StopBits = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}停止位: [{1}] 修改为 [{2}]", Name, stopBits, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref stopBits, value);
                 }
             }
@@ -145,7 +150,7 @@ namespace GMCC.Sorter.ViewModel
                 if (scanCommand != value)
                 {
                     Arthur.Business.Application.SetOption("ScanCommand_TrayScaner_" + this.Id, value);
-
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}扫码指令: [{1}] 修改为 [{2}]", Name, stopBits, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref scanCommand, value);
                 }
             }
@@ -153,7 +158,7 @@ namespace GMCC.Sorter.ViewModel
 
         public TrayScanerViewModel(Commor commor) : base(commor)
         {
-
+            Console.WriteLine(this.ScanCommand);
         }
 
         public void Comm()
@@ -168,7 +173,7 @@ namespace GMCC.Sorter.ViewModel
                 {
                     var saveRet = Result.OK;
 
-                    if(this == Current.BindTrayScaner)
+                    if (this == Current.BindTrayScaner)
                     {
                         //把托盘条码保存进数据库
                         saveRet = new Business.ProcTrayManage().Create(new Model.ProcTray() { Code = ret.Data.ToString() }, true);

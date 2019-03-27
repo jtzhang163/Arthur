@@ -29,6 +29,7 @@ namespace GMCC.Sorter.ViewModel
                 if (host != value)
                 {
                     ((Server)this.Commor.Communicator).Host = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("交互平台. MES: [{0}] 修改为 [{1}]", host, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref host, value);
                     this.CommorInfo = null;
                 }

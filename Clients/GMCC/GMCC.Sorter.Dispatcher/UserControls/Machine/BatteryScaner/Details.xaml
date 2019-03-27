@@ -29,6 +29,8 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
@@ -45,6 +47,10 @@
                     <Label Content="{Binding IP}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="端口：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Port}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="通信间隔(ms)：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding CommInterval}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="扫码指令：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding ScanCommand}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

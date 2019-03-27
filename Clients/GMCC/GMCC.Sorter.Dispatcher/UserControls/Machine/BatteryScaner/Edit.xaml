@@ -30,6 +30,8 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
@@ -46,6 +48,10 @@
                     <TextBox x:Name="ip" Grid.Row="3" Grid.Column="1" Text="{Binding IP, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                     <Label Content="端口：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="port" Grid.Row="4" Grid.Column="1" Text="{Binding Port, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False"  GotFocus="textbox_GotFocus"/>
+                    <Label Content="通信间隔(ms)：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="comm_interval" Grid.Row="5" Grid.Column="1" Text="{Binding CommInterval, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" />
+                    <Label Content="扫码指令：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="scan_command" Grid.Row="6" Grid.Column="1" Text="{Binding ScanCommand, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

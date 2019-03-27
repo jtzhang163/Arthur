@@ -29,7 +29,12 @@ namespace Arthur
 
         }
 
-        public Result(Exception ex) : this(ex.Message)
+        public Result(Exception ex) : this("", ex)
+        {
+
+        }
+
+        public Result(string title, Exception ex) : this(title + ":" + ex.Message)
         {
             //写入异常日志
             LogHelper.WriteError(ex);

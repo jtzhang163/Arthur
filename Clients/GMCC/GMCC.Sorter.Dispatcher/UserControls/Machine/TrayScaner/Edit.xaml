@@ -33,6 +33,8 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
@@ -51,11 +53,14 @@
                     <ComboBox x:Name="baudrate" Grid.Row="4" Grid.Column="1" FontSize="14" Height="26" Width="120" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
                     <Label Content="数据位：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <ComboBox x:Name="databits" Grid.Row="5" Grid.Column="1" FontSize="14" Height="26" Width="120" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
-
                     <Label Content="校验位：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <ComboBox x:Name="parity" Grid.Row="6" Grid.Column="1" FontSize="14" Height="26" Width="120" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
                     <Label Content="停止位：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <ComboBox x:Name="stopbits" Grid.Row="7" Grid.Column="1" FontSize="14" Height="26" Width="120" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                    <Label Content="通信间隔(ms)：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="comm_interval" Grid.Row="8" Grid.Column="1" Text="{Binding CommInterval, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" />
+                    <Label Content="扫码指令：" Grid.Row="9" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="scan_command" Grid.Row="9" Grid.Column="1" Text="{Binding ScanCommand, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

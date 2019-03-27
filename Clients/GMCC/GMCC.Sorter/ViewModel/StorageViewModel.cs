@@ -35,14 +35,14 @@ namespace GMCC.Sorter.ViewModel
             }
             set
             {
-                if(name != value)
+                if (name != value)
                 {
                     Context.Storages.FirstOrDefault(o => o.Id == this.Id).Name = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. [{0}] 名称修改为 [{1}]", name, value), Arthur.App.Model.OpType.编辑);
                     this.SetProperty(ref name, value);
                 }
             }
         }
-
 
         private string company = null;
 
@@ -57,6 +57,7 @@ namespace GMCC.Sorter.ViewModel
                 if (company != value)
                 {
                     Context.Storages.FirstOrDefault(o => o.Id == this.Id).Company = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 品牌: [{1}] 修改为 [{2}]", Name, company, value), Arthur.App.Model.OpType.编辑);
                     this.SetProperty(ref company, value);
                 }
             }

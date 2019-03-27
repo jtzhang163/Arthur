@@ -82,6 +82,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.TrayScaner
             var databits = Convert.ToInt32(this.databits.SelectedItem);
             var parity = (Parity)Enum.Parse(typeof(Parity), this.parity.SelectedItem.ToString());
             var stopbits = (StopBits)Enum.Parse(typeof(StopBits), this.stopbits.SelectedItem.ToString());
+            var comm_interval = this.comm_interval.Text.Trim();
+            var scan_command = this.scan_command.Text.Trim();
 
             try
             {
@@ -92,6 +94,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.TrayScaner
                 this.TrayScaner.DataBits = databits;
                 this.TrayScaner.Parity = parity;
                 this.TrayScaner.StopBits = stopbits;
+                this.TrayScaner.CommInterval = Convert.ToInt32(comm_interval);
+                this.TrayScaner.ScanCommand = scan_command;
 
                 Context.AppContext.SaveChanges();
                 tip.Foreground = new SolidColorBrush(Colors.Green);

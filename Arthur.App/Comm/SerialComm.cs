@@ -27,7 +27,7 @@ namespace Arthur.App.Comm
             }
             catch (Exception ex)
             {
-                return new Result(ex.Message);
+                return new Result(string.Format("连接{0}失败", commor.Communicator.Name), ex);
             }
             commor.Connector = serialPort;
             return Result.OK;
