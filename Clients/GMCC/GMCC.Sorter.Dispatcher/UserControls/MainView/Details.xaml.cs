@@ -34,9 +34,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
                 SetRowCol(storageUC);
             });
 
-            var jawControl = new JawControl();
-            jawControl.Margin = new Thickness(Current.MainMachine.JawPos, 0, 0, 0);
-            this.jaw.Children.Add(jawControl);
+            this.jaw.Children.Add(new JawControl());
+
+            this.bind_mach.Children.Add(new BindMachControl());
+
+            this.unbind_mach.Children.Add(new UnbindMachControl());
         }
 
         private void SetRowCol(Controls.Machine.StorageControl storageControl)
@@ -61,4 +63,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
         }
 
     }
+
+
 }

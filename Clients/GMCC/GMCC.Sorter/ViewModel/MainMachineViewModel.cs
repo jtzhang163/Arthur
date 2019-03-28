@@ -65,40 +65,9 @@ namespace GMCC.Sorter.ViewModel
         }
 
 
-        private string jawName = null;
-        /// <summary>
-        /// 夹爪机构名称
-        /// </summary>
-        public string JawName
-        {
-            get
-            {
-                if (jawName == null)
-                {
-                    jawName = Arthur.Business.Application.GetOption("JawName");
-                    if (jawName == null)
-                    {
-                        jawName = "横移";
-                        Arthur.Business.Application.SetOption("JawName", jawName, "夹爪机构名称");
-                    }
-                }
-                return jawName;
-            }
-            set
-            {
-                if (jawName != value)
-                {
-                    Arthur.Business.Application.SetOption("JawName", value);
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. 夹爪机构名称: [{0}] 修改为 [{1}]", jawName, value), Arthur.App.Model.OpType.编辑);
-                    SetProperty(ref jawName, value);
-                }
-            }
-        }
-
-
         private int jawPos = -2;
         /// <summary>
-        /// 夹爪机构位置
+        /// 横移位置
         /// </summary>
         public int JawPos
         {
@@ -110,7 +79,7 @@ namespace GMCC.Sorter.ViewModel
                     if (jawPos == -1)
                     {
                         jawPos = 0;
-                        Arthur.Business.Application.SetOption("JawPos", jawPos.ToString(), "夹爪机构位置");
+                        Arthur.Business.Application.SetOption("JawPos", jawPos.ToString(), "横移位置");
                     }
                 }
                 return jawPos;
@@ -142,7 +111,7 @@ namespace GMCC.Sorter.ViewModel
 
         private string jawStatus = "闲置";
         /// <summary>
-        /// 夹爪机构状态
+        /// 横移状态
         /// </summary>
         public string JawStatus
         {
@@ -162,7 +131,7 @@ namespace GMCC.Sorter.ViewModel
 
         private string jawTrayCode = null;
         /// <summary>
-        /// 夹爪机构托盘条码
+        /// 横移托盘条码
         /// </summary>
         public string JawTrayCode
         {
@@ -174,7 +143,7 @@ namespace GMCC.Sorter.ViewModel
                     if (jawTrayCode == null)
                     {
                         jawTrayCode = "";
-                        Arthur.Business.Application.SetOption("JawTrayCode", jawTrayCode, "夹爪机构名称");
+                        Arthur.Business.Application.SetOption("JawTrayCode", jawTrayCode, "横移名称");
                     }
                 }
                 return jawTrayCode;
@@ -184,7 +153,7 @@ namespace GMCC.Sorter.ViewModel
                 if (jawTrayCode != value)
                 {
                     Arthur.Business.Application.SetOption("JawTrayCode", value);
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. 夹爪机构托盘条码: [{0}] 修改为 [{1}]", jawTrayCode, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. 横移托盘条码: [{0}] 修改为 [{1}]", jawTrayCode, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref jawTrayCode, value);
                 }
             }

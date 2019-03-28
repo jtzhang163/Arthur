@@ -84,6 +84,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\Machine\GridHelper.cs" />
+    <Compile Include="Controls\Machine\UnbindMachControl.xaml.cs">
+      <DependentUpon>UnbindMachControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Machine\BindMachControl.xaml.cs">
+      <DependentUpon>BindMachControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Machine\JawControl.xaml.cs">
       <DependentUpon>JawControl.xaml</DependentUpon>
     </Compile>
@@ -208,6 +215,14 @@
       <DependentUpon>RoleManageUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Converter.cs" />
+    <Page Include="Controls\Machine\UnbindMachControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Machine\BindMachControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Machine\JawControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

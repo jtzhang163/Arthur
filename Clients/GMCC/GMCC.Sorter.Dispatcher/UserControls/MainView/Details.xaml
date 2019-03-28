@@ -56,6 +56,10 @@
                     </Grid.ColumnDefinitions>
                     <Grid x:Name="jaw" Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="13">
                     </Grid>
+                    <Grid x:Name="bind_mach" Grid.Row="1" Grid.RowSpan="5"  Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+                    </Grid>
+                    <Grid x:Name="unbind_mach" Grid.Row="1" Grid.Column="11" Grid.RowSpan="5"  Grid.ColumnSpan="2" VerticalAlignment="Bottom">
+                    </Grid>
                 </Grid>
             </DockPanel>
         </DockPanel>

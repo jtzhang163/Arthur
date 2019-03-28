@@ -6,7 +6,15 @@
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.Controls.Machine"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Label Content="{Binding Name}" BorderThickness="1" BorderBrush="Gray"/>
-    </Grid>
+    <Border BorderThickness="0.7" BorderBrush="Black">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Label Content="{Binding Name}" FontSize="10" Padding="0" HorizontalContentAlignment="Center"/>
+            <Label Grid.Row="2" Content="Tray0003" FontSize="10" Padding="0" HorizontalContentAlignment="Center"/>
+        </Grid>
+    </Border>
 </UserControl>
