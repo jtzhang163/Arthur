@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Arthur.View.Utils;
 using GMCC.Sorter.Dispatcher.Views;
 using GMCC.Sorter.Dispatcher.Views.SystemUC;
@@ -87,7 +89,6 @@ namespace GMCC.Sorter.Dispatcher
             // IsChangeNavChecked = false;
         }
 
-
         private UIElement GetTabItem(string tabName)
         {
             switch (tabName)
@@ -105,8 +106,8 @@ namespace GMCC.Sorter.Dispatcher
                 case "系统日志":
                     return new OplogUC();
 
-                case "PLC":
-                    return new PLCView();
+                case "压床":
+                    return new MainMachineView();
                 case "电池扫码枪":
                     return new BatteryScanerView();
                 case "托盘扫码枪":
@@ -183,6 +184,15 @@ namespace GMCC.Sorter.Dispatcher
         {
             if (IsChangeNavChecked)
             {
+                new Thread(() =>
+                {
+                    Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                    new Action(() =>
+                    {
+                        Thread.Sleep(100);
+                        tabControl_SelectionChanged(sender, e);
+                    }));
+                }).Start();
                 return;
             }
             var selectedTab = this.tabControl.SelectedItem as TabItemClose;

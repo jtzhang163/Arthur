@@ -51,27 +51,27 @@ namespace Arthur.Helper.TcpServer
                     int i;
                     while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
                     {
-                        data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
+                        data = System.Text.Encoding.ASCII.GetString(bytes, 0, i).Trim(new char[] { '\r', '\n' });
                         ReceiveSendDataAdd("Received: " + data.Trim(new char[] { '\r', '\n' }));
-                        if (data.Contains(Current.App.Receive1))
+                        if (data == Current.App.Receive1)
                         {
                             byte[] send = System.Text.Encoding.ASCII.GetBytes(Current.App.Send1 + "\r");
                             stream.Write(send, 0, send.Length);
                             ReceiveSendDataAdd("Sent: " + Current.App.Send1);
                         }
-                        else if (data.Contains(Current.App.Receive2))
+                        else if (data == Current.App.Receive2)
                         {
                             byte[] send = System.Text.Encoding.ASCII.GetBytes(Current.App.Send2 + "\r");
                             stream.Write(send, 0, send.Length);
                             ReceiveSendDataAdd("Sent: " + Current.App.Send2);
                         }
-                        else if (data.Contains(Current.App.Receive3))
+                        else if (data == Current.App.Receive3)
                         {
                             byte[] send = System.Text.Encoding.ASCII.GetBytes(Current.App.Send3 + "\r");
                             stream.Write(send, 0, send.Length);
                             ReceiveSendDataAdd("Sent: " + Current.App.Send3);
                         }
-                        else if (data.Contains(Current.App.Receive4))
+                        else if (data == Current.App.Receive4)
                         {
                             byte[] send = System.Text.Encoding.ASCII.GetBytes(Current.App.Send4 + "\r");
                             stream.Write(send, 0, send.Length);

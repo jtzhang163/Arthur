@@ -430,7 +430,7 @@
 
     <Grid>
         <DockPanel>
-            <DockPanel DockPanel.Dock="Top" Background="#FF2B579A" Height="60">
+            <DockPanel DockPanel.Dock="Top" Background="#FF2B579A" Height="80">
                 <TextBlock VerticalAlignment="Bottom" Foreground="White" DockPanel.Dock="Right" Margin="0,0,5,5">
                     欢迎你，<Hyperlink x:Name="currentUser" Click="currentUser_Click"><TextBlock Text="{Binding UserName}" Foreground="White" FontStyle="Italic" TextDecorations="Underline"/></Hyperlink></TextBlock>
                 <Label Content="{Binding AppName}" FontSize="30" Foreground="White" VerticalAlignment="Center" FontWeight="Bold" Margin="10,0,0,0"/>
@@ -489,7 +489,7 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">PLC</RadioButton>
+                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">压床</RadioButton>
                             <RadioButton Grid.Row="1" Checked="RadioButton_Checked">电池扫码枪</RadioButton>
                             <RadioButton Grid.Row="2" Checked="RadioButton_Checked">托盘扫码枪</RadioButton>
                             <RadioButton Grid.Row="3" Checked="RadioButton_Checked">托盘管理</RadioButton>
@@ -608,6 +608,8 @@
             <Grid>
                 <DockPanel>
                     <Canvas DockPanel.Dock="Left" Width="5" Background="#FF2B579A"/>
+                    <Canvas DockPanel.Dock="Right" Width="5" Background="#FF2B579A"/>
+                    <Canvas DockPanel.Dock="Bottom" Height="5" Background="#FF2B579A"/>
                     <Grid Background="#858586">
                         <TabControl x:Name="tabControl"  Foreground="Black" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" SelectionChanged="tabControl_SelectionChanged">
                             <local:TabItemClose Header="主界面" Height="30"  Width="100" IsCanClose="False">

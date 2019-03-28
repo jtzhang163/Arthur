@@ -17,7 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Machine.PLC
+namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
 {
     /// <summary>
     /// Edit.xaml 的交互逻辑
@@ -43,7 +43,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.PLC
 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteParentUserControlMethod(this, "PlcView", "SwitchWindow", "Details", 0);
+            Helper.ExecuteParentUserControlMethod(this, "MainMachine", "SwitchWindow", "Details", 0);
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)
@@ -53,6 +53,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.PLC
             var ip = this.ip.Text.Trim();
             var port = _Convert.StrToInt(this.port.Text.Trim(), -1);
             var comm_interval = this.comm_interval.Text.Trim();
+            var jaw_traycode = this.jaw_traycode.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(ip)|| string.IsNullOrWhiteSpace(this.port.Text))
             {
@@ -68,6 +69,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.PLC
                     Current.MainMachine.IP = ip;
                     Current.MainMachine.Port = port;
                     Current.MainMachine.CommInterval = Convert.ToInt32(comm_interval);
+                    Current.MainMachine.JawTrayCode = jaw_traycode;
 
                     Context.AppContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);

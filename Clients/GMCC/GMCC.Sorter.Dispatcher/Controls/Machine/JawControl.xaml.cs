@@ -16,21 +16,14 @@ using System.Windows.Shapes;
 namespace GMCC.Sorter.Dispatcher.Controls.Machine
 {
     /// <summary>
-    /// StorageUC.xaml 的交互逻辑
+    /// JawControl.xaml 的交互逻辑
     /// </summary>
-    public partial class StorageUC : UserControl
+    public partial class JawControl : UserControl
     {
-        public int Col;
-        public int Floor;
-
-        public StorageUC(int id)
+        public JawControl()
         {
-
             InitializeComponent();
-            var storage = Current.Storages.FirstOrDefault(o => o.Id == id);
-            this.DataContext = storage;
-            this.Col = storage.Column;
-            this.Floor = storage.Floor;
+            this.DataContext = Current.MainMachine;
         }
     }
 }

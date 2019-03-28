@@ -129,4 +129,18 @@ namespace GMCC.Sorter.Dispatcher.Utils
         }
     }
 
+    public class JawPosToMarginConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var pos = (int)value;
+            return new Thickness(pos, 0, 0, 0); ;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }

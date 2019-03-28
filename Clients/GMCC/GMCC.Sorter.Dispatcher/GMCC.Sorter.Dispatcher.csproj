@@ -84,8 +84,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\Machine\StorageUC.xaml.cs">
-      <DependentUpon>StorageUC.xaml</DependentUpon>
+    <Compile Include="Controls\Machine\JawControl.xaml.cs">
+      <DependentUpon>JawControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Machine\StorageControl.xaml.cs">
+      <DependentUpon>StorageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Query\Battery\Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
@@ -123,10 +126,10 @@
     <Compile Include="UserControls\Machine\BatteryScaner\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Machine\PLC\Details.xaml.cs">
+    <Compile Include="UserControls\Machine\MainMachine\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Machine\PLC\Edit.xaml.cs">
+    <Compile Include="UserControls\Machine\MainMachine\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Machine\TrayScaner\Index.xaml.cs">
@@ -183,8 +186,8 @@
     <Compile Include="Views\Machine\BatteryScanerView.xaml.cs">
       <DependentUpon>BatteryScanerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Machine\PLCView.xaml.cs">
-      <DependentUpon>PLCView.xaml</DependentUpon>
+    <Compile Include="Views\Machine\MainMachineView.xaml.cs">
+      <DependentUpon>MainMachineView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainViewUC.xaml.cs">
       <DependentUpon>MainViewUC.xaml</DependentUpon>
@@ -205,7 +208,11 @@
       <DependentUpon>RoleManageUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Converter.cs" />
-    <Page Include="Controls\Machine\StorageUC.xaml">
+    <Page Include="Controls\Machine\JawControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\Machine\StorageControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -257,11 +264,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Machine\PLC\Details.xaml">
+    <Page Include="UserControls\Machine\MainMachine\Details.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Machine\PLC\Edit.xaml">
+    <Page Include="UserControls\Machine\MainMachine\Edit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -321,7 +328,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Machine\PLCView.xaml">
+    <Page Include="Views\Machine\MainMachineView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

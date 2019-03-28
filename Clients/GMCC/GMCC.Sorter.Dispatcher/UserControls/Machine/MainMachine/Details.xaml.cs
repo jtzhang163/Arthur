@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Machine.PLC
+namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
 {
     /// <summary>
     /// Details.xaml 的交互逻辑
@@ -29,13 +29,13 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.PLC
 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteParentUserControlMethod(this, "PlcView", "SwitchWindow", "Details", 0);
+            Helper.ExecuteParentUserControlMethod(this, "MainMachine", "SwitchWindow", "Details", 0);
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
             var id = Convert.ToInt32((sender as Button).Tag);
-            Helper.ExecuteParentUserControlMethod(this, "PlcView", "SwitchWindow", "Edit", id);
+            Helper.ExecuteParentUserControlMethod(this, "MainMachine", "SwitchWindow", "Edit", id);
         }
     }
 }

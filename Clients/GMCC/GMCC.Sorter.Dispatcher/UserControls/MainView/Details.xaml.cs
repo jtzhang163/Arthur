@@ -1,5 +1,6 @@
 ﻿using Arthur.View.Utils;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Dispatcher.Controls.Machine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,31 +29,35 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
 
             Current.Storages.ForEach(o =>
             {
-                var storageUC = new Controls.Machine.StorageUC(o.Id);
+                var storageUC = new Controls.Machine.StorageControl(o.Id);
                 this.grid.Children.Add(storageUC);
                 SetRowCol(storageUC);
             });
+
+            var jawControl = new JawControl();
+            jawControl.Margin = new Thickness(Current.MainMachine.JawPos, 0, 0, 0);
+            this.jaw.Children.Add(jawControl);
         }
 
-        private void SetRowCol(Controls.Machine.StorageUC storageUC)
+        private void SetRowCol(Controls.Machine.StorageControl storageControl)
         {
 
             var row = 0;
             var col = 0;
 
-            if (storageUC.Col < Common.STOR_COL_COUNT / 2 + 1)
+            if (storageControl.Col < Common.STOR_COL_COUNT / 2 + 1)
             {
-                row = 6 - storageUC.Floor;
-                col = 1 + storageUC.Col;
+                row = 6 - storageControl.Floor;
+                col = 1 + storageControl.Col;
             }
             else
             {
-                row = 13 - storageUC.Floor;
-                col = storageUC.Col - 8;
+                row = 13 - storageControl.Floor;
+                col = storageControl.Col - 8;
             }
 
-            Grid.SetRow(storageUC, row);
-            Grid.SetColumn(storageUC, col);
+            Grid.SetRow(storageControl, row);
+            Grid.SetColumn(storageControl, col);
         }
 
     }

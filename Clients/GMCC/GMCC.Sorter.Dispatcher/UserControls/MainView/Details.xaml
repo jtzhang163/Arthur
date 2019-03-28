@@ -54,6 +54,8 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
+                    <Grid x:Name="jaw" Grid.Row="6" Grid.RowSpan="2" Grid.ColumnSpan="13">
+                    </Grid>
                 </Grid>
             </DockPanel>
         </DockPanel>

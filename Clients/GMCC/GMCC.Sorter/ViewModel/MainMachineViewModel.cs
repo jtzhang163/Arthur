@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GMCC.Sorter.ViewModel
@@ -22,7 +23,7 @@ namespace GMCC.Sorter.ViewModel
         {
             get
             {
-                if(ip == null)
+                if (ip == null)
                 {
                     ip = ((EthernetCommor)this.Commor.Communicator).IP;
                 }
@@ -63,6 +64,132 @@ namespace GMCC.Sorter.ViewModel
             }
         }
 
+
+        private string jawName = null;
+        /// <summary>
+        /// 夹爪机构名称
+        /// </summary>
+        public string JawName
+        {
+            get
+            {
+                if (jawName == null)
+                {
+                    jawName = Arthur.Business.Application.GetOption("JawName");
+                    if (jawName == null)
+                    {
+                        jawName = "横移";
+                        Arthur.Business.Application.SetOption("JawName", jawName, "夹爪机构名称");
+                    }
+                }
+                return jawName;
+            }
+            set
+            {
+                if (jawName != value)
+                {
+                    Arthur.Business.Application.SetOption("JawName", value);
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. 夹爪机构名称: [{0}] 修改为 [{1}]", jawName, value), Arthur.App.Model.OpType.编辑);
+                    SetProperty(ref jawName, value);
+                }
+            }
+        }
+
+
+        private int jawPos = -2;
+        /// <summary>
+        /// 夹爪机构位置
+        /// </summary>
+        public int JawPos
+        {
+            get
+            {
+                if (jawPos == -2)
+                {
+                    jawPos = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("JawPos"), -1);
+                    if (jawPos == -1)
+                    {
+                        jawPos = 0;
+                        Arthur.Business.Application.SetOption("JawPos", jawPos.ToString(), "夹爪机构位置");
+                    }
+                }
+                return jawPos;
+            }
+            set
+            {
+                if (value > jawPos)
+                {
+                    this.JawStatus = "» 移动 »";
+                }
+                else if(value < jawPos)
+                {
+                    this.JawStatus = "« 移动 «";
+                }
+                else
+                {
+                    this.JawStatus = "闲置";
+                }
+
+                if (jawPos != value)
+                {
+                    Arthur.Business.Application.SetOption("JawPos", value.ToString());
+                    SetProperty(ref jawPos, value);
+                }
+            }
+        }
+
+
+
+        private string jawStatus = "闲置";
+        /// <summary>
+        /// 夹爪机构状态
+        /// </summary>
+        public string JawStatus
+        {
+            get
+            {
+                return jawStatus;
+            }
+            set
+            {
+                if (jawStatus != value)
+                {
+                    SetProperty(ref jawStatus, value);
+                }
+            }
+        }
+
+
+        private string jawTrayCode = null;
+        /// <summary>
+        /// 夹爪机构托盘条码
+        /// </summary>
+        public string JawTrayCode
+        {
+            get
+            {
+                if (jawTrayCode == null)
+                {
+                    jawTrayCode = Arthur.Business.Application.GetOption("JawTrayCode");
+                    if (jawTrayCode == null)
+                    {
+                        jawTrayCode = "";
+                        Arthur.Business.Application.SetOption("JawTrayCode", jawTrayCode, "夹爪机构名称");
+                    }
+                }
+                return jawTrayCode;
+            }
+            set
+            {
+                if (jawTrayCode != value)
+                {
+                    Arthur.Business.Application.SetOption("JawTrayCode", value);
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. 夹爪机构托盘条码: [{0}] 修改为 [{1}]", jawTrayCode, value), Arthur.App.Model.OpType.编辑);
+                    SetProperty(ref jawTrayCode, value);
+                }
+            }
+        }
+
         /// <summary>
         /// 电池扫码准备就绪
         /// </summary>
@@ -97,23 +224,31 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
-
-            Console.WriteLine("MainMachineViewModel: Comm");
-            if (this.Commor.Connected)
+            var ret = this.Commor.Comm("GET_PLC_INFO");
+            if (ret.IsOk)
             {
-                if (this.Commor.Comm("").IsOk)
+                // this.RealtimeStatus = "+" + ret.Data;
+
+                var retData = ret.Data.ToString().Split('-');
+                this.IsBatteryScanReady = retData[0] == "1";
+                this.IsBindTrayScanReady = retData[1] == "1";
+                this.IsUnbindTrayScanReady = retData[2] == "1";
+                this.JawPos = Convert.ToInt32(retData[3]);
+
+                var t = new Thread(() =>
                 {
-                   // this.IsBatteryScanReady = true;
-                    //...
-                }
+                    //界面交替显示扫码状态
+                    Thread.Sleep(this.CommInterval / 2);
+                    //this.RealtimeStatus = "等待扫码...";
+                });
+                t.Start();
+                this.IsAlive = true;
             }
             else
             {
+                this.RealtimeStatus = ret.Msg;
                 this.IsAlive = false;
             }
-
-            this.IsBatteryScanReady = true;
-            this.IsAlive = true;
         }
     }
 }
