@@ -27,10 +27,10 @@ namespace GMCC.Sorter.Business
         {
             try
             {
-                //if (Context.Batteries.Count(r => r.Code == battery.Code) > 0)
-                //{
-                //    return new Result(string.Format("系统中已存在条码为{0}的电池！", battery.Code));
-                //}
+                if (Context.Batteries.Count(r => r.Code == battery.Code) > 0)
+                {
+                    return new Result(string.Format("系统中已存在条码为{0}的电池！", battery.Code));
+                }
                 lock (Arthur.App.Application.DbLocker)
                 {
                     Context.Batteries.Add(new Battery() { Code = battery.Code, ScanTime = DateTime.Now });

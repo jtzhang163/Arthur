@@ -50,6 +50,7 @@ namespace GMCC.Sorter.Business
                         StorageId = -1,
                         Code = procTray.Code,
                         ScanTime = DateTime.Now,
+                        StartStillTime = Arthur.Default.DateTime
                     });
 
                     Context.AppContext.SaveChanges();

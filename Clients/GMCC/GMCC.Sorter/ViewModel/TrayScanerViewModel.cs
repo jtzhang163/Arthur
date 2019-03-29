@@ -163,40 +163,72 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
-            //if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady)
-            //{
-            var ret = this.Commor.Comm(this.ScanCommand);
-            if (ret.IsOk)
-            {
-                this.RealtimeStatus = "+" + ret.Data;
-                var t = new Thread(() =>
-                {
-                    var saveRet = Result.OK;
+            if (!Current.MainMachine.IsAlive) return;
 
-                    if (this == Current.BindTrayScaner)
+            if (this == Current.BindTrayScaner && Current.MainMachine.IsBindTrayScanReady && !Current.MainMachine.isAlreadyBindTrayScan)
+            {
+                var ret = this.Commor.Comm(this.ScanCommand);
+                if (ret.IsOk)
+                {
+                    Current.MainMachine.isAlreadyBindTrayScan = true;
+                    this.RealtimeStatus = "+" + ret.Data;
+                    var t = new Thread(() =>
                     {
                         //把托盘条码保存进数据库
-                        saveRet = new Business.ProcTrayManage().Create(new Model.ProcTray() { Code = ret.Data.ToString() }, true);
-                    }
+                        var saveRet = new Business.ProcTrayManage().Create(new Model.ProcTray() { Code = ret.Data.ToString() }, true);
 
-                    if (!saveRet.IsOk)
-                    {
-                        Current.App.ErrorMsg = saveRet.Msg;
-                        Current.App.RunStatus = RunStatus.异常;
-                        TimerExec.IsRunning = false;
-                    }
+                        if (!saveRet.IsOk)
+                        {
+                            Current.App.ErrorMsg = saveRet.Msg;
+                            Current.App.RunStatus = RunStatus.异常;
+                            TimerExec.IsRunning = false;
+                        }
 
-                    //界面交替显示扫码状态
-                    Thread.Sleep(this.CommInterval / 2);
-                    this.RealtimeStatus = "等待扫码...";
-                });
-                t.Start();
-                this.IsAlive = true;
+                        //界面交替显示扫码状态
+                        Thread.Sleep(this.CommInterval / 2);
+                        this.RealtimeStatus = "等待扫码...";
+                    });
+                    t.Start();
+                    this.IsAlive = true;
+                }
+                else
+                {
+                    this.RealtimeStatus = ret.Msg;
+                    this.IsAlive = false;
+                }
             }
-            else
+            else if (this == Current.UnbindTrayScaner && Current.MainMachine.IsUnbindTrayScanReady && !Current.MainMachine.isAlreadyUnbindTrayScan)
             {
-                this.RealtimeStatus = ret.Msg;
-                this.IsAlive = false;
+                var ret = this.Commor.Comm(this.ScanCommand);
+                if (ret.IsOk)
+                {
+                    Current.MainMachine.isAlreadyBindTrayScan = true;
+                    this.RealtimeStatus = "+" + ret.Data;
+                    var t = new Thread(() =>
+                    {
+                        var saveRet = Result.OK;
+
+                        //处理解盘
+
+                        if (!saveRet.IsOk)
+                        {
+                            Current.App.ErrorMsg = saveRet.Msg;
+                            Current.App.RunStatus = RunStatus.异常;
+                            TimerExec.IsRunning = false;
+                        }
+
+                        //界面交替显示扫码状态
+                        Thread.Sleep(this.CommInterval / 2);
+                        this.RealtimeStatus = "等待扫码...";
+                    });
+                    t.Start();
+                    this.IsAlive = true;
+                }
+                else
+                {
+                    this.RealtimeStatus = ret.Msg;
+                    this.IsAlive = false;
+                }
             }
             //}
         }

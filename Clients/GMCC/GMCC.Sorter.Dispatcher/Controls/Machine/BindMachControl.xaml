@@ -4,8 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.Controls.Machine"
+             xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              mc:Ignorable="d" Height="140" Width="100"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <utils:SignalToSingalColorConverter x:Key="signalToSingalColorConverter"/>
+    </UserControl.Resources>
 
     <Border BorderThickness="1" BorderBrush="Black">
         <Grid>
@@ -21,10 +25,9 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0" Grid.ColumnSpan="2" Content="绑盘机构" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0" VerticalAlignment="Center"/>
             <Label Grid.Row="1" Content="托盘扫码就绪" FontSize="10" HorizontalContentAlignment="Center" Margin="0" Padding="0"/>
-            <Ellipse  Grid.Row="1" Grid.Column="1" Fill="LightGray" Width="12" Height="12"/>
+            <Ellipse  Grid.Row="1" Grid.Column="1" Fill="{Binding IsBindTrayScanReady,Converter={StaticResource signalToSingalColorConverter}}" Width="12" Height="12"/>
             <Label Grid.Row="2" Content="电池扫码就绪" FontSize="10" HorizontalContentAlignment="Center" Margin="0" Padding="0"/>
-            <!--<Rectangle Grid.Row="2" Grid.Column="1" Fill="Lime" Margin="0,3,5,3"/>-->
-            <Ellipse Grid.Row="2" Grid.Column="1" Fill="Lime"  Width="12" Height="12" />
+            <Ellipse Grid.Row="2" Grid.Column="1" Fill="{Binding IsBatteryScanReady,Converter={StaticResource signalToSingalColorConverter}}"  Width="12" Height="12" />
             <Border Grid.Row="3" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
                     <Label DockPanel.Dock="Bottom" Content="tray00002" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0"/>

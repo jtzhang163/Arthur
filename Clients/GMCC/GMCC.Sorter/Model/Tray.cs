@@ -23,6 +23,11 @@ namespace GMCC.Sorter.Model
         /// 所在料仓
         /// </summary>
         public int StorageId { get; set; }
+
+        /// <summary>
+        /// 开始静置时间
+        /// </summary>
+        public DateTime StartStillTime { get; set; }
     }
 
     /// <summary>

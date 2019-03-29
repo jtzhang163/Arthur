@@ -62,5 +62,26 @@ namespace GMCC.Sorter.ViewModel
                 }
             }
         }
+
+        private int stillTimeSpan = -2;
+        /// <summary>
+        /// 静置时间(min)
+        /// </summary>
+        public int StillTimeSpan
+        {
+            get
+            {
+                return stillTimeSpan;
+            }
+            set
+            {
+                if (stillTimeSpan != value)
+                {
+                    Context.Storages.FirstOrDefault(o => o.Id == this.Id).StillTimeSpan = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 静置时间: [{1}] 修改为 [{2}]", Name, stillTimeSpan, value), Arthur.App.Model.OpType.编辑);
+                    SetProperty(ref stillTimeSpan, value);
+                }
+            }
+        }
     }
 }

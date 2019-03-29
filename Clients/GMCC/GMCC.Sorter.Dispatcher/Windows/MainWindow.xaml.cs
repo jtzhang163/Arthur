@@ -145,6 +145,7 @@ namespace GMCC.Sorter.Dispatcher
             }
             else
             {
+                GMCC.Sorter.Run.Running.Reset();
                 Arthur.Business.Logging.AddEvent(string.Format("关闭软件", ""), Arthur.App.Model.EventType.信息);
             }
         }

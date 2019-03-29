@@ -18,5 +18,10 @@ namespace GMCC.Sorter.Model
         /// 所在层
         /// </summary>
         public int Floor { get; set; }
+
+        /// <summary>
+        /// 静置时间(min)
+        /// </summary>
+        public int StillTimeSpan { get; set; }
     }
 }

@@ -10,11 +10,29 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="1*"/>
+                <!--<RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>-->
             </Grid.RowDefinitions>
-            <Label Content="{Binding Name}" FontSize="10" Padding="0" HorizontalContentAlignment="Center"/>
-            <Label Grid.Row="2" Content="Tray0003" FontSize="10" Padding="0" HorizontalContentAlignment="Center"/>
+            <Label Content="{Binding Name}" FontSize="12" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Label.ToolTip>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Content="料仓名称："/>
+                        <Label Grid.Row="0" Grid.Column="1" Content="{Binding Name}"/>
+                        <Label Grid.Row="1" Grid.Column="0" Content="托盘条码："/>
+                        <Label Grid.Row="1" Grid.Column="1" Content="{Binding TrayCode}"/>
+                    </Grid>
+                </Label.ToolTip>
+            </Label>
+            <!--<Label Grid.Row="2" Content="Tray0003" FontSize="10" Padding="0" HorizontalContentAlignment="Center"/>-->
         </Grid>
     </Border>
 </UserControl>

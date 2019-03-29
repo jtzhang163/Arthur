@@ -102,12 +102,12 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
-
-            //if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady)
-            //{
+            if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady && !Current.MainMachine.isAlreadyBatteryScan)
+            {
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
                 {
+                    Current.MainMachine.isAlreadyBatteryScan = true;
                     this.RealtimeStatus = "+" + ret.Data;
                     var t = new Thread(() =>
                     {
@@ -132,7 +132,7 @@ namespace GMCC.Sorter.ViewModel
                     this.RealtimeStatus = ret.Msg;
                     this.IsAlive = false;
                 }
-            //}
+            }
         }
     }
 }

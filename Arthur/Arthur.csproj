@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Default.cs" />
     <Compile Include="Extensions\CommonExtension.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="Result.cs" />

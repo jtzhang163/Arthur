@@ -143,4 +143,18 @@ namespace GMCC.Sorter.Dispatcher.Utils
         }
     }
 
+    public class SignalToSingalColorConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var signal = (bool)value;
+            return signal ? Brushes.Lime : Brushes.LightGray;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }
