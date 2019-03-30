@@ -20,6 +20,11 @@ namespace GMCC.Sorter.Model
         public int Floor { get; set; }
 
         /// <summary>
+        /// 流程托盘Id
+        /// </summary>
+        public int ProcTrayId { get; set; }
+       
+        /// <summary>
         /// 静置时间(min)
         /// </summary>
         public int StillTimeSpan { get; set; }

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine"
+             xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -12,6 +13,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Style/Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -25,6 +27,9 @@
                 <TextBlock x:Name="tip" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>
                 <Grid x:Name="grid">
                     <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -47,8 +52,14 @@
                     <TextBox x:Name="port" Grid.Row="3" Grid.Column="1" Text="{Binding Port, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False"  GotFocus="textbox_GotFocus"/>
                     <Label Content="通信间隔(ms)：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="comm_interval" Grid.Row="4" Grid.Column="1" Text="{Binding CommInterval, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" />
-                    <Label Content="横移托盘条码：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <TextBox x:Name="jaw_traycode" Grid.Row="5" Grid.Column="1" Text="{Binding JawTrayCode, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="绑盘位条码：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="bind_traycode" Grid.Row="5" Grid.Column="1" Text="{Binding BindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="横移托盘条码：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="jaw_traycode" Grid.Row="6" Grid.Column="1" Text="{Binding JawProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="解盘位条码：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="unbind_traycode" Grid.Row="7" Grid.Column="1" Text="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="静置时间(min)：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="still_timespan" Grid.Row="8" Grid.Column="1" Text="{Binding StillTimeSpan, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" />
                 </Grid>
             </DockPanel>
         </DockPanel>

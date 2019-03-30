@@ -28,6 +28,7 @@ namespace GMCC.Sorter.Business
 
             try
             {
+                var id = -1;
                 lock (Arthur.App.Application.DbLocker)
                 {
                     var tray = Context.Trays.FirstOrDefault(t => t.Code == procTray.Code);
@@ -44,7 +45,7 @@ namespace GMCC.Sorter.Business
                         Context.AppContext.SaveChanges();
                     }
 
-                    Context.ProcTrays.Add(new ProcTray()
+                    var proctray = Context.ProcTrays.Add(new ProcTray()
                     {
                         TrayId = tray.Id,
                         StorageId = -1,
@@ -53,6 +54,7 @@ namespace GMCC.Sorter.Business
                         StartStillTime = Arthur.Default.DateTime
                     });
 
+                    id = proctray.Id;
                     Context.AppContext.SaveChanges();
                 }
 
@@ -64,7 +66,7 @@ namespace GMCC.Sorter.Business
                 {
                     Arthur.Business.Logging.AddOplog(string.Format("新增流程托盘[{0}]", procTray.Code), Arthur.App.Model.OpType.创建);
                 }
-                return Result.OK;
+                return Result.OkHasData(id);
             }
             catch (Exception ex)
             {

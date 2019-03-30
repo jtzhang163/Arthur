@@ -1,4 +1,5 @@
-﻿using GMCC.Sorter.Utils;
+﻿using GMCC.Sorter.Data;
+using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -149,6 +150,48 @@ namespace GMCC.Sorter.Dispatcher.Utils
         {
             var signal = (bool)value;
             return signal ? Brushes.Lime : Brushes.LightGray;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class IdToProcTrayCodeConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var id = (int)value;
+            return (Context.ProcTrays.FirstOrDefault(o => o.Id == id) ?? new Model.ProcTray()).Code;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ProcTrayIdToBackConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var id = (int)value;
+            return id > 0 ? Brushes.LightGreen : Brushes.White;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class ProcTrayIdToVisibilityConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var id = (int)value;
+            return id > 0 ? Visibility.Visible : Visibility.Hidden;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -17,13 +17,15 @@ namespace GMCC.Sorter.ViewModel
 
         public int Floor { get; set; }
 
-        public StorageViewModel(int id, int column, int floor, string name, string company)
+        public StorageViewModel(int id, int column, int floor, string name, string company, int stillTimeSpan, int procTrayId)
         {
             this.Id = id;
             this.Column = column;
             this.Floor = floor;
             this.name = name;
             this.company = company;
+            this.stillTimeSpan = stillTimeSpan;
+            this.procTrayId = procTrayId;
         }
 
         private string name = null;
@@ -80,6 +82,28 @@ namespace GMCC.Sorter.ViewModel
                     Context.Storages.FirstOrDefault(o => o.Id == this.Id).StillTimeSpan = value;
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 静置时间: [{1}] 修改为 [{2}]", Name, stillTimeSpan, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref stillTimeSpan, value);
+                }
+            }
+        }
+
+
+        private int procTrayId = -2;
+        /// <summary>
+        /// 流程托盘Id
+        /// </summary>
+        public int ProcTrayId
+        {
+            get
+            {
+                return procTrayId;
+            }
+            set
+            {
+                if (procTrayId != value)
+                {
+                    Context.Storages.FirstOrDefault(o => o.Id == this.Id).ProcTrayId = value;
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 流程托盘Id: [{1}] 修改为 [{2}]", Name, procTrayId, value), Arthur.App.Model.OpType.编辑);
+                    SetProperty(ref procTrayId, value);
                 }
             }
         }

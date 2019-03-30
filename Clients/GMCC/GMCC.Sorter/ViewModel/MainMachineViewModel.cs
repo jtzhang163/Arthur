@@ -122,7 +122,7 @@ namespace GMCC.Sorter.ViewModel
                     if (stillTimeSpan == -1)
                     {
                         stillTimeSpan = 0;
-                        Arthur.Business.Application.SetOption("StillTimeSpan", jawPos.ToString(), "静置时间(min)");
+                        Arthur.Business.Application.SetOption("StillTimeSpan", stillTimeSpan.ToString(), "静置时间(min)");
                     }
                 }
                 return stillTimeSpan;
@@ -134,6 +134,9 @@ namespace GMCC.Sorter.ViewModel
                     Arthur.Business.Application.SetOption("StillTimeSpan", value.ToString());
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 静置时间: [{1}] 修改为 [{2}]", Name, stillTimeSpan, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref stillTimeSpan, value);
+
+                    //同步设置所有料仓静置时间
+                    Current.Storages.ForEach(o => o.StillTimeSpan = value);
                 }
             }
         }
@@ -160,32 +163,91 @@ namespace GMCC.Sorter.ViewModel
         }
 
 
-        private string jawTrayCode = null;
+        private int bindProcTrayId = -2;
         /// <summary>
-        /// 横移托盘条码
+        /// 绑盘位流程托盘Id
         /// </summary>
-        public string JawTrayCode
+        public int BindProcTrayId
         {
             get
             {
-                if (jawTrayCode == null)
+                if (bindProcTrayId == -2)
                 {
-                    jawTrayCode = Arthur.Business.Application.GetOption("JawTrayCode");
-                    if (jawTrayCode == null)
+                    bindProcTrayId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("BindProcTrayId"), -1);
+                    if (bindProcTrayId == -1)
                     {
-                        jawTrayCode = "";
-                        Arthur.Business.Application.SetOption("JawTrayCode", jawTrayCode, "横移名称");
+                        bindProcTrayId = 0;
+                        Arthur.Business.Application.SetOption("BindProcTrayId", bindProcTrayId.ToString(), "绑盘位流程托盘Id");
                     }
                 }
-                return jawTrayCode;
+                return bindProcTrayId;
             }
             set
             {
-                if (jawTrayCode != value)
+                if (bindProcTrayId != value)
                 {
-                    Arthur.Business.Application.SetOption("JawTrayCode", value);
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. 横移托盘条码: [{0}] 修改为 [{1}]", jawTrayCode, value), Arthur.App.Model.OpType.编辑);
-                    SetProperty(ref jawTrayCode, value);
+                    Arthur.Business.Application.SetOption("BindProcTrayId", value.ToString());
+                    SetProperty(ref bindProcTrayId, value);
+                }
+            }
+        }
+
+
+        private int unbindProcTrayId = -2;
+        /// <summary>
+        /// 解盘位流程托盘Id
+        /// </summary>
+        public int UnbindProcTrayId
+        {
+            get
+            {
+                if (unbindProcTrayId == -2)
+                {
+                    unbindProcTrayId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("UnbindProcTrayId"), -1);
+                    if (unbindProcTrayId == -1)
+                    {
+                        unbindProcTrayId = 0;
+                        Arthur.Business.Application.SetOption("UnbindProcTrayId", unbindProcTrayId.ToString(), "解盘位流程托盘Id");
+                    }
+                }
+                return unbindProcTrayId;
+            }
+            set
+            {
+                if (unbindProcTrayId != value)
+                {
+                    Arthur.Business.Application.SetOption("UnbindProcTrayId", value.ToString());
+                    SetProperty(ref unbindProcTrayId, value);
+                }
+            }
+        }
+
+
+        private int jawProcTrayId = -2;
+        /// <summary>
+        /// 横移流程托盘Id
+        /// </summary>
+        public int JawProcTrayId
+        {
+            get
+            {
+                if (jawProcTrayId == -2)
+                {
+                    jawProcTrayId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("JawProcTrayId"), -1);
+                    if (jawProcTrayId == -1)
+                    {
+                        jawProcTrayId = 0;
+                        Arthur.Business.Application.SetOption("JawProcTrayId", jawProcTrayId.ToString(), "横移流程托盘Id");
+                    }
+                }
+                return jawProcTrayId;
+            }
+            set
+            {
+                if (jawProcTrayId != value)
+                {
+                    Arthur.Business.Application.SetOption("JawProcTrayId", value.ToString());
+                    SetProperty(ref jawProcTrayId, value);
                 }
             }
         }

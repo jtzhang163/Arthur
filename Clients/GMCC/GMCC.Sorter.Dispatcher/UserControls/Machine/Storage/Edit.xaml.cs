@@ -53,6 +53,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
         {
             var name = this.name.Text.Trim();
             var company = this.company.Text.Trim();
+            var proctray_code = this.proctray_code.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -65,6 +66,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
                 {
                     this.Storage.Name = name;
                     this.Storage.Company = company;
+                    this.Storage.ProcTrayId = GetProcTrayId(proctray_code);
                     Context.AppContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
@@ -77,6 +79,24 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
                 }
             }
             tip.Visibility = Visibility.Visible;
+        }
+
+        private int GetProcTrayId(string code)
+        {
+            var id = -1;
+            if (string.IsNullOrEmpty(code))
+            {
+                id = 0;
+            }
+            else if (Context.ProcTrays.Count(o => o.Code == code) == 0)
+            {
+                throw new Exception(string.Format("系统中不存在条码为[{0}]的托盘", code));
+            }
+            else
+            {
+                id = Context.ProcTrays.OrderByDescending(o => o.Id).FirstOrDefault(o => o.Code == code).Id;
+            }
+            return id;
         }
     }
 }

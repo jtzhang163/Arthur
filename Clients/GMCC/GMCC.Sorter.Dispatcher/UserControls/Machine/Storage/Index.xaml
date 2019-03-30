@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.Machine.Storage"
+             xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              mc:Ignorable="d" Loaded="UserControl_Loaded"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -36,6 +37,8 @@
                 <Setter Property="Padding" Value="2,0,2,0"/>
                 <!--<Setter Property="Foreground" Value="#09a3de"/>-->
             </Style>
+
+            <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -201,7 +204,27 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="品牌" Width="*"  CanUserSort="True" SortMemberPath="Level">
+                        <DataGridTemplateColumn Header="静置总时间(min)" Width="*"  CanUserSort="True" SortMemberPath="StillTimeSpan">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding StillTimeSpan}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="托盘条码" Width="*"  CanUserSort="True" SortMemberPath="ProcTrayId">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding ProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="品牌" Width="*"  CanUserSort="True" SortMemberPath="Company">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

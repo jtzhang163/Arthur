@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine"
+             xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -11,6 +12,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Style/Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -24,6 +26,9 @@
                 <TextBlock x:Name="tip" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>
                 <Grid x:Name="grid">
                     <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -46,8 +51,14 @@
                     <Label Content="{Binding Port}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="通信间隔(ms)：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding CommInterval}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="横移托盘条码：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding JawTrayCode}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="绑盘位条码：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding BindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="横移托盘条码：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding JawProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="解盘位条码：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="静置时间(min)：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding StillTimeSpan}" Grid.Row="8" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

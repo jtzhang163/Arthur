@@ -53,9 +53,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
             var ip = this.ip.Text.Trim();
             var port = _Convert.StrToInt(this.port.Text.Trim(), -1);
             var comm_interval = this.comm_interval.Text.Trim();
+            var bind_traycode = this.bind_traycode.Text.Trim();
             var jaw_traycode = this.jaw_traycode.Text.Trim();
+            var unbind_traycode = this.unbind_traycode.Text.Trim();
+            var still_timespan = this.still_timespan.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(ip)|| string.IsNullOrWhiteSpace(this.port.Text))
+            if (string.IsNullOrWhiteSpace(ip) || string.IsNullOrWhiteSpace(this.port.Text))
             {
                 tip.Foreground = new SolidColorBrush(Colors.Red);
                 tip.Text = "请填写数据！";
@@ -64,12 +67,16 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
             {
                 try
                 {
+
                     Current.MainMachine.Company = company;
                     Current.MainMachine.ModelNumber = modelNumber;
                     Current.MainMachine.IP = ip;
                     Current.MainMachine.Port = port;
                     Current.MainMachine.CommInterval = Convert.ToInt32(comm_interval);
-                    Current.MainMachine.JawTrayCode = jaw_traycode;
+                    Current.MainMachine.BindProcTrayId = GetProcTrayId(bind_traycode);
+                    Current.MainMachine.JawProcTrayId = GetProcTrayId(jaw_traycode);
+                    Current.MainMachine.UnbindProcTrayId = GetProcTrayId(unbind_traycode);
+                    Current.MainMachine.StillTimeSpan = Convert.ToInt32(still_timespan);
 
                     Context.AppContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);
@@ -82,6 +89,24 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
                 }
             }
             tip.Visibility = Visibility.Visible;
+        }
+
+        private int GetProcTrayId(string code)
+        {
+            var id = -1;
+            if (string.IsNullOrEmpty(code))
+            {
+                id = 0;
+            }
+            else if (Context.ProcTrays.Count(o => o.Code == code) == 0)
+            {
+                throw new Exception(string.Format("系统中不存在条码为[{0}]的托盘", code));
+            }
+            else
+            {
+                id = Context.ProcTrays.OrderByDescending(o => o.Id).FirstOrDefault(o => o.Code == code).Id;
+            }
+            return id;
         }
     }
 }
