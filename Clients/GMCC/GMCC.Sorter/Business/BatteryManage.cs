@@ -1,6 +1,7 @@
 ﻿using Arthur;
 using Arthur.Business;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Model;
 using GMCC.Sorter.Run;
 using System;
@@ -33,7 +34,13 @@ namespace GMCC.Sorter.Business
                 }
                 lock (Arthur.App.Application.DbLocker)
                 {
-                    Context.Batteries.Add(new Battery() { Code = battery.Code, ScanTime = DateTime.Now });
+                    Context.Batteries.Add(new Battery() {
+                        Code = battery.Code,
+                        ScanTime = DateTime.Now,
+                        ProcTrayId = Current.MainMachine.BindProcTrayId,
+                        Pos = Current.MainMachine.GetBindProcTray().GetBatteries().Count + 1,
+                        SortResult = SortResult.Unknown
+                    });
                     Context.AppContext.SaveChanges();
                 }
                 if (isScan)

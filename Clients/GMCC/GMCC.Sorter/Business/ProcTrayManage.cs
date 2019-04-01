@@ -5,6 +5,7 @@ using GMCC.Sorter.Model;
 using GMCC.Sorter.Run;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,11 +52,11 @@ namespace GMCC.Sorter.Business
                         StorageId = -1,
                         Code = procTray.Code,
                         ScanTime = DateTime.Now,
-                        StartStillTime = Arthur.Default.DateTime
+                        StartStillTime = DateTime.Now,//Arthur.Default.DateTime
                     });
+                    Context.AppContext.SaveChanges();
 
                     id = proctray.Id;
-                    Context.AppContext.SaveChanges();
                 }
 
                 if (isScan)
@@ -73,5 +74,20 @@ namespace GMCC.Sorter.Business
                 return new Result(ex);
             }
         }
+
+        //public List<Battery> GetBatteries(int procTrayId)
+        //{
+        //    return Context.Batteries.Where(o => o.ProcTrayId == procTrayId).AsNoTracking().ToList();
+        //}
+
+        //public static int GetBatteryCount(int procTrayId)
+        //{
+        //    return Context.Batteries.Count(o => o.ProcTrayId == procTrayId);
+        //}
+
+        //public static ProcTray CreateById(int id)
+        //{
+        //    return Context.ProcTrays.SingleOrDefault(o => o.Id == id) ?? new ProcTray();
+        //}
     }
 }

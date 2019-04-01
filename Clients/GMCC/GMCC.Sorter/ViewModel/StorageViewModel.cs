@@ -1,5 +1,6 @@
 ﻿using Arthur.App;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,22 @@ namespace GMCC.Sorter.ViewModel
             this.company = company;
             this.stillTimeSpan = stillTimeSpan;
             this.procTrayId = procTrayId;
+        }
+
+        private string showInfo;
+        public string ShowInfo
+        {
+            get
+            {
+                return showInfo;
+            }
+            set
+            {
+                if (showInfo != value)
+                {
+                    this.SetProperty(ref showInfo, value);
+                }
+            }
         }
 
         private string name = null;
@@ -104,8 +121,44 @@ namespace GMCC.Sorter.ViewModel
                     Context.Storages.FirstOrDefault(o => o.Id == this.Id).ProcTrayId = value;
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 流程托盘Id: [{1}] 修改为 [{2}]", Name, procTrayId, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref procTrayId, value);
+                    procTray = null;
                 }
             }
         }
+
+        private ProcTray procTray = null;
+
+        public ProcTray ProcTray
+        {
+            get
+            {
+                if (procTray == null)
+                {
+                    procTray = Context.ProcTrays.FirstOrDefault(o => o.Id == this.ProcTrayId)?? new ProcTray();
+                }
+                return procTray;
+            }
+        }
+
+        private StorageStatus status = StorageStatus.未知;
+        public StorageStatus Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                SetProperty(ref status, value);
+            }
+        }
+    }
+
+    public enum StorageStatus
+    {
+        未知 = 0,
+        无托盘 = 1,
+        正在静置 = 2,
+        静置完成 = 3
     }
 }

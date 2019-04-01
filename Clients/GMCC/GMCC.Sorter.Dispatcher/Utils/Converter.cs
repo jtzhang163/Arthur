@@ -200,4 +200,22 @@ namespace GMCC.Sorter.Dispatcher.Utils
         }
     }
 
+
+    public class StorageStatusToBackConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var status = (StorageStatus)value;
+            return status == StorageStatus.无托盘 ? Brushes.White :
+                status == StorageStatus.正在静置 ? Brushes.LightGreen :
+                status == StorageStatus.静置完成 ? Brushes.Cyan :
+                Brushes.White;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }

@@ -23,8 +23,7 @@ namespace Arthur.App.Model
         /// <summary>
         /// 位置
         /// </summary>
-        [MaxLength(50)]
-        public string Pos { get; set; }
+        public int Pos { get; set; }
 
         /// <summary>
         /// 扫码时间

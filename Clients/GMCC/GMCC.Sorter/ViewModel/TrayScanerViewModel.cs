@@ -176,12 +176,19 @@ namespace GMCC.Sorter.ViewModel
                     {
                         //把托盘条码保存进数据库
                         var saveRet = new Business.ProcTrayManage().Create(new Model.ProcTray() { Code = ret.Data.ToString() }, true);
-
-                        if (!saveRet.IsOk)
+                        if (saveRet.IsOk)
                         {
-                            Current.App.ErrorMsg = saveRet.Msg;
-                            Current.App.RunStatus = RunStatus.异常;
-                            TimerExec.IsRunning = false;
+                            if (Current.MainMachine.BindProcTrayId > 0)
+                            {
+                                Running.StopRunAndShowMsg("绑盘位已有托盘条码！");
+                                return;
+                            }
+                            Current.MainMachine.BindProcTrayId = (int)saveRet.Data;
+                        }
+                        else
+                        {
+                            Running.StopRunAndShowMsg(saveRet.Msg);
+                            return;
                         }
 
                         //界面交替显示扫码状态

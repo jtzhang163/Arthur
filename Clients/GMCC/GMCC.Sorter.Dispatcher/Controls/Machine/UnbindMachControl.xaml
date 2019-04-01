@@ -29,7 +29,7 @@
             <Border Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
                     <Label DockPanel.Dock="Bottom" Content="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0"/>
-                    <Grid Visibility="{Binding UnbindProcTrayId,Converter={StaticResource procTrayIdToVisibilityConverter}}" Background="LightGreen" Margin="15,5,15,0" local:GridHelper.ShowBorder="True" local:GridHelper.GridLineThickness="0.3" local:GridHelper.GridLineBrush="Black" Height="50">
+                    <Grid Visibility="{Binding UnbindProcTrayId,Converter={StaticResource procTrayIdToVisibilityConverter}}" Background="Cyan" Margin="15,5,15,0" Height="50">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
