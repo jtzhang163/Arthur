@@ -13,7 +13,7 @@ namespace GMCC.Sorter.Extensions
     {
         public static List<Battery> GetBatteries(this ProcTray procTray)
         {
-            return Context.Batteries.Where(o => o.ProcTrayId == procTray.Id).AsNoTracking().ToList();
+            return Context.Batteries.Where(o => o.ProcTrayId == procTray.Id).ToList();
         }
     }
 }

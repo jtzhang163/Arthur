@@ -97,6 +97,18 @@
     <Compile Include="Controls\Machine\StorageControl.xaml.cs">
       <DependentUpon>StorageControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Query\ProcTray\Create.xaml.cs">
+      <DependentUpon>Create.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Query\ProcTray\Details.xaml.cs">
+      <DependentUpon>Details.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Query\ProcTray\Edit.xaml.cs">
+      <DependentUpon>Edit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Query\ProcTray\Index.xaml.cs">
+      <DependentUpon>Index.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Query\Battery\Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
     </Compile>
@@ -142,9 +154,6 @@
     <Compile Include="UserControls\Machine\TrayScaner\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Machine\Tray\Create.xaml.cs">
-      <DependentUpon>Create.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Machine\Tray\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
@@ -174,6 +183,9 @@
     </Compile>
     <Compile Include="UserControls\SystemUC\ParamUC\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Query\ProcTrayView.xaml.cs">
+      <DependentUpon>ProcTrayView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Query\BatteryView.xaml.cs">
       <DependentUpon>BatteryView.xaml</DependentUpon>
@@ -228,6 +240,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Machine\StorageControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Query\ProcTray\Create.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Query\ProcTray\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Query\ProcTray\Edit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Query\ProcTray\Index.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -291,10 +319,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Machine\Tray\Create.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="UserControls\Machine\Tray\Details.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -316,6 +340,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\Platform\MES\Edit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Query\ProcTrayView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -27,18 +27,21 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="150"/>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="条码：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding Code}" x:Name="level" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="{Binding Code}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="品牌：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Company}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="创建时间：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding CreateTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

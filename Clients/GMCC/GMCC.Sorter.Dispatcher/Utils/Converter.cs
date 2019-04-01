@@ -172,6 +172,20 @@ namespace GMCC.Sorter.Dispatcher.Utils
         }
     }
 
+    public class IdToStorageNameConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var id = (int)value;
+            return (Current.Storages.FirstOrDefault(o => o.Id == id) ?? new StorageViewModel()).Name;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class ProcTrayIdToBackConverter : IValueConverter
     {
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)

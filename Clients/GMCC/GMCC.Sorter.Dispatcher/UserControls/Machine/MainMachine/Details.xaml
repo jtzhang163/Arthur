@@ -57,7 +57,7 @@
                     <Label Content="{Binding JawProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="解盘位条码：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="静置时间(min)：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="静置时长(min)：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding StillTimeSpan}" Grid.Row="8" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>

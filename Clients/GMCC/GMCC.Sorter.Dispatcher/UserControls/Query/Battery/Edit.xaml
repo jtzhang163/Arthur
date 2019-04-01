@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.Query.Battery"
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              mc:Ignorable="d" 
@@ -12,11 +13,13 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Style/Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <utils:IdToStorageNameConverter x:Key="idToStorageNameConverter"/>
+            <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
         <DockPanel>
-            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="编辑托盘"  Style="{StaticResource PageTitleTextBlock}"/>
+            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="编辑电池"  Style="{StaticResource PageTitleTextBlock}"/>
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
                 <Button x:Name="edit" Click="edit_Click" Style="{StaticResource ChamferButton}">保存</Button>
                 <Button x:Name="cancel" Click="cancel_Click" Style="{StaticResource ChamferButton}">返回</Button>
@@ -27,19 +30,32 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <!--<RowDefinition/>-->
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="180"/>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="条码：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <TextBox x:Name="code" Grid.Row="1" Grid.Column="1" Text="{Binding Code, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <!--<Label Content="品牌：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <TextBox x:Name="company" Grid.Row="2" Grid.Column="1" Text="{Binding Company, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>-->
+                    <Label Content="条码：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="code" Grid.Row="0" Grid.Column="1" Text="{Binding Code, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="绑定托盘：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <ComboBox x:Name="proctray" Grid.Row="1" Grid.Column="1" FontSize="14" Height="30" HorizontalAlignment="Left" VerticalContentAlignment="Center" Width="200" Background="White"/>
+                    <Label Content="位置：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="pos" Grid.Row="2" Grid.Column="1" Text="{Binding Pos, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
+                    <Label Content="静置料仓：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding StorageId, Converter={StaticResource idToStorageNameConverter}}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="开始静置时间：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding StartStillTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="静置时长(min)：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding StillTimeSpan}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="扫码时间：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding ScanTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <!--<TextBox x:Name="company" Grid.Row="2" Grid.Column="1" Text="{Binding Company, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>-->
                 </Grid>
             </DockPanel>
         </DockPanel>

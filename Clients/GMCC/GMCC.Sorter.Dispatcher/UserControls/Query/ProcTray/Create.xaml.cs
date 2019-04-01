@@ -17,7 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
+namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 {
     /// <summary>
     /// Create.xaml 的交互逻辑
@@ -31,13 +31,13 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteParentUserControlMethod(this, "Tray", "SwitchWindow", "Index", 0);
+            Helper.ExecuteParentUserControlMethod(this, "ProcTray", "SwitchWindow", "Index", 0);
         }
 
         private void create_Click(object sender, RoutedEventArgs e)
         {
             var code = this.code.Text.Trim();
-            var company = this.company.Text.Trim();
+            //var company = this.company.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(code))
             {
@@ -46,7 +46,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
             }
             else
             {
-                var ret = new Business.TrayManage().Create(new Model.Tray() { Code = code, Company = company });
+                var ret = new Business.ProcTrayManage().Create(new Model.ProcTray() { Code = code});
                 if (ret.IsOk)
                 {
                     tip.Foreground = new SolidColorBrush(Colors.Green);

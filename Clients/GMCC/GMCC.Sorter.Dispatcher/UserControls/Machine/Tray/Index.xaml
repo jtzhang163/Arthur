@@ -43,7 +43,7 @@
             <!--<TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="角色信息" Style="{StaticResource PageTitleTextBlock}"/>-->
             <DockPanel Margin="0,0,0,0">
                 <DockPanel DockPanel.Dock="Top" Height="40">
-                    <Button DockPanel.Dock="Right" Style="{DynamicResource ChamferButton}" Click="create_Click" Width="60">新增</Button>
+                    <!--<Button DockPanel.Dock="Right" Style="{DynamicResource ChamferButton}" Click="create_Click" Width="60">新增</Button>-->
                     <WrapPanel VerticalAlignment="Center">
                         <TextBox x:Name="queryText" Width="200" Height="28" Margin="0" VerticalContentAlignment="Center"></TextBox>
                         <Button x:Name="query" Style="{DynamicResource ChamferButton}" Click="query_Click" Margin="10,0">查询</Button>
@@ -201,11 +201,21 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="品牌" Width="*"  CanUserSort="True" SortMemberPath="Level">
+                        <DataGridTemplateColumn Header="品牌" Width="*"  CanUserSort="True" SortMemberPath="Company">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                                         <TextBlock Text="{Binding Company}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="创建时间" Width="*"  CanUserSort="True" SortMemberPath="CreateTime">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding CreateTime, StringFormat={}{0:yyyy-MM-dd HH:mm}}"></TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
@@ -226,9 +236,6 @@
                                             <TextBlock x:Name="edit" Text="&#xf044;" Style="{DynamicResource FontAwesome}" FontSize="18" MouseDown="edit_MouseDown"  Tag="{Binding Id}" Cursor="Hand"/>
                                         </Border>
 
-                                        <Border VerticalAlignment="Center" Margin="3,0">
-                                            <TextBlock x:Name="delete" Text="&#xf1f8;" Style="{DynamicResource FontAwesome}" FontSize="18" MouseDown="delete_MouseDown"  Tag="{Binding Id}" Cursor="Hand"/>
-                                        </Border>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

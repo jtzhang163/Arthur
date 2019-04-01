@@ -7,23 +7,26 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Model
 {
-    public class Storage : Machine
+    /// <summary>
+    /// 流程托盘
+    /// </summary>
+    public class ProcTray : Product
     {
         /// <summary>
-        /// 所在列
+        /// 所在托盘
         /// </summary>
-        public int Column { get; set; }
+        public int TrayId { get; set; }
 
         /// <summary>
-        /// 所在层
+        /// 所在料仓
         /// </summary>
-        public int Floor { get; set; }
+        public int StorageId { get; set; }
 
         /// <summary>
-        /// 流程托盘Id
+        /// 开始静置时间
         /// </summary>
-        public int ProcTrayId { get; set; }
-       
+        public DateTime StartStillTime { get; set; }
+
         /// <summary>
         /// 静置时长(min)
         /// </summary>

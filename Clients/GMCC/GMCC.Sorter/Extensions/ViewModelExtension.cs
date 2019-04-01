@@ -13,7 +13,7 @@ namespace GMCC.Sorter.Extensions
     {
         public static ProcTray GetBindProcTray(this MainMachineViewModel mainMachine)
         {
-            return Context.ProcTrays.AsNoTracking().SingleOrDefault(o => o.Id == mainMachine.BindProcTrayId) ?? new ProcTray();
+            return Context.ProcTrays.SingleOrDefault(o => o.Id == mainMachine.BindProcTrayId) ?? new ProcTray();
         }
     }
 }

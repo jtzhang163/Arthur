@@ -2,6 +2,7 @@
 using Arthur.App.Comm;
 using Arthur.App.Model;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Run;
 using System;
 using System.Collections.Generic;
@@ -110,7 +111,7 @@ namespace GMCC.Sorter.ViewModel
 
         private int stillTimeSpan = -2;
         /// <summary>
-        /// 静置时间(min)
+        /// 静置时长(min)
         /// </summary>
         public int StillTimeSpan
         {
@@ -122,7 +123,7 @@ namespace GMCC.Sorter.ViewModel
                     if (stillTimeSpan == -1)
                     {
                         stillTimeSpan = 0;
-                        Arthur.Business.Application.SetOption("StillTimeSpan", stillTimeSpan.ToString(), "静置时间(min)");
+                        Arthur.Business.Application.SetOption("StillTimeSpan", stillTimeSpan.ToString(), "静置时长(min)");
                     }
                 }
                 return stillTimeSpan;
@@ -251,6 +252,32 @@ namespace GMCC.Sorter.ViewModel
                 }
             }
         }
+
+
+        private int bindBatteriesCount = -2;
+        /// <summary>
+        /// 当前绑盘位托盘里面电池个数
+        /// </summary>
+        public int BindBatteriesCount
+        {
+            get
+            {
+                if (bindBatteriesCount == -2)
+                {
+                    bindBatteriesCount = Current.MainMachine.GetBindProcTray().GetBatteries().Count;
+                }
+                return bindBatteriesCount;
+            }
+            set
+            {
+                if (bindBatteriesCount != value)
+                {
+                    SetProperty(ref bindBatteriesCount, value);
+                }
+            }
+        }
+
+
 
         private bool isBatteryScanReady;
         /// <summary>

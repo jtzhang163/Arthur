@@ -18,24 +18,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
+namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 {
     /// <summary>
     /// Details.xaml 的交互逻辑
     /// </summary>
     public partial class Details : UserControl
     {
-        private BatteryViewModel Battery;
+        private ProcTrayViewModel ProcTray;
         public Details(int id)
         {
             InitializeComponent();
-            this.Battery = ContextToViewModel.Convert(Context.Batteries.Single(t => t.Id == id));
-            this.DataContext = this.Battery;
+            this.ProcTray = ContextToViewModel.Convert(Context.ProcTrays.Single(t => t.Id == id));
+            this.DataContext = this.ProcTray;
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteParentUserControlMethod(this, "Battery", "SwitchWindow", "Index", 0);
+            Helper.ExecuteParentUserControlMethod(this, "ProcTray", "SwitchWindow", "Index", 0);
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)
@@ -46,7 +46,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
                 return;
             }
             var id = Convert.ToInt32((sender as Button).Tag);
-            Helper.ExecuteParentUserControlMethod(this, "Battery", "SwitchWindow", "Edit", id);
+            Helper.ExecuteParentUserControlMethod(this, "ProcTray", "SwitchWindow", "Edit", id);
         }
     }
 }

@@ -20,7 +20,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
+namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 {
     /// <summary>
     /// Index.xaml 的交互逻辑
@@ -37,7 +37,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
 
         private int PageIndex = 1;
 
-        private List<BatteryViewModel> Batteries
+        private List<ProcTrayViewModel> ProcTrays
         {
             get
             {
@@ -46,11 +46,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
                 var endTime = this.end_time.Value;
                 if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return ContextToViewModel.Convert(Context.Batteries.Where(r => r.ScanTime > startTime && r.ScanTime < endTime).ToList());
+                    return ContextToViewModel.Convert(Context.ProcTrays.Where(r => r.ScanTime > startTime && r.ScanTime < endTime).ToList());
                 }
                 else
                 {
-                    return ContextToViewModel.Convert(Context.Batteries.Where(r => r.ScanTime > startTime && r.ScanTime < endTime && r.Code.Contains(queryText)).ToList());
+                    return ContextToViewModel.Convert(Context.ProcTrays.Where(r => r.ScanTime > startTime && r.ScanTime < endTime && r.Code.Contains(queryText)).ToList());
                 }
             }
         }
@@ -63,9 +63,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
 
         private void UpdateDataGrid(int index)
         {
-            var dtos = PaginatedList<BatteryViewModel>.Create(Batteries, PageIndex, Current.Option.DataGridPageSize);
+            var dtos = PaginatedList<ProcTrayViewModel>.Create(ProcTrays, PageIndex, Current.Option.DataGridPageSize);
 
-            this.count.Content = Batteries.Count();
+            this.count.Content = ProcTrays.Count();
             this.pageIndex.Content = PageIndex;
             this.totalPages.Content = dtos.TotalPages;
             this.size.Content = Current.Option.DataGridPageSize;
@@ -83,7 +83,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
-            Helper.ExecuteParentUserControlMethod(this, "Battery", "SwitchWindow", "Create", 0);
+            Helper.ExecuteParentUserControlMethod(this, "ProcTray", "SwitchWindow", "Create", 0);
         }
 
 
@@ -95,11 +95,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            var battery = Context.Batteries.SingleOrDefault(r => r.Id == id);
+            var ProcTray = Context.ProcTrays.SingleOrDefault(r => r.Id == id);
 
-            if (battery == null)
+            if (ProcTray == null)
             {
-                MessageBox.Show("不存在该电池，删除失败！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("不存在该托盘，删除失败！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -110,11 +110,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
             } 
 
 
-            if (MessageBox.Show(string.Format("确定要删除电池【{0}】吗？", battery.Code), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+            if (MessageBox.Show(string.Format("确定要删除流程托盘【{0}】吗？", ProcTray.Code), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Context.Batteries.Remove(battery);
+                Context.ProcTrays.Remove(ProcTray);
                 Context.AppContext.SaveChanges();
-                Arthur.Business.Logging.AddOplog(string.Format("删除电池[{0}]", battery.Code), Arthur.App.Model.OpType.删除);
+                Arthur.Business.Logging.AddOplog(string.Format("删除流程托盘[{0}]", ProcTray.Code), Arthur.App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }
         }
@@ -127,13 +127,13 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
                 return;
             }
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            Helper.ExecuteParentUserControlMethod(this, "Battery", "SwitchWindow", "Edit", id);
+            Helper.ExecuteParentUserControlMethod(this, "ProcTray", "SwitchWindow", "Edit", id);
         }
 
         private void details_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            Helper.ExecuteParentUserControlMethod(this, "Battery", "SwitchWindow", "Details", id);
+            Helper.ExecuteParentUserControlMethod(this, "ProcTray", "SwitchWindow", "Details", id);
         }
 
         private void go_page_Click(object sender, RoutedEventArgs e)

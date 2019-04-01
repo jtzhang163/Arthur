@@ -35,7 +35,7 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
         {
             this.grid.Dispatcher.BeginInvoke(new Action(() =>{
 
-                var battteryCount = Current.MainMachine.GetBindProcTray().GetBatteries().Count;
+                var batteryCount = Current.MainMachine.BindBatteriesCount;
 
                 this.grid.Children.Clear();
 
@@ -45,7 +45,7 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
                     {
                         var border = new Border()
                         {
-                            Background = i * 4 + j < battteryCount ? Brushes.LightGreen : Brushes.White,
+                            Background = i * 4 + j < batteryCount ? Brushes.LightGreen : Brushes.White,
                             // Margin = new Thickness(0.1),
                             BorderThickness = new Thickness(0.5),
                             BorderBrush = Brushes.Black

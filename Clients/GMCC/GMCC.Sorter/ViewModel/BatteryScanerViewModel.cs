@@ -102,7 +102,7 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
-            if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady && !Current.MainMachine.isAlreadyBatteryScan)
+            if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady && !Current.MainMachine.isAlreadyBatteryScan && Current.MainMachine.BindProcTrayId > 0)
             {
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
@@ -123,6 +123,7 @@ namespace GMCC.Sorter.ViewModel
                         //界面交替显示扫码状态
                         Thread.Sleep(this.CommInterval / 2);
                         this.RealtimeStatus = "等待扫码...";
+                        Current.MainMachine.BindBatteriesCount++;
                     });
                     t.Start();
                     this.IsAlive = true;

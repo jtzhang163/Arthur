@@ -51,32 +51,24 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            var code = this.code.Text.Trim();
             var company = this.company.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(code))
+            try
+            {
+
+                this.Tray.Company = company;
+
+                Context.AppContext.SaveChanges();
+                tip.Foreground = new SolidColorBrush(Colors.Green);
+                tip.Text = "修改信息成功！";
+
+            }
+            catch (Exception ex)
             {
                 tip.Foreground = new SolidColorBrush(Colors.Red);
-                tip.Text = "请填写数据！";
+                tip.Text = "修改信息失败：" + ex.Message;
             }
-            else
-            {
-                try
-                {
-                    this.Tray.Code = code;
-                    this.Tray.Company = company;
 
-                    Context.AppContext.SaveChanges();
-                    tip.Foreground = new SolidColorBrush(Colors.Green);
-                    tip.Text = "修改信息成功！";
-
-                }
-                catch (Exception ex)
-                {
-                    tip.Foreground = new SolidColorBrush(Colors.Red);
-                    tip.Text = "修改信息失败：" + ex.Message;
-                }
-            }
             tip.Visibility = Visibility.Visible;
         }
     }

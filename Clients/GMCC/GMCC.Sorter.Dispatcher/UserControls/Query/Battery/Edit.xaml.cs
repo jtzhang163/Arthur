@@ -1,5 +1,7 @@
 ﻿using Arthur.View.Utils;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Model;
+using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -24,13 +26,28 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
     /// </summary>
     public partial class Edit : UserControl
     {
-        private GMCC.Sorter.Model.Battery Battery;
+        private BatteryViewModel Battery;
 
         public Edit(int id)
         {
             InitializeComponent();
-            this.Battery = Context.Batteries.Single(t => t.Id == id);
+            this.Battery = ContextToViewModel.Convert(Context.Batteries.Single(t => t.Id == id));
             this.DataContext = this.Battery;
+
+            var trays = Context.Trays.ToList();
+            this.proctray.Items.Add("——未知——");
+            trays.ForEach(o => this.proctray.Items.Add(o.Code));
+            var proctray_index = -1;
+            if (this.Battery.ProcTrayId < 1)
+            {
+                proctray_index = 0;
+            }
+            else
+            {
+                var procTray = GetObject.GetById<Model.ProcTray>(this.Battery.ProcTrayId);
+                proctray_index = trays.IndexOf(trays.FirstOrDefault(o => o.Id == procTray.TrayId)) + 1;
+            }
+            this.proctray.SelectedIndex = proctray_index;
         }
 
         private void textbox_GotFocus(object sender, RoutedEventArgs e)
@@ -51,9 +68,20 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            var code = this.code.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(code))
+            var trays = Context.Trays.ToList();
+
+            var code = this.code.Text.Trim();
+            var pos = this.pos.Text.Trim();
+            var procTrayId = -1;
+            if (this.proctray.SelectedIndex > 0)
+            {
+                var tray = trays[this.proctray.SelectedIndex - 1];
+                var proc_tray = Context.ProcTrays.Where(o => o.TrayId == tray.Id).OrderByDescending(o => o.Id).FirstOrDefault() ?? new Model.ProcTray();
+                procTrayId = proc_tray.Id;
+            }
+
+            if (string.IsNullOrWhiteSpace(code) || string.IsNullOrWhiteSpace(pos))
             {
                 tip.Foreground = new SolidColorBrush(Colors.Red);
                 tip.Text = "请填写数据！";
@@ -63,6 +91,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
                 try
                 {
                     this.Battery.Code = code;
+                    this.Battery.ProcTrayId = procTrayId;
+                    this.Battery.Pos = Convert.ToInt32(pos);
 
                     Context.AppContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);

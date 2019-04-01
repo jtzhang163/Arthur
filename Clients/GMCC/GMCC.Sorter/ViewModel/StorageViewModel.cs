@@ -18,6 +18,11 @@ namespace GMCC.Sorter.ViewModel
 
         public int Floor { get; set; }
 
+        public StorageViewModel()
+        {
+
+        }
+
         public StorageViewModel(int id, int column, int floor, string name, string company, int stillTimeSpan, int procTrayId)
         {
             this.Id = id;
@@ -84,7 +89,7 @@ namespace GMCC.Sorter.ViewModel
 
         private int stillTimeSpan = -2;
         /// <summary>
-        /// 静置时间(min)
+        /// 静置时长(min)
         /// </summary>
         public int StillTimeSpan
         {

@@ -1,5 +1,6 @@
 ﻿using Arthur.View.Utils;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -17,20 +18,35 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
+namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 {
     /// <summary>
     /// Edit.xaml 的交互逻辑
     /// </summary>
     public partial class Edit : UserControl
     {
-        private StorageViewModel Storage;
+        private ProcTrayViewModel ProcTray;
 
         public Edit(int id)
         {
             InitializeComponent();
-            this.Storage = Current.Storages.Single(t => t.Id == id);
-            this.DataContext = this.Storage;
+            this.ProcTray = ContextToViewModel.Convert(Context.ProcTrays.Single(t => t.Id == id));
+            this.DataContext = this.ProcTray;
+
+            this.storage.Items.Add("——未知——");
+            Current.Storages.ForEach(o => this.storage.Items.Add(o.Name));
+            var storage_index = -1;
+            if (this.ProcTray.StorageId < 1)
+            {
+                storage_index = 0;
+            }
+            else
+            {
+                storage_index = Current.Storages.IndexOf(Current.Storages.FirstOrDefault(o => o.Id == this.ProcTray.StorageId)) + 1;
+            }
+            this.storage.SelectedIndex = storage_index;
+
+            this.startstill_time.Value = this.ProcTray.StartStillTime;
         }
 
         private void textbox_GotFocus(object sender, RoutedEventArgs e)
@@ -46,15 +62,20 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
 
         private void cancel_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteParentUserControlMethod(this, "Storage", "SwitchWindow", "Index", 0);
+            Helper.ExecuteParentUserControlMethod(this, "ProcTray", "SwitchWindow", "Index", 0);
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            var name = this.name.Text.Trim();
-            var company = this.company.Text.Trim();
+            var code = this.code.Text.Trim();
+            var storageId = -1;
+            if(this.storage.SelectedIndex > 0)
+            {
+                storageId = Current.Storages[this.storage.SelectedIndex - 1].Id;
+            }
+            var startstill_time = this.startstill_time.Value.Value;
 
-            if (string.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrWhiteSpace(code))
             {
                 tip.Foreground = new SolidColorBrush(Colors.Red);
                 tip.Text = "请填写数据！";
@@ -63,8 +84,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
             {
                 try
                 {
-                    this.Storage.Name = name;
-                    this.Storage.Company = company;
+                    this.ProcTray.Code = code;
+                    this.ProcTray.StorageId = storageId;
+                    this.ProcTray.StartStillTime = startstill_time;
 
                     Context.AppContext.SaveChanges();
                     tip.Foreground = new SolidColorBrush(Colors.Green);
@@ -78,24 +100,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
                 }
             }
             tip.Visibility = Visibility.Visible;
-        }
-
-        private int GetProcTrayId(string code)
-        {
-            var id = -1;
-            if (string.IsNullOrEmpty(code))
-            {
-                id = 0;
-            }
-            else if (Context.ProcTrays.Count(o => o.Code == code) == 0)
-            {
-                throw new Exception(string.Format("系统中不存在条码为[{0}]的托盘", code));
-            }
-            else
-            {
-                id = Context.ProcTrays.OrderByDescending(o => o.Id).FirstOrDefault(o => o.Code == code).Id;
-            }
-            return id;
         }
     }
 }

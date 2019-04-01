@@ -61,6 +61,7 @@
     <Compile Include="Model\BatteryScaner.cs" />
     <Compile Include="Model\MES.cs" />
     <Compile Include="Model\PLC.cs" />
+    <Compile Include="Model\ProcTray.cs" />
     <Compile Include="Model\Storage.cs" />
     <Compile Include="Model\Tray.cs" />
     <Compile Include="Model\Battery.cs" />
@@ -71,8 +72,12 @@
     <Compile Include="Run\Running.cs" />
     <Compile Include="Run\TimerExec.cs" />
     <Compile Include="Utils\AppInfo.cs" />
+    <Compile Include="Utils\ContextToViewModel.cs" />
+    <Compile Include="Utils\GetObject.cs" />
     <Compile Include="ViewModel\AppViewModel.cs" />
     <Compile Include="ViewModel\Base\CommorViewModel.cs" />
+    <Compile Include="ViewModel\ProcTrayViewModel.cs" />
+    <Compile Include="ViewModel\BatteryViewModel.cs" />
     <Compile Include="ViewModel\TrayScanerViewModel.cs" />
     <Compile Include="ViewModel\BatteryScanerViewModel.cs" />
     <Compile Include="ViewModel\MesViewModel.cs" />
