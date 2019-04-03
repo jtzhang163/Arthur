@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GMCC.Sorter.Dispatcher.Utils;
+using GMCC.Sorter.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +22,18 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
     /// </summary>
     public partial class JawControl : UserControl
     {
+        private MainMachineViewModel MainMachine;
+
         public JawControl()
         {
             InitializeComponent();
-            this.DataContext = Current.MainMachine;
+            this.MainMachine = Current.MainMachine;
+            this.DataContext = this.MainMachine;
+        }
+
+        private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ShowWindows.ShowTrayBatteryWin(this.MainMachine.JawProcTrayId);
         }
     }
 }

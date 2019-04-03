@@ -13,7 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GMCC.Sorter.Dispatcher.Utils;
 using GMCC.Sorter.Extensions;
+using GMCC.Sorter.ViewModel;
 
 namespace GMCC.Sorter.Dispatcher.Controls.Machine
 {
@@ -22,10 +24,13 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
     /// </summary>
     public partial class BindMachControl : UserControl
     {
+        private MainMachineViewModel MainMachine;
+
         public BindMachControl()
         {
             InitializeComponent();
-            this.DataContext = Current.MainMachine;
+            this.MainMachine = Current.MainMachine;
+            this.DataContext = this.MainMachine;
             this.Timer = new System.Threading.Timer(new TimerCallback(this.SetBackground), null, 2000, 1000);
         }
 
@@ -57,6 +62,11 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
                 }
             }));
 
+        }
+
+        private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ShowWindows.ShowTrayBatteryWin(this.MainMachine.BindProcTrayId);
         }
     }
 }

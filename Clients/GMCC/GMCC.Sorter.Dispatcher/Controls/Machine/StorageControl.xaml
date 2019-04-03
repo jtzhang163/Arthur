@@ -18,7 +18,9 @@
                 <!--<RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>-->
             </Grid.RowDefinitions>
-            <Label Content="{Binding ShowInfo}" Background="{Binding Status, Converter={StaticResource storageStatusToBackConverter}}" Foreground="Gray" FontSize="12" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label Content="{Binding ShowInfo}" Background="{Binding Status, Converter={StaticResource storageStatusToBackConverter}}"
+                   MouseDoubleClick="Label_MouseDoubleClick"
+                   Foreground="Gray" FontSize="12" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.ToolTip>
                     <Grid>
                         <Grid.RowDefinitions>

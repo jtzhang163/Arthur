@@ -28,7 +28,7 @@
             <Ellipse  Grid.Row="1" Grid.Column="1" Fill="{Binding IsUnbindTrayScanReady,Converter={StaticResource signalToSingalColorConverter}}" Width="12" Height="12"/>
             <Border Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
-                    <Label DockPanel.Dock="Bottom" Content="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0"/>
+                    <Label DockPanel.Dock="Bottom" Content="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0" MouseDoubleClick="Label_MouseDoubleClick"/>
                     <Grid Visibility="{Binding UnbindProcTrayId,Converter={StaticResource procTrayIdToVisibilityConverter}}" Background="Cyan" Margin="15,5,15,0" Height="50">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>

@@ -7,7 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace GMCC.Sorter.Dispatcher.Controls.Machine
+namespace Arthur.View.Utils
 {
     public class GridHelper
     {

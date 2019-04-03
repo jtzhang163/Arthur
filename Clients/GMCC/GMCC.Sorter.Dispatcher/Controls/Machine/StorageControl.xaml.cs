@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GMCC.Sorter.Dispatcher.Utils;
+using GMCC.Sorter.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,8 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
     /// </summary>
     public partial class StorageControl : UserControl
     {
+        private StorageViewModel storage;
+
         public int Col;
         public int Floor;
 
@@ -27,10 +31,15 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
         {
 
             InitializeComponent();
-            var storage = Current.Storages.FirstOrDefault(o => o.Id == id);
+            storage = Current.Storages.FirstOrDefault(o => o.Id == id);
             this.DataContext = storage;
             this.Col = storage.Column;
             this.Floor = storage.Floor;
+        }
+
+        private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ShowWindows.ShowTrayBatteryWin(storage.ProcTrayId);
         }
     }
 }

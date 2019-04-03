@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="Utils\ControlsSearchHelper.cs" />
     <Compile Include="Utils\Converter.cs" />
+    <Compile Include="Utils\GridHelper.cs" />
     <Compile Include="Utils\Helper.cs" />
     <Compile Include="Utils\PaginatedList.cs" />
   </ItemGroup>
