@@ -63,6 +63,8 @@
     <Compile Include="Model\PLC.cs" />
     <Compile Include="Model\ProcTray.cs" />
     <Compile Include="Model\Storage.cs" />
+    <Compile Include="Model\CurrentTask.cs" />
+    <Compile Include="Model\TaskLog.cs" />
     <Compile Include="Model\Tray.cs" />
     <Compile Include="Model\Battery.cs" />
     <Compile Include="Data\DbInitializer.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Utils\GetObject.cs" />
     <Compile Include="ViewModel\AppViewModel.cs" />
     <Compile Include="ViewModel\Base\CommorViewModel.cs" />
+    <Compile Include="ViewModel\CurrentTaskViewModel.cs" />
     <Compile Include="ViewModel\ProcTrayViewModel.cs" />
     <Compile Include="ViewModel\BatteryViewModel.cs" />
     <Compile Include="ViewModel\TrayScanerViewModel.cs" />

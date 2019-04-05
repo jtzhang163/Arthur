@@ -1,4 +1,5 @@
 ﻿using GMCC.Sorter.Data;
+using GMCC.Sorter.Model;
 using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
 using System;
@@ -224,6 +225,21 @@ namespace GMCC.Sorter.Dispatcher.Utils
                 status == StorageStatus.正在静置 ? Brushes.LightGreen :
                 status == StorageStatus.静置完成 ? Brushes.Cyan :
                 Brushes.White;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    public class TaskTypeToVisibilityConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var taskType = (TaskType)value;
+            return taskType == TaskType.未知 ? Visibility.Hidden : Visibility.Visible;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -102,12 +102,12 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
-            if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady && !Current.MainMachine.isAlreadyBatteryScan && Current.MainMachine.BindProcTrayId > 0)
+            if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady && !Current.MainMachine.IsAlreadyBatteryScan && Current.MainMachine.BindProcTrayId > 0)
             {
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
                 {
-                    Current.MainMachine.isAlreadyBatteryScan = true;
+                    Current.MainMachine.IsAlreadyBatteryScan = true;
                     this.RealtimeStatus = "+" + ret.Data;
                     var t = new Thread(() =>
                     {

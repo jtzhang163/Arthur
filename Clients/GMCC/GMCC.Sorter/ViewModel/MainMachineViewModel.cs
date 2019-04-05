@@ -290,13 +290,13 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (!isBatteryScanReady && value)
                 {
-                    isAlreadyBatteryScan = false;
+                    IsAlreadyBatteryScan = false;
                 }
                 SetProperty(ref isBatteryScanReady, value);
             }
         }
 
-        public bool isAlreadyBatteryScan { get; set; }
+        public bool IsAlreadyBatteryScan { get; set; }
 
         private bool isBindTrayScanReady;
         /// <summary>
@@ -309,13 +309,13 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (!isBindTrayScanReady && value)
                 {
-                    isAlreadyBindTrayScan = false;
+                    IsAlreadyBindTrayScan = false;
                 }
                 SetProperty(ref isBindTrayScanReady, value);
             }
         }
 
-        public bool isAlreadyBindTrayScan { get; set; }
+        public bool IsAlreadyBindTrayScan { get; set; }
 
         private bool isUnbindTrayScanReady;
         /// <summary>
@@ -334,6 +334,37 @@ namespace GMCC.Sorter.ViewModel
             }
 
         }
+
+
+
+
+        private bool isBindTrayGetReady;
+        /// <summary>
+        /// 上料托盘可取
+        /// </summary>
+        public bool IsBindTrayGetReady
+        {
+            get => isBindTrayGetReady;
+            set
+            {
+                SetProperty(ref isBindTrayGetReady, value);
+            }
+        }
+
+
+        private bool isUnbindTrayPutReady;
+        /// <summary>
+        /// 下料托盘可放
+        /// </summary>
+        public bool IsUnbindTrayPutReady
+        {
+            get => isUnbindTrayPutReady;
+            set
+            {
+                SetProperty(ref isUnbindTrayPutReady, value);
+            }
+        }
+
 
         public bool isAlreadyUnbindTrayScan { get; set; }
 
@@ -366,6 +397,8 @@ namespace GMCC.Sorter.ViewModel
                 this.IsBindTrayScanReady = retData[1] == "1";
                 this.IsUnbindTrayScanReady = retData[2] == "1";
                 this.JawPos = Convert.ToInt32(retData[3]);
+                this.IsBindTrayGetReady = retData[4] == "1";
+                this.IsUnbindTrayPutReady = retData[5] == "1";
 
                 var t = new Thread(() =>
                 {

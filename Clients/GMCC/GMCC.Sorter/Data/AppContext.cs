@@ -1,4 +1,5 @@
-﻿using GMCC.Sorter.Model;
+﻿using Arthur;
+using GMCC.Sorter.Model;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -29,6 +30,9 @@ namespace GMCC.Sorter.Data
 
             modelBuilder.Entity<MES>().ToTable("t_mes");
             modelBuilder.Entity<PLC>().ToTable("t_plc");
+
+            modelBuilder.Entity<CurrentTask>().ToTable("t_task");
+            modelBuilder.Entity<TaskLog>().ToTable("t_task_log");
         }
 
         public DbSet<Tray> Trays { get; set; }
@@ -42,6 +46,10 @@ namespace GMCC.Sorter.Data
 
         public DbSet<BatteryScaner> BatteryScaners { get; set; }
         public DbSet<TrayScaner> TrayScaners { get; set; }
+
+        public DbSet<CurrentTask> CurrentTasks { get; set; }
+        public DbSet<TaskLog> TaskLogs { get; set; }
+
     }
 
     public class AppInitializer : DropCreateDatabaseIfModelChanges<AppContext>
@@ -145,6 +153,16 @@ namespace GMCC.Sorter.Data
                 }
             };
             trayScaners.ForEach(o => context.TrayScaners.Add(o));
+
+            var task = new CurrentTask()
+            {
+                TaskType = TaskType.未知,
+                PreTaskType = TaskType.未知,
+                ProcTrayId = -1,
+                StorageId = -1,
+                StartTime = Default.DateTime,
+            };
+            context.CurrentTasks.Add(task);
         }
     }
 }

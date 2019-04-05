@@ -165,12 +165,12 @@ namespace GMCC.Sorter.ViewModel
         {
             if (!Current.MainMachine.IsAlive) return;
 
-            if (this == Current.BindTrayScaner && Current.MainMachine.IsBindTrayScanReady && !Current.MainMachine.isAlreadyBindTrayScan)
+            if (this == Current.BindTrayScaner && Current.MainMachine.IsBindTrayScanReady && !Current.MainMachine.IsAlreadyBindTrayScan)
             {
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
                 {
-                    Current.MainMachine.isAlreadyBindTrayScan = true;
+                    Current.MainMachine.IsAlreadyBindTrayScan = true;
                     this.RealtimeStatus = "+" + ret.Data;
                     var t = new Thread(() =>
                     {
@@ -209,7 +209,7 @@ namespace GMCC.Sorter.ViewModel
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
                 {
-                    Current.MainMachine.isAlreadyBindTrayScan = true;
+                    Current.MainMachine.IsAlreadyBindTrayScan = true;
                     this.RealtimeStatus = "+" + ret.Data;
                     var t = new Thread(() =>
                     {

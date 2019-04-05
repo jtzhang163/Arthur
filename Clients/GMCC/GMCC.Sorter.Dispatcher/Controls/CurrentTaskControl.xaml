@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="GMCC.Sorter.Dispatcher.Controls.CurrentTaskControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.Controls"
+             xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Style.Setters>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style.Setters>
+        </Style>
+        <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
+        <utils:IdToStorageNameConverter x:Key="idToStorageNameConverter"/>
+        <utils:TaskTypeToVisibilityConverter x:Key="taskTypeToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Content="当前任务" FontWeight="Bold"></Label>
+        <Label Grid.Column="1" Content="任务类型："></Label>
+        <Label Grid.Column="2" Content="{Binding TaskType}" Foreground="Green" Visibility="{Binding TaskType, Converter={StaticResource taskTypeToVisibilityConverter}}"></Label>
+        <Label Grid.Column="3" Content="料仓："></Label>
+        <Label Grid.Column="4" Content="{Binding StorageId, Converter={StaticResource idToStorageNameConverter}}" Foreground="Green" Visibility="{Binding TaskType, Converter={StaticResource taskTypeToVisibilityConverter}}"></Label>
+        <Label Grid.Column="5" Content="托盘："></Label>
+        <Label Grid.Column="6" Content="{Binding ProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Foreground="Green" Visibility="{Binding TaskType, Converter={StaticResource taskTypeToVisibilityConverter}}"></Label>
+        <Label Grid.Column="7" Content="开始时间："></Label>
+        <Label Grid.Column="8" Content="{Binding StartTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm:ss}" Foreground="Green" Visibility="{Binding TaskType, Converter={StaticResource taskTypeToVisibilityConverter}}"></Label>
+    </Grid>
+</UserControl>

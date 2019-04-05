@@ -133,6 +133,19 @@ namespace GMCC.Sorter
                     mes = new MesViewModel(commor);
                 }
                 return mes;
+            } 
+        }
+
+        private static CurrentTaskViewModel task = null;
+        public static CurrentTaskViewModel Task
+        {
+            get
+            {
+                if (task == null)
+                {
+                    task = new CurrentTaskViewModel(Context.CurrentTask);
+                }
+                return task;
             }
         }
     }

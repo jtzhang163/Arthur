@@ -80,5 +80,13 @@ namespace GMCC.Sorter.Data
                 return AppContext.TrayScaners;
             }
         }
+
+        public static CurrentTask CurrentTask
+        {
+            get
+            {
+                return AppContext.CurrentTasks.FirstOrDefault();
+            }
+        }
     }
 }

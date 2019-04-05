@@ -74,6 +74,7 @@
     <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="Factory\AccountFactory.cs" />
     <Compile Include="Model\Base\EthernetCommor.cs" />
+    <Compile Include="Model\Base\Logging.cs" />
     <Compile Include="Model\Base\Server.cs" />
     <Compile Include="Model\Base\SerialCommor.cs" />
     <Compile Include="Model\EventLog.cs" />

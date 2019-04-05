@@ -1,5 +1,6 @@
 ﻿using Arthur.View.Utils;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Dispatcher.Controls;
 using GMCC.Sorter.Dispatcher.Controls.Machine;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
             this.bind_mach.Children.Add(new BindMachControl());
 
             this.unbind_mach.Children.Add(new UnbindMachControl());
+
+            this.current_task.Children.Add(new CurrentTaskControl());
 
             this.Timer = new System.Threading.Timer(new TimerCallback(this.CheckStorageStatus), null, 2000, 1000);
         }
