@@ -156,8 +156,8 @@ namespace GMCC.Sorter.Data
 
             var task = new CurrentTask()
             {
-                TaskType = TaskType.未知,
-                PreTaskType = TaskType.未知,
+                Type = TaskType.未知,
+                PreType = TaskType.未知,
                 ProcTrayId = -1,
                 StorageId = -1,
                 StartTime = Default.DateTime,

@@ -25,7 +25,7 @@
         <utils:ErrorMsgToVisibilityConverter x:Key="errorMsgToVisibilityConverter"/>
 
         <DataTemplate x:Key="commTemplate" DataType="{x:Type vm:CommorViewModel}">
-            <Border Margin="5" Width="145" Background="{Binding IsAlive, Converter={StaticResource machineIsAliveToBackgroundConverter}}">
+            <Border Margin="5,0,0,0" Width="145" Background="{Binding IsAlive, Converter={StaticResource machineIsAliveToBackgroundConverter}}">
                 <StackPanel Margin="5">
                     <StackPanel Orientation="Horizontal">
                         <CheckBox IsChecked="{Binding IsEnabled}" Margin="0,5,0,5" IsEnabled="{Binding SelectedEnabled}"/>
@@ -67,9 +67,9 @@
                 <!--<Canvas Height="1" Background="WhiteSmoke"/>&#xf144;-->
             </StackPanel>
 
-            <WrapPanel DockPanel.Dock="Bottom" Grid.ColumnSpan="8" Visibility="{Binding ErrorMsg, Converter={StaticResource errorMsgToVisibilityConverter}}">
-                <TextBlock Text="&#xf071;" Style="{DynamicResource FontAwesome}" FontSize="16" Foreground="Red"></TextBlock>
-                <TextBlock Text="{Binding ErrorMsg}" FontSize="16" Foreground="Red" VerticalAlignment="Center"></TextBlock>
+            <WrapPanel DockPanel.Dock="Bottom" Grid.ColumnSpan="8" Visibility="{Binding ErrorMsg, Converter={StaticResource errorMsgToVisibilityConverter}}" Background="Red">
+                <TextBlock Text="&#xf071;" Style="{DynamicResource FontAwesome}" FontSize="16" Foreground="White" Margin="5,0,5,0"></TextBlock>
+                <TextBlock Text="{Binding ErrorMsg}" FontSize="16" VerticalAlignment="Center" Foreground="White"></TextBlock>
             </WrapPanel>
 
             <DockPanel DockPanel.Dock="Left" Margin="0,5,0,10">

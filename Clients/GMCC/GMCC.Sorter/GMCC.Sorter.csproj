@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Business\ProcTrayManage.cs" />
     <Compile Include="Business\BatteryManage.cs" />
+    <Compile Include="Business\TaskManage.cs" />
     <Compile Include="Business\TrayManage.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Current.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Extensions\ModelExtension.cs" />
     <Compile Include="Extensions\ViewModelExtension.cs" />
     <Compile Include="Factory\CommorHelper.cs" />
+    <Compile Include="Factory\TaskHelper.cs" />
     <Compile Include="Model\BatteryScaner.cs" />
     <Compile Include="Model\MES.cs" />
     <Compile Include="Model\PLC.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Utils\AppInfo.cs" />
     <Compile Include="Utils\ContextToViewModel.cs" />
     <Compile Include="Utils\GetObject.cs" />
+    <Compile Include="Utils\JawMoveInfo.cs" />
     <Compile Include="ViewModel\AppViewModel.cs" />
     <Compile Include="ViewModel\Base\CommorViewModel.cs" />
     <Compile Include="ViewModel\CurrentTaskViewModel.cs" />

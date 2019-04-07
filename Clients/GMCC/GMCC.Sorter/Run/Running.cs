@@ -28,8 +28,6 @@ namespace GMCC.Sorter.Run
                 }
             }
 
-            //暂时放置在此处
-            Current.App.IsTerminalInitFinished = true;
             Current.App.RunStatus = RunStatus.运行;
             TimerExec.IsRunning = true;
             return Result.OK;

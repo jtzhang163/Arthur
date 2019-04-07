@@ -3,7 +3,6 @@ using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
 using GMCC.Sorter.Data;
-using GMCC.Sorter.Model;
 using GMCC.Sorter.Run;
 using System;
 using System.Collections.Generic;
@@ -19,31 +18,61 @@ namespace GMCC.Sorter.ViewModel
     /// </summary>
     public class CurrentTaskViewModel : BindableObject
     {
-        private TaskType taskType = TaskType.未知;
+        private Model.TaskType type = Model.TaskType.未知;
+        private Model.TaskType preType = Model.TaskType.未知;
+        private Model.TaskStatus status = Model.TaskStatus.未知;
         private int procTrayId = -1;
         private int storageId = -1;
         private DateTime startTime = Default.DateTime;
 
-        public CurrentTaskViewModel(CurrentTask task)
+        public CurrentTaskViewModel(Model.CurrentTask task)
         {
-            this.taskType = task.TaskType;
+            this.type = task.Type;
+            this.preType = task.PreType;
+            this.status = task.Status;
             this.procTrayId = task.ProcTrayId;
             this.storageId = task.StorageId;
             this.startTime = task.StartTime;
         }
 
-        public TaskType TaskType
+        public Model.TaskType Type
         {
-            get => taskType;
+            get => type;
             set
             {
-                if (taskType != value)
+                if (type != value)
                 {
-                    Context.CurrentTask.TaskType = value;
-                    this.SetProperty(ref taskType, value);
+                    Context.CurrentTask.Type = value;
+                    this.SetProperty(ref type, value);
                 }
             }
-        } 
+        }
+
+        public Model.TaskType PreType
+        {
+            get => preType;
+            set
+            {
+                if (preType != value)
+                {
+                    Context.CurrentTask.PreType = value;
+                    this.SetProperty(ref preType, value);
+                }
+            }
+        }
+
+        public Model.TaskStatus Status
+        {
+            get => status;
+            set
+            {
+                if (status != value)
+                {
+                    Context.CurrentTask.Status = value;
+                    this.SetProperty(ref status, value);
+                }
+            }
+        }
 
         public int ProcTrayId
         {

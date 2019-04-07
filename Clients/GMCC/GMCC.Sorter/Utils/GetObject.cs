@@ -21,6 +21,10 @@ namespace GMCC.Sorter.Utils
             {
                 obj = Context.ProcTrays.SingleOrDefault(o => o.Id == id) ?? new ProcTray();
             }
+            else if (typeof(T).Name == "StorageViewModel")
+            {
+                obj = Current.Storages.SingleOrDefault(o => o.Id == id);
+            }
             return (T)obj;
         }   
     }

@@ -1,8 +1,10 @@
 ﻿using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
+using Arthur.Utility;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Extensions;
+using GMCC.Sorter.Model;
 using GMCC.Sorter.Run;
 using System;
 using System.Collections.Generic;
@@ -65,6 +67,14 @@ namespace GMCC.Sorter.ViewModel
             }
         }
 
+        public void SendCommand(JawMoveInfo toMoveInfo)
+        {
+
+            this.Commor.Comm("GET_PLC_INFO");
+
+        }
+
+        public JawMoveInfo JawMoveInfo = new JawMoveInfo();
 
         private int jawPos = -2;
         /// <summary>
@@ -379,10 +389,42 @@ namespace GMCC.Sorter.ViewModel
         public bool IsBlankingFinished { get; set; }
 
 
+        private int taskExecInterval = -1;
+
+        /// <summary>
+        /// 搬运任务执行定时器间隔(ms)
+        /// </summary>
+        public int TaskExecInterval
+        {
+            get
+            {
+                if (taskExecInterval < 0)
+                {
+                    taskExecInterval = _Convert.StrToInt(Arthur.Business.Application.GetOption("TaskExecInterval"), -1);
+                    if (taskExecInterval < 0)
+                    {
+                        taskExecInterval = 3000;
+                        Arthur.Business.Application.SetOption("TaskExecInterval", taskExecInterval.ToString(), "搬运任务执行定时器间隔(ms)");
+                    }
+                }
+                return taskExecInterval;
+            }
+            set
+            {
+                if (taskExecInterval != value)
+                {
+                    Arthur.Business.Application.SetOption("TaskExecInterval", value.ToString());
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. 搬运任务执行定时器间隔(ms): [{1}] 修改为 [{2}]", Name, taskExecInterval, value), Arthur.App.Model.OpType.编辑);
+                    SetProperty(ref taskExecInterval, value);
+                }
+            }
+        }
+
+        private System.Threading.Timer Timer;// = new System.Threading.Timer(new TimerCallback(TaskExec), null, 5000, Current.MainMachine.TaskExecInterval);
 
         public MainMachineViewModel(Commor commor) : base(commor)
         {
-
+            Timer = new System.Threading.Timer(new TimerCallback(TimerExec.TaskExec), null, 5000, this.TaskExecInterval);
         }
 
         public void Comm()
@@ -400,6 +442,10 @@ namespace GMCC.Sorter.ViewModel
                 this.IsBindTrayGetReady = retData[4] == "1";
                 this.IsUnbindTrayPutReady = retData[5] == "1";
 
+                this.JawMoveInfo.Row = 1;
+                this.JawMoveInfo.Col = 1;
+                this.JawMoveInfo.Floor = 1;
+
                 var t = new Thread(() =>
                 {
                     //界面交替显示扫码状态
@@ -407,6 +453,8 @@ namespace GMCC.Sorter.ViewModel
                     //this.RealtimeStatus = "等待扫码...";
                 });
                 t.Start();
+
+                Current.App.IsTerminalInitFinished = true;
                 this.IsAlive = true;
             }
             else
