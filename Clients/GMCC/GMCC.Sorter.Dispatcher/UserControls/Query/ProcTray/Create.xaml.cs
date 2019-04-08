@@ -41,7 +41,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 
             if (string.IsNullOrWhiteSpace(code))
             {
-                tip.Foreground = new SolidColorBrush(Colors.Red);
+                 
                 tip.Text = "请填写数据！";
             }
             else
@@ -49,12 +49,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
                 var ret = new Business.ProcTrayManage().Create(new Model.ProcTray() { Code = code});
                 if (ret.IsOk)
                 {
-                    tip.Foreground = new SolidColorBrush(Colors.Green);
+                    tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "新增托盘成功！";
                 }
                 else
                 {
-                    tip.Foreground = new SolidColorBrush(Colors.Red);
+                     
                     tip.Text = ret.Msg;
                 }
             }

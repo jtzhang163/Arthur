@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,35 +19,65 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
+namespace GMCC.Sorter.Dispatcher.UserControls.Debug.Scaner
 {
     /// <summary>
     /// Details.xaml 的交互逻辑
     /// </summary>
     public partial class Details : UserControl
     {
-        private BatteryViewModel Battery;
+
         public Details(int id)
         {
             InitializeComponent();
-            this.Battery = ContextToViewModel.Convert(Context.Batteries.Single(t => t.Id == id));
-            this.DataContext = this.Battery;
         }
 
-        private void cancel_Click(object sender, RoutedEventArgs e)
+        private void Scan_Click(object sender, RoutedEventArgs e)
         {
-            Helper.ExecuteParentUserControlMethod(this, "Battery", "SwitchWindow", "Index", 0);
+            var btnName = (sender as Button).Name;
+            var index = Convert.ToInt32(btnName.Substring(7));
+
+            CommorViewModel scaner;
+            
+            if (index == 1) scaner = Current.BatteryScaner;
+            else if (index == 2) scaner = Current.BindTrayScaner;
+            else scaner = Current.UnbindTrayScaner;
+
+            var type = scaner.GetType();
+            var scanCommand = type.GetProperty("ScanCommand").GetValue(scaner);
+
+
+            new Thread(() => {
+                this.Dispatcher.Invoke(new Action(() => {
+                    var result = scaner.Commor.Comm(scanCommand as string);
+                    if (result.IsOk)
+                    {
+                        var tbRetMsg = ControlsSearchHelper.GetChildObject<TextBox>(this, "tbRetMsg" + index);
+                        tbRetMsg.Text = result.Data.ToString();
+                    }
+                    else
+                    {
+                        this.tip.Text = result.Msg;
+                        this.tip.Visibility = Visibility.Visible;
+                    }
+                }));
+            }).Start();
+
         }
 
-        private void edit_Click(object sender, RoutedEventArgs e)
+        private void Clear_Click(object sender, RoutedEventArgs e)
         {
-            if (Current.User.Role.Level < Arthur.App.Data.Context.Roles.Single(r => r.Name == "管理员").Level)
-            {
-                MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            var id = Convert.ToInt32((sender as Button).Tag);
-            Helper.ExecuteParentUserControlMethod(this, "Battery", "SwitchWindow", "Edit", id);
+            var btnName = (sender as Button).Name;
+            var index = btnName.Substring(8);
+            var tbRetMsg = ControlsSearchHelper.GetChildObject<TextBox>(this, "tbRetMsg" + index);
+            tbRetMsg.Text = "";
         }
+
+        private void btn_MouseEnter(object sender, MouseEventArgs e)
+        {
+            this.tip.Text = "";
+            this.tip.Visibility = Visibility.Collapsed;
+        }
+
     }
 }

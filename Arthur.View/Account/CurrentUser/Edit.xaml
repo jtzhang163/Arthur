@@ -32,7 +32,7 @@
                 <Button x:Name="cancel" Tag="{Binding Id}" Click="cancel_Click" Style="{StaticResource ChamferButton}">返回</Button>
             </StackPanel>
             <DockPanel>
-                <TextBlock x:Name="tip" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>
+                <TextBlock x:Name="tip" Foreground="White" Background="Red" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>
                 <Grid x:Name="grid">
                     <Grid.RowDefinitions>
                         <RowDefinition/>

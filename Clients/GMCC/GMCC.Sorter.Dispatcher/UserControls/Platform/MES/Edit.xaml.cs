@@ -53,7 +53,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
 
             if (string.IsNullOrWhiteSpace(host))
             {
-                tip.Foreground = new SolidColorBrush(Colors.Red);
+                 
                 tip.Text = "请填写数据！";
             }
             else
@@ -65,12 +65,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
                     Current.Mes.CommInterval = Convert.ToInt32(comm_interval);
 
                     Context.AppContext.SaveChanges();
-                    tip.Foreground = new SolidColorBrush(Colors.Green);
+                    tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
                 }
                 catch (Exception ex)
                 {
-                    tip.Foreground = new SolidColorBrush(Colors.Red);
+                     
                     tip.Text = "修改信息失败：" + ex.Message;
                 }
             }

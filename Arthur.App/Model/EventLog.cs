@@ -12,7 +12,7 @@ namespace Arthur.App.Model
     /// <summary>
     /// 系统事件日志
     /// </summary>
-    public class EventLog : Service
+    public class EventLog : Logging
     {
 
         public EventLog() : this(-1)
@@ -35,8 +35,6 @@ namespace Arthur.App.Model
         public string Content { get; set; }
 
         public EventType EventType { get; set; }
-
-        public DateTime Time { get; set; }
 
         #endregion
     }

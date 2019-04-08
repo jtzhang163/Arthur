@@ -83,7 +83,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
 
             if (string.IsNullOrWhiteSpace(code) || string.IsNullOrWhiteSpace(pos))
             {
-                tip.Foreground = new SolidColorBrush(Colors.Red);
+                 
                 tip.Text = "请填写数据！";
             }
             else
@@ -95,13 +95,13 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
                     this.Battery.Pos = Convert.ToInt32(pos);
 
                     Context.AppContext.SaveChanges();
-                    tip.Foreground = new SolidColorBrush(Colors.Green);
+                    tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
 
                 }
                 catch (Exception ex)
                 {
-                    tip.Foreground = new SolidColorBrush(Colors.Red);
+                     
                     tip.Text = "修改信息失败：" + ex.Message;
                 }
             }

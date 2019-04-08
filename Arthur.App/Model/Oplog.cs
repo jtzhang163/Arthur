@@ -11,7 +11,7 @@ namespace Arthur.App.Model
     /// <summary>
     /// 操作日志
     /// </summary>
-    public class Oplog : Service
+    public class Oplog : Logging
     {
 
         public Oplog() : this(-1)
@@ -26,7 +26,6 @@ namespace Arthur.App.Model
 
 
         #region 属性
-        public int UserId { get; set; }
 
         /// <summary>
         /// 操作内容
@@ -39,7 +38,6 @@ namespace Arthur.App.Model
         /// </summary>
         public OpType OpType { get; set; }
 
-        public DateTime Time { get; set; }
         #endregion
     }
 

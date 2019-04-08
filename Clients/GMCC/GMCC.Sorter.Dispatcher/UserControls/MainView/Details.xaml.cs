@@ -55,12 +55,14 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
 
             if (storageControl.Col < Common.STOR_COL_COUNT / 2 + 1)
             {
-                row = 6 - storageControl.Floor;
+                //row = 6 - storageControl.Floor;
+                row = storageControl.Floor;
                 col = 1 + storageControl.Col;
             }
             else
             {
-                row = 13 - storageControl.Floor;
+                //row = 13 - storageControl.Floor;
+                row = 7 + storageControl.Floor;
                 col = storageControl.Col - 8;
             }
 

@@ -41,7 +41,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
 
             if (string.IsNullOrWhiteSpace(code))
             {
-                tip.Foreground = new SolidColorBrush(Colors.Red);
+                 
                 tip.Text = "请填写数据！";
             }
             else
@@ -49,12 +49,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
                 var ret = new Business.BatteryManage().Create(new Model.Battery() { Code = code});
                 if (ret.IsOk)
                 {
-                    tip.Foreground = new SolidColorBrush(Colors.Green);
+                    tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "新增电池成功！";
                 }
                 else
                 {
-                    tip.Foreground = new SolidColorBrush(Colors.Red);
+                     
                     tip.Text = ret.Msg;
                 }
             }

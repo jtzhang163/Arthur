@@ -117,6 +117,9 @@ namespace GMCC.Sorter.Dispatcher
                 case "料仓管理":
                     return new StorageView();
 
+                case "扫码枪调试":
+                    return new ScanerView();
+
                 case "托盘追溯":
                     return new ProcTrayView();
                 case "电池追溯":

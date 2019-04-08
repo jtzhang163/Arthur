@@ -81,13 +81,13 @@ namespace Arthur.View.Account.User
                 this.User.Role = role;
 
                 Arthur.App.Data.Context.AppContext.SaveChanges();
-                tip.Foreground = new SolidColorBrush(Colors.Green);
+                tip.Background = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";
 
             }
             catch (Exception ex)
             {
-                tip.Foreground = new SolidColorBrush(Colors.Red);
+                 
                 tip.Text = "修改信息失败：" + ex.Message;
             }
 

@@ -73,6 +73,7 @@ namespace GMCC.Sorter.Data
                 return AppContext.BatteryScaners;
             }
         }
+
         public static DbSet<TrayScaner> TrayScaners
         {
             get
@@ -86,6 +87,14 @@ namespace GMCC.Sorter.Data
             get
             {
                 return AppContext.CurrentTasks.FirstOrDefault();
+            }
+        }
+
+        public static DbSet<TaskLog> TaskLogs
+        {
+            get
+            {
+                return AppContext.TaskLogs;
             }
         }
     }

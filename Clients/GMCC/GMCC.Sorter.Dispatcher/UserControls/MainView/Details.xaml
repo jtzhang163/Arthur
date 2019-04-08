@@ -21,10 +21,12 @@
                 --><!--<Button x:Name="cancel" Click="cancel_Click" Style="{StaticResource ChamferButton}">返回</Button>--><!--
             </StackPanel>-->
             <DockPanel>
-                <!--<TextBlock x:Name="tip" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>-->
+                <!--<TextBlock x:Name="tip" Foreground="White" Background="Red" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>-->
                 <Grid x:Name="grid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="24"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
@@ -60,7 +62,7 @@
                     </Grid>
                     <Grid x:Name="unbind_mach" Grid.Row="1" Grid.Column="11" Grid.RowSpan="5"  Grid.ColumnSpan="2" VerticalAlignment="Bottom">
                     </Grid>
-                    <Grid x:Name="current_task" Grid.Row="13" Grid.ColumnSpan="13" Margin="10"  Background="WhiteSmoke">
+                    <Grid x:Name="current_task" Grid.Row="15" Grid.ColumnSpan="13" Margin="10"  Background="WhiteSmoke">
 
                     </Grid>
                 </Grid>

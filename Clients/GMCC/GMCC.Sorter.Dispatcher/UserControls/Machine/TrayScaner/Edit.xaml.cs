@@ -98,12 +98,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.TrayScaner
                 this.TrayScaner.ScanCommand = scan_command;
 
                 Context.AppContext.SaveChanges();
-                tip.Foreground = new SolidColorBrush(Colors.Green);
+                tip.Background = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";
             }
             catch (Exception ex)
             {
-                tip.Foreground = new SolidColorBrush(Colors.Red);
+                 
                 tip.Text = "修改信息失败：" + ex.Message;
             }
 

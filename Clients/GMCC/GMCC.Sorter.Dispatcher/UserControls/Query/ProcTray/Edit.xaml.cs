@@ -77,7 +77,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 
             if (string.IsNullOrWhiteSpace(code))
             {
-                tip.Foreground = new SolidColorBrush(Colors.Red);
+                 
                 tip.Text = "请填写数据！";
             }
             else
@@ -89,13 +89,13 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
                     this.ProcTray.StartStillTime = startstill_time;
 
                     Context.AppContext.SaveChanges();
-                    tip.Foreground = new SolidColorBrush(Colors.Green);
+                    tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
 
                 }
                 catch (Exception ex)
                 {
-                    tip.Foreground = new SolidColorBrush(Colors.Red);
+                     
                     tip.Text = "修改信息失败：" + ex.Message;
                 }
             }

@@ -55,17 +55,17 @@ namespace Arthur.View.Account.Role
 
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(level))
             {
-                tip.Foreground = new SolidColorBrush(Colors.Red);
+                 
                 tip.Text = "请填写数据！";
             }
             else if (!int.TryParse(level, out int iLevel))
             {
-                tip.Foreground = new SolidColorBrush(Colors.Red);
+                 
                 tip.Text = "角色等级输入有误！";
             }
             else if (iLevel > Context.Roles.Single(r => r.Name == "系统管理员").Level)
             {
-                tip.Foreground = new SolidColorBrush(Colors.Red);
+                 
                 tip.Text = "角色等级不能大于管理员等级！";
             }
             else
@@ -76,13 +76,13 @@ namespace Arthur.View.Account.Role
                     this.Role.Level = iLevel;
 
                     Arthur.App.Data.Context.AppContext.SaveChanges();
-                    tip.Foreground = new SolidColorBrush(Colors.Green);
+                    tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
 
                 }
                 catch (Exception ex)
                 {
-                    tip.Foreground = new SolidColorBrush(Colors.Red);
+                     
                     tip.Text = "修改信息失败：" + ex.Message;
                 }
             }

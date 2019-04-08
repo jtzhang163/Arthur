@@ -60,7 +60,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
 
             if (string.IsNullOrWhiteSpace(ip) || string.IsNullOrWhiteSpace(this.port.Text))
             {
-                tip.Foreground = new SolidColorBrush(Colors.Red);
+                 
                 tip.Text = "请填写数据！";
             }
             else
@@ -79,12 +79,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
                     Current.MainMachine.StillTimeSpan = Convert.ToInt32(still_timespan);
 
                     Context.AppContext.SaveChanges();
-                    tip.Foreground = new SolidColorBrush(Colors.Green);
+                    tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
                 }
                 catch (Exception ex)
                 {
-                    tip.Foreground = new SolidColorBrush(Colors.Red);
+                     
                     tip.Text = "修改信息失败：" + ex.Message;
                 }
             }
