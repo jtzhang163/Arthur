@@ -527,14 +527,14 @@
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
                     <Expander.Header>
-                        <TextBlock Text="数据分析"/>
+                        <TextBlock Text="手动调试"/>
                     </Expander.Header>
                     <Expander.Content>
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0">产能与合格率</RadioButton>
+                            <RadioButton Grid.Row="0">扫码枪调试</RadioButton>
                         </Grid>
                     </Expander.Content>
                 </Expander>
@@ -549,12 +549,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
-                                <!--<RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>-->
                             </Grid.RowDefinitions>
                             <!--<RadioButton Grid.Row="0">基本数据</RadioButton>
                             <RadioButton Grid.Row="1">静置数据</RadioButton>
@@ -566,6 +561,7 @@
                             <RadioButton Grid.Row="6">高速缓存</RadioButton>-->
                             <RadioButton Grid.Row="0" Checked="RadioButton_Checked">托盘追溯</RadioButton>
                             <RadioButton Grid.Row="1" Checked="RadioButton_Checked">电池追溯</RadioButton>
+                            <RadioButton Grid.Row="2" Checked="RadioButton_Checked">任务日志</RadioButton>
                         </Grid>
                     </Expander.Content>
                 </Expander>

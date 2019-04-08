@@ -121,6 +121,8 @@ namespace GMCC.Sorter.Dispatcher
                     return new ProcTrayView();
                 case "电池追溯":
                     return new BatteryView();
+                case "任务日志":
+                    return new TaskLogView();
 
                 case "MES":
                     return new MESView();

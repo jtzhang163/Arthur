@@ -102,6 +102,9 @@
     <Compile Include="Controls\TrayBatteryControl.xaml.cs">
       <DependentUpon>TrayBatteryControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Query\TaskLog\Index.xaml.cs">
+      <DependentUpon>Index.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Query\ProcTray\Create.xaml.cs">
       <DependentUpon>Create.xaml</DependentUpon>
     </Compile>
@@ -190,6 +193,9 @@
     <Compile Include="UserControls\SystemUC\ParamUC\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Query\TaskLogView.xaml.cs">
+      <DependentUpon>TaskLogView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Query\ProcTrayView.xaml.cs">
       <DependentUpon>ProcTrayView.xaml</DependentUpon>
     </Compile>
@@ -256,6 +262,10 @@
     <Page Include="Controls\TrayBatteryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Query\TaskLog\Index.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\Query\ProcTray\Create.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -354,6 +364,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\Platform\MES\Edit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Query\TaskLogView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
