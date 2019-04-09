@@ -105,6 +105,15 @@
     <Compile Include="UserControls\Debug\Scaner\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Platform\BtsClient\Details.xaml.cs">
+      <DependentUpon>Details.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Platform\BtsClient\Edit.xaml.cs">
+      <DependentUpon>Edit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Platform\BtsClient\Index.xaml.cs">
+      <DependentUpon>Index.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Query\TaskLog\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
     </Compile>
@@ -199,6 +208,9 @@
     <Compile Include="Views\Debug\ScanerView.xaml.cs">
       <DependentUpon>ScanerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Platform\BtsClientView.xaml.cs">
+      <DependentUpon>BtsClientView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Query\TaskLogView.xaml.cs">
       <DependentUpon>TaskLogView.xaml</DependentUpon>
     </Compile>
@@ -270,6 +282,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Debug\Scaner\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Platform\BtsClient\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Platform\BtsClient\Edit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Platform\BtsClient\Index.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -378,6 +402,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Debug\ScanerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Platform\BtsClientView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -548,8 +576,6 @@
   <ItemGroup>
     <Resource Include="Images\close.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserControls\Platform\BtsClient\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

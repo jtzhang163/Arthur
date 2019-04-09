@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace GMCC.Sorter.Data
 {
     /// <summary>
-    /// 设备上下文
+    /// 应用程序上下文
     /// </summary>
     public class AppContext : DbContext
     {

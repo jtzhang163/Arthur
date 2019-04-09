@@ -29,5 +29,16 @@ namespace GMCC.Sorter.Utils
         {
             return procTrays.ConvertAll<ProcTrayViewModel>(o => new ProcTrayViewModel(o.Id, o.Code, o.ScanTime, o.StorageId, o.StartStillTime, o.StillTimeSpan));
         }
+
+
+        public static ShareDataViewModel Convert(ShareData shareData)
+        {
+            return new ShareDataViewModel(shareData.Id, shareData.Key, shareData.Value, shareData.Status, shareData.Desc);
+        }
+
+        public static List<ShareDataViewModel> Convert(List<ShareData> shareDatas)
+        {
+            return shareDatas.ConvertAll<ShareDataViewModel>(o => new ShareDataViewModel(o.Id, o.Key, o.Value, o.Status, o.Desc));
+        }
     }
 }

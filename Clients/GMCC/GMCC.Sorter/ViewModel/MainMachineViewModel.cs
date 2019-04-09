@@ -388,43 +388,13 @@ namespace GMCC.Sorter.ViewModel
         /// </summary>
         public bool IsBlankingFinished { get; set; }
 
-
-        private int taskExecInterval = -1;
-
-        /// <summary>
-        /// 搬运任务执行定时器间隔(ms)
-        /// </summary>
-        public int TaskExecInterval
-        {
-            get
-            {
-                if (taskExecInterval < 0)
-                {
-                    taskExecInterval = _Convert.StrToInt(Arthur.Business.Application.GetOption("TaskExecInterval"), -1);
-                    if (taskExecInterval < 0)
-                    {
-                        taskExecInterval = 3000;
-                        Arthur.Business.Application.SetOption("TaskExecInterval", taskExecInterval.ToString(), "搬运任务执行定时器间隔(ms)");
-                    }
-                }
-                return taskExecInterval;
-            }
-            set
-            {
-                if (taskExecInterval != value)
-                {
-                    Arthur.Business.Application.SetOption("TaskExecInterval", value.ToString());
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. 搬运任务执行定时器间隔(ms): [{1}] 修改为 [{2}]", Name, taskExecInterval, value), Arthur.App.Model.OpType.编辑);
-                    SetProperty(ref taskExecInterval, value);
-                }
-            }
-        }
-
-        private System.Threading.Timer Timer;// = new System.Threading.Timer(new TimerCallback(TaskExec), null, 5000, Current.MainMachine.TaskExecInterval);
+        private System.Threading.Timer TaskTimer;// = new System.Threading.Timer(new TimerCallback(TaskExec), null, 5000, Current.MainMachine.TaskExecInterval);
+        private System.Threading.Timer GetShareDataTimer;
 
         public MainMachineViewModel(Commor commor) : base(commor)
         {
-            Timer = new System.Threading.Timer(new TimerCallback(TimerExec.TaskExec), null, 5000, this.TaskExecInterval);
+            TaskTimer = new System.Threading.Timer(new TimerCallback(TimerExec.TaskExec), null, 5000, Current.Option.TaskExecInterval);
+            GetShareDataTimer = new System.Threading.Timer(new TimerCallback(TimerExec.GetShareDataExec), null, 5000, Current.Option.GetShareDataExecInterval);
         }
 
         public void Comm()

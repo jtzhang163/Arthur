@@ -127,6 +127,8 @@ namespace GMCC.Sorter.Dispatcher
                 case "任务日志":
                     return new TaskLogView();
 
+                case "BTS客户端":
+                    return new BtsClientView();
                 case "MES":
                     return new MESView();
 

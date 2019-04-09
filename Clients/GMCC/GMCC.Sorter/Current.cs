@@ -1,6 +1,7 @@
 ﻿using Arthur.App.Comm;
 using Arthur.ViewModel;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace GMCC.Sorter
         {
             get
             {
-                if(mainMachine == null)
+                if (mainMachine == null)
                 {
                     var plc = Context.PLCs.FirstOrDefault();
                     var commor = new Commor(plc);
@@ -133,7 +134,7 @@ namespace GMCC.Sorter
                     mes = new MesViewModel(commor);
                 }
                 return mes;
-            } 
+            }
         }
 
         private static CurrentTaskViewModel task = null;
@@ -148,5 +149,17 @@ namespace GMCC.Sorter
                 return task;
             }
         }
+
+        public static List<ShareDataViewModel> ShareDatas
+        {
+            get
+            {
+                using (var db = new ShareContext())
+                {
+                    var data = db.Database.SqlQuery<ShareData>("select * from t_data").ToList();
+                    return ContextToViewModel.Convert(data);
+                }
+            }
+        } 
     }
 }

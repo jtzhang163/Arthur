@@ -11,7 +11,7 @@ namespace GMCC.Sorter.Data
 {
     public class Context
     {
-        public static AppContext appContext = new AppContext();
+        private static AppContext appContext = new AppContext();
         public static AppContext AppContext
         {
             get
@@ -97,5 +97,6 @@ namespace GMCC.Sorter.Data
                 return AppContext.TaskLogs;
             }
         }
+
     }
 }

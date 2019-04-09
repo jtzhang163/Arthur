@@ -578,7 +578,7 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0">BTS客户端</RadioButton>
+                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">BTS客户端</RadioButton>
                             <RadioButton Grid.Row="1" Checked="RadioButton_Checked">MES</RadioButton>
                         </Grid>
                     </Expander.Content>

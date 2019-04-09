@@ -8,7 +8,7 @@ using Arthur.Utility;
 
 namespace Arthur.App
 {
-    public class AppOption
+    public class AppOption : BindableObject
     {
         private int rememberUserId = -1;
 
@@ -30,7 +30,7 @@ namespace Arthur.App
             set
             {
                 if (rememberUserId != value)
-                {              
+                {
                     Business.Application.SetOption("RememberUserId", value.ToString());
                     rememberUserId = value;
                 }

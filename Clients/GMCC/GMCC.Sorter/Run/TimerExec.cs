@@ -1,4 +1,5 @@
 ﻿using GMCC.Sorter.Business;
+using GMCC.Sorter.Data;
 using GMCC.Sorter.Factory;
 using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
@@ -78,6 +79,14 @@ namespace GMCC.Sorter.Run
                     Current.Task.PreType = Current.Task.Type;
                     Current.Task.Status = Model.TaskStatus.完成;
                 }
+            }
+        }
+
+        public static void GetShareDataExec(object obj)
+        {
+            if(Current.ShareDatas.Count > 0)
+            {
+
             }
         }
     }
