@@ -37,11 +37,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
         private void create_Click(object sender, RoutedEventArgs e)
         {
             var code = this.code.Text.Trim();
-            //var company = this.company.Text.Trim();
+
+            tip.Background = new SolidColorBrush(Colors.Red);
 
             if (string.IsNullOrWhiteSpace(code))
-            {
-                 
+            {                
                 tip.Text = "请填写数据！";
             }
             else

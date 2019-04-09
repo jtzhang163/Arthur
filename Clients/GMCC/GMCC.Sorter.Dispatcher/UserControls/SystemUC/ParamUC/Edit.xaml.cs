@@ -50,6 +50,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.SystemUC.ParamUC
             var companyName = this.company_name.Text.Trim();
             var gridPageSize = this.grid_page_size.Text.Trim();
 
+            tip.Background = new SolidColorBrush(Colors.Red);
+
             if (string.IsNullOrWhiteSpace(appName) || string.IsNullOrWhiteSpace(companyName) || string.IsNullOrWhiteSpace(gridPageSize))
             {
                  

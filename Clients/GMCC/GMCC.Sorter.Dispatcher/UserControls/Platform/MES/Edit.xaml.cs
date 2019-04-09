@@ -51,9 +51,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
             var company = this.company.Text.Trim();
             var comm_interval = this.comm_interval.Text.Trim();
 
+            tip.Background = new SolidColorBrush(Colors.Red);
             if (string.IsNullOrWhiteSpace(host))
-            {
-                 
+            {           
                 tip.Text = "请填写数据！";
             }
             else
@@ -69,8 +69,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
                     tip.Text = "修改信息成功！";
                 }
                 catch (Exception ex)
-                {
-                     
+                {               
                     tip.Text = "修改信息失败：" + ex.Message;
                 }
             }

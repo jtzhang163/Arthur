@@ -58,9 +58,10 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
             var unbind_traycode = this.unbind_traycode.Text.Trim();
             var still_timespan = this.still_timespan.Text.Trim();
 
+            tip.Background = new SolidColorBrush(Colors.Red);
+
             if (string.IsNullOrWhiteSpace(ip) || string.IsNullOrWhiteSpace(this.port.Text))
-            {
-                 
+            {                
                 tip.Text = "请填写数据！";
             }
             else

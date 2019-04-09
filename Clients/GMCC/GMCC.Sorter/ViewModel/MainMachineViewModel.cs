@@ -132,7 +132,7 @@ namespace GMCC.Sorter.ViewModel
                     stillTimeSpan = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("StillTimeSpan"), -1);
                     if (stillTimeSpan == -1)
                     {
-                        stillTimeSpan = 0;
+                        stillTimeSpan = 120;
                         Arthur.Business.Application.SetOption("StillTimeSpan", stillTimeSpan.ToString(), "静置时长(min)");
                     }
                 }

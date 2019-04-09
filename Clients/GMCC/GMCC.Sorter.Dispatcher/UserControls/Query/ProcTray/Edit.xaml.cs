@@ -75,9 +75,10 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
             }
             var startstill_time = this.startstill_time.Value.Value;
 
+            tip.Background = new SolidColorBrush(Colors.Red);
+
             if (string.IsNullOrWhiteSpace(code))
-            {
-                 
+            {             
                 tip.Text = "请填写数据！";
             }
             else
@@ -94,8 +95,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 
                 }
                 catch (Exception ex)
-                {
-                     
+                {                     
                     tip.Text = "修改信息失败：" + ex.Message;
                 }
             }

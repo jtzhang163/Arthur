@@ -39,19 +39,18 @@ namespace Arthur.View.Account.Role
             var level = this.level.Text.Trim();
             var name = this.name.Text.Trim();
 
+            tip.Background = new SolidColorBrush(Colors.Red);
+
             if (string.IsNullOrWhiteSpace(level) || string.IsNullOrWhiteSpace(name))
-            {
-                 
+            {                
                 tip.Text = "请填写数据！";
             }
             else if (!int.TryParse(level, out int iLevel))
-            {
-                 
+            {                 
                 tip.Text = "角色等级输入有误！";
             }
             else if (iLevel >= Context.Roles.Single(r => r.Name == "系统管理员").Level)
-            {
-                 
+            {                
                 tip.Text = "角色等级必须小于系统管理员！";
             }
             else
@@ -63,12 +62,10 @@ namespace Arthur.View.Account.Role
                     tip.Text = "新增角色成功！";
                 }
                 else
-                {
-                     
+                {                   
                     tip.Text = ret.Msg;
                 }
             }
-
             tip.Visibility = Visibility.Visible;
         }
 

@@ -55,9 +55,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.BatteryScaner
             var comm_interval = this.comm_interval.Text.Trim();
             var scan_command = this.scan_command.Text.Trim();
 
+            tip.Background = new SolidColorBrush(Colors.Red);
             if (string.IsNullOrWhiteSpace(ip) || string.IsNullOrWhiteSpace(this.port.Text))
-            {
-                 
+            {                
                 tip.Text = "请填写数据！";
             }
             else
@@ -76,8 +76,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.BatteryScaner
                     tip.Text = "修改信息成功！";
                 }
                 catch (Exception ex)
-                {
-                     
+                {                
                     tip.Text = "修改信息失败：" + ex.Message;
                 }
             }

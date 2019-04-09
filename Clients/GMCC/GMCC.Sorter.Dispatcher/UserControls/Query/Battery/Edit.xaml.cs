@@ -81,9 +81,10 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
                 procTrayId = proc_tray.Id;
             }
 
+            tip.Background = new SolidColorBrush(Colors.Red);
+
             if (string.IsNullOrWhiteSpace(code) || string.IsNullOrWhiteSpace(pos))
-            {
-                 
+            {                 
                 tip.Text = "请填写数据！";
             }
             else

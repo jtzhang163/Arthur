@@ -53,6 +53,8 @@ namespace Arthur.View.Account.Role
             var name = this.name.Text.Trim();
             var level = this.level.Text.Trim();
 
+            tip.Background = new SolidColorBrush(Colors.Red);
+
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(level))
             {
                  
@@ -78,11 +80,9 @@ namespace Arthur.View.Account.Role
                     Arthur.App.Data.Context.AppContext.SaveChanges();
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
-
                 }
                 catch (Exception ex)
-                {
-                     
+                {                    
                     tip.Text = "修改信息失败：" + ex.Message;
                 }
             }

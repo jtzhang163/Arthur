@@ -103,7 +103,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.TrayScaner
             }
             catch (Exception ex)
             {
-                 
+                tip.Background = new SolidColorBrush(Colors.Red);
                 tip.Text = "修改信息失败：" + ex.Message;
             }
 

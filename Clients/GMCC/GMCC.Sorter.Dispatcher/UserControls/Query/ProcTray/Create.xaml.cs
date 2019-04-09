@@ -37,7 +37,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
         private void create_Click(object sender, RoutedEventArgs e)
         {
             var code = this.code.Text.Trim();
-            //var company = this.company.Text.Trim();
+
+            tip.Background = new SolidColorBrush(Colors.Red);
 
             if (string.IsNullOrWhiteSpace(code))
             {

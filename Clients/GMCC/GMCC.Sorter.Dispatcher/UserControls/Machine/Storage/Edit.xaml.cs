@@ -54,9 +54,10 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
             var name = this.name.Text.Trim();
             var company = this.company.Text.Trim();
 
+            tip.Background = new SolidColorBrush(Colors.Red);
+
             if (string.IsNullOrWhiteSpace(name))
-            {
-                 
+            {                
                 tip.Text = "请填写数据！";
             }
             else
