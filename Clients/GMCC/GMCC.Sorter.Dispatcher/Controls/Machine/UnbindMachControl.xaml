@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.Controls.Machine"
              xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
-             mc:Ignorable="d" Height="130" Width="100"
+             mc:Ignorable="d" Width="100"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <utils:SignalToSingalColorConverter x:Key="signalToSingalColorConverter"/>
@@ -18,15 +18,43 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="12*"/>
+
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="12*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Row="0" Grid.ColumnSpan="2" Content="解盘机构" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0" VerticalAlignment="Center"/>
-            <Label Grid.Row="1" Content="托盘扫码就绪" FontSize="10" HorizontalContentAlignment="Center" Margin="0" Padding="0"/>
+            <Label Grid.Row="0" Grid.ColumnSpan="2" Content="放电模组" FontSize="14" HorizontalContentAlignment="Center" Margin="0" Padding="0" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label Grid.Row="1" Content="托盘扫码就绪" FontSize="10" HorizontalContentAlignment="Center" Margin="0" Padding="0" VerticalAlignment="Center"/>
             <Ellipse  Grid.Row="1" Grid.Column="1" Fill="{Binding IsUnbindTrayScanReady,Converter={StaticResource signalToSingalColorConverter}}" Width="12" Height="12"/>
             <Border Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black" Margin="5">
+                <DockPanel>
+                    <Label DockPanel.Dock="Bottom" Content="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0" MouseDoubleClick="Label_MouseDoubleClick"/>
+                    <Grid Visibility="{Binding UnbindProcTrayId,Converter={StaticResource procTrayIdToVisibilityConverter}}" Background="Cyan" Margin="15,5,15,0" Height="50">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </DockPanel>
+            </Border>
+
+            <Label Grid.Row="3" Grid.ColumnSpan="2" Content="解盘模组" FontSize="14" HorizontalContentAlignment="Center" Margin="0" Padding="0" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Border Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
                     <Label DockPanel.Dock="Bottom" Content="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0" MouseDoubleClick="Label_MouseDoubleClick"/>
                     <Grid Visibility="{Binding UnbindProcTrayId,Converter={StaticResource procTrayIdToVisibilityConverter}}" Background="Cyan" Margin="15,5,15,0" Height="50">

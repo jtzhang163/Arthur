@@ -15,8 +15,8 @@
             <Setter Property="TextElement.FontFamily" Value="pack://application:,,,/#FontAwesome" />
             <Setter Property="TextBlock.TextAlignment" Value="Left"></Setter>
           
-            <Setter Property="TextBlock.Foreground" Value="White"></Setter>
-            <Setter Property="TextBlock.Width" Value="40"></Setter>
+            <Setter Property="TextBlock.Foreground" Value="#D0D0D0"></Setter>
+            <Setter Property="TextBlock.Width" Value="25"></Setter>
             <Setter Property="TextBlock.VerticalAlignment" Value="Center"></Setter>
         </Style>
 
@@ -440,7 +440,11 @@
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
                     <Expander.Header>
-                        <TextBlock Text="用户管理"/>
+                        <!--TextBlock Text="&#xf00d;" Style="{DynamicResource FontAwesome}"-->
+                        <WrapPanel>
+                            <TextBlock Text="&#xf2bb;" Style="{DynamicResource FontAwesome}" FontSize="18"/>
+                            <TextBlock Text="用户管理"/>
+                        </WrapPanel>
                     </Expander.Header>
                     <Expander.Content>
                         <Grid>
@@ -459,7 +463,10 @@
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
                     <Expander.Header>
-                        <TextBlock Text="系统"/>
+                        <WrapPanel>
+                            <TextBlock Text="&#xf013;" Style="{DynamicResource FontAwesome}" FontSize="22"/>
+                            <TextBlock Text="系统"/>
+                        </WrapPanel>
                     </Expander.Header>
                     <Expander.Content>
                         <Grid>
@@ -478,7 +485,10 @@
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
                     <Expander.Header>
-                        <TextBlock Text="设备管理"/>
+                        <WrapPanel>
+                            <TextBlock Text="&#xf085;" Style="{DynamicResource FontAwesome}" FontSize="18"/>
+                            <TextBlock Text="设备管理"/>
+                        </WrapPanel>
                     </Expander.Header>
                     <Expander.Content>
                         <Grid>
@@ -502,32 +512,10 @@
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
                     <Expander.Header>
-                        <TextBlock Text="生产"/>
-                    </Expander.Header>
-                    <Expander.Content>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0">产线</RadioButton>
-                            <RadioButton Grid.Row="1">项目</RadioButton>
-                            <RadioButton Grid.Row="2">批次</RadioButton>
-                            <RadioButton Grid.Row="3">流程文件</RadioButton>
-                            <RadioButton Grid.Row="4">电池类型</RadioButton>
-                            <RadioButton Grid.Row="5">NG代码</RadioButton>
-                        </Grid>
-                    </Expander.Content>
-                </Expander>
-                <Separator Height="2" Background="White"/>
-
-                <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
-                    <Expander.Header>
-                        <TextBlock Text="手动调试"/>
+                        <WrapPanel>
+                            <TextBlock Text="&#xf25a;" Style="{DynamicResource FontAwesome}" FontSize="20"/>
+                            <TextBlock Text="手动调试"/>
+                        </WrapPanel>
                     </Expander.Header>
                     <Expander.Content>
                         <Grid>
@@ -542,7 +530,10 @@
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
                     <Expander.Header>
-                        <TextBlock Text="数据查询"/>
+                        <WrapPanel>
+                            <TextBlock Text="&#xf002;" Style="{DynamicResource FontAwesome}" FontSize="20"/>
+                            <TextBlock Text="数据查询"/>
+                        </WrapPanel>
                     </Expander.Header>
                     <Expander.Content>
                         <Grid>
@@ -570,7 +561,10 @@
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">
                     <Expander.Header>
-                        <TextBlock Text="交互平台"/>
+                        <WrapPanel>
+                            <TextBlock Text="&#xf0ee;" Style="{DynamicResource FontAwesome}" FontSize="18"/>
+                            <TextBlock Text="交互平台"/>
+                        </WrapPanel>
                     </Expander.Header>
                     <Expander.Content>
                         <Grid>
@@ -588,7 +582,10 @@
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">
                     <Expander.Header>
-                        <TextBlock Text="帮助"/>
+                        <WrapPanel>
+                            <TextBlock Text="&#xf059;" Style="{DynamicResource FontAwesome}" FontSize="20"/>
+                            <TextBlock Text="帮助"/>
+                        </WrapPanel>
                     </Expander.Header>
                     <Expander.Content>
                         <Grid>
