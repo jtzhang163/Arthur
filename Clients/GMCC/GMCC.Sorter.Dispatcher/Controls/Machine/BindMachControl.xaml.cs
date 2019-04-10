@@ -50,7 +50,7 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
                     {
                         var border = new Border()
                         {
-                            Background = i * 4 + j < batteryCount ? Brushes.LightGreen : Brushes.White,
+                            Background = i * 4 + 3 - j < batteryCount ? Brushes.LightGreen : Brushes.White,
                             // Margin = new Thickness(0.1),
                             BorderThickness = new Thickness(0.5),
                             BorderBrush = Brushes.Black
@@ -66,7 +66,8 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
 
         private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ShowWindows.ShowTrayBatteryWin(this.MainMachine.BindProcTrayId);
+            var label = sender as Label;
+            ShowWindows.ShowTrayBatteryWin(Convert.ToInt32(label.Tag));
         }
     }
 }

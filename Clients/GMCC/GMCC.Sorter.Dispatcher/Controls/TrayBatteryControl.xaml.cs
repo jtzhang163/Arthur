@@ -39,7 +39,7 @@ namespace GMCC.Sorter.Dispatcher.Controls
                 lab.VerticalContentAlignment = VerticalAlignment.Center;
                 this.grid.Children.Add(lab);
                 Grid.SetRow(lab, (o.Pos - 1) / 4);
-                Grid.SetColumn(lab, (o.Pos - 1) % 4);
+                Grid.SetColumn(lab, 3 - (o.Pos - 1) % 4);
             });
             //  this.
         }

@@ -102,6 +102,12 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
+            //绑盘位电池已满，不扫码，直到出现新托盘再扫
+            if (Current.MainMachine.BindBatteriesCount >= Common.TRAY_BATTERY_COUNT)
+            {
+                return;
+            }
+
             if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady && !Current.MainMachine.IsAlreadyBatteryScan && Current.MainMachine.BindProcTrayId > 0)
             {
                 var ret = this.Commor.Comm(this.ScanCommand);
@@ -115,9 +121,8 @@ namespace GMCC.Sorter.ViewModel
                         var saveRet = new Business.BatteryManage().Create(new Model.Battery() { Code = ret.Data.ToString() }, true);
                         if (!saveRet.IsOk)
                         {
-                            Current.App.ErrorMsg = saveRet.Msg;
-                            Current.App.RunStatus = RunStatus.异常;
-                            TimerExec.IsRunning = false;
+                            Running.StopRunAndShowMsg(saveRet.Msg);
+                            return;
                         }
 
                         //界面交替显示扫码状态

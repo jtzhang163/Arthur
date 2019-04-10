@@ -204,6 +204,37 @@ namespace GMCC.Sorter.ViewModel
         }
 
 
+        private int chargeProcTrayId = -2;
+        /// <summary>
+        /// 充电位流程托盘Id
+        /// </summary>
+        public int ChargeProcTrayId
+        {
+            get
+            {
+                if (chargeProcTrayId == -2)
+                {
+                    chargeProcTrayId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("ChargeProcTrayId"), -1);
+                    if (chargeProcTrayId == -1)
+                    {
+                        chargeProcTrayId = 0;
+                        Arthur.Business.Application.SetOption("ChargeProcTrayId", bindProcTrayId.ToString(), "充电位流程托盘Id");
+                    }
+                }
+                return chargeProcTrayId;
+            }
+            set
+            {
+                if (chargeProcTrayId != value)
+                {
+                    Arthur.Business.Application.SetOption("ChargeProcTrayId", value.ToString());
+                    SetProperty(ref chargeProcTrayId, value);
+                }
+            }
+        }
+
+
+
         private int unbindProcTrayId = -2;
         /// <summary>
         /// 解盘位流程托盘Id
@@ -376,6 +407,38 @@ namespace GMCC.Sorter.ViewModel
         }
 
 
+        private bool isHasChargeTray;
+        /// <summary>
+        /// 充电位有托盘
+        /// </summary>
+        public bool IsHasChargeTray
+        {
+            get => isHasChargeTray;
+            set
+            {
+                if (!isHasChargeTray && value && this.BindBatteriesCount == Common.TRAY_BATTERY_COUNT)
+                {
+                    this.ChargeProcTrayId = this.BindProcTrayId;
+                    this.BindProcTrayId = 0; 
+                }
+                SetProperty(ref isHasChargeTray, value);
+            }
+        }
+
+        private bool isHasDisChargeTray;
+        /// <summary>
+        /// 放电位有托盘
+        /// </summary>
+        public bool IsHasDisChargeTray
+        {
+            get => isHasDisChargeTray;
+            set
+            {
+                SetProperty(ref isHasDisChargeTray, value);
+            }
+        }
+
+
         public bool isAlreadyUnbindTrayScan { get; set; }
 
         /// <summary>
@@ -411,6 +474,9 @@ namespace GMCC.Sorter.ViewModel
                 this.JawPos = Convert.ToInt32(retData[3]);
                 this.IsBindTrayGetReady = retData[4] == "1";
                 this.IsUnbindTrayPutReady = retData[5] == "1";
+
+                this.IsHasChargeTray = retData[6] == "1";
+                this.IsHasDisChargeTray = retData[7] == "1";
 
                 this.JawMoveInfo.Row = 1;
                 this.JawMoveInfo.Col = 1;

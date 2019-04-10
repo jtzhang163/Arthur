@@ -157,12 +157,14 @@ namespace Arthur.View.Account.Role
 
         private void preview_page_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (PageIndex <= 1) return;
             PageIndex--;
             UpdateDataGrid(PageIndex);
         }
 
         private void next_page_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            if (PageIndex >= Convert.ToUInt32(this.totalPages.Content)) return;
             PageIndex++;
             UpdateDataGrid(PageIndex);
         }

@@ -165,6 +165,8 @@ namespace GMCC.Sorter.ViewModel
         {
             if (!Current.MainMachine.IsAlive) return;
 
+            if (Current.MainMachine.BindProcTrayId > 0) return;
+
             if (this == Current.BindTrayScaner && Current.MainMachine.IsBindTrayScanReady && !Current.MainMachine.IsAlreadyBindTrayScan)
             {
                 var ret = this.Commor.Comm(this.ScanCommand);
@@ -178,11 +180,11 @@ namespace GMCC.Sorter.ViewModel
                         var saveRet = new Business.ProcTrayManage().Create(new Model.ProcTray() { Code = ret.Data.ToString() }, true);
                         if (saveRet.IsOk)
                         {
-                            if (Current.MainMachine.BindProcTrayId > 0)
-                            {
-                                Running.StopRunAndShowMsg("绑盘位已有托盘条码！");
-                                return;
-                            }
+                            //if (Current.MainMachine.BindProcTrayId > 0)
+                            //{
+                            //    Running.StopRunAndShowMsg("绑盘位已有托盘条码！");
+                            //    return;
+                            //}
                             Current.MainMachine.BindProcTrayId = (int)saveRet.Data;
                         }
                         else

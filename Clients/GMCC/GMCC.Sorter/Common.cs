@@ -17,5 +17,10 @@ namespace GMCC.Sorter
         /// 料仓层数
         /// </summary>
         public const int STOR_FLOOR_COUNT = 5;
+
+        /// <summary>
+        /// 托盘满盘电池数
+        /// </summary>
+        public const int TRAY_BATTERY_COUNT = 32;
     }
 }

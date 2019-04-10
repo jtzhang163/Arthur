@@ -1,6 +1,9 @@
-﻿using GMCC.Sorter.Business;
+﻿using Arthur.Utils;
+using GMCC.Sorter.Business;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Factory;
+using GMCC.Sorter.Model;
 using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
 using System;
@@ -19,6 +22,8 @@ namespace GMCC.Sorter.Run
 
         public static void TaskExec(object obj)
         {
+            if (!IsRunning) return;
+
             if (Current.Task.Status == Model.TaskStatus.完成)
             {
                 if (Current.App.TaskMode == ViewModel.TaskMode.自动任务)
@@ -84,8 +89,32 @@ namespace GMCC.Sorter.Run
 
         public static void GetShareDataExec(object obj)
         {
-            if(Current.ShareDatas.Count > 0)
+            if (!IsRunning) return;
+
+            if (Current.ShareDatas.Count > 0)
             {
+                if(Current.MainMachine.ChargeProcTrayId > 0)
+                {
+                    var chargeData = Current.ShareDatas.First(o => o.Key == "ChargeCodes");
+                    var bindCode = JsonHelper.DeserializeJsonToObject<BindCode>(chargeData.Value);
+                    var procTray = GetObject.GetById<ProcTray>(Current.MainMachine.ChargeProcTrayId);
+                    if (chargeData.Status == 2)
+                    {
+                        if (bindCode.TrayCode == procTray.Code)
+                        {
+                            //充电位置可以取盘
+                        }
+                        else
+                        {
+                            //充电位条码绑定信息传给BTS客户端
+                            var codes = procTray.GetBatteries().ConvertAll<string>(o => o.Code);
+                            var value = new BindCode { TrayCode = procTray.Code, BatteryCodes = string.Join(",", codes.ToArray()) };
+                            chargeData.Value = JsonHelper.SerializeObject(value);
+                            chargeData.Status = 1;
+                        }
+
+                    }
+                }
 
             }
         }

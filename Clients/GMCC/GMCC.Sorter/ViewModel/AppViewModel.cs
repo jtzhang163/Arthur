@@ -89,7 +89,7 @@ namespace GMCC.Sorter.ViewModel
                 {
                     if (string.IsNullOrWhiteSpace(Current.Option.CompanyName))
                     {
-                        Current.Option.CompanyName = "深圳市益通智能装备有限公司";
+                        Current.Option.CompanyName = "XXXXX公司";
                     }
                     companyName = Current.Option.CompanyName;
                 }
