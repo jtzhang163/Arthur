@@ -161,6 +161,7 @@ namespace GMCC.Sorter.Data
                 ProcTrayId = -1,
                 StorageId = -1,
                 StartTime = Default.DateTime,
+                Status = Model.TaskStatus.完成
             };
             context.CurrentTasks.Add(task);
         }

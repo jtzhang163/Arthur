@@ -129,18 +129,6 @@ namespace GMCC.Sorter.Dispatcher.Views
             var btn = (ProcButton)sender;
             if(btn.Name == "task_mode_switch")
             {
-                if (Current.App.RunStatus == RunStatus.闲置)
-                {
-                    Current.App.ErrorMsg = "请先启动！";
-                    return;
-                }
-
-                if (Current.App.RunStatus == RunStatus.运行)
-                {
-                    Current.App.ErrorMsg = "请先停止！";
-                    return;
-                }
-
                 if (!Current.App.IsTerminalInitFinished)
                 {
                     Current.App.ErrorMsg = "信息初始化尚未完成，请稍后！";
@@ -172,6 +160,10 @@ namespace GMCC.Sorter.Dispatcher.Views
 
                 Current.App.TaskMode = Current.App.TaskMode == TaskMode.自动任务 ? TaskMode.手动任务 : TaskMode.自动任务;
                 MessageBox.Show(string.Format("成功切换为{0}！", Current.App.TaskMode), "提示", MessageBoxButton.OK);
+            }
+            else if (btn.Name == "task_reset")
+            {
+                Current.Task.Status = Model.TaskStatus.完成;
             }
         }
     }

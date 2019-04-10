@@ -32,7 +32,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <Label Grid.Column="0" Content="当前任务" FontWeight="Bold"></Label>
         <Label Grid.Column="1" Content="类型："></Label>

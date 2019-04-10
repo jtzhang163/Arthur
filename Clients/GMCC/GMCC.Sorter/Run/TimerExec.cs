@@ -39,8 +39,9 @@ namespace GMCC.Sorter.Run
                                 Current.Task.StorageId = storage.Id;
                                 Current.Task.Type = type;
                                 Current.Task.StartTime = DateTime.Now;
-                                Current.Task.ProcTrayId = type == Model.TaskType.上料 ? Current.MainMachine.BindProcTrayId : storage.ProcTrayId;
+                                Current.Task.ProcTrayId = type == Model.TaskType.上料 ? Current.MainMachine.ChargeProcTrayId : storage.ProcTrayId;
                                 Current.Task.Status = Model.TaskStatus.就绪;
+                                Context.AppContext.SaveChanges();
                                 break;
                             }
                         }
@@ -61,6 +62,7 @@ namespace GMCC.Sorter.Run
                 {
                     Current.MainMachine.JawProcTrayId = Current.Task.ProcTrayId;
                     Current.Task.Status = Model.TaskStatus.执行中;
+                    Context.AppContext.SaveChanges();
                     return;
                 }
 
@@ -71,18 +73,25 @@ namespace GMCC.Sorter.Run
             {
                 if (TaskManage.TaskIsFinished(Current.Task.Type))
                 {
+                    var storage = GetObject.GetById<StorageViewModel>(Current.Task.StorageId);
                     if (Current.Task.Type == Model.TaskType.上料)
                     {
-                        var storage = GetObject.GetById<StorageViewModel>(Current.Task.StorageId);
                         storage.ProcTrayId = Current.Task.ProcTrayId;
+                        storage.ProcTray.StartStillTime = DateTime.Now;
+                        Current.MainMachine.ChargeProcTrayId = 0;
                     }
                     else
                     {
-                        Current.MainMachine.UnbindProcTrayId = Current.Task.ProcTrayId;
+                        storage.ProcTrayId = 0;
+                        Current.MainMachine.DischargeProcTrayId = Current.Task.ProcTrayId;
                     }
 
+                    TaskManage.AddTaskLog();
+
+                    Current.MainMachine.JawProcTrayId = 0;
                     Current.Task.PreType = Current.Task.Type;
                     Current.Task.Status = Model.TaskStatus.完成;
+                    Context.AppContext.SaveChanges();
                 }
             }
         }
@@ -90,6 +99,8 @@ namespace GMCC.Sorter.Run
         public static void GetShareDataExec(object obj)
         {
             if (!IsRunning) return;
+
+            var isChargeFinished = false;
 
             if (Current.ShareDatas.Count > 0)
             {
@@ -103,6 +114,7 @@ namespace GMCC.Sorter.Run
                         if (bindCode.TrayCode == procTray.Code)
                         {
                             //充电位置可以取盘
+                            isChargeFinished = true;
                         }
                         else
                         {
@@ -116,7 +128,35 @@ namespace GMCC.Sorter.Run
                     }
                 }
 
+                Current.MainMachine.IsChargeGetReady = isChargeFinished;
+
+
+                if (Current.MainMachine.DischargeProcTrayId > 0)
+                {
+                    var dischargeData = Current.ShareDatas.First(o => o.Key == "DischargeCodes");
+                    var bindCode = JsonHelper.DeserializeJsonToObject<BindCode>(dischargeData.Value);
+                    var procTray = GetObject.GetById<ProcTray>(Current.MainMachine.DischargeProcTrayId);
+                    if (dischargeData.Status == 2)
+                    {
+                        if (bindCode.TrayCode == procTray.Code)
+                        {
+
+                        }
+                        else
+                        {
+                            //充电位条码绑定信息传给BTS客户端
+                            var codes = procTray.GetBatteries().ConvertAll<string>(o => o.Code);
+                            var value = new BindCode { TrayCode = procTray.Code, BatteryCodes = string.Join(",", codes.ToArray()) };
+                            dischargeData.Value = JsonHelper.SerializeObject(value);
+                            dischargeData.Status = 1;
+                        }
+
+                    }
+                }
+
             }
+
+
         }
     }
 }

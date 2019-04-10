@@ -56,7 +56,10 @@ namespace GMCC.Sorter.ViewModel
                 if (pos != value)
                 {
                     Context.Batteries.FirstOrDefault(o => o.Id == this.Id).Pos = value;
-                    Arthur.Business.Logging.AddOplog(string.Format("数据追溯. 电池. Id:{0} 位置: [{1}] 修改为 [{2}]", Id, pos, value), Arthur.App.Model.OpType.编辑);
+                    if (pos > 0)
+                    {
+                        Arthur.Business.Logging.AddOplog(string.Format("数据追溯. 电池. 条码:{0} 位置: [{1}] 修改为 [{2}]", Code, pos, value), Arthur.App.Model.OpType.编辑);
+                    }
                     this.SetProperty(ref pos, value);
                 }
             }
@@ -75,7 +78,7 @@ namespace GMCC.Sorter.ViewModel
                 if (procTrayId != value)
                 {
                     Context.Batteries.FirstOrDefault(o => o.Id == this.Id).ProcTrayId = value;
-                    Arthur.Business.Logging.AddOplog(string.Format("数据追溯. 电池. 条码:{0} 位置: [{1}] 修改为 [{2}]", Code, procTrayId, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.Business.Logging.AddOplog(string.Format("数据追溯. 电池. 条码:{0} ProcTrayId: [{1}] 修改为 [{2}]", Code, procTrayId, value), Arthur.App.Model.OpType.编辑);
                     this.SetProperty(ref procTrayId, value);
                 }
             }

@@ -19,7 +19,7 @@ namespace GMCC.Sorter
 
         public static JawMoveInfo Create(TaskType type, StorageViewModel storage)
         {
-            return new JawMoveInfo();
+            return new JawMoveInfo() { Floor = storage.Floor, Row = storage.Column / 10 + 1, Col = (storage.Column - 1) % 9 + 1 };
         }
 
         public override bool Equals(object obj)

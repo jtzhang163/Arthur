@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.Controls.Machine"
+             xmlns:base_utils="clr-namespace:Arthur.View.Utils;assembly=Arthur.View"
              xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              mc:Ignorable="d" Width="100"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -31,8 +32,9 @@
             <Ellipse  Grid.Row="1" Grid.Column="1" Fill="{Binding IsUnbindTrayScanReady,Converter={StaticResource signalToSingalColorConverter}}" Width="12" Height="12"/>
             <Border Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
-                    <Label DockPanel.Dock="Bottom" Content="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0" MouseDoubleClick="Label_MouseDoubleClick"/>
-                    <Grid Visibility="{Binding UnbindProcTrayId,Converter={StaticResource procTrayIdToVisibilityConverter}}" Background="Cyan" Margin="15,5,15,0" Height="50">
+                    <Label DockPanel.Dock="Bottom" Content="{Binding DischargeProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0" MouseDoubleClick="Label_MouseDoubleClick"/>
+                    <Grid Visibility="{Binding DischargeProcTrayId,Converter={StaticResource procTrayIdToVisibilityConverter}}" Background="Cyan" Margin="15,5,15,0" Height="90"
+                          base_utils:GridHelper.ShowBorder="True" base_utils:GridHelper.GridLineThickness="0.3" base_utils:GridHelper.GridLineBrush="Black">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -57,7 +59,8 @@
             <Border Grid.Row="4" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
                     <Label DockPanel.Dock="Bottom" Content="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0" MouseDoubleClick="Label_MouseDoubleClick"/>
-                    <Grid Visibility="{Binding UnbindProcTrayId,Converter={StaticResource procTrayIdToVisibilityConverter}}" Background="Cyan" Margin="15,5,15,0" Height="50">
+                    <Grid Visibility="{Binding UnbindProcTrayId,Converter={StaticResource procTrayIdToVisibilityConverter}}" Background="Cyan" Margin="15,5,15,0" Height="90"
+                          base_utils:GridHelper.ShowBorder="True" base_utils:GridHelper.GridLineThickness="0.3" base_utils:GridHelper.GridLineBrush="Black">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>

@@ -70,7 +70,7 @@ namespace GMCC.Sorter.ViewModel
         public void SendCommand(JawMoveInfo toMoveInfo)
         {
 
-            this.Commor.Comm("GET_PLC_INFO");
+           // this.Commor.Comm("SET_Move_Info");
 
         }
 
@@ -234,6 +234,36 @@ namespace GMCC.Sorter.ViewModel
         }
 
 
+        private int dischargeProcTrayId = -2;
+        /// <summary>
+        /// 放电位流程托盘Id
+        /// </summary>
+        public int DischargeProcTrayId
+        {
+            get
+            {
+                if (dischargeProcTrayId == -2)
+                {
+                    dischargeProcTrayId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("DischargeProcTrayId"), -1);
+                    if (dischargeProcTrayId == -1)
+                    {
+                        dischargeProcTrayId = 0;
+                        Arthur.Business.Application.SetOption("DischargeProcTrayId", dischargeProcTrayId.ToString(), "放电位流程托盘Id");
+                    }
+                }
+                return dischargeProcTrayId;
+            }
+            set
+            {
+                if (dischargeProcTrayId != value)
+                {
+                    Arthur.Business.Application.SetOption("DischargeProcTrayId", value.ToString());
+                    SetProperty(ref dischargeProcTrayId, value);
+                }
+            }
+        }
+
+
 
         private int unbindProcTrayId = -2;
         /// <summary>
@@ -379,30 +409,30 @@ namespace GMCC.Sorter.ViewModel
 
 
 
-        private bool isBindTrayGetReady;
+        private bool isChargeGetReady;
         /// <summary>
-        /// 上料托盘可取
+        /// 充电模组可取托盘
         /// </summary>
-        public bool IsBindTrayGetReady
+        public bool IsChargeGetReady
         {
-            get => isBindTrayGetReady;
+            get => isChargeGetReady;
             set
             {
-                SetProperty(ref isBindTrayGetReady, value);
+                SetProperty(ref isChargeGetReady, value);
             }
         }
 
 
-        private bool isUnbindTrayPutReady;
+        private bool isDischargePutReady;
         /// <summary>
-        /// 下料托盘可放
+        /// 放电模组可放托盘
         /// </summary>
-        public bool IsUnbindTrayPutReady
+        public bool IsDischargePutReady
         {
-            get => isUnbindTrayPutReady;
+            get => isDischargePutReady;
             set
             {
-                SetProperty(ref isUnbindTrayPutReady, value);
+                SetProperty(ref isDischargePutReady, value);
             }
         }
 
@@ -472,15 +502,18 @@ namespace GMCC.Sorter.ViewModel
                 this.IsBindTrayScanReady = retData[1] == "1";
                 this.IsUnbindTrayScanReady = retData[2] == "1";
                 this.JawPos = Convert.ToInt32(retData[3]);
-                this.IsBindTrayGetReady = retData[4] == "1";
-                this.IsUnbindTrayPutReady = retData[5] == "1";
+
+                this.IsFeedingFinished = retData[4] == "1";
+                this.IsBlankingFinished = retData[5] == "1";
 
                 this.IsHasChargeTray = retData[6] == "1";
                 this.IsHasDisChargeTray = retData[7] == "1";
 
-                this.JawMoveInfo.Row = 1;
-                this.JawMoveInfo.Col = 1;
-                this.JawMoveInfo.Floor = 1;
+                this.JawMoveInfo.Row = Convert.ToInt32(retData[9]);
+                this.JawMoveInfo.Col = Convert.ToInt32(retData[10]);
+                this.JawMoveInfo.Floor = Convert.ToInt32(retData[11]);
+
+                this.IsDischargePutReady = retData[12] == "1";
 
                 var t = new Thread(() =>
                 {
@@ -498,6 +531,15 @@ namespace GMCC.Sorter.ViewModel
                 this.RealtimeStatus = ret.Msg;
                 this.IsAlive = false;
             }
+
+
+            //发送横移运动指令
+            if (Current.Task.Status == Model.TaskStatus.就绪)
+            {
+
+            }
+
+
         }
     }
 }
