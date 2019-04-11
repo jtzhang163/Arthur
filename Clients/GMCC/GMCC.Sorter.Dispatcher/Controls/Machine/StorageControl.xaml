@@ -10,6 +10,12 @@
     <UserControl.Resources>
         <utils:StorageStatusToBackConverter x:Key="storageStatusToBackConverter"/>
         <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
+        <ContextMenu x:Key="manu_get_put" Background="#FF2B579A">
+            <MenuItem Header="手动【上料】" Foreground="White" Click="MenuItem_Click"/>
+            <MenuItem Header="手动【下料】" Foreground="White" Click="MenuItem_Click"/>
+            <Separator />
+            <MenuItem Header="Menu item 3" />
+        </ContextMenu>
     </UserControl.Resources>
     <Border BorderThickness="0.7" BorderBrush="Black" Margin="2">
         <Grid>
@@ -19,7 +25,7 @@
                 <RowDefinition Height="1*"/>-->
             </Grid.RowDefinitions>
             <Label Content="{Binding ShowInfo}" Background="{Binding Status, Converter={StaticResource storageStatusToBackConverter}}"
-                   MouseDoubleClick="Label_MouseDoubleClick"
+                   MouseDoubleClick="Label_MouseDoubleClick" MouseDown="Label_MouseDown"
                    Foreground="Gray" FontSize="12" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.ToolTip>
                     <Grid>
