@@ -14,7 +14,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <DockPanel Background="White">
+        <DockPanel>
             <!--<TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="系统参数"  Style="{StaticResource PageTitleTextBlock}"/>-->
             <!--<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
                 <Button x:Name="edit" Tag="{Binding Id}" Click="edit_Click" Style="{StaticResource ChamferButton}">编辑</Button>

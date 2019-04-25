@@ -56,6 +56,14 @@ namespace GMCC.Sorter.Dispatcher
             if (!isContain)
             {
 
+                if ((this.tabControl.Items.Count + 1) * 100 > this.Width - 200) /*this.tabControl.Width为NaN*/
+                {
+                    MessageBox.Show("打开的选项卡过多！");
+                    this.SetNavNoChecked(tabName);
+                    this.SetOneNavChecked();
+                    return;
+                }
+
                 var a = new TabItemClose();
                 //a.Cursor = Cursors.Hand;
                 a.Header = tabName;
@@ -64,7 +72,10 @@ namespace GMCC.Sorter.Dispatcher
 
                 var g = new Grid();
                 g.Children.Add(GetTabItem(tabName));
-                g.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#aaffffff"));
+
+                //g.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFECF0F5"));
+                ImageBrush ib = new ImageBrush() {ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/Character.jpg", UriKind.RelativeOrAbsolute)), Opacity = 0.05 };
+                g.Background = ib;
 
                 a.Content = g;
                 //this.tabControl.Items.Add(a);
@@ -186,6 +197,19 @@ namespace GMCC.Sorter.Dispatcher
                 if (o.Content.ToString() == nav_name)
                 {
                     o.IsChecked = false;
+                }
+            });
+        }
+
+        public void SetOneNavChecked()
+        {
+            var objs = ControlsSearchHelper.GetChildObjects<RadioButton>(this.nav_bar, "");
+            objs.ForEach(o =>
+            {
+                if (o.Content.ToString() == (this.tabControl.Items[this.tabControl.SelectedIndex] as TabItem).Header.ToString())
+                {
+                    o.IsChecked = true;
+                    return;
                 }
             });
         }

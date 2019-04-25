@@ -431,7 +431,7 @@
     <Grid>
         <DockPanel>
             <DockPanel DockPanel.Dock="Top" Background="#FF2B579A" Height="80">
-                <TextBlock VerticalAlignment="Bottom" Foreground="White" DockPanel.Dock="Right" Margin="0,0,5,5">
+                <TextBlock VerticalAlignment="Bottom" Foreground="White" DockPanel.Dock="Right" Margin="0,0,10,5">
                     欢迎你，<Hyperlink x:Name="currentUser" Click="currentUser_Click"><TextBlock Text="{Binding UserName}" Foreground="White" FontStyle="Italic" TextDecorations="Underline"/></Hyperlink></TextBlock>
                 <Label Content="{Binding AppName}" FontSize="30" Foreground="White" VerticalAlignment="Center" FontWeight="Bold" Margin="10,0,0,0"/>
             </DockPanel>
@@ -605,12 +605,15 @@
                     <Canvas DockPanel.Dock="Right" Width="5" Background="#FF2B579A"/>
                     <Canvas DockPanel.Dock="Bottom" Height="5" Background="#FF2B579A"/>
                     <Grid Background="#858586">
-                        <TabControl x:Name="tabControl"  Foreground="Black" Background="Transparent" BorderBrush="Transparent" BorderThickness="0" SelectionChanged="tabControl_SelectionChanged">
+                        <TabControl x:Name="tabControl"  Foreground="Black" Background="#FFECF0F5" BorderBrush="Transparent" BorderThickness="0" SelectionChanged="tabControl_SelectionChanged">
                             <local:TabItemClose Header="主界面" Height="30"  Width="100" IsCanClose="False">
-                                <Grid x:Name="grid_mainview" Background="#aaffffff">
-
+                                <Grid x:Name="grid_mainview">
+                                    <Grid.Background>
+                                        <ImageBrush ImageSource="pack://application:,,,/Images/Character.jpg" Opacity="0.05"></ImageBrush>
+                                    </Grid.Background>
                                 </Grid>
                             </local:TabItemClose>
+                            <!--Background="#FFECF0F5"-->
                             <!--<local:TabItemClose  Cursor="Hand" Header="Mv电台" Height="30" Width="100">
                                 <Grid Background="#aaffffff">
                                     <TextBlock Text="Mv电台" VerticalAlignment="Center" HorizontalAlignment="Center"/>
