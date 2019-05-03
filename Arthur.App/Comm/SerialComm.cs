@@ -53,16 +53,24 @@ namespace Arthur.App.Comm
 
         public Result Comm(Commor commor, string input)
         {
-            var ethernetCommor = (SerialCommor)commor.Communicator;
+            var serialCommor = (SerialCommor)commor.Communicator;
             var recvData = string.Empty;
             var serialPort = (SerialPort)commor.Connector;
             try
             {
-                serialPort.Write(input);
-                Thread.Sleep(500);
+                if (!input.Contains(" "))
+                {
+                    serialPort.Write(input);
+                }
+                else
+                {
+                    var bytes = Arthur.Utility._Convert.StrToToHexBytes(input);
+                    serialPort.Write(bytes, 0, bytes.Length);
+                }
+                Thread.Sleep(800);
                 Byte[] InputBuf = new Byte[128];
                 serialPort.Read(InputBuf, 0, serialPort.BytesToRead);
-                recvData = Encoding.ASCII.GetString(InputBuf).Trim('\0');
+                recvData = Encoding.ASCII.GetString(InputBuf).Trim(new char[] {'\0','\r','\n'});
 
                 if (string.IsNullOrEmpty(recvData))
                 {

@@ -492,36 +492,48 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
-            var ret = this.Commor.Comm("GET_PLC_INFO");
+            var ret = this.Commor.Read("D400", (ushort)60);
             if (ret.IsOk)
             {
                 this.RealtimeStatus = "通信中...";
 
-                var retData = ret.Data.ToString().Split('-');
-                this.IsBatteryScanReady = retData[0] == "1";
-                this.IsBindTrayScanReady = retData[1] == "1";
-                this.IsUnbindTrayScanReady = retData[2] == "1";
-                this.JawPos = Convert.ToInt32(retData[3]);
+                var recv = (ushort[])ret.Data;
 
-                this.IsFeedingFinished = retData[4] == "1";
-                this.IsBlankingFinished = retData[5] == "1";
+                this.JawMoveInfo.Row = Convert.ToInt32(recv[50]);
+                this.JawMoveInfo.Col = Convert.ToInt32(recv[51]);
+                this.JawMoveInfo.Floor = Convert.ToInt32(recv[52]);
 
-                this.IsHasChargeTray = retData[6] == "1";
-                this.IsHasDisChargeTray = retData[7] == "1";
+                Current.App.IsTerminalInitFinished = true;
+                this.IsAlive = true;
+            }
+            else
+            {
+                this.RealtimeStatus = ret.Msg;
+                this.IsAlive = false;
+            }
 
-                this.JawMoveInfo.Row = Convert.ToInt32(retData[9]);
-                this.JawMoveInfo.Col = Convert.ToInt32(retData[10]);
-                this.JawMoveInfo.Floor = Convert.ToInt32(retData[11]);
+            var ret2 = this.Commor.Read("W400", (ushort)2);
+            if (ret2.IsOk)
+            {
+                this.RealtimeStatus = "通信中...";
 
-                this.IsDischargePutReady = retData[12] == "1";
+                var recv = (ushort[])ret2.Data;
+                var bitStr = Convert.ToString(recv[0], 2).PadLeft(8, '0');
 
-                var t = new Thread(() =>
-                {
-                    //界面交替显示扫码状态
-                    Thread.Sleep(this.CommInterval / 2);
-                    //this.RealtimeStatus = "等待扫码...";
-                });
-                t.Start();
+                this.IsBatteryScanReady = bitStr[5] == '1';
+                this.IsBindTrayScanReady = bitStr[4] == '1';
+                this.IsUnbindTrayScanReady = bitStr[3] == '1';
+
+                this.JawPos = Convert.ToInt32("11");
+
+                this.IsFeedingFinished = bitStr[1] == '1';
+                this.IsBlankingFinished = bitStr[0] == '1';
+
+                //this.IsHasChargeTray = retData[6] == "1";
+                //this.IsHasDisChargeTray = retData[7] == "1";
+
+
+                //this.IsDischargePutReady = retData[12] == "1";
 
                 Current.App.IsTerminalInitFinished = true;
                 this.IsAlive = true;
@@ -533,11 +545,11 @@ namespace GMCC.Sorter.ViewModel
             }
 
 
-            //发送横移运动指令
-            if (Current.Task.Status == Model.TaskStatus.就绪)
-            {
+            ////发送横移运动指令
+            //if (Current.Task.Status == Model.TaskStatus.就绪)
+            //{
 
-            }
+            //}
 
 
         }

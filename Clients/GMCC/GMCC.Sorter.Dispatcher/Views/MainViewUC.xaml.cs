@@ -166,5 +166,10 @@ namespace GMCC.Sorter.Dispatcher.Views
                 Current.Task.Status = Model.TaskStatus.完成;
             }
         }
+
+        private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Current.App.ErrorMsg = "";
+        }
     }
 }

@@ -16,5 +16,12 @@ namespace Arthur.Test.WinForm
         {
             InitializeComponent();
         }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            byte b = (byte)127;
+            Console.WriteLine(Convert.ToString(b, 2).PadLeft(8, '0'));
+            Console.WriteLine(byte.MaxValue);
+        }
     }
 }

@@ -68,7 +68,7 @@ namespace Arthur.App.Comm
             }
             else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
             {
-
+                result = new OmronFinsTcpComm().EndConnect(this);
             }
             else if (this.Communicator is EthernetCommor)
             {
@@ -84,11 +84,10 @@ namespace Arthur.App.Comm
             if (this.Communicator is SerialCommor)
             {
                 return new SerialComm().Comm(this, input);
-
             }
             else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
             {
-
+                return new OmronFinsTcpComm().Comm(this, input);
             }
             else if (this.Communicator is EthernetCommor)
             {
@@ -97,5 +96,22 @@ namespace Arthur.App.Comm
             return new Result("连接为未知类型！");
         }
 
+        public Result Read(string addr, ushort length)
+        {
+            if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
+            {
+                return new OmronFinsTcpComm().Read(this, addr, length);
+            }
+            return new Result("连接为未知类型！");
+        }
+
+        public Result Write(string addr, ushort value)
+        {
+            if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
+            {
+                return new OmronFinsTcpComm().Write(this, addr, value);
+            }
+            return new Result("连接为未知类型！");
+        }
     }
 }

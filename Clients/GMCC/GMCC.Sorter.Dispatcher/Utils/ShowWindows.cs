@@ -18,7 +18,7 @@ namespace GMCC.Sorter.Dispatcher.Utils
             var win = new Window()
             {
                 Height = 300,
-                Width = 400,
+                Width = 600,
                 ResizeMode = ResizeMode.NoResize,
                 WindowStartupLocation = WindowStartupLocation.CenterScreen,
                 Title = "托盘绑定电池信息"

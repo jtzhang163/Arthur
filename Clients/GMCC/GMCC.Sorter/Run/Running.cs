@@ -72,5 +72,10 @@ namespace GMCC.Sorter.Run
             Current.App.RunStatus = RunStatus.异常;
             TimerExec.IsRunning = false;
         }
+
+        public static void ShowErrorMsg(string msg)
+        {
+            Current.App.ErrorMsg = msg;
+        }
     }
 }

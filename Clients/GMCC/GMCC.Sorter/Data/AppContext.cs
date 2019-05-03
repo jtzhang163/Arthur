@@ -108,8 +108,8 @@ namespace GMCC.Sorter.Data
             var batteryScaner = new BatteryScaner()
             {
                 Name = "电池扫码枪",
-                IP = "192.168.1.1",
-                Port = 9999,
+                IP = "192.168.3.100",
+                Port = 51236,
                 Company = "Datalogic",
                 ModelNumber = "MATRIX 300N 482-011",
                 CreateTime = DateTime.Now,
@@ -124,8 +124,8 @@ namespace GMCC.Sorter.Data
                 new TrayScaner()
                 {
                     Name = "绑盘托盘扫码枪",
-                    PortName = "COM1",
-                    BaudRate = 9600,
+                    PortName = "COM9",
+                    BaudRate = 115200,
                     Parity = System.IO.Ports.Parity.None,
                     DataBits = 8,
                     StopBits = System.IO.Ports.StopBits.None,
@@ -139,8 +139,8 @@ namespace GMCC.Sorter.Data
                 new TrayScaner()
                 {
                     Name = "解盘托盘扫码枪",
-                    PortName = "COM2",
-                    BaudRate = 9600,
+                    PortName = "COM10",
+                    BaudRate = 115200,
                     Parity = System.IO.Ports.Parity.None,
                     DataBits = 8,
                     StopBits = System.IO.Ports.StopBits.None,

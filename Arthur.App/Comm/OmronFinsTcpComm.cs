@@ -17,7 +17,6 @@ namespace Arthur.App.Comm
     {
         public Result Connect(Commor commor)
         {
-            commor.Connector = null;
             var omronFinsNet = new OmronFinsNet();
             var ethernetCommor = (EthernetCommor)commor.Communicator;
             try
@@ -25,9 +24,9 @@ namespace Arthur.App.Comm
                 omronFinsNet.ConnectTimeOut = 2000;
                 omronFinsNet.IpAddress = ethernetCommor.IP;
                 omronFinsNet.Port = ethernetCommor.Port;
-                omronFinsNet.SA1 = 192;
+                omronFinsNet.SA1 = Utils.NetHelper.GetIpLastValue(Utils.NetHelper.GetLocalIpByRegex("192.168.1.*")); ;
                 omronFinsNet.DA2 = 0;
-                omronFinsNet.ByteTransform.DataFormat = (HslCommunication.Core.DataFormat)Enum.Parse(typeof(HslCommunication.Core.DataFormat), "ABCD");
+                omronFinsNet.ByteTransform.DataFormat = (HslCommunication.Core.DataFormat)Enum.Parse(typeof(HslCommunication.Core.DataFormat), "CDAB");
 
                 OperateResult connect = omronFinsNet.ConnectServer();
                 if (connect.IsSuccess)
@@ -45,12 +44,17 @@ namespace Arthur.App.Comm
             {
                 return new Result(ex.Message);
             }
+
         }
 
         public Result EndConnect(Commor commor)
         {
             var omronFinsNet = (OmronFinsNet)commor.Connector;
-            omronFinsNet.ConnectClose();
+            if (omronFinsNet != null)
+            {
+                omronFinsNet.ConnectClose();
+                commor.Connector = null;
+            }
             return Result.OK;
         }
 
@@ -60,6 +64,40 @@ namespace Arthur.App.Comm
             var ethernetCommor = (EthernetCommor)commor.Communicator;
 
             return Result.OK;
+        }
+
+        public Result Read(Commor commor, string addr, ushort length)
+        {
+           // Connect(commor);
+            var omronFinsNet = (OmronFinsNet)commor.Connector;
+            OperateResult<ushort[]> result = omronFinsNet.ReadUInt16(addr, length);
+           // EndConnect(commor);
+
+            if (result.IsSuccess)
+            {
+                return Result.OkHasData(result.Content);
+            }
+            else
+            {
+                return new Result(string.Format("{0}:{1}", result.ErrorCode, result.Message));
+            }
+        }
+
+        public Result Write(Commor commor, string addr, ushort value)
+        {
+            //Connect(commor);
+            var omronFinsNet = (OmronFinsNet)commor.Connector;
+            OperateResult result = omronFinsNet.Write(addr, value);
+            //EndConnect(commor);
+
+            if (result.IsSuccess)
+            {
+                return Result.OK;
+            }
+            else
+            {
+                return new Result(string.Format("{0}:{1}", result.ErrorCode, result.Message));
+            }
         }
     }
 }

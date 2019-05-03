@@ -87,7 +87,7 @@ namespace Arthur.Utility
             }
         }
 
-        public static byte[] HexStrTobyte(string hexString)
+        public static byte[] StrToToHexBytes(string hexString)
         {
             hexString = hexString.Replace(" ", "");
             if ((hexString.Length % 2) != 0)
@@ -206,5 +206,6 @@ namespace Arthur.Utility
             }
             return oblist;
         }
+
     }
 }

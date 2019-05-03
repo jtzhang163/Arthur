@@ -10,13 +10,17 @@ namespace Arthur.App.Data
 {
     public class Context
     {
-        private static AppContext appContext = new AppContext();
+        private static AppContext appContext = null;
         public static AppContext AppContext
         {
             get
             {
                 lock (Arthur.App.Application.DbLocker)
                 {
+                    if (appContext == null)
+                    {
+                        appContext = new AppContext();
+                    }
                     return appContext;
                 }
             }

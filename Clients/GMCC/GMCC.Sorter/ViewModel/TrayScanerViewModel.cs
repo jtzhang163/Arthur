@@ -139,7 +139,7 @@ namespace GMCC.Sorter.ViewModel
                     scanCommand = Arthur.Business.Application.GetOption("ScanCommand_TrayScaner_" + this.Id);
                     if (scanCommand == null)
                     {
-                        scanCommand = "T";
+                        scanCommand = "16 54 0D";
                         Arthur.Business.Application.SetOption("ScanCommand_TrayScaner_" + this.Id, scanCommand, this.Name + "扫码指令");
                     }
                 }

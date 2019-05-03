@@ -1,4 +1,5 @@
-﻿using Arthur.App;
+﻿using Arthur;
+using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
 using GMCC.Sorter.Data;
@@ -113,24 +114,49 @@ namespace GMCC.Sorter.ViewModel
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
                 {
-                    Current.MainMachine.IsAlreadyBatteryScan = true;
-                    this.RealtimeStatus = "+" + ret.Data;
-                    var t = new Thread(() =>
+                    var result = true;
+                    var code = ret.Data.ToString();
+                    if (code.StartsWith("NG"))
                     {
-                        //把电池条码保存进数据库
-                        var saveRet = new Business.BatteryManage().Create(new Model.Battery() { Code = ret.Data.ToString() }, true);
-                        if (!saveRet.IsOk)
+                        var ret2 = this.Commor.Comm(this.ScanCommand);
+                        if (ret2.IsOk && !ret2.Data.ToString().StartsWith("NG"))
                         {
-                            Running.StopRunAndShowMsg(saveRet.Msg);
-                            return;
+                            code = ret2.Data.ToString();
                         }
+                        else
+                        {
+                            result = false;
+                            LogHelper.WriteError(this.Name + " 扫码失败！");
+                            Running.ShowErrorMsg(this.Name + " 扫码失败！");
+                        }
+                    }
 
-                        //界面交替显示扫码状态
-                        Thread.Sleep(this.CommInterval / 2);
-                        this.RealtimeStatus = "等待扫码...";
-                        Current.MainMachine.BindBatteriesCount++;
-                    });
-                    t.Start();
+                    if (result)
+                    {
+                        this.RealtimeStatus = "+" + code;
+                        var t = new Thread(() =>
+                        {
+                            //把电池条码保存进数据库
+                            var saveRet = new Business.BatteryManage().Create(new Model.Battery() { Code = code }, true);
+                            if (!saveRet.IsOk)
+                            {
+                                Running.StopRunAndShowMsg(saveRet.Msg);
+                                return;
+                            }
+
+                            //界面交替显示扫码状态
+                            Thread.Sleep(this.CommInterval / 2);
+                            this.RealtimeStatus = "等待扫码...";
+                            Current.MainMachine.BindBatteriesCount++;
+                        });
+                        t.Start();
+                    }
+                    else
+                    {
+                        this.RealtimeStatus = "扫码失败！";
+                    }
+
+                    Current.MainMachine.IsAlreadyBatteryScan = true;
                     this.IsAlive = true;
                 }
                 else
