@@ -19,12 +19,12 @@ namespace GMCC.Sorter.Dispatcher.Views
     /// <summary>
     /// ScanerDebugView.xaml 的交互逻辑
     /// </summary>
-    public partial class ScanerView : UserControl
+    public partial class PlcView : UserControl
     {
 
         public string Option { get; set; }
 
-        public ScanerView() : this("Details")
+        public PlcView() : this("Details")
         {
 
         }
@@ -32,7 +32,7 @@ namespace GMCC.Sorter.Dispatcher.Views
         /// 
         /// </summary>
         /// <param name="option">显示选项 Index, Create, Details ,Edit</param>
-        public ScanerView(string option)
+        public PlcView(string option)
         {
             this.Option = option;
             InitializeComponent();
@@ -44,7 +44,7 @@ namespace GMCC.Sorter.Dispatcher.Views
         {
             this.Option = option;
             Assembly assembly = Assembly.GetExecutingAssembly();
-            Type type = assembly.GetType("GMCC.Sorter.Dispatcher.UserControls.Debug.Scaner." + this.Option);
+            Type type = assembly.GetType("GMCC.Sorter.Dispatcher.UserControls.Debug.MainMachine." + this.Option);
             object page = Activator.CreateInstance(type, new object[] { id });
             grid.Children.Clear();
             this.grid.Children.Add((UIElement)page);

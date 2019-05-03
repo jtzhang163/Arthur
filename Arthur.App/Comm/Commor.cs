@@ -96,6 +96,11 @@ namespace Arthur.App.Comm
             return new Result("连接为未知类型！");
         }
 
+        public Result Read(string addr)
+        {
+            return Read(addr, (ushort)1);
+        }
+
         public Result Read(string addr, ushort length)
         {
             if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)

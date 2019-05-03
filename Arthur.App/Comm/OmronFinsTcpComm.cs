@@ -68,35 +68,45 @@ namespace Arthur.App.Comm
 
         public Result Read(Commor commor, string addr, ushort length)
         {
-           // Connect(commor);
-            var omronFinsNet = (OmronFinsNet)commor.Connector;
-            OperateResult<ushort[]> result = omronFinsNet.ReadUInt16(addr, length);
-           // EndConnect(commor);
+            try
+            {
+                var omronFinsNet = (OmronFinsNet)commor.Connector;
+                OperateResult<ushort[]> result = omronFinsNet.ReadUInt16(addr, length);
 
-            if (result.IsSuccess)
-            {
-                return Result.OkHasData(result.Content);
+                if (result.IsSuccess)
+                {
+                    return Result.OkHasData(result.Content);
+                }
+                else
+                {
+                    return new Result(string.Format("{0}:{1}", result.ErrorCode, result.Message));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new Result(string.Format("{0}:{1}", result.ErrorCode, result.Message));
+                return new Result(ex.Message);
             }
         }
 
         public Result Write(Commor commor, string addr, ushort value)
         {
-            //Connect(commor);
-            var omronFinsNet = (OmronFinsNet)commor.Connector;
-            OperateResult result = omronFinsNet.Write(addr, value);
-            //EndConnect(commor);
+            try
+            {
+                var omronFinsNet = (OmronFinsNet)commor.Connector;
+                OperateResult result = omronFinsNet.Write(addr, value);
 
-            if (result.IsSuccess)
-            {
-                return Result.OK;
+                if (result.IsSuccess)
+                {
+                    return Result.OK;
+                }
+                else
+                {
+                    return new Result(string.Format("{0}:{1}", result.ErrorCode, result.Message));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return new Result(string.Format("{0}:{1}", result.ErrorCode, result.Message));
+                return new Result(ex.Message);
             }
         }
     }

@@ -521,8 +521,10 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">扫码枪调试</RadioButton>
+                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">PLC调试</RadioButton>
+                            <RadioButton Grid.Row="1" Checked="RadioButton_Checked">扫码枪调试</RadioButton>
                         </Grid>
                     </Expander.Content>
                 </Expander>

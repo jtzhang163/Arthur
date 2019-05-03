@@ -102,6 +102,9 @@
     <Compile Include="Controls\TrayBatteryControl.xaml.cs">
       <DependentUpon>TrayBatteryControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Debug\MainMachine\Details.xaml.cs">
+      <DependentUpon>Details.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Debug\Scaner\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,9 @@
     <Compile Include="UserControls\SystemUC\ParamUC\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Debug\PlcView.xaml.cs">
+      <DependentUpon>PlcView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Debug\ScanerView.xaml.cs">
       <DependentUpon>ScanerView.xaml</DependentUpon>
     </Compile>
@@ -278,6 +284,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\TrayBatteryControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\Debug\MainMachine\Details.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -398,6 +408,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\Platform\MES\Edit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Debug\PlcView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -579,5 +593,6 @@
   <ItemGroup>
     <Resource Include="Images\Character.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

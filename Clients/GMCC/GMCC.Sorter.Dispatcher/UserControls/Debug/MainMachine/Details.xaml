@@ -3,10 +3,62 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.Debug.MainMachine"
+             xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <utils:IdToStorageNameConverter x:Key="idToStorageNameConverter"/>
+            <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-            
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="PLC调试"  Style="{StaticResource PageTitleTextBlock}"/>
+            <DockPanel>
+                <Label Padding="0" DockPanel.Dock="Bottom" x:Name="tip" Foreground="White" Background="Red" FontSize="20" Content="错误提示" Visibility="Collapsed" MouseDoubleClick="Tip_MouseDoubleClick"></Label>
+                <Grid x:Name="grid" Height="200">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="读取测试：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}" FontWeight="Bold"></Label>
+                    <Label Content="写入测试：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}" FontWeight="Bold"></Label>
+
+                    <Label Content="地址：" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_title}"></Label>
+                    <Label Content="地址：" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_title}"></Label>
+
+                    <TextBox x:Name="read_addr" Grid.Row="0" Grid.Column="2" Style="{StaticResource property_TextBox}" Text="D100"/>
+                    <TextBox x:Name="write_addr" Grid.Row="1" Grid.Column="2" Style="{StaticResource property_TextBox}" Text="D100"/>
+
+                    <Button Content="读取" Grid.Row="0" Grid.Column="3" Style="{StaticResource ChamferButton}" Click="Read_Click"></Button>
+                    <Button Content="写入" Grid.Row="1" Grid.Column="5" Style="{StaticResource ChamferButton}" Click="Write_Click"></Button>
+
+                    <Label Content="数值：" Grid.Row="0" Grid.Column="4" Style="{StaticResource property_title}"></Label>
+                    <Label Content="数值：" Grid.Row="1" Grid.Column="3" Style="{StaticResource property_title}"></Label>
+
+                    <TextBox x:Name="read_value" Grid.Row="0" Grid.Column="5" Style="{StaticResource property_TextBox}" IsEnabled="False"/>
+                    <TextBox x:Name="write_value" Grid.Row="1" Grid.Column="4" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False"/>
+
+                    <Button Content="清除" Grid.Row="0" Grid.Column="6" Style="{StaticResource ChamferButton}" Click="ReadClear_Click"></Button>
+                    <Label Content="结果" Grid.Row="1" Grid.Column="6" Style="{StaticResource property_title}" Name="write_result" HorizontalAlignment="Center" Foreground="Green"></Label>
+                </Grid>
+            </DockPanel>
+        </DockPanel>
     </Grid>
 </UserControl>
+

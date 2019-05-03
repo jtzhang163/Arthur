@@ -57,7 +57,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Debug.Scaner
                     }
                     else
                     {
-                        this.tip.Text = result.Msg;
+                        this.tip.Content = result.Msg;
                         this.tip.Visibility = Visibility.Visible;
                     }
                 }));
@@ -73,11 +73,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Debug.Scaner
             tbRetMsg.Text = "";
         }
 
-        private void btn_MouseEnter(object sender, MouseEventArgs e)
+
+        private void Tip_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this.tip.Text = "";
+            this.tip.Content = "";
             this.tip.Visibility = Visibility.Collapsed;
         }
-
     }
 }

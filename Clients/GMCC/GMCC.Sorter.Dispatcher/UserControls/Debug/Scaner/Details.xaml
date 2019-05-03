@@ -20,7 +20,7 @@
         <DockPanel>
             <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="扫码枪调试"  Style="{StaticResource PageTitleTextBlock}"/>
             <DockPanel>
-                <TextBlock x:Name="tip" Foreground="White" Background="Red" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>
+                <Label Padding="0" DockPanel.Dock="Bottom" x:Name="tip" Foreground="White" Background="Red" FontSize="20" Content="错误提示" Visibility="Collapsed" MouseDoubleClick="Tip_MouseDoubleClick"></Label>
                 <Grid x:Name="grid" Height="200">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
@@ -36,15 +36,15 @@
                     <Label Content="上料电池扫码枪：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="上料托盘扫码枪：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="下料托盘扫码枪：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Button x:Name="btnScan1" Content="扫码" Click="Scan_Click" Grid.Row="0" Grid.Column="1" Style="{StaticResource ChamferButton}" MouseEnter="btn_MouseEnter"></Button>
-                    <Button x:Name="btnScan2" Content="扫码" Click="Scan_Click" Grid.Row="1" Grid.Column="1" Style="{StaticResource ChamferButton}" MouseEnter="btn_MouseEnter"></Button>
-                    <Button x:Name="btnScan3" Content="扫码" Click="Scan_Click" Grid.Row="2" Grid.Column="1" Style="{StaticResource ChamferButton}" MouseEnter="btn_MouseEnter"></Button>
+                    <Button x:Name="btnScan1" Content="扫码" Click="Scan_Click" Grid.Row="0" Grid.Column="1" Style="{StaticResource ChamferButton}"></Button>
+                    <Button x:Name="btnScan2" Content="扫码" Click="Scan_Click" Grid.Row="1" Grid.Column="1" Style="{StaticResource ChamferButton}"></Button>
+                    <Button x:Name="btnScan3" Content="扫码" Click="Scan_Click" Grid.Row="2" Grid.Column="1" Style="{StaticResource ChamferButton}"></Button>
                     <TextBox x:Name="tbRetMsg1" Grid.Row="0" Grid.Column="2" Style="{StaticResource property_TextBox}"/>
                     <TextBox x:Name="tbRetMsg2" Grid.Row="1" Grid.Column="2" Style="{StaticResource property_TextBox}"/>
                     <TextBox x:Name="tbRetMsg3" Grid.Row="2" Grid.Column="2" Style="{StaticResource property_TextBox}"/>
-                    <Button x:Name="btnClear1" Content="清除" Click="Clear_Click" Grid.Row="0" Grid.Column="3" Style="{StaticResource ChamferButton}" MouseEnter="btn_MouseEnter"></Button>
-                    <Button x:Name="btnClear2" Content="清除" Click="Clear_Click" Grid.Row="1" Grid.Column="3" Style="{StaticResource ChamferButton}" MouseEnter="btn_MouseEnter"></Button>
-                    <Button x:Name="btnClear3" Content="清除" Click="Clear_Click" Grid.Row="2" Grid.Column="3" Style="{StaticResource ChamferButton}" MouseEnter="btn_MouseEnter"></Button>
+                    <Button x:Name="btnClear1" Content="清除" Click="Clear_Click" Grid.Row="0" Grid.Column="3" Style="{StaticResource ChamferButton}"></Button>
+                    <Button x:Name="btnClear2" Content="清除" Click="Clear_Click" Grid.Row="1" Grid.Column="3" Style="{StaticResource ChamferButton}"></Button>
+                    <Button x:Name="btnClear3" Content="清除" Click="Clear_Click" Grid.Row="2" Grid.Column="3" Style="{StaticResource ChamferButton}"></Button>
                 </Grid>
             </DockPanel>
         </DockPanel>

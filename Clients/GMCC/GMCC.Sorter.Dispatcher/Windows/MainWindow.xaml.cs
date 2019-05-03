@@ -128,6 +128,8 @@ namespace GMCC.Sorter.Dispatcher
                 case "料仓管理":
                     return new StorageView();
 
+                case "PLC调试":
+                    return new PlcView();
                 case "扫码枪调试":
                     return new ScanerView();
 
