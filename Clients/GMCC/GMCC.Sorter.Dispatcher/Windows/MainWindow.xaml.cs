@@ -56,7 +56,7 @@ namespace GMCC.Sorter.Dispatcher
             if (!isContain)
             {
 
-                if ((this.tabControl.Items.Count + 1) * 100 > this.Width - 200) /*this.tabControl.Width为NaN*/
+                if ((this.tabControl.Items.Count + 1) * 100 > this.ActualWidth - 210) /*this.tabControl.Width为NaN*/
                 {
                     MessageBox.Show("打开的选项卡过多！");
                     this.SetNavNoChecked(tabName);
@@ -74,7 +74,7 @@ namespace GMCC.Sorter.Dispatcher
                 g.Children.Add(GetTabItem(tabName));
 
                 //g.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFECF0F5"));
-                ImageBrush ib = new ImageBrush() {ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/Character.jpg", UriKind.RelativeOrAbsolute)), Opacity = 0.05 };
+                ImageBrush ib = new ImageBrush() {ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/Character.jpg", UriKind.RelativeOrAbsolute)), Opacity = 0.2 };
                 g.Background = ib;
 
                 a.Content = g;

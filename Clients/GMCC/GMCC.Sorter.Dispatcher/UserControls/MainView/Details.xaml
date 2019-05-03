@@ -62,7 +62,7 @@
                     </Grid>
                     <Grid x:Name="unbind_mach" Grid.Row="1" Grid.RowSpan="12" Grid.ColumnSpan="2">
                     </Grid>
-                    <Grid x:Name="current_task" Grid.Row="15" Grid.ColumnSpan="13" Margin="10"  Background="WhiteSmoke">
+                    <Grid x:Name="current_task" Grid.Row="15" Grid.ColumnSpan="13" Margin="10">
                     </Grid>
                 </Grid>
             </DockPanel>
