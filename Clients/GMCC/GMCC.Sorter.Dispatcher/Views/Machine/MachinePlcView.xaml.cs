@@ -19,12 +19,12 @@ namespace GMCC.Sorter.Dispatcher.Views
     /// <summary>
     /// ParamUC.xaml 的交互逻辑
     /// </summary>
-    public partial class MainMachineView : UserControl
+    public partial class MachinePlcView : UserControl
     {
 
         public string Option { get; set; }
 
-        public MainMachineView() : this("Details")
+        public MachinePlcView() : this("Details")
         {
 
         }
@@ -32,7 +32,7 @@ namespace GMCC.Sorter.Dispatcher.Views
         /// 
         /// </summary>
         /// <param name="option">显示选项 Index, Create, Details ,Edit</param>
-        public MainMachineView(string option)
+        public MachinePlcView(string option)
         {
             this.Option = option;
             InitializeComponent();
@@ -44,7 +44,7 @@ namespace GMCC.Sorter.Dispatcher.Views
         {
             this.Option = option;
             Assembly assembly = Assembly.GetExecutingAssembly();
-            Type type = assembly.GetType("GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine." + this.Option);
+            Type type = assembly.GetType("GMCC.Sorter.Dispatcher.UserControls.Machine.MachinePlc." + this.Option);
             object page = Activator.CreateInstance(type, new object[] { id });
             grid.Children.Clear();
             this.grid.Children.Add((UIElement)page);

@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine.Edit"
+﻿<UserControl x:Class="GMCC.Sorter.Dispatcher.UserControls.Machine.MachinePlc.Edit"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine"
+             xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.Machine.MachinePlc"
              xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              mc:Ignorable="d" 
@@ -18,7 +18,7 @@
     </UserControl.Resources>
     <Grid>
         <DockPanel>
-            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="压床配置"  Style="{StaticResource PageTitleTextBlock}"/>
+            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="PLC配置"  Style="{StaticResource PageTitleTextBlock}"/>
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
                 <Button x:Name="edit" Click="edit_Click" Style="{StaticResource ChamferButton}">保存</Button>
                 <Button x:Name="cancel" Click="cancel_Click" Style="{StaticResource ChamferButton}">返回</Button>
@@ -32,34 +32,22 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
                         <ColumnDefinition Width="300"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="PLC品牌：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="品牌：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="company" Grid.Row="0" Grid.Column="1" Text="{Binding Company, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <Label Content="PLC型号：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="型号：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="model_number" Grid.Row="1" Grid.Column="1" Text="{Binding ModelNumber, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <Label Content="PLC IP地址：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="IP地址：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="ip" Grid.Row="2" Grid.Column="1" Text="{Binding IP, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <Label Content="PLC端口：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="端口：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="port" Grid.Row="3" Grid.Column="1" Text="{Binding Port, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False"  GotFocus="textbox_GotFocus"/>
                     <Label Content="通信间隔(ms)：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="comm_interval" Grid.Row="4" Grid.Column="1" Text="{Binding CommInterval, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" />
-                    <Label Content="绑盘位条码：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <TextBox x:Name="bind_traycode" Grid.Row="5" Grid.Column="1" Text="{Binding BindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <Label Content="横移托盘条码：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <TextBox x:Name="jaw_traycode" Grid.Row="6" Grid.Column="1" Text="{Binding JawProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <Label Content="解盘位条码：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <TextBox x:Name="unbind_traycode" Grid.Row="7" Grid.Column="1" Text="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <Label Content="静置时长(min)：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <TextBox x:Name="still_timespan" Grid.Row="8" Grid.Column="1" Text="{Binding StillTimeSpan, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" />
                 </Grid>
             </DockPanel>
         </DockPanel>

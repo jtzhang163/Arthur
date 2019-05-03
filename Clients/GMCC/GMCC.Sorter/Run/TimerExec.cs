@@ -39,7 +39,7 @@ namespace GMCC.Sorter.Run
                                 Current.Task.StorageId = storage.Id;
                                 Current.Task.Type = type;
                                 Current.Task.StartTime = DateTime.Now;
-                                Current.Task.ProcTrayId = type == Model.TaskType.上料 ? Current.MainMachine.ChargeProcTrayId : storage.ProcTrayId;
+                                Current.Task.ProcTrayId = type == Model.TaskType.上料 ? Current.Option.ChargeProcTrayId : storage.ProcTrayId;
                                 Current.Task.Status = Model.TaskStatus.就绪;
                                 Context.AppContext.SaveChanges();
                                 break;
@@ -58,9 +58,9 @@ namespace GMCC.Sorter.Run
                 var toMoveInfo = JawMoveInfo.Create(Current.Task.Type, storage);
 
                 //若指令已经发给PLC
-                if (Current.MainMachine.JawMoveInfo.Equals(toMoveInfo))
+                if (Current.Option.JawMoveInfo.Equals(toMoveInfo))
                 {
-                    Current.MainMachine.JawProcTrayId = Current.Task.ProcTrayId;
+                    Current.Option.JawProcTrayId = Current.Task.ProcTrayId;
                     Current.Task.Status = Model.TaskStatus.执行中;
                     Context.AppContext.SaveChanges();
                     return;
@@ -78,17 +78,17 @@ namespace GMCC.Sorter.Run
                     {
                         storage.ProcTrayId = Current.Task.ProcTrayId;
                         storage.ProcTray.StartStillTime = DateTime.Now;
-                        Current.MainMachine.ChargeProcTrayId = 0;
+                        Current.Option.ChargeProcTrayId = 0;
                     }
                     else
                     {
                         storage.ProcTrayId = 0;
-                        Current.MainMachine.DischargeProcTrayId = Current.Task.ProcTrayId;
+                        Current.Option.DischargeProcTrayId = Current.Task.ProcTrayId;
                     }
 
                     TaskManage.AddTaskLog();
 
-                    Current.MainMachine.JawProcTrayId = 0;
+                    Current.Option.JawProcTrayId = 0;
                     Current.Task.PreType = Current.Task.Type;
                     Current.Task.Status = Model.TaskStatus.完成;
                     Context.AppContext.SaveChanges();
@@ -104,11 +104,11 @@ namespace GMCC.Sorter.Run
 
             if (Current.ShareDatas.Count > 0)
             {
-                if(Current.MainMachine.ChargeProcTrayId > 0)
+                if(Current.Option.ChargeProcTrayId > 0)
                 {
                     var chargeData = Current.ShareDatas.First(o => o.Key == "ChargeCodes");
                     var bindCode = JsonHelper.DeserializeJsonToObject<BindCode>(chargeData.Value);
-                    var procTray = GetObject.GetById<ProcTray>(Current.MainMachine.ChargeProcTrayId);
+                    var procTray = GetObject.GetById<ProcTray>(Current.Option.ChargeProcTrayId);
                     if (chargeData.Status == 2)
                     {
                         if (bindCode.TrayCode == procTray.Code)
@@ -128,14 +128,14 @@ namespace GMCC.Sorter.Run
                     }
                 }
 
-                Current.MainMachine.IsChargeGetReady = isChargeFinished;
+                Current.Option.IsChargeGetReady = isChargeFinished;
 
 
-                if (Current.MainMachine.DischargeProcTrayId > 0)
+                if (Current.Option.DischargeProcTrayId > 0)
                 {
                     var dischargeData = Current.ShareDatas.First(o => o.Key == "DischargeCodes");
                     var bindCode = JsonHelper.DeserializeJsonToObject<BindCode>(dischargeData.Value);
-                    var procTray = GetObject.GetById<ProcTray>(Current.MainMachine.DischargeProcTrayId);
+                    var procTray = GetObject.GetById<ProcTray>(Current.Option.DischargeProcTrayId);
                     if (dischargeData.Status == 2)
                     {
                         if (bindCode.TrayCode == procTray.Code)

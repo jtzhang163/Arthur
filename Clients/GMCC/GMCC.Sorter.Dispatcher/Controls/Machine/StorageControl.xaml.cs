@@ -72,7 +72,7 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
                 Current.Task.StorageId = this.Storage.Id;
                 Current.Task.Type = header == "手动【上料】" ? Model.TaskType.上料 : Model.TaskType.下料;
                 Current.Task.StartTime = DateTime.Now;
-                Current.Task.ProcTrayId = Current.Task.Type == Model.TaskType.上料 ? Current.MainMachine.ChargeProcTrayId : this.Storage.ProcTrayId;
+                Current.Task.ProcTrayId = Current.Task.Type == Model.TaskType.上料 ? Current.Option.ChargeProcTrayId : this.Storage.ProcTrayId;
                 Current.Task.Status = Model.TaskStatus.就绪;
                 Context.AppContext.SaveChanges();
             }

@@ -117,8 +117,12 @@ namespace GMCC.Sorter.Dispatcher
                 case "系统日志":
                     return new OplogUC();
 
-                case "压床":
-                    return new MainMachineView();
+                case "配置":
+                    return new OptionView();
+
+
+                case "PLC":
+                    return new MachinePlcView();
                 case "电池扫码枪":
                     return new BatteryScanerView();
                 case "托盘扫码枪":

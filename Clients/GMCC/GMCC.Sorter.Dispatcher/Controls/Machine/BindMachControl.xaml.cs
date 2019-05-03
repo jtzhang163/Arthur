@@ -24,13 +24,13 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
     /// </summary>
     public partial class BindMachControl : UserControl
     {
-        private MainMachineViewModel MainMachine;
+        private AppOption Option;
 
         public BindMachControl()
         {
             InitializeComponent();
-            this.MainMachine = Current.MainMachine;
-            this.DataContext = this.MainMachine;
+            this.Option = Current.Option;
+            this.DataContext = this.Option;
             this.Timer = new System.Threading.Timer(new TimerCallback(this.SetBackground), null, 2000, 1000);
         }
 
@@ -40,7 +40,7 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
         {
             this.grid.Dispatcher.BeginInvoke(new Action(() =>{
 
-                var batteryCount = Current.MainMachine.BindBatteriesCount;
+                var batteryCount = Current.Option.BindBatteriesCount;
 
                 this.grid.Children.Clear();
 

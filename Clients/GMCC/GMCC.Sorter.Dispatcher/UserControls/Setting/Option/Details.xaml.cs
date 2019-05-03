@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
+namespace GMCC.Sorter.Dispatcher.UserControls.Setting.Option
 {
     /// <summary>
     /// Details.xaml 的交互逻辑
@@ -24,7 +24,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
         public Details(int id)
         {
             InitializeComponent();
-            this.DataContext = Current.MainMachine;
+            this.DataContext = Current.Option;
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)

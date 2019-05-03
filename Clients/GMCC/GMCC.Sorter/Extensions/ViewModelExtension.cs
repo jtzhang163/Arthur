@@ -11,9 +11,9 @@ namespace GMCC.Sorter.Extensions
 {
     public static class ViewModelExtension
     {
-        public static ProcTray GetBindProcTray(this MainMachineViewModel mainMachine)
+        public static ProcTray GetBindProcTray(this AppOption option)
         {
-            return Context.ProcTrays.SingleOrDefault(o => o.Id == mainMachine.BindProcTrayId) ?? new ProcTray();
+            return Context.ProcTrays.SingleOrDefault(o => o.Id == option.BindProcTrayId) ?? new ProcTray();
         }
     }
 }

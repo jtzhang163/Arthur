@@ -165,14 +165,14 @@ namespace GMCC.Sorter.ViewModel
         {
             if (!Current.MainMachine.IsAlive) return;
 
-            if (Current.MainMachine.BindProcTrayId > 0) return;
+            if (Current.Option.BindProcTrayId > 0) return;
 
-            if (this == Current.BindTrayScaner && Current.MainMachine.IsBindTrayScanReady && !Current.MainMachine.IsAlreadyBindTrayScan)
+            if (this == Current.BindTrayScaner && Current.Option.IsBindTrayScanReady && !Current.Option.IsAlreadyBindTrayScan)
             {
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
                 {
-                    Current.MainMachine.IsAlreadyBindTrayScan = true;
+                    Current.Option.IsAlreadyBindTrayScan = true;
                     this.RealtimeStatus = "+" + ret.Data;
                     var t = new Thread(() =>
                     {
@@ -185,7 +185,7 @@ namespace GMCC.Sorter.ViewModel
                             //    Running.StopRunAndShowMsg("绑盘位已有托盘条码！");
                             //    return;
                             //}
-                            Current.MainMachine.BindProcTrayId = (int)saveRet.Data;
+                            Current.Option.BindProcTrayId = (int)saveRet.Data;
                         }
                         else
                         {
@@ -206,12 +206,12 @@ namespace GMCC.Sorter.ViewModel
                     this.IsAlive = false;
                 }
             }
-            else if (this == Current.UnbindTrayScaner && Current.MainMachine.IsUnbindTrayScanReady && !Current.MainMachine.isAlreadyUnbindTrayScan)
+            else if (this == Current.UnbindTrayScaner && Current.Option.IsUnbindTrayScanReady && !Current.Option.isAlreadyUnbindTrayScan)
             {
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
                 {
-                    Current.MainMachine.IsAlreadyBindTrayScan = true;
+                    Current.Option.IsAlreadyBindTrayScan = true;
                     this.RealtimeStatus = "+" + ret.Data;
                     var t = new Thread(() =>
                     {

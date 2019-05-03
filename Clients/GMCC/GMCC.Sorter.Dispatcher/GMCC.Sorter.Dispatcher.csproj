@@ -108,6 +108,12 @@
     <Compile Include="UserControls\Debug\Scaner\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Machine\MachinePlc\Details.xaml.cs">
+      <DependentUpon>Details.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Machine\MachinePlc\Edit.xaml.cs">
+      <DependentUpon>Edit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Platform\BtsClient\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
@@ -168,12 +174,6 @@
     <Compile Include="UserControls\Machine\BatteryScaner\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\Machine\MainMachine\Details.xaml.cs">
-      <DependentUpon>Details.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\Machine\MainMachine\Edit.xaml.cs">
-      <DependentUpon>Edit.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\Machine\TrayScaner\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
     </Compile>
@@ -195,6 +195,12 @@
     <Compile Include="UserControls\Platform\MES\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\Setting\Option\Details.xaml.cs">
+      <DependentUpon>Details.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Setting\Option\Edit.xaml.cs">
+      <DependentUpon>Edit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utils\ShowWindows.cs" />
     <Compile Include="Views\Account\CurrentUserUC.xaml.cs">
       <DependentUpon>CurrentUserUC.xaml</DependentUpon>
@@ -213,6 +219,9 @@
     </Compile>
     <Compile Include="Views\Debug\ScanerView.xaml.cs">
       <DependentUpon>ScanerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Machine\MachinePlcView.xaml.cs">
+      <DependentUpon>MachinePlcView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Platform\BtsClientView.xaml.cs">
       <DependentUpon>BtsClientView.xaml</DependentUpon>
@@ -241,8 +250,8 @@
     <Compile Include="Views\Machine\BatteryScanerView.xaml.cs">
       <DependentUpon>BatteryScanerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Machine\MainMachineView.xaml.cs">
-      <DependentUpon>MainMachineView.xaml</DependentUpon>
+    <Compile Include="Views\Setting\OptionView.xaml.cs">
+      <DependentUpon>OptionView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainViewUC.xaml.cs">
       <DependentUpon>MainViewUC.xaml</DependentUpon>
@@ -292,6 +301,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\Debug\Scaner\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Machine\MachinePlc\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Machine\MachinePlc\Edit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -375,14 +392,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\Machine\MainMachine\Details.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\Machine\MainMachine\Edit.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="UserControls\Machine\TrayScaner\Index.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -411,11 +420,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UserControls\Setting\Option\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\Setting\Option\Edit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Debug\PlcView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Debug\ScanerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Machine\MachinePlcView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -455,7 +476,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Machine\MainMachineView.xaml">
+    <Page Include="Views\Setting\OptionView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

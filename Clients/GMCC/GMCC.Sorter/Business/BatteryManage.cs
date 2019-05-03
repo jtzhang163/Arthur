@@ -37,8 +37,8 @@ namespace GMCC.Sorter.Business
                     Context.Batteries.Add(new Battery() {
                         Code = battery.Code,
                         ScanTime = DateTime.Now,
-                        ProcTrayId = Current.MainMachine.BindProcTrayId,
-                        Pos = Current.MainMachine.GetBindProcTray().GetBatteries().Count + 1,
+                        ProcTrayId = Current.Option.BindProcTrayId,
+                        Pos = Current.Option.GetBindProcTray().GetBatteries().Count + 1,
                         SortResult = SortResult.Unknown
                     });
                     Context.AppContext.SaveChanges();

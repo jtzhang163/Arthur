@@ -104,12 +104,12 @@ namespace GMCC.Sorter.ViewModel
         public void Comm()
         {
             //绑盘位电池已满，不扫码，直到出现新托盘再扫
-            if (Current.MainMachine.BindBatteriesCount >= Common.TRAY_BATTERY_COUNT)
+            if (Current.Option.BindBatteriesCount >= Common.TRAY_BATTERY_COUNT)
             {
                 return;
             }
 
-            if (Current.MainMachine.IsAlive && Current.MainMachine.IsBatteryScanReady && !Current.MainMachine.IsAlreadyBatteryScan && Current.MainMachine.BindProcTrayId > 0)
+            if (Current.MainMachine.IsAlive && Current.Option.IsBatteryScanReady && !Current.Option.IsAlreadyBatteryScan && Current.Option.BindProcTrayId > 0)
             {
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
@@ -147,7 +147,7 @@ namespace GMCC.Sorter.ViewModel
                             //界面交替显示扫码状态
                             Thread.Sleep(this.CommInterval / 2);
                             this.RealtimeStatus = "等待扫码...";
-                            Current.MainMachine.BindBatteriesCount++;
+                            Current.Option.BindBatteriesCount++;
                         });
                         t.Start();
                     }
@@ -156,7 +156,7 @@ namespace GMCC.Sorter.ViewModel
                         this.RealtimeStatus = "扫码失败！";
                     }
 
-                    Current.MainMachine.IsAlreadyBatteryScan = true;
+                    Current.Option.IsAlreadyBatteryScan = true;
                     this.IsAlive = true;
                 }
                 else

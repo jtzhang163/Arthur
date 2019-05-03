@@ -17,7 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
+namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MachinePlc
 {
     /// <summary>
     /// Edit.xaml 的交互逻辑
@@ -53,10 +53,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
             var ip = this.ip.Text.Trim();
             var port = _Convert.StrToInt(this.port.Text.Trim(), -1);
             var comm_interval = this.comm_interval.Text.Trim();
-            var bind_traycode = this.bind_traycode.Text.Trim();
-            var jaw_traycode = this.jaw_traycode.Text.Trim();
-            var unbind_traycode = this.unbind_traycode.Text.Trim();
-            var still_timespan = this.still_timespan.Text.Trim();
 
             tip.Background = new SolidColorBrush(Colors.Red);
 
@@ -74,10 +70,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine
                     Current.MainMachine.IP = ip;
                     Current.MainMachine.Port = port;
                     Current.MainMachine.CommInterval = Convert.ToInt32(comm_interval);
-                    Current.MainMachine.BindProcTrayId = GetProcTrayId(bind_traycode);
-                    Current.MainMachine.JawProcTrayId = GetProcTrayId(jaw_traycode);
-                    Current.MainMachine.UnbindProcTrayId = GetProcTrayId(unbind_traycode);
-                    Current.MainMachine.StillTimeSpan = Convert.ToInt32(still_timespan);
 
                     Context.AppContext.SaveChanges();
                     tip.Background = new SolidColorBrush(Colors.Green);

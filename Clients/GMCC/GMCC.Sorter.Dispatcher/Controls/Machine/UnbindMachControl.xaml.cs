@@ -22,17 +22,17 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
     /// </summary>
     public partial class UnbindMachControl : UserControl
     {
-        private MainMachineViewModel MainMachine;
+        private AppOption Option;
         public UnbindMachControl()
         {
             InitializeComponent();
-            this.MainMachine = Current.MainMachine;
-            this.DataContext = this.MainMachine;
+            this.Option = Current.Option;
+            this.DataContext = this.Option;
         }
 
         private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ShowWindows.ShowTrayBatteryWin(this.MainMachine.UnbindProcTrayId);
+            ShowWindows.ShowTrayBatteryWin(this.Option.UnbindProcTrayId);
         }
     }
 }

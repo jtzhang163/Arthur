@@ -22,18 +22,18 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
     /// </summary>
     public partial class JawControl : UserControl
     {
-        private MainMachineViewModel MainMachine;
+        private AppOption Option;
 
         public JawControl()
         {
             InitializeComponent();
-            this.MainMachine = Current.MainMachine;
-            this.DataContext = this.MainMachine;
+            this.Option = Current.Option;
+            this.DataContext = this.Option;
         }
 
         private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ShowWindows.ShowTrayBatteryWin(this.MainMachine.JawProcTrayId);
+            ShowWindows.ShowTrayBatteryWin(this.Option.JawProcTrayId);
         }
     }
 }

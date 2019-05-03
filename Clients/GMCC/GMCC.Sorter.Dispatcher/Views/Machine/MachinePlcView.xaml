@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="GMCC.Sorter.Dispatcher.Views.MainMachineView"
+﻿<UserControl x:Class="GMCC.Sorter.Dispatcher.Views.MachinePlcView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -9,7 +9,7 @@
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
                 <TextBlock FontSize="24" FontFamily="Times New Roman,宋体" Foreground="#FF222D32" FontWeight="Bold" Height="40">
-                    <Label Content="设备管理 > 压床"/>
+                    <Label Content="设备管理 > PLC"/>
                 </TextBlock>
                 <Canvas Height="1" Background="WhiteSmoke"/>
             </StackPanel>

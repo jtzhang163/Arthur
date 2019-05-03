@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine.Details"
+﻿<UserControl x:Class="GMCC.Sorter.Dispatcher.UserControls.Machine.MachinePlc.Details"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.Machine.MainMachine"
+             xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.Machine.MachinePlc"
              xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -17,19 +17,14 @@
     </UserControl.Resources>
     <Grid>
         <DockPanel>
-            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="压床信息"  Style="{StaticResource PageTitleTextBlock}"/>
+            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="PLC信息"  Style="{StaticResource PageTitleTextBlock}"/>
             <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
                 <Button x:Name="edit" Tag="{Binding Id}" Click="edit_Click" Style="{StaticResource ChamferButton}">编辑</Button>
-                <!--<Button x:Name="cancel" Click="cancel_Click" Style="{StaticResource ChamferButton}">返回</Button>-->
             </StackPanel>
             <DockPanel>
                 <TextBlock x:Name="tip" Foreground="White" Background="Red" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>
                 <Grid x:Name="grid">
                     <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
@@ -41,24 +36,16 @@
                         <ColumnDefinition Width="300"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="PLC品牌：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="品牌：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Company}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="PLC型号：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="型号：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding ModelNumber}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="PLC IP地址：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="IP地址：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding IP}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="PLC端口：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="端口：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Port}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="通信间隔(ms)：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding CommInterval}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="绑盘位条码：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding BindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="横移托盘条码：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding JawProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="解盘位条码：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="静置时长(min)：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding StillTimeSpan}" Grid.Row="8" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

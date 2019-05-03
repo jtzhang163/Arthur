@@ -464,7 +464,7 @@
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
                     <Expander.Header>
                         <WrapPanel>
-                            <TextBlock Text="&#xf013;" Style="{DynamicResource FontAwesome}" FontSize="22"/>
+                            <TextBlock Text="&#xf108;" Style="{DynamicResource FontAwesome}" FontSize="18"/>
                             <TextBlock Text="系统"/>
                         </WrapPanel>
                     </Expander.Header>
@@ -486,6 +486,26 @@
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
                     <Expander.Header>
                         <WrapPanel>
+                            <TextBlock Text="&#xf013;" Style="{DynamicResource FontAwesome}" FontSize="22"/>
+                            <TextBlock Text="设置"/>
+                        </WrapPanel>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+
+                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">配置</RadioButton>
+
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
+                <Separator Height="2" Background="White"/>
+
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
+                    <Expander.Header>
+                        <WrapPanel>
                             <TextBlock Text="&#xf085;" Style="{DynamicResource FontAwesome}" FontSize="18"/>
                             <TextBlock Text="设备管理"/>
                         </WrapPanel>
@@ -499,7 +519,8 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">压床</RadioButton>
+
+                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">PLC</RadioButton>
                             <RadioButton Grid.Row="1" Checked="RadioButton_Checked">电池扫码枪</RadioButton>
                             <RadioButton Grid.Row="2" Checked="RadioButton_Checked">托盘扫码枪</RadioButton>
                             <RadioButton Grid.Row="3" Checked="RadioButton_Checked">托盘管理</RadioButton>
