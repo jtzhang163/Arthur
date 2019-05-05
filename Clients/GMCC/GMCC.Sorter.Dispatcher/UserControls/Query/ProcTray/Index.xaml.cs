@@ -37,7 +37,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 
         private int PageIndex = 1;
 
-        private List<ProcTrayViewModel> ProcTrays
+        private IQueryable<Model.ProcTray> ProcTrays
         {
             get
             {
@@ -46,11 +46,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
                 var endTime = this.end_time.Value;
                 if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return ContextToViewModel.Convert(Context.ProcTrays.Where(r => r.ScanTime > startTime && r.ScanTime < endTime).ToList());
+                    return Context.ProcTrays.Where(r => r.ScanTime > startTime && r.ScanTime < endTime).OrderBy(o => o.Id);
                 }
                 else
                 {
-                    return ContextToViewModel.Convert(Context.ProcTrays.Where(r => r.ScanTime > startTime && r.ScanTime < endTime && r.Code.Contains(queryText)).ToList());
+                    return Context.ProcTrays.Where(r => r.ScanTime > startTime && r.ScanTime < endTime && r.Code.Contains(queryText)).OrderBy(o => o.Id);
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 
         private void UpdateDataGrid(int index)
         {
-            var dtos = PaginatedList<ProcTrayViewModel>.Create(ProcTrays, PageIndex, Arthur.App.Current.Option.DataGridPageSize);
+            var dtos = PaginatedList<Model.ProcTray>.Create(ProcTrays, PageIndex, Arthur.App.Current.Option.DataGridPageSize);
 
             this.count.Content = ProcTrays.Count();
             this.pageIndex.Content = PageIndex;
@@ -73,7 +73,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
             this.preview_page.IsEnabled = dtos.HasPreviousPage;
             this.next_page.IsEnabled = dtos.HasNextPage;
 
-            this.dataGrid.ItemsSource = dtos;
+            this.dataGrid.ItemsSource = ContextToViewModel.Convert(dtos);
         }
 
         private void create_Click(object sender, RoutedEventArgs e)

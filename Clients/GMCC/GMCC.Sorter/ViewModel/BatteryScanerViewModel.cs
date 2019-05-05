@@ -134,7 +134,7 @@ namespace GMCC.Sorter.ViewModel
                     if (result)
                     {
                         this.RealtimeStatus = "+" + code;
-                        var save_res = Current.MainMachine.Commor.Write("D433", (ushort)1);
+                        Current.MainMachine.Commor.Write("D433", (ushort)1);
 
                         var t = new Thread(() =>
                         {
@@ -157,7 +157,7 @@ namespace GMCC.Sorter.ViewModel
                     }
                     else
                     {
-                        var save_res = Current.MainMachine.Commor.Write("D433", (ushort)2);
+                        Current.MainMachine.Commor.Write("D433", (ushort)2);
                         this.RealtimeStatus = "扫码失败！";
                     }
 

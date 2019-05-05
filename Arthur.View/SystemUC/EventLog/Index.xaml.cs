@@ -46,23 +46,21 @@ namespace Arthur.View.SystemUC.EventLog
 
         private int PageIndex = 1;
 
-        private List<Arthur.App.Model.EventLog> EventLogs
+        private IQueryable<Arthur.App.Model.EventLog> EventLogs
         {
             get
             {
-                var logs = new List<Arthur.App.Model.EventLog>();
                 var startTime = this.start_time.Value;
                 var endTime = this.end_time.Value;
                 if (this.event_type.SelectedIndex > 0)
                 {
                     var type = (Arthur.App.Model.EventType)Enum.Parse(typeof(Arthur.App.Model.EventType), this.event_type.SelectedItem.ToString());
-                    logs = Context.EventLogs.Where(r => r.Time > startTime && r.Time < endTime && r.EventType == type).ToList();
+                    return Context.EventLogs.Where(r => r.Time > startTime && r.Time < endTime && r.EventType == type).OrderBy(o => o.Id);
                 }
                 else
                 {
-                    logs = Context.EventLogs.Where(r => r.Time > startTime && r.Time < endTime).ToList();
+                    return Context.EventLogs.Where(r => r.Time > startTime && r.Time < endTime).OrderBy(o => o.Id);
                 }
-                return logs;
             }
         }
 

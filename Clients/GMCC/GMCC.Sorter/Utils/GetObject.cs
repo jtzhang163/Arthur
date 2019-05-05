@@ -51,30 +51,13 @@ namespace GMCC.Sorter.Utils
             var obj = new object();
             if (typeof(T).Name == "Battery")
             {
-                obj = Context.Batteries.SingleOrDefault(o => o.Code == code) ?? new Battery();
+                obj = Context.Batteries.Where(o => o.Code == code).OrderByDescending(o => o.ScanTime).FirstOrDefault() ?? new Battery();
             }
             else if (typeof(T).Name == "ProcTray")
             {
-                if (AppCache.ProcTrays.Count(o => o.Code == code) > 0)
-                {
-                    obj = AppCache.ProcTrays.Where(o => o.Code == code).OrderByDescending(o => o.ScanTime).FirstOrDefault();
-                }
-                else
-                {
-                    obj = Context.ProcTrays.Where(o => o.Code == code).OrderByDescending(o => o.ScanTime).FirstOrDefault();
-                    if (obj == null)
-                    {
-                        obj = new ProcTray();
-                    }
-                    else
-                    {
-                        AppCache.ProcTrays.Add(obj as ProcTray);
-                    }
-                }
-
+                obj = Context.ProcTrays.Where(o => o.Code == code).OrderByDescending(o => o.ScanTime).FirstOrDefault() ?? new ProcTray();
             }
             return (T)obj;
         }
-
     }
 }

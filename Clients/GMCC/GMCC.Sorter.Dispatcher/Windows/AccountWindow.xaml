@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher"
         xmlns:account="clr-namespace:Arthur.View.Account;assembly=Arthur.View"
-        mc:Ignorable="d" WindowState="Maximized"
-        Title="{Binding AppTitle}" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d" Title="{Binding AppTitle}" Height="800" Width="1280">
     <Grid x:Name="grid">
         <Grid.Background>
             <ImageBrush ImageSource="/Images/nightsky2.jpg"/>

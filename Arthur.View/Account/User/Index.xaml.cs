@@ -33,14 +33,14 @@ namespace Arthur.View.Account.User
 
         private int PageIndex = 1;
 
-        private List<Arthur.App.Model.User> Users
+        private IQueryable<Arthur.App.Model.User> Users
         {
             get
             {
                 var queryText = this.queryText.Text.Trim();
                 if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return Context.Users.ToList();
+                    return Context.Users.OrderBy(o => o.Id);
                 }
                 else
                 {
@@ -49,7 +49,7 @@ namespace Arthur.View.Account.User
                     || r.Number.Contains(queryText)
                     || r.PhoneNumber.Contains(queryText)
                     || r.Email.Contains(queryText)
-                    ).ToList();
+                    ).OrderBy(o => o.Id);
                 }
             }
         }

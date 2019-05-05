@@ -185,7 +185,7 @@
 
                     <DataGrid.Columns>
 
-                        <DataGridTemplateColumn Header="条码" Width="*"  CanUserSort="True" SortMemberPath="Code">
+                        <DataGridTemplateColumn Header="条码" Width="2*"  CanUserSort="True" SortMemberPath="Code">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -228,7 +228,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="开始静置时间" Width="*"  CanUserSort="True" SortMemberPath="StartStillTime">
+                        <DataGridTemplateColumn Header="开始静置时间" Width="2*"  CanUserSort="True" SortMemberPath="StartStillTime">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -248,7 +248,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="扫码时间" Width="*"  CanUserSort="True" SortMemberPath="ScanTime">
+                        <DataGridTemplateColumn Header="扫码时间" Width="2*"  CanUserSort="True" SortMemberPath="ScanTime">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -259,7 +259,7 @@
                         </DataGridTemplateColumn>
 
 
-                        <DataGridTemplateColumn Header="操作" Width="*">
+                        <DataGridTemplateColumn Header="操作" Width="2*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="25">

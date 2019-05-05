@@ -41,7 +41,7 @@
     <Grid>
         <DockPanel Margin="10,0,0,0">
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
-                <Grid Height="80" Margin="0,10">
+                <Grid Name="grid_op" Height="80" Margin="0,10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="7*"/>

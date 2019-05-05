@@ -137,15 +137,9 @@ namespace GMCC.Sorter.ViewModel
                 Current.Option.IsHasTray22 = bitStr2[11] == '1';
                 Current.Option.IsHasTray23 = bitStr2[10] == '1';
 
-
-
                 //Current.Option.IsHasChargeTray = retData[6] == "1";
                 //Current.Option.IsHasDisChargeTray = retData[7] == "1";
-
-
                 //Current.Option.IsDischargePutReady = retData[12] == "1";
-                // 最小值 -5540111 最大值 
-                Current.Option.JawPos = Convert.ToInt32("11");
 
                 Current.App.IsTerminalInitFinished = true;
                 this.IsAlive = true;
@@ -157,13 +151,13 @@ namespace GMCC.Sorter.ViewModel
             }
 
 
-            var ret3 = this.Commor.Read("D439", (ushort)10);
+            var ret3 = this.Commor.ReadInt("D439");
             if (ret3.IsOk)
             {
                 this.RealtimeStatus = "通信中...";
 
                 // 最小值 -5540111 最大值 805192
-                Current.Option.JawPos = Convert.ToInt32("11");
+                Current.Option.JawPos = ((int)ret3.Data + 5542000)/ 11900;
 
                 Current.App.IsTerminalInitFinished = true;
                 this.IsAlive = true;

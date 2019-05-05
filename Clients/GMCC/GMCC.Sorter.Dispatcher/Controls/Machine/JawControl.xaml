@@ -13,7 +13,7 @@
         <utils:ProcTrayIdToBackConverter x:Key="procTrayIdToBackConverter"/>
     </UserControl.Resources>
     <Grid VerticalAlignment="Center" HorizontalAlignment="Left">
-        <Border Margin="{Binding JawPos, Converter={StaticResource jawPosToMarginConverter}}" BorderThickness="1" BorderBrush="Black" Height="50" Width="70">
+        <Border Margin="{Binding JawPos, Converter={StaticResource jawPosToMarginConverter}}" BorderThickness="1" BorderBrush="Black" Height="50" Width="60">
             <Grid Background="{Binding JawProcTrayId,Converter={StaticResource procTrayIdToBackConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>

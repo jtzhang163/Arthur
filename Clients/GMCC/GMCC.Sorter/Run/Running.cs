@@ -71,6 +71,7 @@ namespace GMCC.Sorter.Run
 
         public static void StopRunAndShowMsg(string msg)
         {
+            Current.MainMachine.Commor.Write("D437", (ushort)1);
             Current.App.ErrorMsg = msg;
             Current.App.RunStatus = RunStatus.异常;
             TimerExec.IsRunning = false;

@@ -37,7 +37,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
 
         private int PageIndex = 1;
 
-        private List<BatteryViewModel> Batteries
+        private IQueryable<Model.Battery> Batteries
         {
             get
             {
@@ -46,11 +46,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
                 var endTime = this.end_time.Value;
                 if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return ContextToViewModel.Convert(Context.Batteries.Where(r => r.ScanTime > startTime && r.ScanTime < endTime).ToList());
+                    return Context.Batteries.Where(r => r.ScanTime > startTime && r.ScanTime < endTime).OrderBy(o => o.Id);
                 }
                 else
                 {
-                    return ContextToViewModel.Convert(Context.Batteries.Where(r => r.ScanTime > startTime && r.ScanTime < endTime && r.Code.Contains(queryText)).ToList());
+                    return Context.Batteries.Where(r => r.ScanTime > startTime && r.ScanTime < endTime && r.Code.Contains(queryText)).OrderBy(o => o.Id);
                 }
             }
         }
@@ -63,7 +63,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
 
         private void UpdateDataGrid(int index)
         {
-            var dtos = PaginatedList<BatteryViewModel>.Create(Batteries, PageIndex, Arthur.App.Current.Option.DataGridPageSize);
+            var dtos = PaginatedList<Model.Battery>.Create(Batteries, PageIndex, Arthur.App.Current.Option.DataGridPageSize);
 
             this.count.Content = Batteries.Count();
             this.pageIndex.Content = PageIndex;
@@ -73,7 +73,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
             this.preview_page.IsEnabled = dtos.HasPreviousPage;
             this.next_page.IsEnabled = dtos.HasNextPage;
 
-            this.dataGrid.ItemsSource = dtos;
+            this.dataGrid.ItemsSource = ContextToViewModel.Convert(dtos);
         }
 
         private void create_Click(object sender, RoutedEventArgs e)

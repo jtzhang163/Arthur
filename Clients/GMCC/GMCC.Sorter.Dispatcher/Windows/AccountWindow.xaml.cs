@@ -26,7 +26,14 @@ namespace GMCC.Sorter.Dispatcher
 
         public AccountWindow() : this("login")
         {
-            // this.Title = new Utility().AppTitle;
+            //SystemParameters.PrimaryScreenWidth;//得到屏幕整体宽度
+            //SystemParameters.PrimaryScreenHeight;//得到屏幕整体高度
+            //SystemParameters.WorkArea.Width;//得到屏幕工作区域宽度
+            //SystemParameters.WorkArea.Height;//得到屏幕工作区域高度
+            if(SystemParameters.PrimaryScreenHeight < 800)
+            {
+                this.WindowState = WindowState.Maximized;
+            }
             this.DataContext = Current.App;
         }
 

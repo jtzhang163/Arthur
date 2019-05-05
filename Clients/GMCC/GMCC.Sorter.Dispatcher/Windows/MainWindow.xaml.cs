@@ -30,6 +30,11 @@ namespace GMCC.Sorter.Dispatcher
         {
             InitializeComponent();
 
+            if (SystemParameters.PrimaryScreenHeight < 800)
+            {
+                this.WindowState = WindowState.Maximized;
+            }
+
             grid_mainview.Children.Add(new MainViewUC());
 
             this.DataContext = Current.App;

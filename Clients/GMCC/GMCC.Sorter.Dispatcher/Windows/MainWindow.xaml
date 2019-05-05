@@ -4,9 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher"
-        WindowState="Maximized"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" Closing="Window_Closing"
-        Title="{Binding AppTitle}" Height="450" Width="800">
+        Title="{Binding AppTitle}" Height="800" Width="1280">
     <Window.Resources>
 
         <!--<utils:AppNameToTitleConverter x:Key="appNameToTitleConverter"/>-->

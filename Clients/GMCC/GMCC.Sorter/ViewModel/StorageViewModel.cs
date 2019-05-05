@@ -1,6 +1,7 @@
 ﻿using Arthur.App;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Model;
+using GMCC.Sorter.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,7 +124,16 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (procTrayId != value)
                 {
-                    Context.Storages.FirstOrDefault(o => o.Id == this.Id).ProcTrayId = value;
+                    var storage = Context.Storages.FirstOrDefault(o => o.Id == this.Id);
+                    if (storage != null)
+                    {
+                        storage.ProcTrayId = value;
+                        if(value > 0)
+                        {
+                            GetObject.GetById<ProcTray>(value).StorageId = storage.Id;
+                        }
+                    }
+
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 流程托盘Id: [{1}] 修改为 [{2}]", Name, procTrayId, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref procTrayId, value);
                     procTray = null;

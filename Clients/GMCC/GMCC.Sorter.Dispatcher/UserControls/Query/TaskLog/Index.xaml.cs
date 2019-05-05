@@ -37,13 +37,13 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.TaskLog
 
         private int PageIndex = 1;
 
-        private List<GMCC.Sorter.Model.TaskLog> TaskLogs
+        private IQueryable<GMCC.Sorter.Model.TaskLog> TaskLogs
         {
             get
             {
                 var startTime = this.start_time.Value;
                 var endTime = this.end_time.Value;
-                return Context.TaskLogs.Where(o => o.Time > startTime && o.Time < endTime).ToList();
+                return Context.TaskLogs.Where(o => o.Time > startTime && o.Time < endTime).OrderBy(o => o.Id);
             }
         }
 

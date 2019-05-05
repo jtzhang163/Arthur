@@ -33,18 +33,18 @@ namespace Arthur.View.Account.Role
 
         private int PageIndex = 1;
 
-        private List<Arthur.App.Model.Role> Roles
+        private IQueryable<Arthur.App.Model.Role> Roles
         {
             get
             {
                 var queryText = this.queryText.Text.Trim();
                 if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return Context.Roles.ToList();
+                    return Context.Roles.OrderBy(o => o.Id);
                 }
                 else
                 {
-                    return Context.Roles.Where(r => r.Name.Contains(queryText)).ToList();
+                    return Context.Roles.Where(r => r.Name.Contains(queryText)).OrderBy(o => o.Id);
                 }
             }
         }

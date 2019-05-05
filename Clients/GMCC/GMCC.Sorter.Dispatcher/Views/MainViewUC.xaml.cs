@@ -30,6 +30,11 @@ namespace GMCC.Sorter.Dispatcher.Views
 
         public MainViewUC() : this("Details")
         {
+            if (SystemParameters.PrimaryScreenHeight < 800)
+            {
+                this.grid_op.Margin = new Thickness(0);
+            }
+
             this.DataContext = Current.App;
             this.commorList.DataContext = GMCC.Sorter.Factory.CommorHelper.GetCommors();
         }

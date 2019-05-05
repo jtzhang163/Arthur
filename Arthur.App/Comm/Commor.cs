@@ -110,6 +110,15 @@ namespace Arthur.App.Comm
             return new Result("连接为未知类型！");
         }
 
+        public Result ReadInt(string addr)
+        {
+            if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
+            {
+                return new OmronFinsTcpComm().ReadInt(this, addr);
+            }
+            return new Result("连接为未知类型！");
+        }
+
         public Result Write(string addr, ushort value)
         {
             if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)

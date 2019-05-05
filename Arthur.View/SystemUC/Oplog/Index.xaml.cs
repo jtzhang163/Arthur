@@ -45,23 +45,22 @@ namespace Arthur.View.SystemUC.Oplog
 
         private int PageIndex = 1;
 
-        private List<Arthur.App.Model.Oplog> Oplogs
+        private IQueryable<Arthur.App.Model.Oplog> Oplogs
         {
             get
             {
-                var logs = new List<Arthur.App.Model.Oplog>();
+
                 var startTime = this.start_time.Value;
                 var endTime = this.end_time.Value;
                 if (this.op_type.SelectedIndex > 0)
                 {
                     var type = (Arthur.App.Model.OpType)Enum.Parse(typeof(Arthur.App.Model.OpType), this.op_type.SelectedItem.ToString());
-                    logs = Context.Oplogs.Where(r => r.Time > startTime && r.Time < endTime && r.OpType == type).ToList();
+                    return Context.Oplogs.Where(r => r.Time > startTime && r.Time < endTime && r.OpType == type).OrderBy(o => o.Id);
                 }
                 else
                 {
-                    logs = Context.Oplogs.Where(r => r.Time > startTime && r.Time < endTime).ToList();
+                    return Context.Oplogs.Where(r => r.Time > startTime && r.Time < endTime).OrderBy(o => o.Id);
                 }
-                return logs;
             }
         }
 
