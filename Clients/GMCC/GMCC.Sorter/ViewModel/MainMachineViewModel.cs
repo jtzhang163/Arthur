@@ -95,6 +95,9 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
+            //发送给PLC上位机在线心跳
+            Current.MainMachine.Commor.Write("D441", (ushort)1);
+
             var ret = this.Commor.Read("D400", (ushort)60);
             if (ret.IsOk)
             {
@@ -105,6 +108,7 @@ namespace GMCC.Sorter.ViewModel
                 Current.Option.JawMoveInfo.Col = Convert.ToInt32(recv[50]);
                 Current.Option.JawMoveInfo.Row = Convert.ToInt32(recv[51]);
                 Current.Option.JawMoveInfo.Floor = Convert.ToInt32(recv[52]);
+
                 Current.Option.IsTaskFinished = recv[36] == (ushort)1;
 
                 this.IsAlive = true;
@@ -137,11 +141,10 @@ namespace GMCC.Sorter.ViewModel
                 Current.Option.IsHasTray22 = bitStr2[11] == '1';
                 Current.Option.IsHasTray23 = bitStr2[10] == '1';
 
-                //Current.Option.IsHasChargeTray = retData[6] == "1";
-                //Current.Option.IsHasDisChargeTray = retData[7] == "1";
-                //Current.Option.IsDischargePutReady = retData[12] == "1";
+                Current.Option.IsJawHasTray = bitStr2[9] == '1';
 
-                Current.App.IsTerminalInitFinished = true;
+                Current.Option.IsTaskReady = bitStr2[8] == '1';
+
                 this.IsAlive = true;
             }
             else
@@ -149,7 +152,6 @@ namespace GMCC.Sorter.ViewModel
                 this.RealtimeStatus = ret.Msg;
                 this.IsAlive = false;
             }
-
 
             var ret3 = this.Commor.ReadInt("D439");
             if (ret3.IsOk)
@@ -159,7 +161,6 @@ namespace GMCC.Sorter.ViewModel
                 // 最小值 -5540111 最大值 805192
                 Current.Option.JawPos = ((int)ret3.Data + 5542000)/ 11900;
 
-                Current.App.IsTerminalInitFinished = true;
                 this.IsAlive = true;
             }
             else
@@ -168,6 +169,7 @@ namespace GMCC.Sorter.ViewModel
                 this.IsAlive = false;
             }
 
+            Current.App.IsTerminalInitFinished = true;
 
             ////发送横移运动指令
             //if (Current.Task.Status == Model.TaskStatus.就绪)

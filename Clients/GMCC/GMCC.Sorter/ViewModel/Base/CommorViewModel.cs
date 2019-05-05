@@ -226,7 +226,7 @@ namespace GMCC.Sorter.ViewModel
                     commInterval = _Convert.StrToInt(Arthur.Business.Application.GetOption(string.Format("CommInterval_{0}", this.Name)), -1);
                     if (commInterval < 0)
                     {
-                        commInterval = 3000;
+                        commInterval = 1000;
                         Arthur.Business.Application.SetOption(string.Format("CommInterval_{0}", this.Name), commInterval.ToString(), string.Format("上位机-{0}通讯时间间隔", this.Name));
                     }
                 }

@@ -75,7 +75,7 @@
                 </DockPanel>
             </Border>
 
-            <Label Grid.Row="4" Content="返盘位(23)" FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label Grid.Row="4" Content="分选位(23)" FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
             <Border Grid.Row="5" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
                     <Label DockPanel.Dock="Bottom" Content="{Binding Tray23_Id, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" Height="22" Cursor="Hand"

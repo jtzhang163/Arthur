@@ -72,14 +72,14 @@ namespace GMCC.Sorter.Run
         public static void StopRunAndShowMsg(string msg)
         {
             Current.MainMachine.Commor.Write("D437", (ushort)1);
-            Current.App.ErrorMsg = msg;
+            ShowErrorMsg(msg);
             Current.App.RunStatus = RunStatus.异常;
             TimerExec.IsRunning = false;
         }
 
         public static void ShowErrorMsg(string msg)
         {
-            Current.App.ErrorMsg = msg;
+            Current.App.ErrorMsg = string.Format("[{0}] {1}", DateTime.Now.ToString("M/d HH:mm:ss"), msg);
         }
     }
 }

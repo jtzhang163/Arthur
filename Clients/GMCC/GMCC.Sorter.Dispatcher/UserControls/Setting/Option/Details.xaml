@@ -50,7 +50,7 @@
                     <Label Content="{Binding Tray21_Id, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="放电位(22)条码：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Tray22_Id, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="返盘位(23)条码：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="分选位(23)条码：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Tray23_Id, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
 
                     <Label Content="横移托盘条码：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>

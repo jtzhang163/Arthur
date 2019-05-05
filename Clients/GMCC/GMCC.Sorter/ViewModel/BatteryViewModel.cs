@@ -78,7 +78,10 @@ namespace GMCC.Sorter.ViewModel
                 if (procTrayId != value)
                 {
                     Context.Batteries.FirstOrDefault(o => o.Id == this.Id).ProcTrayId = value;
-                    Arthur.Business.Logging.AddOplog(string.Format("数据追溯. 电池. 条码:{0} ProcTrayId: [{1}] 修改为 [{2}]", Code, procTrayId, value), Arthur.App.Model.OpType.编辑);
+                    if (procTrayId > -2)
+                    {
+                        Arthur.Business.Logging.AddOplog(string.Format("数据追溯. 电池. 条码:{0} ProcTrayId: [{1}] 修改为 [{2}]", Code, procTrayId, value), Arthur.App.Model.OpType.编辑);
+                    }
                     this.SetProperty(ref procTrayId, value);
                 }
             }

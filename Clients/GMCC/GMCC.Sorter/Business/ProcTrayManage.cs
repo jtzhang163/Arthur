@@ -30,8 +30,8 @@ namespace GMCC.Sorter.Business
             try
             {
                 var id = -1;
-                lock (Arthur.App.Application.DbLocker)
-                {
+                //lock (Arthur.App.Application.DbLocker)
+                //{
                     var tray = Context.Trays.FirstOrDefault(t => t.Code == procTray.Code);
                     if (tray == null)
                     {
@@ -57,7 +57,7 @@ namespace GMCC.Sorter.Business
                     Context.AppContext.SaveChanges();
 
                     id = proctray.Id;
-                }
+                //}
 
                 if (isScan)
                 {

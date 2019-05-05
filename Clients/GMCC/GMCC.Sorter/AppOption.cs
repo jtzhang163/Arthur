@@ -32,8 +32,6 @@ namespace GMCC.Sorter
             }
         }
 
-
-
         private int taskExecInterval = -1;
 
         /// <summary>
@@ -64,9 +62,6 @@ namespace GMCC.Sorter
                 }
             }
         }
-
-
-
 
         private int getShareDataExecInterval = -1;
 
@@ -134,6 +129,45 @@ namespace GMCC.Sorter
         }
 
 
+        private int bindBatteriesCount = -2;
+        /// <summary>
+        /// 当前绑盘位托盘里面电池个数
+        /// </summary>
+        public int BindBatteriesCount
+        {
+            get
+            {
+                if (bindBatteriesCount < 0)
+                {
+                    bindBatteriesCount = GetObject.GetById<ProcTray>(Current.Option.Tray11_Id).GetBatteries().Count;
+                }
+                return bindBatteriesCount;
+            }
+            set
+            {
+                if (bindBatteriesCount != value)
+                {
+                    SetProperty(ref bindBatteriesCount, value);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 上下料任务准备就绪
+        /// </summary>
+        public bool IsTaskReady { get; set; }
+
+        /// <summary>
+        /// 上下料任务完成
+        /// </summary>
+        public bool IsTaskFinished { get; set; }
+
+
+        #region 横移相关
+
+        public JawMoveInfo JawMoveInfo = new JawMoveInfo();
+
         private int jawProcTrayId = -2;
         /// <summary>
         /// 横移流程托盘Id
@@ -163,32 +197,6 @@ namespace GMCC.Sorter
             }
         }
 
-
-        private int bindBatteriesCount = -2;
-        /// <summary>
-        /// 当前绑盘位托盘里面电池个数
-        /// </summary>
-        public int BindBatteriesCount
-        {
-            get
-            {
-                if (bindBatteriesCount < 0)
-                {
-                    bindBatteriesCount = GetObject.GetById<ProcTray>(Current.Option.Tray11_Id).GetBatteries().Count;
-                }
-                return bindBatteriesCount;
-            }
-            set
-            {
-                if (bindBatteriesCount != value)
-                {
-                    SetProperty(ref bindBatteriesCount, value);
-                }
-            }
-        }
-
-        public JawMoveInfo JawMoveInfo = new JawMoveInfo();
-
         private int jawPos = -2;
         /// <summary>
         /// 横移位置
@@ -217,6 +225,10 @@ namespace GMCC.Sorter
                 else if (value < jawPos)
                 {
                     this.JawStatus = "« 移动 «";
+                }
+                else if (Current.Task.Status != Model.TaskStatus.完成)
+                {
+                    this.JawStatus = "取放中";
                 }
                 else
                 {
@@ -250,12 +262,20 @@ namespace GMCC.Sorter
             }
         }
 
-
+        private bool isJawHasTray;
         /// <summary>
-        /// 横移上下料完成
+        /// 横移有托盘
         /// </summary>
-        public bool IsTaskFinished { get; set; }
+        public bool IsJawHasTray
+        {
+            get => isJawHasTray;
+            set
+            {
+                SetProperty(ref isJawHasTray, value);
+            }
+        }
 
+        #endregion
 
         #region 工位有托盘信号
 
@@ -388,7 +408,7 @@ namespace GMCC.Sorter
 
         private bool? isHasTray23;
         /// <summary>
-        /// 返盘位有托盘
+        /// 分选位有托盘
         /// </summary>
         public bool IsHasTray23
         {
@@ -567,7 +587,7 @@ namespace GMCC.Sorter
 
         private int tray23_Id = -2;
         /// <summary>
-        /// 返盘位流程托盘Id
+        /// 分选位流程托盘Id
         /// </summary>
         public int Tray23_Id
         {
@@ -579,7 +599,7 @@ namespace GMCC.Sorter
                     if (tray23_Id == -1)
                     {
                         tray23_Id = 0;
-                        Arthur.Business.Application.SetOption("Tray23_Id", tray23_Id.ToString(), "返盘位流程托盘Id");
+                        Arthur.Business.Application.SetOption("Tray23_Id", tray23_Id.ToString(), "分选位流程托盘Id");
                     }
                 }
                 return tray23_Id;
@@ -619,7 +639,7 @@ namespace GMCC.Sorter
             }
             set
             {
-                if (tray11_PreId != value)
+                if (tray11_PreId != value && value > 0)
                 {
                     Arthur.Business.Application.SetOption("Tray11_PreId", value.ToString());
                     SetProperty(ref tray11_PreId, value);
@@ -649,7 +669,7 @@ namespace GMCC.Sorter
             }
             set
             {
-                if (tray12_PreId != value)
+                if (tray12_PreId != value && value > 0)
                 {
                     Arthur.Business.Application.SetOption("Tray12_PreId", value.ToString());
                     SetProperty(ref tray12_PreId, value);
@@ -679,7 +699,7 @@ namespace GMCC.Sorter
             }
             set
             {
-                if (tray13_PreId != value)
+                if (tray13_PreId != value && value > 0)
                 {
                     Arthur.Business.Application.SetOption("Tray13_PreId", value.ToString());
                     SetProperty(ref tray13_PreId, value);
@@ -709,7 +729,7 @@ namespace GMCC.Sorter
             }
             set
             {
-                if (tray21_PreId != value)
+                if (tray21_PreId != value && value > 0)
                 {
                     Arthur.Business.Application.SetOption("Tray21_PreId", value.ToString());
                     SetProperty(ref tray21_PreId, value);
@@ -738,7 +758,7 @@ namespace GMCC.Sorter
             }
             set
             {
-                if (tray22_PreId != value)
+                if (tray22_PreId != value && value > 0)
                 {
                     Arthur.Business.Application.SetOption("Tray22_PreId", value.ToString());
                     SetProperty(ref tray22_PreId, value);
@@ -749,7 +769,7 @@ namespace GMCC.Sorter
 
         private int tray23_PreId = -2;
         /// <summary>
-        /// 返盘位流程托盘原ID
+        /// 分选位流程托盘原ID
         /// </summary>
         public int Tray23_PreId
         {
@@ -761,14 +781,14 @@ namespace GMCC.Sorter
                     if (tray23_PreId == -1)
                     {
                         tray23_PreId = 0;
-                        Arthur.Business.Application.SetOption("Tray23_PreId", tray23_PreId.ToString(), "返盘位流程托盘原ID");
+                        Arthur.Business.Application.SetOption("Tray23_PreId", tray23_PreId.ToString(), "分选位流程托盘原ID");
                     }
                 }
                 return tray23_PreId;
             }
             set
             {
-                if (tray23_PreId != value)
+                if (tray23_PreId != value && value > 0)
                 {
                     Arthur.Business.Application.SetOption("Tray23_PreId", value.ToString());
                     SetProperty(ref tray23_PreId, value);

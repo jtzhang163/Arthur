@@ -9,12 +9,12 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <utils:JawPosToMarginConverter x:Key="jawPosToMarginConverter"/>
-        <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
-        <utils:ProcTrayIdToBackConverter x:Key="procTrayIdToBackConverter"/>
+        <utils:IsJawHasTrayToProcTrayCodeConverter x:Key="isJawHasTrayToProcTrayCodeConverter"/>
+        <utils:IsJawHasTrayToBackConverter x:Key="isJawHasTrayToBackConverter"/>
     </UserControl.Resources>
     <Grid VerticalAlignment="Center" HorizontalAlignment="Left">
         <Border Margin="{Binding JawPos, Converter={StaticResource jawPosToMarginConverter}}" BorderThickness="1" BorderBrush="Black" Height="50" Width="60">
-            <Grid Background="{Binding JawProcTrayId,Converter={StaticResource procTrayIdToBackConverter}}">
+            <Grid Background="{Binding IsJawHasTray,Converter={StaticResource isJawHasTrayToBackConverter}}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="3*"/>
@@ -22,7 +22,7 @@
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="横移" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0"/>
                 <Label Grid.Row="1" Content="{Binding JawStatus}" Foreground="Blue" FontSize="16" HorizontalContentAlignment="Center" VerticalAlignment="Center" Margin="0" Padding="0"/>
-                <Label Grid.Row="2" Content="{Binding JawProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="10" HorizontalContentAlignment="Center" Margin="0" Padding="0" MouseDoubleClick="Label_MouseDoubleClick"/>
+                <Label Grid.Row="2" Content="{Binding IsJawHasTray, Converter={StaticResource isJawHasTrayToProcTrayCodeConverter}}" FontSize="10" HorizontalContentAlignment="Center" Margin="0" Padding="0" MouseDoubleClick="Label_MouseDoubleClick"/>
             </Grid>
         </Border>
     </Grid>

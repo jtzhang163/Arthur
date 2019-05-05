@@ -22,19 +22,19 @@ namespace GMCC.Sorter.Business
             {
                 for (var j = 0; j < Common.STOR_FLOOR_COUNT; j++)
                 {
-                    var storage = Current.Storages.First(o => o.Column == i + 1 && o.Floor == 5 - j);
+                    var storage1 = Current.Storages.First(o => o.Column == i + 1 && o.Floor == 5 - j);
+                    var storage2 = Current.Storages.First(o => o.Column == i + 1 && o.Floor == j + 1);
 
-                    if (type == TaskType.上料 && storage.ProcTrayId < 1)
+                    if (type == TaskType.上料 && storage1.ProcTrayId < 1)
                     {
-                        storages.Add(storage);
+                        storages.Add(storage1);
                         continue;
                     }
-
-                    else if (type == TaskType.下料 && storage.ProcTrayId > 0)
+                    else if (type == TaskType.下料 && storage2.ProcTrayId > 0)
                     {
-                        if (storage.Status == StorageStatus.静置完成)
+                        if (storage2.Status == StorageStatus.静置完成)
                         {
-                            storages.Add(storage);
+                            storages.Add(storage2);
                         }
                         continue;
                     }

@@ -169,6 +169,7 @@ namespace GMCC.Sorter.ViewModel
 
             if (this == Current.BindTrayScaner && Current.Option.IsBindTrayScanReady && !Current.Option.IsAlreadyBindTrayScan)
             {
+                LogHelper.WriteInfo("开始绑盘托盘扫码。。。");
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
                 {
@@ -191,35 +192,42 @@ namespace GMCC.Sorter.ViewModel
 
                     if (result)
                     {
+
+                        LogHelper.WriteInfo("绑盘托盘扫码OK。。。");
+
                         this.RealtimeStatus = "+" + code;
                         Current.MainMachine.Commor.Write("D434", (ushort)1);
 
-                        var t = new Thread(() =>
-                        {
-                            var saveRet = Result.OK;
-                            if (Current.Option.Tray11_Id < 1)
-                            {
-                                //把电池条码保存进数据库
-                                saveRet = new Business.ProcTrayManage().Create(new Model.ProcTray() { Code = code }, true);
-                                Current.Option.Tray11_Id = (int)saveRet.Data;
-                            }
 
-                            if (saveRet.IsOk)
+                        var saveRet = Result.OK;
+                        if (Current.Option.Tray11_Id < 1)
+                        {
+                            //把电池条码保存进数据库
+                            saveRet = new Business.ProcTrayManage().Create(new Model.ProcTray() { Code = code }, true);
+                            Current.Option.Tray11_Id = (int)saveRet.Data;
+                        }
+
+                        if (saveRet.IsOk)
+                        {
+                            var t = new Thread(() =>
                             {
                                 //界面交替显示扫码状态
                                 Thread.Sleep(2000);
                                 this.RealtimeStatus = "等待扫码...";
-                            }
-                            else
-                            {
-                                Running.StopRunAndShowMsg(saveRet.Msg);
-                            }
+                            });
+                            t.Start();
+                        }
+                        else
+                        {
+                            Running.StopRunAndShowMsg(saveRet.Msg);
+                        }
 
-                        });
-                        t.Start();
+
                     }
                     else
                     {
+                        LogHelper.WriteInfo("绑盘托盘扫码NG。。。");
+
                         Current.MainMachine.Commor.Write("D434", (ushort)2);
                         this.RealtimeStatus = "扫码失败！";
                     }
@@ -229,6 +237,8 @@ namespace GMCC.Sorter.ViewModel
                 }
                 else
                 {
+                    LogHelper.WriteInfo("绑盘托盘扫码NG。。。");
+
                     Current.MainMachine.Commor.Write("D434", (ushort)2);
                     this.RealtimeStatus = ret.Msg;
                     this.IsAlive = false;
@@ -236,6 +246,7 @@ namespace GMCC.Sorter.ViewModel
             }
             else if (this == Current.UnbindTrayScaner && Current.Option.IsUnbindTrayScanReady && !Current.Option.isAlreadyUnbindTrayScan)
             {
+                LogHelper.WriteInfo("开始解盘托盘扫码。。。");
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
                 {
@@ -258,36 +269,39 @@ namespace GMCC.Sorter.ViewModel
 
                     if (result)
                     {
+                        LogHelper.WriteInfo("解盘托盘扫码OK。。。");
                         this.RealtimeStatus = "+" + code;
                         Current.MainMachine.Commor.Write("D435", (ushort)1);
 
-                        var t = new Thread(() =>
+
+                        var saveRet = Result.OK;
+
+                        //逻辑处理
+                        var procTrayId = GetObject.GetByCode<ProcTray>(code).Id;
+                        if (Current.Option.Tray21_Id < 1 || Current.Option.Tray21_Id != procTrayId)
                         {
-                            var saveRet = Result.OK;
+                            Current.Option.Tray21_Id = procTrayId;
+                        }
 
-                            //逻辑处理
-                            var procTrayId = GetObject.GetByCode<ProcTray>(code).Id;
-                            if (Current.Option.Tray21_Id < 1 || Current.Option.Tray21_Id != procTrayId)
-                            {
-                                Current.Option.Tray21_Id = procTrayId;
-                            }
-
-                            if (saveRet.IsOk)
+                        if (saveRet.IsOk)
+                        {
+                            var t = new Thread(() =>
                             {
                                 //界面交替显示扫码状态
                                 Thread.Sleep(2000);
                                 this.RealtimeStatus = "等待扫码...";
-                            }
-                            else
-                            {
-                                Running.StopRunAndShowMsg(saveRet.Msg);
-                            }
+                            });
+                            t.Start();
+                        }
+                        else
+                        {
+                            Running.StopRunAndShowMsg(saveRet.Msg);
+                        }
 
-                        });
-                        t.Start();
                     }
                     else
                     {
+                        LogHelper.WriteInfo("解盘托盘扫码NG。。。");
                         Current.MainMachine.Commor.Write("D435", (ushort)2);
                         this.RealtimeStatus = "扫码失败！";
                     }
@@ -297,6 +311,7 @@ namespace GMCC.Sorter.ViewModel
                 }
                 else
                 {
+                    LogHelper.WriteInfo("解盘托盘扫码NG。。。");
                     Current.MainMachine.Commor.Write("D435", (ushort)2);
                     this.RealtimeStatus = ret.Msg;
                     this.IsAlive = false;

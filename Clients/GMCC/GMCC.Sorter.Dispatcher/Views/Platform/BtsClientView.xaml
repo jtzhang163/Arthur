@@ -9,7 +9,7 @@
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
                 <TextBlock FontSize="24" FontFamily="Times New Roman,宋体" Foreground="#FF222D32" FontWeight="Bold" Height="40">
-                    <Label Content="交互平台 > BTS客户端"/>
+                    <Label Content="交互平台 > 与BTS客户端共享数据"/>
                 </TextBlock>
                 <Canvas Height="1" Background="WhiteSmoke"/>
             </StackPanel>

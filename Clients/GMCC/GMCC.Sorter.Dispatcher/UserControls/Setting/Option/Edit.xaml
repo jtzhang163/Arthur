@@ -51,7 +51,7 @@
                     <TextBox x:Name="tray21_code" Grid.Row="3" Grid.Column="1" Text="{Binding Tray21_Id, Converter={StaticResource idToProcTrayCodeConverter}, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                     <Label Content="放电位(22)条码：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="tray22_code" Grid.Row="4" Grid.Column="1" Text="{Binding Tray22_Id, Converter={StaticResource idToProcTrayCodeConverter}, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
-                    <Label Content="返盘位(23)条码：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="分选位(23)条码：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="tray23_code" Grid.Row="5" Grid.Column="1" Text="{Binding Tray23_Id, Converter={StaticResource idToProcTrayCodeConverter}, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
 
                     <Label Content="横移托盘条码：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>

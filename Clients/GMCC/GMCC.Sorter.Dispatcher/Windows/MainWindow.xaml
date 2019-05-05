@@ -615,7 +615,6 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <RadioButton Grid.Row="0">帮助</RadioButton>
                             <RadioButton Grid.Row="1" Checked="RadioButton_Checked">关于</RadioButton>
                         </Grid>
                     </Expander.Content>

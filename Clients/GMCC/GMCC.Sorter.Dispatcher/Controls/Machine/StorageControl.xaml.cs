@@ -66,11 +66,26 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
             var header = (sender as MenuItem).Header.ToString();
             if (header == "手动【上料】" || header == "手动【下料】")
             {
+
+                if (Current.App.TaskMode != TaskMode.手动任务)
+                {
+                    MessageBox.Show("当前不是手动任务状态，无法手动发送指令！", "提示");
+                    return;
+                }
+
                 if (Current.Task.Status != Model.TaskStatus.完成)
                 {
                     MessageBox.Show("当前任务尚未完成！", "提示");
                     return;
                 }
+
+
+                if (!Current.Option.IsTaskReady)
+                {
+                    MessageBox.Show("PLC接收任务状态未就绪！", "提示");
+                    return;
+                }
+
 
                 var type = header == "手动【上料】" ? Model.TaskType.上料 : Model.TaskType.下料;
 

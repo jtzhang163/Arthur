@@ -63,7 +63,7 @@
                         <Label>每页</Label>
                         <Label x:Name="size"></Label>
                         <Label>条记录 第</Label>
-                        <TextBox x:Name="tbPageIndex" MaxLength="10" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Foreground="#09a3de"/>
+                        <TextBox x:Name="tbPageIndex" FontSize="8" VerticalContentAlignment="Center" MaxLength="10" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" Foreground="#09a3de"/>
                         <Label>页</Label>
                         <Button x:Name="go_page" Click="go_page_Click" Style="{DynamicResource ChamferButton}" FontSize="10" Width="25" Height="14" VerticalContentAlignment="Center" VerticalAlignment="Center">GO</Button>
                         <TextBlock x:Name="preview_page" Text="&#xf0a8;" FontSize="16" Style="{DynamicResource FontAwesome}" MouseDown="preview_page_MouseDown">

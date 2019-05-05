@@ -33,8 +33,8 @@ namespace GMCC.Sorter.Business
                 //{
                 //    return new Result(string.Format("系统中已存在条码为{0}的电池！", battery.Code));
                 //}
-                lock (Arthur.App.Application.DbLocker)
-                {
+                //lock (Arthur.App.Application.DbLocker)
+                //{
                     Context.Batteries.Add(new Battery() {
                         Code = battery.Code,
                         ScanTime = DateTime.Now,
@@ -43,7 +43,7 @@ namespace GMCC.Sorter.Business
                         SortResult = SortResult.Unknown
                     });
                     Context.AppContext.SaveChanges();
-                }
+                //}
                 if (isScan)
                 {
                     LogHelper.WriteInfo("电池扫码：" + battery.Code);

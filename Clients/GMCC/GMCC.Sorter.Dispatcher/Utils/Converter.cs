@@ -201,6 +201,42 @@ namespace GMCC.Sorter.Dispatcher.Utils
         }
     }
 
+
+    public class IsJawHasTrayToBackConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var isJawHasTray = (bool)value;
+            return isJawHasTray ? Brushes.LightGreen : Brushes.White;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class IsJawHasTrayToProcTrayCodeConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var isJawHasTray = (bool)value;
+            if (!isJawHasTray)
+            {
+                return "";
+            }
+            else
+            {
+                return (Context.ProcTrays.FirstOrDefault(o => o.Id == Current.Task.ProcTrayId) ?? new Model.ProcTray()).Code;
+            }
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class ProcTrayIdToVisibilityConverter : IValueConverter
     {
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)

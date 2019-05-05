@@ -136,24 +136,24 @@ namespace GMCC.Sorter.ViewModel
                         this.RealtimeStatus = "+" + code;
                         Current.MainMachine.Commor.Write("D433", (ushort)1);
 
-                        var t = new Thread(() =>
+                        //把电池条码保存进数据库
+                        var saveRet = new Business.BatteryManage().Create(new Model.Battery() { Code = code }, true);
+                        if (saveRet.IsOk)
                         {
-                            //把电池条码保存进数据库
-                            var saveRet = new Business.BatteryManage().Create(new Model.Battery() { Code = code }, true);
-                            if (saveRet.IsOk)
+                            Current.Option.BindBatteriesCount++;
+                            var t = new Thread(() =>
                             {
                                 //界面交替显示扫码状态
                                 Thread.Sleep(2000);
                                 this.RealtimeStatus = "等待扫码...";
-                                Current.Option.BindBatteriesCount++;
-                            }
-                            else
-                            {
-                                Running.StopRunAndShowMsg(saveRet.Msg);
-                            }
- 
-                        });
-                        t.Start();
+                            });
+                            t.Start();
+                        }
+                        else
+                        {
+                            Running.StopRunAndShowMsg(saveRet.Msg);
+                        }
+
                     }
                     else
                     {
