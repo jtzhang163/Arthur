@@ -36,6 +36,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
                 SetRowCol(storageUC);
             });
 
+            this.scaner_signal.Children.Add(new ScanerSignalControl());
+
             this.jaw.Children.Add(new JawControl());
 
             this.bind_mach.Children.Add(new BindMachControl());

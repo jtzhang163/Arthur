@@ -106,10 +106,10 @@ namespace GMCC.Sorter.ViewModel
             //绑盘位电池已满，不扫码，直到出现新托盘再扫
             if (Current.Option.BindBatteriesCount >= Common.TRAY_BATTERY_COUNT)
             {
-                return;
+                Current.Option.BindBatteriesCount = -2;
             }
 
-            if (Current.MainMachine.IsAlive && Current.Option.IsBatteryScanReady && !Current.Option.IsAlreadyBatteryScan && Current.Option.BindProcTrayId > 0)
+            if (Current.MainMachine.IsAlive && Current.Option.IsBatteryScanReady && !Current.Option.IsAlreadyBatteryScan && Current.Option.Tray11_Id > 0)
             {
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
@@ -134,25 +134,30 @@ namespace GMCC.Sorter.ViewModel
                     if (result)
                     {
                         this.RealtimeStatus = "+" + code;
+                        var save_res = Current.MainMachine.Commor.Write("D433", (ushort)1);
+
                         var t = new Thread(() =>
                         {
                             //把电池条码保存进数据库
                             var saveRet = new Business.BatteryManage().Create(new Model.Battery() { Code = code }, true);
-                            if (!saveRet.IsOk)
+                            if (saveRet.IsOk)
+                            {
+                                //界面交替显示扫码状态
+                                Thread.Sleep(2000);
+                                this.RealtimeStatus = "等待扫码...";
+                                Current.Option.BindBatteriesCount++;
+                            }
+                            else
                             {
                                 Running.StopRunAndShowMsg(saveRet.Msg);
-                                return;
                             }
-
-                            //界面交替显示扫码状态
-                            Thread.Sleep(this.CommInterval / 2);
-                            this.RealtimeStatus = "等待扫码...";
-                            Current.Option.BindBatteriesCount++;
+ 
                         });
                         t.Start();
                     }
                     else
                     {
+                        var save_res = Current.MainMachine.Commor.Write("D433", (ushort)2);
                         this.RealtimeStatus = "扫码失败！";
                     }
 
@@ -161,6 +166,7 @@ namespace GMCC.Sorter.ViewModel
                 }
                 else
                 {
+                    Current.MainMachine.Commor.Write("D433", (ushort)2);
                     this.RealtimeStatus = ret.Msg;
                     this.IsAlive = false;
                 }

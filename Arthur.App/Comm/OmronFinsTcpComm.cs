@@ -88,6 +88,28 @@ namespace Arthur.App.Comm
             }
         }
 
+        public Result ReadInt(Commor commor, string addr)
+        {
+            try
+            {
+                var omronFinsNet = (OmronFinsNet)commor.Connector;
+                OperateResult<int> result = omronFinsNet.ReadInt32(addr);
+
+                if (result.IsSuccess)
+                {
+                    return Result.OkHasData(result.Content);
+                }
+                else
+                {
+                    return new Result(string.Format("{0}:{1}", result.ErrorCode, result.Message));
+                }
+            }
+            catch (Exception ex)
+            {
+                return new Result(ex.Message);
+            }
+        }
+
         public Result Write(Commor commor, string addr, ushort value)
         {
             try
@@ -97,6 +119,7 @@ namespace Arthur.App.Comm
 
                 if (result.IsSuccess)
                 {
+                    LogHelper.WriteInfo(string.Format("成功往 {0} 的 {1} 位置 {2}", commor.Communicator.Name, addr, value));
                     return Result.OK;
                 }
                 else

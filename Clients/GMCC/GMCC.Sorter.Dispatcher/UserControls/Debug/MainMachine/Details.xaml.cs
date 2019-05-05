@@ -53,7 +53,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Debug.MainMachine
                     var result = Current.MainMachine.Commor.Read(this.read_addr.Text.Trim());
                     if (result.IsOk)
                     {
-                        this.read_value.Text = result.Data.ToString();
+                        this.read_value.Text = ((ushort[])result.Data)[0].ToString();
                     }
                     else
                     {
@@ -74,7 +74,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Debug.MainMachine
                 return;
             }
 
-            if (ushort.TryParse(this.write_value.Text.ToString(), out ushort val))
+            if (!ushort.TryParse(this.write_value.Text.ToString(), out ushort val))
             {
                 this.tip.Content = "输入数值有误！";
                 this.tip.Visibility = Visibility.Visible;

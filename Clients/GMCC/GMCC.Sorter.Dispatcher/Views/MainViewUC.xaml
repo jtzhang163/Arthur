@@ -25,7 +25,7 @@
         <utils:ErrorMsgToVisibilityConverter x:Key="errorMsgToVisibilityConverter"/>
 
         <DataTemplate x:Key="commTemplate" DataType="{x:Type vm:CommorViewModel}">
-            <Border Margin="5,5,0,5" Width="145" Background="{Binding IsAlive, Converter={StaticResource machineIsAliveToBackgroundConverter}}">
+            <Border Margin="5,5,0,5" Width="145" Background="{Binding IsAlive, Converter={StaticResource machineIsAliveToBackgroundConverter}}" Opacity="0.9">
                 <StackPanel Margin="5">
                     <StackPanel Orientation="Horizontal">
                         <CheckBox IsChecked="{Binding IsEnabled}" Margin="0,5,0,5" IsEnabled="{Binding SelectedEnabled}"/>
@@ -41,7 +41,7 @@
     <Grid>
         <DockPanel Margin="10,0,0,0">
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
-                <Grid Height="80">
+                <Grid Height="80" Margin="0,10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="7*"/>
@@ -76,7 +76,7 @@
 
             <DockPanel DockPanel.Dock="Left" Margin="0,5,0,10">
                 <Label Content="通信设备选择 / 设备状态：" Height="30" DockPanel.Dock="Top" VerticalAlignment="Center" FontSize="14"/>
-                <ListBox x:Name="commorList" Width="170" ItemsSource="{Binding}" ItemTemplate="{StaticResource commTemplate}" Padding="0,5,0,5">
+                <ListBox x:Name="commorList" Width="170" ItemsSource="{Binding}" ItemTemplate="{StaticResource commTemplate}" Padding="0,5,0,5" Background="Transparent">
                 </ListBox>
             </DockPanel>
             <Grid x:Name="grid" Margin="5,10,0,0">

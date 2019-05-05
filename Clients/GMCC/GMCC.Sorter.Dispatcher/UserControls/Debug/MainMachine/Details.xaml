@@ -42,8 +42,8 @@
                     <Label Content="地址：" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_title}"></Label>
                     <Label Content="地址：" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_title}"></Label>
 
-                    <TextBox x:Name="read_addr" Grid.Row="0" Grid.Column="2" Style="{StaticResource property_TextBox}" Text="D100"/>
-                    <TextBox x:Name="write_addr" Grid.Row="1" Grid.Column="2" Style="{StaticResource property_TextBox}" Text="D100"/>
+                    <TextBox x:Name="read_addr" Grid.Row="0" Grid.Column="2" Style="{StaticResource property_TextBox}" Text="D1000"/>
+                    <TextBox x:Name="write_addr" Grid.Row="1" Grid.Column="2" Style="{StaticResource property_TextBox}" Text="D1000"/>
 
                     <Button Content="读取" Grid.Row="0" Grid.Column="3" Style="{StaticResource ChamferButton}" Click="Read_Click"></Button>
                     <Button Content="写入" Grid.Row="1" Grid.Column="5" Style="{StaticResource ChamferButton}" Click="Write_Click"></Button>

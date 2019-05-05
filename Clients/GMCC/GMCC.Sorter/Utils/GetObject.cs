@@ -26,14 +26,52 @@ namespace GMCC.Sorter.Utils
                 }
                 else
                 {
-                    obj = Context.ProcTrays.SingleOrDefault(o => o.Id == id) ?? new ProcTray();
-                    AppCache.ProcTrays.Add(obj as ProcTray);
+                    obj = Context.ProcTrays.SingleOrDefault(o => o.Id == id);
+                    if (obj == null)
+                    {
+                        obj = new ProcTray();
+                    }
+                    else
+                    {
+                        AppCache.ProcTrays.Add(obj as ProcTray);
+                    }
                 }
 
             }
             else if (typeof(T).Name == "StorageViewModel")
             {
                 obj = Current.Storages.SingleOrDefault(o => o.Id == id);
+            }
+            return (T)obj;
+        }
+
+
+        public static T GetByCode<T>(string code)
+        {
+            var obj = new object();
+            if (typeof(T).Name == "Battery")
+            {
+                obj = Context.Batteries.SingleOrDefault(o => o.Code == code) ?? new Battery();
+            }
+            else if (typeof(T).Name == "ProcTray")
+            {
+                if (AppCache.ProcTrays.Count(o => o.Code == code) > 0)
+                {
+                    obj = AppCache.ProcTrays.Where(o => o.Code == code).OrderByDescending(o => o.ScanTime).FirstOrDefault();
+                }
+                else
+                {
+                    obj = Context.ProcTrays.Where(o => o.Code == code).OrderByDescending(o => o.ScanTime).FirstOrDefault();
+                    if (obj == null)
+                    {
+                        obj = new ProcTray();
+                    }
+                    else
+                    {
+                        AppCache.ProcTrays.Add(obj as ProcTray);
+                    }
+                }
+
             }
             return (T)obj;
         }

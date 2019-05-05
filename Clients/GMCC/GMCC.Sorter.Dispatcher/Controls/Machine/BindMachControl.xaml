@@ -6,10 +6,8 @@
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.Controls.Machine"
              xmlns:base_utils="clr-namespace:Arthur.View.Utils;assembly=Arthur.View"
              xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
-             mc:Ignorable="d" Width="100"
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <utils:SignalToSingalColorConverter x:Key="signalToSingalColorConverter"/>
         <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
         <utils:ProcTrayIdToVisibilityConverter x:Key="procTrayIdToVisibilityConverter"/>
     </UserControl.Resources>
@@ -17,30 +15,21 @@
     <Border BorderThickness="1" BorderBrush="Black">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="12*"/>
-                
-                <RowDefinition Height="3*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="12*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.ColumnSpan="2" Content="充电模组" FontSize="14" HorizontalContentAlignment="Center" Margin="0" Padding="0" VerticalAlignment="Center" FontWeight="Bold"/>
-            <Label Grid.Row="1" Content="充电完可静置" FontSize="10" HorizontalContentAlignment="Center" Margin="0" Padding="0" VerticalAlignment="Center"/>
-            <Ellipse Grid.Row="1" Grid.Column="1" Fill="{Binding IsChargeGetReady,Converter={StaticResource signalToSingalColorConverter}}" Width="12" Height="12" />
-            <Border Grid.Row="2" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black" Margin="5">
+            <Label Grid.Row="0" Content="上料位(13)" FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Border Grid.Row="1" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
-                    <Label DockPanel.Dock="Bottom" Content="{Binding ChargeProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0"
-                         Tag="{Binding ChargeProcTrayId}"  MouseDoubleClick="Label_MouseDoubleClick"/>
-                    <Grid Visibility="{Binding ChargeProcTrayId,Converter={StaticResource procTrayIdToVisibilityConverter}}" Margin="15,5,15,0" Height="90" Background="LightGreen"
+                    <Label DockPanel.Dock="Bottom" Content="{Binding Tray13_Id, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" Height="22" Cursor="Hand"
+                          HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Tag="{Binding Tray13_Id}"  MouseDoubleClick="Label_MouseDoubleClick"/>
+                    <Grid Visibility="{Binding Tray13_Id,Converter={StaticResource procTrayIdToVisibilityConverter}}" Margin="15,10,15,0" Background="LightGreen"
                           base_utils:GridHelper.ShowBorder="True" base_utils:GridHelper.GridLineThickness="0.3" base_utils:GridHelper.GridLineBrush="Black">
-                        <!--local:GridHelper.ShowBorder="True" local:GridHelper.GridLineThickness="0.3" local:GridHelper.GridLineBrush="Black"-->
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -61,17 +50,39 @@
                 </DockPanel>
             </Border>
 
-            <Label Grid.Row="3" Grid.ColumnSpan="2" Content="绑盘模组" FontSize="14" HorizontalContentAlignment="Center" Margin="0" Padding="0" VerticalAlignment="Center" FontWeight="Bold"/>
-            <Label Grid.Row="4" Content="托盘扫码就绪" FontSize="10" HorizontalContentAlignment="Center" Margin="0" Padding="0" VerticalAlignment="Center"/>
-            <Ellipse Grid.Row="4" Grid.Column="1" Fill="{Binding IsBindTrayScanReady,Converter={StaticResource signalToSingalColorConverter}}" Width="12" Height="12" />
-            <Label Grid.Row="5" Content="电池扫码就绪" FontSize="10" HorizontalContentAlignment="Center" Margin="0" Padding="0" VerticalAlignment="Center"/>
-            <Ellipse Grid.Row="5" Grid.Column="1" Fill="{Binding IsBatteryScanReady,Converter={StaticResource signalToSingalColorConverter}}"  Width="12" Height="12" />
-            <Border Grid.Row="6" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="Black" Margin="5">
+            <Label Grid.Row="2" Content="充电位(12)" FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Border Grid.Row="3" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
-                    <Label DockPanel.Dock="Bottom" Content="{Binding BindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" HorizontalContentAlignment="Center" Margin="0" Padding="0"
-                          Tag="{Binding BindProcTrayId}" MouseDoubleClick="Label_MouseDoubleClick"/>
-                    <Grid x:Name="grid" Visibility="{Binding BindProcTrayId,Converter={StaticResource procTrayIdToVisibilityConverter}}" Margin="15,5,15,0" Height="90">
-                        <!--local:GridHelper.ShowBorder="True" local:GridHelper.GridLineThickness="0.3" local:GridHelper.GridLineBrush="Black"-->
+                    <Label DockPanel.Dock="Bottom" Content="{Binding Tray12_Id, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" Height="22" Cursor="Hand"
+                         VerticalAlignment="Center" HorizontalContentAlignment="Center" Tag="{Binding Tray12_Id}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                    <Grid Visibility="{Binding Tray12_Id,Converter={StaticResource procTrayIdToVisibilityConverter}}"  Margin="15,10,15,0" Background="LightGreen"
+                          base_utils:GridHelper.ShowBorder="True" base_utils:GridHelper.GridLineThickness="0.3" base_utils:GridHelper.GridLineBrush="Black">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </DockPanel>
+            </Border>
+
+            <Label Grid.Row="4" Content="绑盘位(11)" FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Border Grid.Row="5" BorderThickness="1" BorderBrush="Black" Margin="5">
+                <DockPanel>
+                    <Label DockPanel.Dock="Bottom" Content="{Binding Tray11_Id, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" Height="22" Cursor="Hand"
+                         VerticalAlignment="Center" HorizontalContentAlignment="Center" Tag="{Binding Tray11_Id}" MouseDoubleClick="Label_MouseDoubleClick"/>
+                    <Grid x:Name="grid" Visibility="{Binding Tray11_Id,Converter={StaticResource procTrayIdToVisibilityConverter}}"  Margin="15,10,15,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>

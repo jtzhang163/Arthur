@@ -60,7 +60,6 @@
     <Compile Include="Data\AppContext.cs" />
     <Compile Include="Data\Context.cs" />
     <Compile Include="Extensions\ModelExtension.cs" />
-    <Compile Include="Extensions\ViewModelExtension.cs" />
     <Compile Include="Factory\CommorHelper.cs" />
     <Compile Include="Factory\TaskHelper.cs" />
     <Compile Include="Model\BatteryScaner.cs" />

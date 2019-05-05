@@ -1,4 +1,7 @@
-﻿using GMCC.Sorter.Extensions;
+﻿using Arthur.App;
+using GMCC.Sorter.Extensions;
+using GMCC.Sorter.Model;
+using GMCC.Sorter.Utils;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -11,7 +14,7 @@ namespace GMCC.Sorter
     /// <summary>
     /// 通用配置，一些杂项配置放置在此处
     /// </summary>
-    public class AppOption : Arthur.App.AppOption
+    public class AppOption : BindableObject
     {
 
         public string Name = "配置";
@@ -130,35 +133,6 @@ namespace GMCC.Sorter
             }
         }
 
-        private int unbindProcTrayId = -2;
-        /// <summary>
-        /// 解盘位流程托盘Id
-        /// </summary>
-        public int UnbindProcTrayId
-        {
-            get
-            {
-                if (unbindProcTrayId == -2)
-                {
-                    unbindProcTrayId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("UnbindProcTrayId"), -1);
-                    if (unbindProcTrayId == -1)
-                    {
-                        unbindProcTrayId = 0;
-                        Arthur.Business.Application.SetOption("UnbindProcTrayId", unbindProcTrayId.ToString(), "解盘位流程托盘Id");
-                    }
-                }
-                return unbindProcTrayId;
-            }
-            set
-            {
-                if (unbindProcTrayId != value)
-                {
-                    Arthur.Business.Application.SetOption("UnbindProcTrayId", value.ToString());
-                    SetProperty(ref unbindProcTrayId, value);
-                }
-            }
-        }
-
 
         private int jawProcTrayId = -2;
         /// <summary>
@@ -198,9 +172,9 @@ namespace GMCC.Sorter
         {
             get
             {
-                if (bindBatteriesCount == -2)
+                if (bindBatteriesCount < 0)
                 {
-                    bindBatteriesCount = Current.Option.GetBindProcTray().GetBatteries().Count;
+                    bindBatteriesCount = GetObject.GetById<ProcTray>(Current.Option.Tray11_Id).GetBatteries().Count;
                 }
                 return bindBatteriesCount;
             }
@@ -212,98 +186,6 @@ namespace GMCC.Sorter
                 }
             }
         }
-
-
-
-        private int bindProcTrayId = -2;
-        /// <summary>
-        /// 绑盘位流程托盘Id
-        /// </summary>
-        public int BindProcTrayId
-        {
-            get
-            {
-                if (bindProcTrayId == -2)
-                {
-                    bindProcTrayId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("BindProcTrayId"), -1);
-                    if (bindProcTrayId == -1)
-                    {
-                        bindProcTrayId = 0;
-                        Arthur.Business.Application.SetOption("BindProcTrayId", bindProcTrayId.ToString(), "绑盘位流程托盘Id");
-                    }
-                }
-                return bindProcTrayId;
-            }
-            set
-            {
-                if (bindProcTrayId != value)
-                {
-                    Arthur.Business.Application.SetOption("BindProcTrayId", value.ToString());
-                    SetProperty(ref bindProcTrayId, value);
-                }
-            }
-        }
-
-
-        private int chargeProcTrayId = -2;
-        /// <summary>
-        /// 充电位流程托盘Id
-        /// </summary>
-        public int ChargeProcTrayId
-        {
-            get
-            {
-                if (chargeProcTrayId == -2)
-                {
-                    chargeProcTrayId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("ChargeProcTrayId"), -1);
-                    if (chargeProcTrayId == -1)
-                    {
-                        chargeProcTrayId = 0;
-                        Arthur.Business.Application.SetOption("ChargeProcTrayId", bindProcTrayId.ToString(), "充电位流程托盘Id");
-                    }
-                }
-                return chargeProcTrayId;
-            }
-            set
-            {
-                if (chargeProcTrayId != value)
-                {
-                    Arthur.Business.Application.SetOption("ChargeProcTrayId", value.ToString());
-                    SetProperty(ref chargeProcTrayId, value);
-                }
-            }
-        }
-
-
-        private int dischargeProcTrayId = -2;
-        /// <summary>
-        /// 放电位流程托盘Id
-        /// </summary>
-        public int DischargeProcTrayId
-        {
-            get
-            {
-                if (dischargeProcTrayId == -2)
-                {
-                    dischargeProcTrayId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("DischargeProcTrayId"), -1);
-                    if (dischargeProcTrayId == -1)
-                    {
-                        dischargeProcTrayId = 0;
-                        Arthur.Business.Application.SetOption("DischargeProcTrayId", dischargeProcTrayId.ToString(), "放电位流程托盘Id");
-                    }
-                }
-                return dischargeProcTrayId;
-            }
-            set
-            {
-                if (dischargeProcTrayId != value)
-                {
-                    Arthur.Business.Application.SetOption("DischargeProcTrayId", value.ToString());
-                    SetProperty(ref dischargeProcTrayId, value);
-                }
-            }
-        }
-
 
         public JawMoveInfo JawMoveInfo = new JawMoveInfo();
 
@@ -368,6 +250,536 @@ namespace GMCC.Sorter
             }
         }
 
+
+        /// <summary>
+        /// 横移上下料完成
+        /// </summary>
+        public bool IsTaskFinished { get; set; }
+
+
+        #region 工位有托盘信号
+
+        private bool? isHasTray11;
+        /// <summary>
+        /// 绑盘位有托盘
+        /// </summary>
+        public bool IsHasTray11
+        {
+            get => isHasTray11.Value;
+            set
+            {
+                if (!value)
+                {
+                    this.Tray11_PreId = this.Tray11_Id;
+                    this.Tray11_Id = 0;
+                }
+
+                //if (value != isHasTray11 && isHasTray11 != null)
+                //{
+                //    if (!value)
+                //    {
+                //        this.Tray11_PreId = this.Tray11_Id;
+                //        this.Tray11_Id = 0;
+                //    }
+                //}
+
+                SetProperty(ref isHasTray11, value);
+            }
+        }
+
+        private bool? isHasTray12;
+        /// <summary>
+        /// 充电位有托盘
+        /// </summary>
+        public bool IsHasTray12
+        {
+            get => isHasTray12.Value;
+            set
+            {
+                if (!value)
+                {
+                    this.Tray12_PreId = this.Tray12_Id;
+                    this.Tray12_Id = 0;
+                }
+                if (value != isHasTray12 && isHasTray12 != null)
+                {
+                    if (value)
+                    {
+                        this.Tray12_Id = this.Tray11_PreId > 0 ? this.Tray11_PreId : this.Tray11_Id;
+                    }
+                }
+                SetProperty(ref isHasTray12, value);
+            }
+        }
+
+        private bool? isHasTray13;
+        /// <summary>
+        /// 上料位有托盘
+        /// </summary>
+        public bool IsHasTray13
+        {
+            get => isHasTray13.Value;
+            set
+            {
+                if (!value)
+                {
+                    this.Tray13_PreId = this.Tray13_Id;
+                    this.Tray13_Id = 0;
+                }
+                if (value != isHasTray13 && isHasTray13 != null)
+                {
+                    if (value)
+                    {
+                        this.Tray13_Id = this.Tray12_PreId > 0 ? this.Tray12_PreId : this.Tray12_Id;
+                    }
+                }
+                SetProperty(ref isHasTray13, value);
+            }
+        }
+
+
+        private bool? isHasTray21;
+        /// <summary>
+        /// 下料位有托盘
+        /// </summary>
+        public bool IsHasTray21
+        {
+            get => isHasTray21.Value;
+            set
+            {
+                if (!value)
+                {
+                    this.Tray21_PreId = this.Tray21_Id;
+                    this.Tray21_Id = 0;
+                }
+                if (value != isHasTray21 && isHasTray21 != null)
+                {
+
+                }
+                SetProperty(ref isHasTray21, value);
+            }
+        }
+
+        private bool? isHasTray22;
+        /// <summary>
+        /// 放电位有托盘
+        /// </summary>
+        public bool IsHasTray22
+        {
+            get => isHasTray22.Value;
+            set
+            {
+                if (!value)
+                {
+                    this.Tray22_PreId = this.Tray22_Id;
+                    this.Tray22_Id = 0;
+                }
+                if (value != isHasTray22 && isHasTray22 != null)
+                {
+                    if (value)
+                    {
+                        this.Tray22_Id = this.Tray21_PreId > 0 ? this.Tray21_PreId : this.Tray21_Id;
+                    }
+                }
+                SetProperty(ref isHasTray22, value);
+            }
+        }
+
+
+        private bool? isHasTray23;
+        /// <summary>
+        /// 返盘位有托盘
+        /// </summary>
+        public bool IsHasTray23
+        {
+            get => isHasTray23.Value;
+            set
+            {
+                if (!value)
+                {
+                    this.Tray23_PreId = this.Tray23_Id;
+                    this.Tray23_Id = 0;
+                }
+                if (value != isHasTray23 && isHasTray23 != null)
+                {
+                    if (value)
+                    {
+                        this.Tray23_Id = this.Tray22_PreId > 0 ? this.Tray22_PreId : this.Tray22_Id;
+                    }
+                }
+                SetProperty(ref isHasTray23, value);
+            }
+        }
+
+
+        #endregion
+
+        #region 工位流程托盘ID
+
+        private int tray11_Id = -2;
+        /// <summary>
+        /// 绑盘位流程托盘Id
+        /// </summary>
+        public int Tray11_Id
+        {
+            get
+            {
+                if (tray11_Id == -2)
+                {
+                    tray11_Id = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray11_Id"), -1);
+                    if (tray11_Id == -1)
+                    {
+                        tray11_Id = 0;
+                        Arthur.Business.Application.SetOption("Tray11_Id", tray11_Id.ToString(), "绑盘位流程托盘Id");
+                    }
+                }
+                return tray11_Id;
+            }
+            set
+            {
+                if (tray11_Id != value)
+                {
+                    Arthur.Business.Application.SetOption("Tray11_Id", value.ToString());
+                    SetProperty(ref tray11_Id, value);
+                }
+            }
+        }
+
+
+        private int tray12_Id = -2;
+        /// <summary>
+        /// 充电位流程托盘Id
+        /// </summary>
+        public int Tray12_Id
+        {
+            get
+            {
+                if (tray12_Id == -2)
+                {
+                    tray12_Id = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray12_Id"), -1);
+                    if (tray12_Id == -1)
+                    {
+                        tray12_Id = 0;
+                        Arthur.Business.Application.SetOption("Tray12_Id", tray12_Id.ToString(), "充电位流程托盘Id");
+                    }
+                }
+                return tray12_Id;
+            }
+            set
+            {
+                if (tray12_Id != value)
+                {
+                    Arthur.Business.Application.SetOption("Tray12_Id", value.ToString());
+                    SetProperty(ref tray12_Id, value);
+                }
+            }
+        }
+
+
+        private int tray13_Id = -2;
+        /// <summary>
+        /// 上料位流程托盘Id
+        /// </summary>
+        public int Tray13_Id
+        {
+            get
+            {
+                if (tray13_Id == -2)
+                {
+                    tray13_Id = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray13_Id"), -1);
+                    if (tray13_Id == -1)
+                    {
+                        tray13_Id = 0;
+                        Arthur.Business.Application.SetOption("Tray13_Id", tray13_Id.ToString(), "上料位流程托盘Id");
+                    }
+                }
+                return tray13_Id;
+            }
+            set
+            {
+                if (tray13_Id != value)
+                {
+                    Arthur.Business.Application.SetOption("Tray13_Id", value.ToString());
+                    SetProperty(ref tray13_Id, value);
+                }
+            }
+        }
+
+
+        private int tray21_Id = -2;
+        /// <summary>
+        /// 下料位流程托盘Id
+        /// </summary>
+        public int Tray21_Id
+        {
+            get
+            {
+                if (tray21_Id == -2)
+                {
+                    tray21_Id = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray21_Id"), -1);
+                    if (tray21_Id == -1)
+                    {
+                        tray21_Id = 0;
+                        Arthur.Business.Application.SetOption("Tray21_Id", tray21_Id.ToString(), "下料位流程托盘Id");
+                    }
+                }
+                return tray21_Id;
+            }
+            set
+            {
+                if (tray21_Id != value)
+                {
+                    Arthur.Business.Application.SetOption("Tray21_Id", value.ToString());
+                    SetProperty(ref tray21_Id, value);
+                }
+            }
+        }
+
+        private int tray22_Id = -2;
+        /// <summary>
+        /// 放电位流程托盘Id
+        /// </summary>
+        public int Tray22_Id
+        {
+            get
+            {
+                if (tray22_Id == -2)
+                {
+                    tray22_Id = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray22_Id"), -1);
+                    if (tray22_Id == -1)
+                    {
+                        tray22_Id = 0;
+                        Arthur.Business.Application.SetOption("Tray22_Id", tray22_Id.ToString(), "放电位流程托盘Id");
+                    }
+                }
+                return tray22_Id;
+            }
+            set
+            {
+                if (tray22_Id != value)
+                {
+                    Arthur.Business.Application.SetOption("Tray22_Id", value.ToString());
+                    SetProperty(ref tray22_Id, value);
+                }
+            }
+        }
+
+
+        private int tray23_Id = -2;
+        /// <summary>
+        /// 返盘位流程托盘Id
+        /// </summary>
+        public int Tray23_Id
+        {
+            get
+            {
+                if (tray23_Id == -2)
+                {
+                    tray23_Id = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray23_Id"), -1);
+                    if (tray23_Id == -1)
+                    {
+                        tray23_Id = 0;
+                        Arthur.Business.Application.SetOption("Tray23_Id", tray23_Id.ToString(), "返盘位流程托盘Id");
+                    }
+                }
+                return tray23_Id;
+            }
+            set
+            {
+                if (tray23_Id != value)
+                {
+                    Arthur.Business.Application.SetOption("Tray23_Id", value.ToString());
+                    SetProperty(ref tray23_Id, value);
+                }
+            }
+        }
+
+        #endregion
+
+        #region 工位流程托盘原ID
+
+        private int tray11_PreId = -2;
+        /// <summary>
+        /// 绑盘位流程托盘原ID
+        /// </summary>
+        public int Tray11_PreId
+        {
+            get
+            {
+                if (tray11_PreId == -2)
+                {
+                    tray11_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray11_PreId"), -1);
+                    if (tray11_PreId == -1)
+                    {
+                        tray11_PreId = 0;
+                        Arthur.Business.Application.SetOption("Tray11_PreId", tray11_PreId.ToString(), "绑盘位流程托盘原ID");
+                    }
+                }
+                return tray11_PreId;
+            }
+            set
+            {
+                if (tray11_PreId != value)
+                {
+                    Arthur.Business.Application.SetOption("Tray11_PreId", value.ToString());
+                    SetProperty(ref tray11_PreId, value);
+                }
+            }
+        }
+
+
+        private int tray12_PreId = -2;
+        /// <summary>
+        /// 充电位流程托盘原ID
+        /// </summary>
+        public int Tray12_PreId
+        {
+            get
+            {
+                if (tray12_PreId == -2)
+                {
+                    tray12_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray12_PreId"), -1);
+                    if (tray12_PreId == -1)
+                    {
+                        tray12_PreId = 0;
+                        Arthur.Business.Application.SetOption("Tray12_PreId", tray12_PreId.ToString(), "充电位流程托盘原ID");
+                    }
+                }
+                return tray12_PreId;
+            }
+            set
+            {
+                if (tray12_PreId != value)
+                {
+                    Arthur.Business.Application.SetOption("Tray12_PreId", value.ToString());
+                    SetProperty(ref tray12_PreId, value);
+                }
+            }
+        }
+
+
+        private int tray13_PreId = -2;
+        /// <summary>
+        /// 上料位流程托盘原ID
+        /// </summary>
+        public int Tray13_PreId
+        {
+            get
+            {
+                if (tray13_PreId == -2)
+                {
+                    tray13_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray13_PreId"), -1);
+                    if (tray13_PreId == -1)
+                    {
+                        tray13_PreId = 0;
+                        Arthur.Business.Application.SetOption("Tray13_PreId", tray13_PreId.ToString(), "上料位流程托盘原ID");
+                    }
+                }
+                return tray13_PreId;
+            }
+            set
+            {
+                if (tray13_PreId != value)
+                {
+                    Arthur.Business.Application.SetOption("Tray13_PreId", value.ToString());
+                    SetProperty(ref tray13_PreId, value);
+                }
+            }
+        }
+
+
+        private int tray21_PreId = -2;
+        /// <summary>
+        /// 下料位流程托盘原ID
+        /// </summary>
+        public int Tray21_PreId
+        {
+            get
+            {
+                if (tray21_PreId == -2)
+                {
+                    tray21_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray21_PreId"), -1);
+                    if (tray21_PreId == -1)
+                    {
+                        tray21_PreId = 0;
+                        Arthur.Business.Application.SetOption("Tray21_PreId", tray21_PreId.ToString(), "下料位流程托盘原ID");
+                    }
+                }
+                return tray21_PreId;
+            }
+            set
+            {
+                if (tray21_PreId != value)
+                {
+                    Arthur.Business.Application.SetOption("Tray21_PreId", value.ToString());
+                    SetProperty(ref tray21_PreId, value);
+                }
+            }
+        }
+
+        private int tray22_PreId = -2;
+        /// <summary>
+        /// 放电位流程托盘原ID
+        /// </summary>
+        public int Tray22_PreId
+        {
+            get
+            {
+                if (tray22_PreId == -2)
+                {
+                    tray22_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray22_PreId"), -1);
+                    if (tray22_PreId == -1)
+                    {
+                        tray22_PreId = 0;
+                        Arthur.Business.Application.SetOption("Tray22_PreId", tray22_PreId.ToString(), "放电位流程托盘原ID");
+                    }
+                }
+                return tray22_PreId;
+            }
+            set
+            {
+                if (tray22_PreId != value)
+                {
+                    Arthur.Business.Application.SetOption("Tray22_PreId", value.ToString());
+                    SetProperty(ref tray22_PreId, value);
+                }
+            }
+        }
+
+
+        private int tray23_PreId = -2;
+        /// <summary>
+        /// 返盘位流程托盘原ID
+        /// </summary>
+        public int Tray23_PreId
+        {
+            get
+            {
+                if (tray23_PreId == -2)
+                {
+                    tray23_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray23_PreId"), -1);
+                    if (tray23_PreId == -1)
+                    {
+                        tray23_PreId = 0;
+                        Arthur.Business.Application.SetOption("Tray23_PreId", tray23_PreId.ToString(), "返盘位流程托盘原ID");
+                    }
+                }
+                return tray23_PreId;
+            }
+            set
+            {
+                if (tray23_PreId != value)
+                {
+                    Arthur.Business.Application.SetOption("Tray23_PreId", value.ToString());
+                    SetProperty(ref tray23_PreId, value);
+                }
+            }
+        }
+
+        #endregion
+
+        #region 扫码就绪信号
+
         private bool isBatteryScanReady;
         /// <summary>
         /// 电池扫码准备就绪
@@ -421,82 +833,10 @@ namespace GMCC.Sorter
                 }
                 SetProperty(ref isUnbindTrayScanReady, value);
             }
-
         }
-
-
-
-
-        private bool isChargeGetReady;
-        /// <summary>
-        /// 充电模组可取托盘
-        /// </summary>
-        public bool IsChargeGetReady
-        {
-            get => isChargeGetReady;
-            set
-            {
-                SetProperty(ref isChargeGetReady, value);
-            }
-        }
-
-
-        private bool isDischargePutReady;
-        /// <summary>
-        /// 放电模组可放托盘
-        /// </summary>
-        public bool IsDischargePutReady
-        {
-            get => isDischargePutReady;
-            set
-            {
-                SetProperty(ref isDischargePutReady, value);
-            }
-        }
-
-
-        private bool isHasChargeTray;
-        /// <summary>
-        /// 充电位有托盘
-        /// </summary>
-        public bool IsHasChargeTray
-        {
-            get => isHasChargeTray;
-            set
-            {
-                if (!isHasChargeTray && value && Current.Option.BindBatteriesCount == Common.TRAY_BATTERY_COUNT)
-                {
-                    Current.Option.ChargeProcTrayId = Current.Option.BindProcTrayId;
-                    Current.Option.BindProcTrayId = 0;
-                }
-                SetProperty(ref isHasChargeTray, value);
-            }
-        }
-
-        private bool isHasDisChargeTray;
-        /// <summary>
-        /// 放电位有托盘
-        /// </summary>
-        public bool IsHasDisChargeTray
-        {
-            get => isHasDisChargeTray;
-            set
-            {
-                SetProperty(ref isHasDisChargeTray, value);
-            }
-        }
-
 
         public bool isAlreadyUnbindTrayScan { get; set; }
+        #endregion
 
-        /// <summary>
-        /// 横移上料完成
-        /// </summary>
-        public bool IsFeedingFinished { get; set; }
-
-        /// <summary>
-        /// 横移下料完成
-        /// </summary>
-        public bool IsBlankingFinished { get; set; }
     }
 }

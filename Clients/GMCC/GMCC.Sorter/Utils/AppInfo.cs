@@ -13,7 +13,7 @@ namespace GMCC.Sorter.Utils
         {
             get
             {
-                return string.Format("{0} {1}   {2}", Current.Option.AppName, VersionInfo, UpdateTime.ToString("yyyy/M/d"));
+                return string.Format("{0} {1}   {2}", Arthur.App.Current.Option.AppName, VersionInfo, UpdateTime.ToString("yyyy/M/d"));
             }
         }
 

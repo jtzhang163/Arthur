@@ -10,11 +10,10 @@
     <UserControl.Resources>
         <utils:StorageStatusToBackConverter x:Key="storageStatusToBackConverter"/>
         <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
-        <ContextMenu x:Key="manu_get_put" Background="#FF2B579A">
-            <MenuItem Header="手动【上料】" Foreground="White" Click="MenuItem_Click"/>
-            <MenuItem Header="手动【下料】" Foreground="White" Click="MenuItem_Click"/>
-            <Separator />
-            <MenuItem Header="Menu item 3" />
+        <ContextMenu x:Key="manu_get_put">
+            <MenuItem Header="手动【上料】" Click="MenuItem_Click"/>
+            <MenuItem Header="手动【下料】" Click="MenuItem_Click"/>
+            <!--<Separator />-->
         </ContextMenu>
     </UserControl.Resources>
     <Border BorderThickness="0.7" BorderBrush="Black" Margin="2">

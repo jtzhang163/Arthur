@@ -99,6 +99,9 @@
     <Compile Include="Controls\CurrentTaskControl.xaml.cs">
       <DependentUpon>CurrentTaskControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ScanerSignalControl.xaml.cs">
+      <DependentUpon>ScanerSignalControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TrayBatteryControl.xaml.cs">
       <DependentUpon>TrayBatteryControl.xaml</DependentUpon>
     </Compile>
@@ -289,6 +292,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\CurrentTaskControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ScanerSignalControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

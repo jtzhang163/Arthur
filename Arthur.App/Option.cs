@@ -106,7 +106,7 @@ namespace Arthur.App
                     dataGridPageSize = _Convert.StrToInt(Business.Application.GetOption("DataGridPageSize"), -1);
                     if (dataGridPageSize < 0)
                     {
-                        dataGridPageSize = 15;
+                        dataGridPageSize = 100;
                         Business.Application.SetOption("DataGridPageSize", dataGridPageSize.ToString(), "数据表每页的数据个数");
                     }
                 }

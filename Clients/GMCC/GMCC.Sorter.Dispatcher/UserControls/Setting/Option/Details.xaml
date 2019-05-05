@@ -30,20 +30,33 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
                         <ColumnDefinition Width="300"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Content="绑盘位条码：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding BindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="横移托盘条码：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding JawProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="解盘位条码：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding UnbindProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="静置时长(min)：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding StillTimeSpan}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="绑盘位(11)条码：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Tray11_Id, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="充电位(12)条码：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Tray12_Id, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="上料位(13)条码：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Tray13_Id, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="下料位(21)条码：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Tray21_Id, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="放电位(22)条码：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Tray22_Id, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="返盘位(23)条码：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Tray23_Id, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
+
+                    <Label Content="横移托盘条码：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding JawProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="静置时长(min)：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding StillTimeSpan}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

@@ -13,13 +13,15 @@ namespace GMCC.Sorter
     /// </summary>
     public class JawMoveInfo
     {
+
+        public TaskType Type { get; set; }
         public int Row { get; set; }
         public int Col { get; set; }
         public int Floor { get; set; }
 
         public static JawMoveInfo Create(TaskType type, StorageViewModel storage)
         {
-            return new JawMoveInfo() { Floor = storage.Floor, Row = storage.Column / 10 + 1, Col = (storage.Column - 1) % 9 + 1 };
+            return new JawMoveInfo() { Floor = storage.Floor, Row = storage.Column / 10 + 1, Col = (storage.Column - 1) % 9 + 1, Type = type };
         }
 
         public override bool Equals(object obj)

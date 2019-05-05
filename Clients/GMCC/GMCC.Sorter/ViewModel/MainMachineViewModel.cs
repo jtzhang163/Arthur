@@ -69,9 +69,18 @@ namespace GMCC.Sorter.ViewModel
 
         public void SendCommand(JawMoveInfo toMoveInfo)
         {
+            this.Commor.Write("D450",(ushort)toMoveInfo.Col);
+            this.Commor.Write("D451", (ushort)toMoveInfo.Row);
+            this.Commor.Write("D452", (ushort)toMoveInfo.Floor);
 
-           // this.Commor.Comm("SET_Move_Info");
-
+            if (toMoveInfo.Type == TaskType.上料)
+            {
+                this.Commor.Write("D400", (ushort)1);
+            }
+            else
+            {
+                this.Commor.Write("D400", (ushort)2);
+            }
         }
 
 
@@ -93,9 +102,50 @@ namespace GMCC.Sorter.ViewModel
 
                 var recv = (ushort[])ret.Data;
 
-                Current.Option.JawMoveInfo.Row = Convert.ToInt32(recv[50]);
-                Current.Option.JawMoveInfo.Col = Convert.ToInt32(recv[51]);
+                Current.Option.JawMoveInfo.Col = Convert.ToInt32(recv[50]);
+                Current.Option.JawMoveInfo.Row = Convert.ToInt32(recv[51]);
                 Current.Option.JawMoveInfo.Floor = Convert.ToInt32(recv[52]);
+                Current.Option.IsTaskFinished = recv[36] == (ushort)1;
+
+                this.IsAlive = true;
+            }
+            else
+            {
+                this.RealtimeStatus = ret.Msg;
+                this.IsAlive = false;
+            }
+
+            var ret2 = this.Commor.Read("W400", (ushort)10);
+            if (ret2.IsOk)
+            {
+                this.RealtimeStatus = "通信中...";
+
+                var recv = (ushort[])ret2.Data;
+                var bitStr1 = Convert.ToString(recv[0], 2).PadLeft(16, '0');
+
+                Current.Option.IsBatteryScanReady = bitStr1[13] == '1';
+                Current.Option.IsBindTrayScanReady = bitStr1[12] == '1';
+                Current.Option.IsUnbindTrayScanReady = bitStr1[11] == '1';
+
+
+                var bitStr2 = Convert.ToString(recv[5], 2).PadLeft(16, '0');
+
+                Current.Option.IsHasTray11 = bitStr2[15] == '1';
+                Current.Option.IsHasTray12 = bitStr2[14] == '1';
+                Current.Option.IsHasTray13 = bitStr2[13] == '1';
+                Current.Option.IsHasTray21 = bitStr2[12] == '1';
+                Current.Option.IsHasTray22 = bitStr2[11] == '1';
+                Current.Option.IsHasTray23 = bitStr2[10] == '1';
+
+
+
+                //Current.Option.IsHasChargeTray = retData[6] == "1";
+                //Current.Option.IsHasDisChargeTray = retData[7] == "1";
+
+
+                //Current.Option.IsDischargePutReady = retData[12] == "1";
+                // 最小值 -5540111 最大值 
+                Current.Option.JawPos = Convert.ToInt32("11");
 
                 Current.App.IsTerminalInitFinished = true;
                 this.IsAlive = true;
@@ -106,28 +156,14 @@ namespace GMCC.Sorter.ViewModel
                 this.IsAlive = false;
             }
 
-            var ret2 = this.Commor.Read("W400", (ushort)2);
-            if (ret2.IsOk)
+
+            var ret3 = this.Commor.Read("D439", (ushort)10);
+            if (ret3.IsOk)
             {
                 this.RealtimeStatus = "通信中...";
 
-                var recv = (ushort[])ret2.Data;
-                var bitStr = Convert.ToString(recv[0], 2).PadLeft(8, '0');
-
-                Current.Option.IsBatteryScanReady = bitStr[5] == '1';
-                Current.Option.IsBindTrayScanReady = bitStr[4] == '1';
-                Current.Option.IsUnbindTrayScanReady = bitStr[3] == '1';
-
+                // 最小值 -5540111 最大值 805192
                 Current.Option.JawPos = Convert.ToInt32("11");
-
-                Current.Option.IsFeedingFinished = bitStr[1] == '1';
-                Current.Option.IsBlankingFinished = bitStr[0] == '1';
-
-                //Current.Option.IsHasChargeTray = retData[6] == "1";
-                //Current.Option.IsHasDisChargeTray = retData[7] == "1";
-
-
-                //Current.Option.IsDischargePutReady = retData[12] == "1";
 
                 Current.App.IsTerminalInitFinished = true;
                 this.IsAlive = true;

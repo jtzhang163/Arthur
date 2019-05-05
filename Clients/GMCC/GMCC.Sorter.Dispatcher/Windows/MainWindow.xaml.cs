@@ -17,6 +17,7 @@ using System.Windows.Threading;
 using Arthur.View.Utils;
 using GMCC.Sorter.Dispatcher.Views;
 using GMCC.Sorter.Dispatcher.Views.SystemUC;
+using GMCC.Sorter.Run;
 
 namespace GMCC.Sorter.Dispatcher
 {
@@ -164,6 +165,13 @@ namespace GMCC.Sorter.Dispatcher
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (TimerExec.IsRunning)
+            {
+                MessageBox.Show("流程正在运行，请先停止！");
+                e.Cancel = true;
+                return;
+            }
+
             var result = MessageBox.Show("确定要退出当前程序？", "关闭确认", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.Cancel)
             {

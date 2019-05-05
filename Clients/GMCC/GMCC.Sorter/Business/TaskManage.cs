@@ -12,17 +12,6 @@ namespace GMCC.Sorter.Business
 {
     public class TaskManage
     {
-        public static bool BindOrUnbindMachIsReady(TaskType type)
-        {
-            return type == TaskType.上料 && Current.Option.IsChargeGetReady
-                || type == TaskType.下料 && Current.Option.IsDischargePutReady;
-        }
-
-        public static bool TaskIsFinished(TaskType type)
-        {
-            return type == TaskType.上料 && Current.Option.IsFeedingFinished
-                || type == TaskType.下料 && Current.Option.IsBlankingFinished;
-        }
 
         public static List<StorageViewModel> CanGetOrPutStorages(TaskType type)
         {

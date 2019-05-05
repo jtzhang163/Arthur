@@ -55,12 +55,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.TaskLog
 
         private void UpdateDataGrid(int index)
         {
-            var dtos = PaginatedList<GMCC.Sorter.Model.TaskLog>.Create(TaskLogs, PageIndex, Current.Option.DataGridPageSize);
+            var dtos = PaginatedList<GMCC.Sorter.Model.TaskLog>.Create(TaskLogs, PageIndex, Arthur.App.Current.Option.DataGridPageSize);
 
             this.count.Content = TaskLogs.Count();
             this.pageIndex.Content = PageIndex;
             this.totalPages.Content = dtos.TotalPages;
-            this.size.Content = Current.Option.DataGridPageSize;
+            this.size.Content = Arthur.App.Current.Option.DataGridPageSize;
             this.tbPageIndex.Text = PageIndex.ToString();
             this.preview_page.IsEnabled = dtos.HasPreviousPage;
             this.next_page.IsEnabled = dtos.HasNextPage;

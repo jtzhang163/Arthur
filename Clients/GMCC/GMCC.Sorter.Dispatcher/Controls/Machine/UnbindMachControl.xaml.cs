@@ -32,7 +32,8 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
 
         private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ShowWindows.ShowTrayBatteryWin(this.Option.UnbindProcTrayId);
+            var label = sender as Label;
+            ShowWindows.ShowTrayBatteryWin(Convert.ToInt32(label.Tag));
         }
     }
 }

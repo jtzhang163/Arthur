@@ -18,11 +18,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (appName == null)
                 {
-                    if (string.IsNullOrWhiteSpace(Current.Option.AppName))
+                    if (string.IsNullOrWhiteSpace(Arthur.App.Current.Option.AppName))
                     {
-                        Current.Option.AppName = "烯晶碳能分选机调度系统";
+                        Arthur.App.Current.Option.AppName = "烯晶碳能分选机调度系统";
                     }
-                    appName = Current.Option.AppName;
+                    appName = Arthur.App.Current.Option.AppName;
                 }
                 return appName;
             }
@@ -30,7 +30,7 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (appName != value)
                 {
-                    Current.Option.AppName = value;
+                    Arthur.App.Current.Option.AppName = value;
 
                     //更新AppName时同步更新AppTitle，使窗体标题栏变化
                     AppTitle = AppNameToTitle(value);
@@ -87,11 +87,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (companyName == null)
                 {
-                    if (string.IsNullOrWhiteSpace(Current.Option.CompanyName))
+                    if (string.IsNullOrWhiteSpace(Arthur.App.Current.Option.CompanyName))
                     {
-                        Current.Option.CompanyName = "XXXXX公司";
+                        Arthur.App.Current.Option.CompanyName = "深圳市益通智能装备有限公司";
                     }
-                    companyName = Current.Option.CompanyName;
+                    companyName = Arthur.App.Current.Option.CompanyName;
                 }
                 return companyName;
             }
@@ -99,10 +99,10 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (companyName != value)
                 {
-                    Current.Option.CompanyName = value;
+                    Arthur.App.Current.Option.CompanyName = value;
 
 
-                    Arthur.Business.Logging.AddOplog(string.Format("系统参数. 公司名: [{0}] 修改为 [{1}]", appName, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.Business.Logging.AddOplog(string.Format("系统参数. 公司名: [{0}] 修改为 [{1}]", companyName, value), Arthur.App.Model.OpType.编辑);
 
                     SetProperty(ref companyName, value);
                 }

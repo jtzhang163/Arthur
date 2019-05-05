@@ -17,9 +17,9 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="托盘条码：" HorizontalAlignment="Center"></Label>
-                <Label Grid.Column="1" x:Name="traycode" Content="托盘条码" HorizontalAlignment="Center"></Label>
+                <Label Grid.Column="1" x:Name="traycode" Content="托盘条码" HorizontalAlignment="Center" Foreground="Green" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Center"></Label>
                 <Label Grid.Column="2" Content="绑定电池个数：" HorizontalAlignment="Center"></Label>
-                <Label Grid.Column="3" x:Name="battery_count" Content="托盘条码" HorizontalAlignment="Center"></Label>
+                <Label Grid.Column="3" x:Name="battery_count" Content="托盘条码" HorizontalAlignment="Center" Foreground="Green" FontWeight="Bold" FontSize="16" VerticalContentAlignment="Center"></Label>
             </Grid>
             <Grid x:Name="grid" utils:GridHelper.ShowBorder="True" utils:GridHelper.GridLineBrush="Black" utils:GridHelper.GridLineThickness="0.3" Margin="5">
                 <Grid.RowDefinitions>

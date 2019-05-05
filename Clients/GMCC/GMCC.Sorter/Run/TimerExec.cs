@@ -30,7 +30,7 @@ namespace GMCC.Sorter.Run
                 {
                     foreach (var type in TaskHelper.TaskTypes)
                     {
-                        if (TaskManage.BindOrUnbindMachIsReady(type))
+                        if (Current.Option.IsTaskFinished)
                         {
                             var storages = TaskManage.CanGetOrPutStorages(type);
                             if (storages.Count > 0)
@@ -39,7 +39,7 @@ namespace GMCC.Sorter.Run
                                 Current.Task.StorageId = storage.Id;
                                 Current.Task.Type = type;
                                 Current.Task.StartTime = DateTime.Now;
-                                Current.Task.ProcTrayId = type == Model.TaskType.上料 ? Current.Option.ChargeProcTrayId : storage.ProcTrayId;
+                                Current.Task.ProcTrayId = type == Model.TaskType.上料 ? Current.Option.Tray12_Id : storage.ProcTrayId;
                                 Current.Task.Status = Model.TaskStatus.就绪;
                                 Context.AppContext.SaveChanges();
                                 break;
@@ -71,19 +71,19 @@ namespace GMCC.Sorter.Run
             }
             else if (Current.Task.Status == Model.TaskStatus.执行中)
             {
-                if (TaskManage.TaskIsFinished(Current.Task.Type))
+                if (Current.Option.IsTaskFinished)
                 {
                     var storage = GetObject.GetById<StorageViewModel>(Current.Task.StorageId);
                     if (Current.Task.Type == Model.TaskType.上料)
                     {
                         storage.ProcTrayId = Current.Task.ProcTrayId;
                         storage.ProcTray.StartStillTime = DateTime.Now;
-                        Current.Option.ChargeProcTrayId = 0;
+                        Current.Option.Tray13_Id = 0;
                     }
                     else
                     {
                         storage.ProcTrayId = 0;
-                        Current.Option.DischargeProcTrayId = Current.Task.ProcTrayId;
+                        Current.Option.Tray21_Id = Current.Task.ProcTrayId;
                     }
 
                     TaskManage.AddTaskLog();
@@ -100,21 +100,18 @@ namespace GMCC.Sorter.Run
         {
             if (!IsRunning) return;
 
-            var isChargeFinished = false;
-
             if (Current.ShareDatas.Count > 0)
             {
-                if(Current.Option.ChargeProcTrayId > 0)
+                if(Current.Option.Tray12_Id > 0)
                 {
-                    var chargeData = Current.ShareDatas.First(o => o.Key == "ChargeCodes");
+                    var chargeData = Current.ShareDatas.First(o => o.Key == "chargeCodes");
                     var bindCode = JsonHelper.DeserializeJsonToObject<BindCode>(chargeData.Value);
-                    var procTray = GetObject.GetById<ProcTray>(Current.Option.ChargeProcTrayId);
+                    var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray12_Id);
                     if (chargeData.Status == 2)
                     {
                         if (bindCode.TrayCode == procTray.Code)
                         {
-                            //充电位置可以取盘
-                            isChargeFinished = true;
+
                         }
                         else
                         {
@@ -128,14 +125,11 @@ namespace GMCC.Sorter.Run
                     }
                 }
 
-                Current.Option.IsChargeGetReady = isChargeFinished;
-
-
-                if (Current.Option.DischargeProcTrayId > 0)
+                if (Current.Option.Tray22_Id > 0)
                 {
-                    var dischargeData = Current.ShareDatas.First(o => o.Key == "DischargeCodes");
+                    var dischargeData = Current.ShareDatas.First(o => o.Key == "dischargeCodes");
                     var bindCode = JsonHelper.DeserializeJsonToObject<BindCode>(dischargeData.Value);
-                    var procTray = GetObject.GetById<ProcTray>(Current.Option.DischargeProcTrayId);
+                    var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray22_Id);
                     if (dischargeData.Status == 2)
                     {
                         if (bindCode.TrayCode == procTray.Code)
@@ -144,18 +138,29 @@ namespace GMCC.Sorter.Run
                         }
                         else
                         {
-                            //充电位条码绑定信息传给BTS客户端
+                            //放电位条码绑定信息传给BTS客户端
                             var codes = procTray.GetBatteries().ConvertAll<string>(o => o.Code);
                             var value = new BindCode { TrayCode = procTray.Code, BatteryCodes = string.Join(",", codes.ToArray()) };
                             dischargeData.Value = JsonHelper.SerializeObject(value);
                             dischargeData.Status = 1;
                         }
-
                     }
+
                 }
 
-            }
 
+                var sortingResults = Current.ShareDatas.First(o => o.Key == "sortingResults");
+                var bindResults = JsonHelper.DeserializeJsonToObject<SortingResult>(sortingResults.Value);
+                if (sortingResults.Status == 1)
+                {
+                    var results = bindResults.Results.Split(',');
+                    for (int i = 0; i < results.Length; i++)
+                    {
+                        Current.MainMachine.Commor.Write(string.Format("D{0:D3}", 401 + i), ushort.Parse(results[i]));
+                    }
+                    sortingResults.Status = 2;
+                }
+            }
 
         }
     }

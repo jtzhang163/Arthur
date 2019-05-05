@@ -4,6 +4,7 @@ using GMCC.Sorter.Data;
 using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Model;
 using GMCC.Sorter.Run;
+using GMCC.Sorter.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,17 +29,17 @@ namespace GMCC.Sorter.Business
         {
             try
             {
-                if (Context.Batteries.Count(r => r.Code == battery.Code) > 0)
-                {
-                    return new Result(string.Format("系统中已存在条码为{0}的电池！", battery.Code));
-                }
+                //if (Context.Batteries.Count(r => r.Code == battery.Code) > 0)
+                //{
+                //    return new Result(string.Format("系统中已存在条码为{0}的电池！", battery.Code));
+                //}
                 lock (Arthur.App.Application.DbLocker)
                 {
                     Context.Batteries.Add(new Battery() {
                         Code = battery.Code,
                         ScanTime = DateTime.Now,
-                        ProcTrayId = Current.Option.BindProcTrayId,
-                        Pos = Current.Option.GetBindProcTray().GetBatteries().Count + 1,
+                        ProcTrayId = Current.Option.Tray11_Id,
+                        Pos = GetObject.GetById<ProcTray>(Current.Option.Tray11_Id).GetBatteries().Count + 1,
                         SortResult = SortResult.Unknown
                     });
                     Context.AppContext.SaveChanges();

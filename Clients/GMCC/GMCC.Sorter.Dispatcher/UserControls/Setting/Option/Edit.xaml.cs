@@ -1,6 +1,8 @@
 ﻿using Arthur.Utility;
 using Arthur.View.Utils;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Model;
+using GMCC.Sorter.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,18 +50,28 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Setting.Option
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            var bind_traycode = this.bind_traycode.Text.Trim();
+            var tray11_code = this.tray11_code.Text.Trim();
+            var tray12_code = this.tray12_code.Text.Trim();
+            var tray13_code = this.tray13_code.Text.Trim();
+            var tray21_code = this.tray21_code.Text.Trim();
+            var tray22_code = this.tray22_code.Text.Trim();
+            var tray23_code = this.tray23_code.Text.Trim();
+
             var jaw_traycode = this.jaw_traycode.Text.Trim();
-            var unbind_traycode = this.unbind_traycode.Text.Trim();
             var still_timespan = this.still_timespan.Text.Trim();
 
             tip.Background = new SolidColorBrush(Colors.Red);
 
             try
             {
-                Current.Option.BindProcTrayId = GetProcTrayId(bind_traycode);
-                Current.Option.JawProcTrayId = GetProcTrayId(jaw_traycode);
-                Current.Option.UnbindProcTrayId = GetProcTrayId(unbind_traycode);
+                Current.Option.Tray11_Id = GetObject.GetByCode<ProcTray>(tray11_code).Id;
+                Current.Option.Tray12_Id = GetObject.GetByCode<ProcTray>(tray12_code).Id;
+                Current.Option.Tray13_Id = GetObject.GetByCode<ProcTray>(tray13_code).Id;
+                Current.Option.Tray21_Id = GetObject.GetByCode<ProcTray>(tray21_code).Id;
+                Current.Option.Tray22_Id = GetObject.GetByCode<ProcTray>(tray22_code).Id;
+                Current.Option.Tray23_Id = GetObject.GetByCode<ProcTray>(tray23_code).Id;
+
+                Current.Option.JawProcTrayId = GetObject.GetByCode<ProcTray>(jaw_traycode).Id;
                 Current.Option.StillTimeSpan = Convert.ToInt32(still_timespan);
 
                 Context.AppContext.SaveChanges();
@@ -75,22 +87,5 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Setting.Option
             tip.Visibility = Visibility.Visible;
         }
 
-        private int GetProcTrayId(string code)
-        {
-            var id = -1;
-            if (string.IsNullOrEmpty(code))
-            {
-                id = 0;
-            }
-            else if (Context.ProcTrays.Count(o => o.Code == code) == 0)
-            {
-                throw new Exception(string.Format("系统中不存在条码为[{0}]的托盘", code));
-            }
-            else
-            {
-                id = Context.ProcTrays.OrderByDescending(o => o.Id).FirstOrDefault(o => o.Code == code).Id;
-            }
-            return id;
-        }
     }
 }

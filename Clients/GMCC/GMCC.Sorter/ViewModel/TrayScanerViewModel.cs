@@ -165,8 +165,6 @@ namespace GMCC.Sorter.ViewModel
         {
             if (!Current.MainMachine.IsAlive) return;
 
-            if (Current.Option.BindProcTrayId > 0) return;
-
             if (this == Current.BindTrayScaner && Current.Option.IsBindTrayScanReady && !Current.Option.IsAlreadyBindTrayScan)
             {
                 var ret = this.Commor.Comm(this.ScanCommand);
@@ -174,6 +172,14 @@ namespace GMCC.Sorter.ViewModel
                 {
                     Current.Option.IsAlreadyBindTrayScan = true;
                     this.RealtimeStatus = "+" + ret.Data;
+
+                    var save_res = Current.MainMachine.Commor.Write("D434", (ushort)1);
+
+                    if (Current.Option.Tray11_Id > 0)
+                    {
+                        return;
+                    }
+
                     var t = new Thread(() =>
                     {
                         //把托盘条码保存进数据库
@@ -185,16 +191,17 @@ namespace GMCC.Sorter.ViewModel
                             //    Running.StopRunAndShowMsg("绑盘位已有托盘条码！");
                             //    return;
                             //}
-                            Current.Option.BindProcTrayId = (int)saveRet.Data;
+                            Current.Option.Tray11_Id = (int)saveRet.Data;
                         }
                         else
                         {
+                    
                             Running.StopRunAndShowMsg(saveRet.Msg);
                             return;
                         }
 
                         //界面交替显示扫码状态
-                        Thread.Sleep(this.CommInterval / 2);
+                        Thread.Sleep(2000);
                         this.RealtimeStatus = "等待扫码...";
                     });
                     t.Start();
@@ -202,6 +209,8 @@ namespace GMCC.Sorter.ViewModel
                 }
                 else
                 {
+                    var save_res = Current.MainMachine.Commor.Write("D434", (ushort)2);
+
                     this.RealtimeStatus = ret.Msg;
                     this.IsAlive = false;
                 }
@@ -211,7 +220,8 @@ namespace GMCC.Sorter.ViewModel
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
                 {
-                    Current.Option.IsAlreadyBindTrayScan = true;
+                    var save_res = Current.MainMachine.Commor.Write("D435", (ushort)1);
+                    Current.Option.isAlreadyUnbindTrayScan = true;
                     this.RealtimeStatus = "+" + ret.Data;
                     var t = new Thread(() =>
                     {
@@ -227,7 +237,7 @@ namespace GMCC.Sorter.ViewModel
                         }
 
                         //界面交替显示扫码状态
-                        Thread.Sleep(this.CommInterval / 2);
+                        Thread.Sleep(2000);
                         this.RealtimeStatus = "等待扫码...";
                     });
                     t.Start();
@@ -235,6 +245,7 @@ namespace GMCC.Sorter.ViewModel
                 }
                 else
                 {
+                    Current.MainMachine.Commor.Write("D435", (ushort)2);
                     this.RealtimeStatus = ret.Msg;
                     this.IsAlive = false;
                 }
