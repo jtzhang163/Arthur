@@ -10,6 +10,7 @@
     <UserControl.Resources>
         <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
         <utils:ProcTrayIdToVisibilityConverter x:Key="procTrayIdToVisibilityConverter"/>
+        <utils:HasTrayToForegroundConverter x:Key="hasTrayToForegroundConverter"/>
     </UserControl.Resources>
 
     <Border BorderThickness="1" BorderBrush="Black">
@@ -22,8 +23,9 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
-
-            <Label Grid.Row="0" Content="上料位(13)" FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <!--Foreground=""-->
+            <Label Grid.Row="0" Content="上料位(13)"  Foreground="{Binding IsHasTray13, Converter={StaticResource hasTrayToForegroundConverter}}"
+                   FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
             <Border Grid.Row="1" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
                     <Label DockPanel.Dock="Bottom" Content="{Binding Tray13_Id, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" Height="22" Cursor="Hand"
@@ -50,7 +52,8 @@
                 </DockPanel>
             </Border>
 
-            <Label Grid.Row="2" Content="充电位(12)" FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label Grid.Row="2" Content="充电位(12)" Foreground="{Binding IsHasTray12, Converter={StaticResource hasTrayToForegroundConverter}}"
+                   FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
             <Border Grid.Row="3" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
                     <Label DockPanel.Dock="Bottom" Content="{Binding Tray12_Id, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" Height="22" Cursor="Hand"
@@ -77,7 +80,8 @@
                 </DockPanel>
             </Border>
 
-            <Label Grid.Row="4" Content="绑盘位(11)" FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label Grid.Row="4" Content="绑盘位(11)" Foreground="{Binding IsHasTray11, Converter={StaticResource hasTrayToForegroundConverter}}"
+                   FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
             <Border Grid.Row="5" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
                     <Label DockPanel.Dock="Bottom" Content="{Binding Tray11_Id, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" Height="22" Cursor="Hand"

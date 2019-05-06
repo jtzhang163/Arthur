@@ -285,7 +285,7 @@ namespace GMCC.Sorter
         /// </summary>
         public bool IsHasTray11
         {
-            get => isHasTray11.Value;
+            get => isHasTray11.HasValue ? isHasTray11.Value : false;
             set
             {
                 if (!value)
@@ -313,7 +313,7 @@ namespace GMCC.Sorter
         /// </summary>
         public bool IsHasTray12
         {
-            get => isHasTray12.Value;
+            get => isHasTray12.HasValue ? isHasTray12.Value : false;
             set
             {
                 if (!value)
@@ -338,7 +338,7 @@ namespace GMCC.Sorter
         /// </summary>
         public bool IsHasTray13
         {
-            get => isHasTray13.Value;
+            get => isHasTray13.HasValue ? isHasTray13.Value : false;
             set
             {
                 if (!value)
@@ -364,7 +364,7 @@ namespace GMCC.Sorter
         /// </summary>
         public bool IsHasTray21
         {
-            get => isHasTray21.Value;
+            get => isHasTray21.HasValue ? isHasTray21.Value : false;
             set
             {
                 if (!value)
@@ -386,7 +386,7 @@ namespace GMCC.Sorter
         /// </summary>
         public bool IsHasTray22
         {
-            get => isHasTray22.Value;
+            get => isHasTray22.HasValue ? isHasTray22.Value : false;
             set
             {
                 if (!value)
@@ -412,7 +412,7 @@ namespace GMCC.Sorter
         /// </summary>
         public bool IsHasTray23
         {
-            get => isHasTray23.Value;
+            get => isHasTray23.HasValue ? isHasTray23.Value : false;
             set
             {
                 if (!value)

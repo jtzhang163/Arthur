@@ -10,6 +10,7 @@
     <UserControl.Resources>
         <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
         <utils:ProcTrayIdToVisibilityConverter x:Key="procTrayIdToVisibilityConverter"/>
+        <utils:HasTrayToForegroundConverter x:Key="hasTrayToForegroundConverter"/>
     </UserControl.Resources>
     <Border BorderThickness="1" BorderBrush="Black">
         <Grid>
@@ -21,7 +22,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Content="下料位(21)" FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label Grid.Row="0" Content="下料位(21)" Foreground="{Binding IsHasTray21, Converter={StaticResource hasTrayToForegroundConverter}}"
+                   FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
             <Border Grid.Row="1" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
                     <Label DockPanel.Dock="Bottom" Content="{Binding Tray21_Id, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" Height="22" Cursor="Hand"
@@ -48,7 +50,8 @@
                 </DockPanel>
             </Border>
 
-            <Label Grid.Row="2" Content="放电位(22)" FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label Grid.Row="2" Content="放电位(22)" Foreground="{Binding IsHasTray22, Converter={StaticResource hasTrayToForegroundConverter}}"
+                   FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
             <Border Grid.Row="3" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
                     <Label DockPanel.Dock="Bottom" Content="{Binding Tray22_Id, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" Height="22" Cursor="Hand"
@@ -75,7 +78,8 @@
                 </DockPanel>
             </Border>
 
-            <Label Grid.Row="4" Content="分选位(23)" FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label Grid.Row="4" Content="分选位(23)" Foreground="{Binding IsHasTray23, Converter={StaticResource hasTrayToForegroundConverter}}"
+                   FontSize="14" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
             <Border Grid.Row="5" BorderThickness="1" BorderBrush="Black" Margin="5">
                 <DockPanel>
                     <Label DockPanel.Dock="Bottom" Content="{Binding Tray23_Id, Converter={StaticResource idToProcTrayCodeConverter}}" FontSize="12" Height="22" Cursor="Hand"

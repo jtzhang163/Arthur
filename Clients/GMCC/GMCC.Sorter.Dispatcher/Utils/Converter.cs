@@ -284,4 +284,18 @@ namespace GMCC.Sorter.Dispatcher.Utils
         }
     }
 
+
+    public class HasTrayToForegroundConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (bool)value ? Brushes.LimeGreen : Brushes.Black;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }
