@@ -97,9 +97,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
                         var procTrayViewModel = ContextToViewModel.Convert(o.ProcTray);
                         if (procTrayViewModel.StillTimeSpan == 0)
                         {
-                            procTrayViewModel.StillTimeSpan = o.StillTimeSpan;
                             try
                             {
+                                procTrayViewModel.StillTimeSpan = o.StillTimeSpan;
                                 Context.AppContext.SaveChanges();
                             }
                             catch (Exception ex)

@@ -126,7 +126,7 @@ namespace GMCC.Sorter.ViewModel
             this.scanTime = scanTime;
             this.storageId = storageId;
             this.startStillTime = startStillTime;
-            this.StillTimeSpan = stillTimeSpan;
+            this.stillTimeSpan = stillTimeSpan;
         }
     }
 }

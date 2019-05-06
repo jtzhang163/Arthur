@@ -111,7 +111,6 @@ namespace GMCC.Sorter.Run
                         {
                             storage.ProcTrayId = Current.Task.ProcTrayId;
                             storage.ProcTray.StartStillTime = DateTime.Now;
-                            Current.Option.Tray13_Id = 0;
                         }
                         else
                         {
