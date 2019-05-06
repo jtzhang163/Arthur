@@ -1,7 +1,9 @@
-﻿using Arthur.View.Utils;
+﻿using Arthur;
+using Arthur.View.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Dispatcher.Controls;
 using GMCC.Sorter.Dispatcher.Controls.Machine;
+using GMCC.Sorter.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,6 +93,20 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
                         o.Status = ViewModel.StorageStatus.静置完成;
                         var timespan = DateTime.Now - o.ProcTray.StartStillTime.AddMinutes(o.StillTimeSpan);
                         o.ShowInfo = string.Format("{0}∶{1:D2}", (int)timespan.TotalMinutes, timespan.Seconds);
+
+                        var procTrayViewModel = ContextToViewModel.Convert(o.ProcTray);
+                        if (procTrayViewModel.StillTimeSpan == 0)
+                        {
+                            procTrayViewModel.StillTimeSpan = o.StillTimeSpan;
+                            try
+                            {
+                                Context.AppContext.SaveChanges();
+                            }
+                            catch (Exception ex)
+                            {
+                                LogHelper.WriteError(ex);
+                            }
+                        }
                     }
                 }
                 else

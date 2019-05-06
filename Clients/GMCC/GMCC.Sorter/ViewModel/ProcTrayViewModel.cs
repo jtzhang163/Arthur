@@ -98,10 +98,26 @@ namespace GMCC.Sorter.ViewModel
             }
         }
 
+        private int stillTimeSpan = 0;
         /// <summary>
         /// 静置时长(min)
         /// </summary>
-        public int StillTimeSpan { get; set; }
+        public int StillTimeSpan
+        {
+            get
+            {
+                return stillTimeSpan;
+            }
+            set
+            {
+                if (stillTimeSpan != value)
+                {
+                    Context.ProcTrays.FirstOrDefault(o => o.Id == this.Id).StillTimeSpan = value;
+                    this.SetProperty(ref stillTimeSpan, value);
+                }
+            }
+        }
+
 
         public ProcTrayViewModel(int id, string code, DateTime scanTime, int storageId, DateTime startStillTime, int stillTimeSpan)
         {

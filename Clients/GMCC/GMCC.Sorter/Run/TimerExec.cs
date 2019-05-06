@@ -34,6 +34,15 @@ namespace GMCC.Sorter.Run
                     {
                         foreach (var type in TaskHelper.TaskTypes)
                         {
+                            if (type == TaskType.上料 && Current.Option.Tray13_Id < 1)
+                            {
+                                continue;
+                            }
+                            else if (type == TaskType.上料 && Current.Option.Tray21_Id > 0)
+                            {
+                                continue;
+                            }
+
                             if (Current.Option.IsTaskReady)
                             {
                                 var storages = TaskManage.CanGetOrPutStorages(type);
@@ -127,7 +136,7 @@ namespace GMCC.Sorter.Run
             }
             catch (Exception ex)
             {
-                Running.ShowErrorMsg("执行任务出现异常：" + ex.Message);
+                Running.StopRunAndShowMsg("执行任务出现异常：" + ex.Message);
                 LogHelper.WriteError(ex);
             }
         }
