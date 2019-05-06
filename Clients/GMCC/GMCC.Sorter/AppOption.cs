@@ -24,7 +24,7 @@ namespace GMCC.Sorter
         {
             get
             {
-                if(shareConnString == null)
+                if (shareConnString == null)
                 {
                     shareConnString = ConfigurationManager.ConnectionStrings["ShareDatabase"].ToString();
                 }
@@ -288,20 +288,18 @@ namespace GMCC.Sorter
             get => isHasTray11.HasValue ? isHasTray11.Value : false;
             set
             {
-                if (!value)
+                if (value)
                 {
-                    this.Tray11_PreId = this.Tray11_Id;
-                    this.Tray11_Id = 0;
-                }
 
-                //if (value != isHasTray11 && isHasTray11 != null)
-                //{
-                //    if (!value)
-                //    {
-                //        this.Tray11_PreId = this.Tray11_Id;
-                //        this.Tray11_Id = 0;
-                //    }
-                //}
+                }
+                else
+                {
+                    if (this.Tray11_Id > 0)
+                    {
+                        this.Tray11_PreId = this.Tray11_Id;
+                        this.Tray11_Id = 0;
+                    }
+                }
 
                 SetProperty(ref isHasTray11, value);
             }
@@ -316,18 +314,23 @@ namespace GMCC.Sorter
             get => isHasTray12.HasValue ? isHasTray12.Value : false;
             set
             {
-                if (!value)
+                if (value)
                 {
-                    this.Tray12_PreId = this.Tray12_Id;
-                    this.Tray12_Id = 0;
-                }
-                if (value != isHasTray12 && isHasTray12 != null)
-                {
-                    if (value)
+                    if (this.Tray12_Id < 1 && this.Tray11_PreId > 0)
                     {
-                        this.Tray12_Id = this.Tray11_PreId > this.Tray11_Id ? this.Tray11_PreId : this.Tray11_Id;
+                        this.Tray12_Id = this.Tray11_PreId;
+                        this.Tray11_PreId = 0;
                     }
                 }
+                else
+                {
+                    if (this.Tray12_Id > 0)
+                    {
+                        this.Tray12_PreId = this.Tray12_Id;
+                        this.Tray12_Id = 0;
+                    }
+                }
+
                 SetProperty(ref isHasTray12, value);
             }
         }
@@ -341,18 +344,23 @@ namespace GMCC.Sorter
             get => isHasTray13.HasValue ? isHasTray13.Value : false;
             set
             {
-                if (!value)
+                if (value)
                 {
-                    this.Tray13_PreId = this.Tray13_Id;
-                    this.Tray13_Id = 0;
-                }
-                if (value != isHasTray13 && isHasTray13 != null)
-                {
-                    if (value)
+                    if (this.Tray13_Id < 1 && this.Tray12_PreId > 0)
                     {
-                        this.Tray13_Id = this.Tray12_PreId > this.Tray12_Id ? this.Tray12_PreId : this.Tray12_Id;
+                        this.Tray13_Id = this.Tray12_PreId;
+                        this.Tray12_PreId = 0;
                     }
                 }
+                else
+                {
+                    if (this.Tray13_Id > 0)
+                    {
+                        //this.Tray13_PreId = this.Tray13_Id;
+                        this.Tray13_Id = 0;
+                    }
+                }
+
                 SetProperty(ref isHasTray13, value);
             }
         }
@@ -367,15 +375,19 @@ namespace GMCC.Sorter
             get => isHasTray21.HasValue ? isHasTray21.Value : false;
             set
             {
-                if (!value)
-                {
-                    this.Tray21_PreId = this.Tray21_Id;
-                    this.Tray21_Id = 0;
-                }
-                if (value != isHasTray21 && isHasTray21 != null)
+                if (value)
                 {
 
                 }
+                else
+                {
+                    if (this.Tray21_Id > 0)
+                    {
+                        this.Tray21_PreId = this.Tray21_Id;
+                        this.Tray21_Id = 0;
+                    }
+                }
+
                 SetProperty(ref isHasTray21, value);
             }
         }
@@ -389,18 +401,23 @@ namespace GMCC.Sorter
             get => isHasTray22.HasValue ? isHasTray22.Value : false;
             set
             {
-                if (!value)
+                if (value)
                 {
-                    this.Tray22_PreId = this.Tray22_Id;
-                    this.Tray22_Id = 0;
-                }
-                if (value != isHasTray22 && isHasTray22 != null)
-                {
-                    if (value)
+                    if (this.Tray22_Id < 1 && this.Tray21_PreId > 0)
                     {
-                        this.Tray22_Id = this.Tray21_PreId > this.Tray21_Id ? this.Tray21_PreId : this.Tray21_Id;
+                        this.Tray22_Id = this.Tray21_PreId;
+                        this.Tray21_PreId = 0;
                     }
                 }
+                else
+                {
+                    if (this.Tray22_Id > 0)
+                    {
+                        this.Tray22_PreId = this.Tray22_Id;
+                        this.Tray22_Id = 0;
+                    }
+                }
+
                 SetProperty(ref isHasTray22, value);
             }
         }
@@ -415,18 +432,23 @@ namespace GMCC.Sorter
             get => isHasTray23.HasValue ? isHasTray23.Value : false;
             set
             {
-                if (!value)
+                if (value)
                 {
-                    this.Tray23_PreId = this.Tray23_Id;
-                    this.Tray23_Id = 0;
-                }
-                if (value != isHasTray23 && isHasTray23 != null)
-                {
-                    if (value)
+                    if (this.Tray23_Id < 1 && this.Tray22_PreId > 0)
                     {
-                        this.Tray23_Id = this.Tray22_PreId > this.Tray22_Id ? this.Tray22_PreId : this.Tray22_Id;
+                        this.Tray23_Id = this.Tray22_PreId;
+                        this.Tray22_PreId = 0;
                     }
                 }
+                else
+                {
+                    if (this.Tray23_Id > 0)
+                    {
+                        //this.Tray23_PreId = this.Tray23_Id;
+                        this.Tray23_Id = 0;
+                    }
+                }
+
                 SetProperty(ref isHasTray23, value);
             }
         }
@@ -639,7 +661,7 @@ namespace GMCC.Sorter
             }
             set
             {
-                if (tray11_PreId != value && value > 0)
+                if (tray11_PreId != value)
                 {
                     Arthur.Business.Application.SetOption("Tray11_PreId", value.ToString());
                     SetProperty(ref tray11_PreId, value);
@@ -669,7 +691,7 @@ namespace GMCC.Sorter
             }
             set
             {
-                if (tray12_PreId != value && value > 0)
+                if (tray12_PreId != value)
                 {
                     Arthur.Business.Application.SetOption("Tray12_PreId", value.ToString());
                     SetProperty(ref tray12_PreId, value);
@@ -678,34 +700,34 @@ namespace GMCC.Sorter
         }
 
 
-        private int tray13_PreId = -2;
-        /// <summary>
-        /// 上料位流程托盘原ID
-        /// </summary>
-        public int Tray13_PreId
-        {
-            get
-            {
-                if (tray13_PreId == -2)
-                {
-                    tray13_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray13_PreId"), -1);
-                    if (tray13_PreId == -1)
-                    {
-                        tray13_PreId = 0;
-                        Arthur.Business.Application.SetOption("Tray13_PreId", tray13_PreId.ToString(), "上料位流程托盘原ID");
-                    }
-                }
-                return tray13_PreId;
-            }
-            set
-            {
-                if (tray13_PreId != value && value > 0)
-                {
-                    Arthur.Business.Application.SetOption("Tray13_PreId", value.ToString());
-                    SetProperty(ref tray13_PreId, value);
-                }
-            }
-        }
+        //private int tray13_PreId = -2;
+        ///// <summary>
+        ///// 上料位流程托盘原ID
+        ///// </summary>
+        //public int Tray13_PreId
+        //{
+        //    get
+        //    {
+        //        if (tray13_PreId == -2)
+        //        {
+        //            tray13_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray13_PreId"), -1);
+        //            if (tray13_PreId == -1)
+        //            {
+        //                tray13_PreId = 0;
+        //                Arthur.Business.Application.SetOption("Tray13_PreId", tray13_PreId.ToString(), "上料位流程托盘原ID");
+        //            }
+        //        }
+        //        return tray13_PreId;
+        //    }
+        //    set
+        //    {
+        //        if (tray13_PreId != value)
+        //        {
+        //            Arthur.Business.Application.SetOption("Tray13_PreId", value.ToString());
+        //            SetProperty(ref tray13_PreId, value);
+        //        }
+        //    }
+        //}
 
 
         private int tray21_PreId = -2;
@@ -729,7 +751,7 @@ namespace GMCC.Sorter
             }
             set
             {
-                if (tray21_PreId != value && value > 0)
+                if (tray21_PreId != value)
                 {
                     Arthur.Business.Application.SetOption("Tray21_PreId", value.ToString());
                     SetProperty(ref tray21_PreId, value);
@@ -758,7 +780,7 @@ namespace GMCC.Sorter
             }
             set
             {
-                if (tray22_PreId != value && value > 0)
+                if (tray22_PreId != value)
                 {
                     Arthur.Business.Application.SetOption("Tray22_PreId", value.ToString());
                     SetProperty(ref tray22_PreId, value);
@@ -767,34 +789,34 @@ namespace GMCC.Sorter
         }
 
 
-        private int tray23_PreId = -2;
-        /// <summary>
-        /// 分选位流程托盘原ID
-        /// </summary>
-        public int Tray23_PreId
-        {
-            get
-            {
-                if (tray23_PreId == -2)
-                {
-                    tray23_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray23_PreId"), -1);
-                    if (tray23_PreId == -1)
-                    {
-                        tray23_PreId = 0;
-                        Arthur.Business.Application.SetOption("Tray23_PreId", tray23_PreId.ToString(), "分选位流程托盘原ID");
-                    }
-                }
-                return tray23_PreId;
-            }
-            set
-            {
-                if (tray23_PreId != value && value > 0)
-                {
-                    Arthur.Business.Application.SetOption("Tray23_PreId", value.ToString());
-                    SetProperty(ref tray23_PreId, value);
-                }
-            }
-        }
+        //private int tray23_PreId = -2;
+        ///// <summary>
+        ///// 分选位流程托盘原ID
+        ///// </summary>
+        //public int Tray23_PreId
+        //{
+        //    get
+        //    {
+        //        if (tray23_PreId == -2)
+        //        {
+        //            tray23_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray23_PreId"), -1);
+        //            if (tray23_PreId == -1)
+        //            {
+        //                tray23_PreId = 0;
+        //                Arthur.Business.Application.SetOption("Tray23_PreId", tray23_PreId.ToString(), "分选位流程托盘原ID");
+        //            }
+        //        }
+        //        return tray23_PreId;
+        //    }
+        //    set
+        //    {
+        //        if (tray23_PreId != value)
+        //        {
+        //            Arthur.Business.Application.SetOption("Tray23_PreId", value.ToString());
+        //            SetProperty(ref tray23_PreId, value);
+        //        }
+        //    }
+        //}
 
         #endregion
 
