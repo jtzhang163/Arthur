@@ -325,7 +325,7 @@ namespace GMCC.Sorter
                 {
                     if (value)
                     {
-                        this.Tray12_Id = this.Tray11_PreId > 0 ? this.Tray11_PreId : this.Tray11_Id;
+                        this.Tray12_Id = this.Tray11_PreId > this.Tray11_Id ? this.Tray11_PreId : this.Tray11_Id;
                     }
                 }
                 SetProperty(ref isHasTray12, value);
@@ -350,7 +350,7 @@ namespace GMCC.Sorter
                 {
                     if (value)
                     {
-                        this.Tray13_Id = this.Tray12_PreId > 0 ? this.Tray12_PreId : this.Tray12_Id;
+                        this.Tray13_Id = this.Tray12_PreId > this.Tray12_Id ? this.Tray12_PreId : this.Tray12_Id;
                     }
                 }
                 SetProperty(ref isHasTray13, value);
@@ -398,7 +398,7 @@ namespace GMCC.Sorter
                 {
                     if (value)
                     {
-                        this.Tray22_Id = this.Tray21_PreId > 0 ? this.Tray21_PreId : this.Tray21_Id;
+                        this.Tray22_Id = this.Tray21_PreId > this.Tray21_Id ? this.Tray21_PreId : this.Tray21_Id;
                     }
                 }
                 SetProperty(ref isHasTray22, value);
@@ -424,7 +424,7 @@ namespace GMCC.Sorter
                 {
                     if (value)
                     {
-                        this.Tray23_Id = this.Tray22_PreId > 0 ? this.Tray22_PreId : this.Tray22_Id;
+                        this.Tray23_Id = this.Tray22_PreId > this.Tray22_Id ? this.Tray22_PreId : this.Tray22_Id;
                     }
                 }
                 SetProperty(ref isHasTray23, value);

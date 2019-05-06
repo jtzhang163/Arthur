@@ -15,6 +15,11 @@ namespace Arthur.Business
     {
         public static Result AddEvent(string content, EventType type)
         {
+            if (content.Length > 250)
+            {
+                content = content.Substring(0, 250);
+            }
+
             var log = new EventLog()
             {
                 Content = content,
@@ -36,6 +41,11 @@ namespace Arthur.Business
 
         public static Result AddOplog(int userId, string content, OpType type)
         {
+            if (content.Length > 250)
+            {
+                content = content.Substring(0, 250);
+            }
+
             var log = new Oplog()
             {
                 UserId = userId,
