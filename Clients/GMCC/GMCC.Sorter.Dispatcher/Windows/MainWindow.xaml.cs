@@ -143,6 +143,9 @@ namespace GMCC.Sorter.Dispatcher
                 case "扫码枪调试":
                     return new ScanerView();
 
+                case "产能与合格率":
+                    return new ProductivityView();
+
                 case "托盘追溯":
                     return new ProcTrayView();
                 case "电池追溯":

@@ -105,6 +105,9 @@
     <Compile Include="Controls\TrayBatteryControl.xaml.cs">
       <DependentUpon>TrayBatteryControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\DataAnalysis\Productivity\Details.xaml.cs">
+      <DependentUpon>Details.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Debug\MainMachine\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
@@ -217,6 +220,9 @@
     <Compile Include="UserControls\SystemUC\ParamUC\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DataAnalysis\ProductivityView.xaml.cs">
+      <DependentUpon>ProductivityView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Debug\PlcView.xaml.cs">
       <DependentUpon>PlcView.xaml</DependentUpon>
     </Compile>
@@ -302,6 +308,10 @@
     <Page Include="Controls\TrayBatteryControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DataAnalysis\Productivity\Details.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\Debug\MainMachine\Details.xaml">
       <SubType>Designer</SubType>
@@ -432,6 +442,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserControls\Setting\Option\Edit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DataAnalysis\ProductivityView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -621,6 +635,10 @@
   <ItemGroup>
     <Resource Include="Images\Character.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Htmls\mix-line-bar.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

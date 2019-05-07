@@ -564,21 +564,30 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
-                            <!--<RadioButton Grid.Row="0">基本数据</RadioButton>
-                            <RadioButton Grid.Row="1">静置数据</RadioButton>
-                            <RadioButton Grid.Row="2">OCV数据</RadioButton>
-                            <RadioButton Grid.Row="3">化成数据</RadioButton>
-                            <RadioButton Grid.Row="4">分容数据</RadioButton>
-
-                            <RadioButton Grid.Row="5">DCIR数据</RadioButton>
-                            <RadioButton Grid.Row="6">高速缓存</RadioButton>-->
                             <RadioButton Grid.Row="0" Checked="RadioButton_Checked">托盘追溯</RadioButton>
                             <RadioButton Grid.Row="1" Checked="RadioButton_Checked">电池追溯</RadioButton>
                             <RadioButton Grid.Row="2" Checked="RadioButton_Checked">任务日志</RadioButton>
                         </Grid>
                     </Expander.Content>
                 </Expander>
+                <Separator Height="2" Background="White"/>
 
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down">
+                    <Expander.Header>
+                        <WrapPanel>
+                            <TextBlock Text="&#xf201;" Style="{DynamicResource FontAwesome}" FontSize="18"/>
+                            <TextBlock Text="数据分析"/>
+                        </WrapPanel>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">产能与合格率</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
                 <Separator Height="2" Background="White"/>
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">
