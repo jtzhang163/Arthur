@@ -1,5 +1,6 @@
 ﻿using Arthur.View.Utils;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -22,12 +23,33 @@ namespace GMCC.Sorter.Dispatcher.UserControls.DataAnalysis.Productivity
     /// </summary>
     public partial class Details : UserControl
     {
+
+        private string path_bak = AppDomain.CurrentDomain.BaseDirectory + "Htmls\\mix-line-bar.bak.html";
+        private string path = AppDomain.CurrentDomain.BaseDirectory + "Htmls\\mix-line-bar.html";
         public Details(int id)
         {
             InitializeComponent();
 
-            this.browser.Navigate(AppDomain.CurrentDomain.BaseDirectory + "Htmls\\mix-line-bar.html");
+            //生成html文件
+            FileStream fs_bak = new FileStream(path_bak, FileMode.Open);
+            StreamReader sr_bak = new StreamReader(fs_bak);
+            var content = sr_bak.ReadToEnd();
+            sr_bak.Close();
+            fs_bak.Close();
+
+            FileStream fs = new FileStream(path, FileMode.Create);
+            StreamWriter sw = new StreamWriter(fs);
+
+            sw.Write(content);
+            sw.Close();
+            sw.Close();
+
+            this.browser.Navigate(path);
         }
+
+
+
+
 
         private void Browser_Navigating(object sender, NavigatingCancelEventArgs e)
         {

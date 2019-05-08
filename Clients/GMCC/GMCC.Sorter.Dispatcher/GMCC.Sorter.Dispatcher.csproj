@@ -636,7 +636,7 @@
     <Resource Include="Images\Character.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Htmls\mix-line-bar.html">
+    <Content Include="Htmls\mix-line-bar.bak.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
