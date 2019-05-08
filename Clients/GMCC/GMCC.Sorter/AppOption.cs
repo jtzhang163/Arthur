@@ -1,4 +1,5 @@
-﻿using Arthur.App;
+﻿using Arthur;
+using Arthur.App;
 using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Model;
 using GMCC.Sorter.Utils;
@@ -301,6 +302,18 @@ namespace GMCC.Sorter
                     }
                 }
 
+                if (isHasTray11.HasValue && isHasTray11 != value)
+                {
+                    if (value)
+                    {
+                        LogHelper.WriteInfo("****************************** 绑盘位 托盘信号：无--->有 ****************************");
+                    }
+                    else
+                    {
+                        LogHelper.WriteInfo("****************************** 绑盘位 托盘信号：有--->无 ****************************");
+                    }
+                }
+
                 SetProperty(ref isHasTray11, value);
             }
         }
@@ -328,6 +341,19 @@ namespace GMCC.Sorter
                     {
                         this.Tray12_PreId = this.Tray12_Id;
                         this.Tray12_Id = 0;
+                    }
+                }
+
+
+                if (isHasTray12.HasValue && isHasTray12 != value)
+                {
+                    if (value)
+                    {
+                        LogHelper.WriteInfo("****************************** 充电位 托盘信号：无--->有 ****************************");
+                    }
+                    else
+                    {
+                        LogHelper.WriteInfo("****************************** 充电位 托盘信号：有--->无 ****************************");
                     }
                 }
 
@@ -361,6 +387,18 @@ namespace GMCC.Sorter
                     }
                 }
 
+                if (isHasTray13.HasValue && isHasTray13 != value)
+                {
+                    if (value)
+                    {
+                        LogHelper.WriteInfo("****************************** 上料位 托盘信号：无--->有 ****************************");
+                    }
+                    else
+                    {
+                        LogHelper.WriteInfo("****************************** 上料位 托盘信号：有--->无 ****************************");
+                    }
+                }
+
                 SetProperty(ref isHasTray13, value);
             }
         }
@@ -385,6 +423,18 @@ namespace GMCC.Sorter
                     {
                         this.Tray21_PreId = this.Tray21_Id;
                         this.Tray21_Id = 0;
+                    }
+                }
+
+                if (isHasTray21.HasValue && isHasTray21 != value)
+                {
+                    if (value)
+                    {
+                        LogHelper.WriteInfo("****************************** 下料位 托盘信号：无--->有 ****************************");
+                    }
+                    else
+                    {
+                        LogHelper.WriteInfo("****************************** 下料位 托盘信号：有--->无 ****************************");
                     }
                 }
 
@@ -418,6 +468,18 @@ namespace GMCC.Sorter
                     }
                 }
 
+                if (isHasTray22.HasValue && isHasTray22 != value)
+                {
+                    if (value)
+                    {
+                        LogHelper.WriteInfo("****************************** 放电位 托盘信号：无--->有 ****************************");
+                    }
+                    else
+                    {
+                        LogHelper.WriteInfo("****************************** 放电位 托盘信号：有--->无 ****************************");
+                    }
+                }
+
                 SetProperty(ref isHasTray22, value);
             }
         }
@@ -446,6 +508,18 @@ namespace GMCC.Sorter
                     {
                         //this.Tray23_PreId = this.Tray23_Id;
                         this.Tray23_Id = 0;
+                    }
+                }
+
+                if (isHasTray23.HasValue && isHasTray23 != value)
+                {
+                    if (value)
+                    {
+                        LogHelper.WriteInfo("****************************** 分选位 托盘信号：无--->有 ****************************");
+                    }
+                    else
+                    {
+                        LogHelper.WriteInfo("****************************** 分选位 托盘信号：有--->无 ****************************");
                     }
                 }
 

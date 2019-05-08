@@ -219,6 +219,7 @@ namespace GMCC.Sorter.Run
                         {
                             Current.MainMachine.Commor.Write(string.Format("D{0:D3}", 401 + i), ushort.Parse(results[i]));
                         }
+                        LogHelper.WriteInfo("-----------------------成功发送分选结果数据给PLC--------------------");
 
                         var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray23_Id);
                         var batteries = procTray.GetBatteries();

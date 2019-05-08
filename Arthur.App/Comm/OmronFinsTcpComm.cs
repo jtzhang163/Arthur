@@ -119,7 +119,6 @@ namespace Arthur.App.Comm
 
                 if (result.IsSuccess)
                 {
-                    LogHelper.WriteInfo(string.Format("成功往 {0} 的 {1} 位置 {2}", commor.Communicator.Name, addr, value));
                     return Result.OK;
                 }
                 else
