@@ -34,6 +34,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
@@ -42,7 +43,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="条码：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Code}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="绑定托盘：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="托盘条码：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding ProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="位置：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Pos}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
@@ -54,6 +55,8 @@
                     <Label Content="{Binding StillTimeSpan}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="扫码时间：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding ScanTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="分选结果：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding SortResult}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

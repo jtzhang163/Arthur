@@ -35,6 +35,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
@@ -55,7 +56,8 @@
                     <Label Content="{Binding StillTimeSpan}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="扫码时间：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding ScanTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <!--<TextBox x:Name="company" Grid.Row="2" Grid.Column="1" Text="{Binding Company, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>-->
+                    <Label Content="分选结果：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding SortResult}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

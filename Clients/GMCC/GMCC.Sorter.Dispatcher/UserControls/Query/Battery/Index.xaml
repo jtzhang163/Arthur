@@ -185,7 +185,7 @@
 
                     <DataGrid.Columns>
 
-                        <DataGridTemplateColumn Header="条码" Width="2*"  CanUserSort="True" SortMemberPath="Code">
+                        <DataGridTemplateColumn Header="条码" Width="3*"  CanUserSort="True" SortMemberPath="Code">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -195,7 +195,20 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="绑定托盘" Width="*"  CanUserSort="True" SortMemberPath="ProcTrayId">
+                        <DataGridTemplateColumn Header="托盘ID" Width="*" CanUserSort="True" SortMemberPath="ProcTrayId">
+                            <!--数据表格模板列的单元格模板属性-->
+                            <DataGridTemplateColumn.CellTemplate>
+                                <!--数据模板-->
+                                <DataTemplate>
+                                    <!--堆叠盘-->
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding ProcTrayId}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="托盘条码" Width="2*"  CanUserSort="True" SortMemberPath="ProcTrayId">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -218,7 +231,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="静置料仓" Width="*"  CanUserSort="True" SortMemberPath="StorageId">
+                        <DataGridTemplateColumn Header="静置料仓" Width="2*"  CanUserSort="True" SortMemberPath="StorageId">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -228,7 +241,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="开始静置时间" Width="2*"  CanUserSort="True" SortMemberPath="StartStillTime">
+                        <DataGridTemplateColumn Header="开始静置时间" Width="3*"  CanUserSort="True" SortMemberPath="StartStillTime">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -238,7 +251,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="静置时长(min)" Width="*"  CanUserSort="True" SortMemberPath="StillTimeSpan">
+                        <DataGridTemplateColumn Header="静置时长(min)" Width="2*"  CanUserSort="True" SortMemberPath="StillTimeSpan">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -248,7 +261,17 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="扫码时间" Width="2*"  CanUserSort="True" SortMemberPath="ScanTime">
+                        <DataGridTemplateColumn Header="分选结果" Width="2*"  CanUserSort="True" SortMemberPath="SortResult">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding SortResult}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="扫码时间" Width="3*"  CanUserSort="True" SortMemberPath="ScanTime">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

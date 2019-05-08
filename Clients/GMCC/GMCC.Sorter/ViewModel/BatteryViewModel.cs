@@ -2,6 +2,7 @@
 using Arthur.App.Comm;
 using Arthur.App.Model;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Model;
 using GMCC.Sorter.Run;
 using System;
 using System.Collections.Generic;
@@ -92,7 +93,25 @@ namespace GMCC.Sorter.ViewModel
         /// </summary>
         public int StillTimeSpan { get; set; }
 
-        public BatteryViewModel(int id, string code, int pos, DateTime scanTime, int storageId, int procTrayId, DateTime startStillTime, int stillTimeSpan)
+
+        private SortResult sortResult = SortResult.Unknown;
+        public SortResult SortResult
+        {
+            get
+            {
+                return sortResult;
+            }
+            set
+            {
+                if (sortResult != value)
+                {
+                    Context.Batteries.FirstOrDefault(o => o.Id == this.Id).SortResult = value;
+                    this.SetProperty(ref sortResult, value);
+                }
+            }
+        }
+
+        public BatteryViewModel(int id, string code, int pos, DateTime scanTime, int storageId, int procTrayId, DateTime startStillTime, int stillTimeSpan, SortResult sortResult)
         {
             this.Id = id;
             this.code = code;
@@ -102,6 +121,7 @@ namespace GMCC.Sorter.ViewModel
             this.ProcTrayId = procTrayId;
             this.StartStillTime = startStillTime;
             this.StillTimeSpan = stillTimeSpan;
+            this.SortResult = sortResult;
         }
     }
 }
