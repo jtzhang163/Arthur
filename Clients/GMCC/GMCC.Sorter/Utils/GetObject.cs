@@ -16,7 +16,10 @@ namespace GMCC.Sorter.Utils
             var obj = new object();
             if (typeof(T).Name == "Battery")
             {
-                obj = Context.Batteries.SingleOrDefault(o => o.Id == id) ?? new Battery();
+                using (var db = new Data.AppContext())
+                {
+                    obj = db.Batteries.SingleOrDefault(o => o.Id == id) ?? new Battery();
+                }
             }
             else if (typeof(T).Name == "ProcTray")
             {
@@ -26,7 +29,10 @@ namespace GMCC.Sorter.Utils
                 }
                 else
                 {
-                    obj = Context.ProcTrays.SingleOrDefault(o => o.Id == id);
+                    using (var db = new Data.AppContext())
+                    {
+                        obj = db.ProcTrays.SingleOrDefault(o => o.Id == id);
+                    }
                     if (obj == null)
                     {
                         obj = new ProcTray();
@@ -51,11 +57,17 @@ namespace GMCC.Sorter.Utils
             var obj = new object();
             if (typeof(T).Name == "Battery")
             {
-                obj = Context.Batteries.Where(o => o.Code == code).OrderByDescending(o => o.ScanTime).FirstOrDefault() ?? new Battery();
+                using (var db = new Data.AppContext())
+                {
+                    obj = db.Batteries.Where(o => o.Code == code).OrderByDescending(o => o.ScanTime).FirstOrDefault() ?? new Battery();
+                }
             }
             else if (typeof(T).Name == "ProcTray")
             {
-                obj = Context.ProcTrays.Where(o => o.Code == code).OrderByDescending(o => o.ScanTime).FirstOrDefault() ?? new ProcTray();
+                using (var db = new Data.AppContext())
+                {
+                    obj = db.ProcTrays.Where(o => o.Code == code).OrderByDescending(o => o.ScanTime).FirstOrDefault() ?? new ProcTray();
+                }
             }
             return (T)obj;
         }

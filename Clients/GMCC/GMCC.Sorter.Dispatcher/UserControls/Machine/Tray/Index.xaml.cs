@@ -25,6 +25,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
     /// </summary>
     public partial class Index : UserControl
     {
+        private readonly Data.AppContext _AppContext = new Data.AppContext();
         public Index(int id)
         {
             InitializeComponent();
@@ -39,11 +40,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
                 var queryText = this.queryText.Text.Trim();
                 if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return Context.Trays.ToList();
+                    return _AppContext.Trays.ToList();
                 }
                 else
                 {
-                    return Context.Trays.Where(r => r.Code.Contains(queryText)).ToList();
+                    return _AppContext.Trays.Where(r => r.Code.Contains(queryText)).ToList();
                 }
             }
         }
@@ -88,7 +89,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            var tray = Context.Trays.SingleOrDefault(r => r.Id == id);
+            var tray = _AppContext.Trays.SingleOrDefault(r => r.Id == id);
 
             if (tray == null)
             {
@@ -105,8 +106,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
 
             if (MessageBox.Show(string.Format("确定要删除托盘【{0}】吗？", tray.Code), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Context.Trays.Remove(tray);
-                Context.AppContext.SaveChanges();
+                _AppContext.Trays.Remove(tray);
+                _AppContext.SaveChanges();
                 Arthur.Business.Logging.AddOplog(string.Format("删除托盘[{0}]", tray.Code), Arthur.App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }

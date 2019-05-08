@@ -27,6 +27,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.TaskLog
     /// </summary>
     public partial class Index : UserControl
     {
+        private readonly Data.AppContext _AppContext = new Data.AppContext();
         public Index(int id)
         {
             InitializeComponent();
@@ -43,7 +44,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.TaskLog
             {
                 var startTime = this.start_time.Value;
                 var endTime = this.end_time.Value;
-                return Context.TaskLogs.Where(o => o.Time > startTime && o.Time < endTime).OrderBy(o => o.Id);
+                return _AppContext.TaskLogs.Where(o => o.Time > startTime && o.Time < endTime).OrderBy(o => o.Id);
             }
         }
 
@@ -77,7 +78,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.TaskLog
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            var taskLog = Context.TaskLogs.SingleOrDefault(r => r.Id == id);
+            var taskLog = _AppContext.TaskLogs.SingleOrDefault(r => r.Id == id);
 
             if (taskLog == null)
             {
@@ -94,8 +95,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.TaskLog
 
             if (MessageBox.Show(string.Format("确定要删除该任务日志吗？", ""), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Context.TaskLogs.Remove(taskLog);
-                Context.AppContext.SaveChanges();
+                _AppContext.TaskLogs.Remove(taskLog);
+                _AppContext.SaveChanges();
                 Arthur.Business.Logging.AddOplog(string.Format("删除任务日志[ID:{0}]", taskLog.Id), Arthur.App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }

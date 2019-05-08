@@ -64,7 +64,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.MES
                     Current.Mes.Company = company;
                     Current.Mes.CommInterval = Convert.ToInt32(comm_interval);
 
-                    Context.AppContext.SaveChanges();
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
                 }

@@ -74,7 +74,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Setting.Option
                 Current.Option.JawProcTrayId = GetObject.GetByCode<ProcTray>(jaw_traycode).Id;
                 Current.Option.StillTimeSpan = Convert.ToInt32(still_timespan);
 
-                Context.AppContext.SaveChanges();
                 tip.Background = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";
             }

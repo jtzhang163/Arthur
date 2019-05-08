@@ -27,6 +27,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
     /// </summary>
     public partial class Index : UserControl
     {
+        private readonly Data.AppContext _AppContext = new Data.AppContext();
         public Index(int id)
         {
             InitializeComponent();
@@ -46,11 +47,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
                 var endTime = this.end_time.Value;
                 if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return Context.ProcTrays.Where(r => r.ScanTime > startTime && r.ScanTime < endTime).OrderBy(o => o.Id);
+                    return _AppContext.ProcTrays.Where(r => r.ScanTime > startTime && r.ScanTime < endTime).OrderBy(o => o.Id);
                 }
                 else
                 {
-                    return Context.ProcTrays.Where(r => r.ScanTime > startTime && r.ScanTime < endTime && r.Code.Contains(queryText)).OrderBy(o => o.Id);
+                    return _AppContext.ProcTrays.Where(r => r.ScanTime > startTime && r.ScanTime < endTime && r.Code.Contains(queryText)).OrderBy(o => o.Id);
                 }
             }
         }
@@ -95,7 +96,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            var ProcTray = Context.ProcTrays.SingleOrDefault(r => r.Id == id);
+            var ProcTray = _AppContext.ProcTrays.SingleOrDefault(r => r.Id == id);
 
             if (ProcTray == null)
             {
@@ -112,8 +113,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 
             if (MessageBox.Show(string.Format("确定要删除流程托盘【{0}】吗？", ProcTray.Code), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Context.ProcTrays.Remove(ProcTray);
-                Context.AppContext.SaveChanges();
+                _AppContext.ProcTrays.Remove(ProcTray);
+                _AppContext.SaveChanges();
                 Arthur.Business.Logging.AddOplog(string.Format("删除流程托盘[{0}]", ProcTray.Code), Arthur.App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }

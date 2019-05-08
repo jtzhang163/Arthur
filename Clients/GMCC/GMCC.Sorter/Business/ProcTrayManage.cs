@@ -30,12 +30,13 @@ namespace GMCC.Sorter.Business
             try
             {
                 var id = -1;
-                //lock (Arthur.App.Application.DbLocker)
-                //{
-                    var tray = Context.Trays.FirstOrDefault(t => t.Code == procTray.Code);
+
+                using (var db = new Data.AppContext())
+                {
+                    var tray = db.Trays.FirstOrDefault(t => t.Code == procTray.Code);
                     if (tray == null)
                     {
-                        tray = Context.Trays.Add(new Tray()
+                        tray = db.Trays.Add(new Tray()
                         {
                             Code = procTray.Code,
                             CreateTime = DateTime.Now,
@@ -43,10 +44,10 @@ namespace GMCC.Sorter.Business
                             IsEnabled = true,
                             Name = procTray.Code,
                         });
-                        Context.AppContext.SaveChanges();
+                        db.SaveChanges();
                     }
 
-                    var proctray = Context.ProcTrays.Add(new ProcTray()
+                    var proctray = db.ProcTrays.Add(new ProcTray()
                     {
                         TrayId = tray.Id,
                         StorageId = -1,
@@ -54,10 +55,11 @@ namespace GMCC.Sorter.Business
                         ScanTime = DateTime.Now,
                         StartStillTime = DateTime.Now,//Arthur.Default.DateTime
                     });
-                    Context.AppContext.SaveChanges();
+
+                    db.SaveChanges();
 
                     id = proctray.Id;
-                //}
+                }
 
                 if (isScan)
                 {

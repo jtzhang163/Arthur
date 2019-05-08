@@ -33,7 +33,7 @@ namespace GMCC.Sorter.ViewModel
                 if (ip != value)
                 {
                     ((EthernetCommor)this.Commor.Communicator).IP = value;
-                    Context.AppContext.SaveChanges();
+                    
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}IP地址: [{1}] 修改为 [{2}]", Name, ip, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref ip, value);
                     this.CommorInfo = null;

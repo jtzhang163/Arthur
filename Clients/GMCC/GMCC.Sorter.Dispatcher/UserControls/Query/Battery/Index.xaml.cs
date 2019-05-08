@@ -27,6 +27,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
     /// </summary>
     public partial class Index : UserControl
     {
+        private readonly Data.AppContext _AppContext = new Data.AppContext();
         public Index(int id)
         {
             InitializeComponent();
@@ -46,11 +47,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
                 var endTime = this.end_time.Value;
                 if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return Context.Batteries.Where(r => r.ScanTime > startTime && r.ScanTime < endTime).OrderBy(o => o.Id);
+                    return _AppContext.Batteries.Where(r => r.ScanTime > startTime && r.ScanTime < endTime).OrderBy(o => o.Id);
                 }
                 else
                 {
-                    return Context.Batteries.Where(r => r.ScanTime > startTime && r.ScanTime < endTime && r.Code.Contains(queryText)).OrderBy(o => o.Id);
+                    return _AppContext.Batteries.Where(r => r.ScanTime > startTime && r.ScanTime < endTime && r.Code.Contains(queryText)).OrderBy(o => o.Id);
                 }
             }
         }
@@ -95,7 +96,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            var battery = Context.Batteries.SingleOrDefault(r => r.Id == id);
+            var battery = _AppContext.Batteries.SingleOrDefault(r => r.Id == id);
 
             if (battery == null)
             {
@@ -112,8 +113,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
 
             if (MessageBox.Show(string.Format("确定要删除电池【{0}】吗？", battery.Code), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Context.Batteries.Remove(battery);
-                Context.AppContext.SaveChanges();
+                _AppContext.Batteries.Remove(battery);
+                _AppContext.SaveChanges();
                 Arthur.Business.Logging.AddOplog(string.Format("删除电池[{0}]", battery.Code), Arthur.App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }

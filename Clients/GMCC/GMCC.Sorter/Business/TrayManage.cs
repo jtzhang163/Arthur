@@ -15,14 +15,17 @@ namespace GMCC.Sorter.Business
 
         public Result Create(Tray tray)
         {
-            if (Context.Trays.Count(r => r.Code == tray.Code) > 0)
-            {
-                return new Result(string.Format("系统中已存在条码为{0}的托盘！", tray.Code));
-            }
             try
             {
-                Context.Trays.Add(new Tray() { Code = tray.Code, Company = tray.Company, CreateTime = DateTime.Now, IsEnabled = true });
-                Context.AppContext.SaveChanges();
+                using (var db = new Data.AppContext())
+                {
+                    if (db.Trays.Count(r => r.Code == tray.Code) > 0)
+                    {
+                        return new Result(string.Format("系统中已存在条码为{0}的托盘！", tray.Code));
+                    }
+                    db.Trays.Add(new Tray() { Code = tray.Code, Company = tray.Company, CreateTime = DateTime.Now, IsEnabled = true });
+                    db.SaveChanges();
+                }
                 Arthur.Business.Logging.AddOplog(string.Format("新增托盘[{0}]", tray.Code), Arthur.App.Model.OpType.创建);
                 return Result.OK;
             }

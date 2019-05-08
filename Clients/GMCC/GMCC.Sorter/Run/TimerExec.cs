@@ -64,7 +64,6 @@ namespace GMCC.Sorter.Run
                                     Current.Task.StartTime = DateTime.Now;
                                     Current.Task.ProcTrayId = type == Model.TaskType.上料 ? Current.Option.Tray13_Id : storage.ProcTrayId;
                                     Current.Task.Status = Model.TaskStatus.就绪;
-                                    Context.AppContext.SaveChanges();
                                     break;
                                 }
                             }
@@ -85,7 +84,6 @@ namespace GMCC.Sorter.Run
                     {
                         Current.Option.JawProcTrayId = Current.Task.ProcTrayId;
                         Current.Task.Status = Model.TaskStatus.准备搬;
-                        Context.AppContext.SaveChanges();
                         return;
                     }
 
@@ -98,7 +96,6 @@ namespace GMCC.Sorter.Run
                     if (Current.Option.IsJawHasTray)
                     {
                         Current.Task.Status = Model.TaskStatus.搬运中;
-                        Context.AppContext.SaveChanges();
                         return;
                     }
                 }
@@ -119,7 +116,6 @@ namespace GMCC.Sorter.Run
                         }
                         Current.Option.JawProcTrayId = 0;
                         Current.Task.Status = Model.TaskStatus.回位中;
-                        Context.AppContext.SaveChanges();
                     }
                 }
                 else if (Current.Task.Status == Model.TaskStatus.回位中)
@@ -129,7 +125,6 @@ namespace GMCC.Sorter.Run
                         Current.Task.PreType = Current.Task.Type;
                         Current.Task.Status = Model.TaskStatus.完成;
                         TaskManage.AddTaskLog();
-                        Context.AppContext.SaveChanges();
                     }
                 }
             }
@@ -237,7 +232,6 @@ namespace GMCC.Sorter.Run
                                 }
                             }
                         }
-                        Context.AppContext.SaveChanges();
 
                         sortingResults.Status = 2;
                     }

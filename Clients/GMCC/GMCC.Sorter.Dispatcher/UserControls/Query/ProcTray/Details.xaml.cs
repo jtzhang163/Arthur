@@ -25,11 +25,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
     /// </summary>
     public partial class Details : UserControl
     {
+        private readonly Data.AppContext _AppContext = new Data.AppContext();
         private ProcTrayViewModel ProcTray;
         public Details(int id)
         {
             InitializeComponent();
-            this.ProcTray = ContextToViewModel.Convert(Context.ProcTrays.Single(t => t.Id == id));
+            this.ProcTray = ContextToViewModel.Convert(_AppContext.ProcTrays.Single(t => t.Id == id));
             this.DataContext = this.ProcTray;
         }
 

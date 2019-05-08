@@ -71,7 +71,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.BatteryScaner
                     Current.BatteryScaner.CommInterval = Convert.ToInt32(comm_interval);
                     Current.BatteryScaner.ScanCommand = scan_command;
 
-                    Context.AppContext.SaveChanges();
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
                 }

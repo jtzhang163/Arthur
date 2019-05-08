@@ -34,10 +34,13 @@ namespace GMCC.Sorter
                 {
                     storages = new List<StorageViewModel>();
 
-                    Context.Storages.ToList().ForEach(o =>
+                    using (var db = new Data.AppContext())
                     {
-                        storages.Add(new StorageViewModel(o.Id, o.Column, o.Floor, o.Name, o.Company, o.StillTimeSpan, o.ProcTrayId));
-                    });
+                        db.Storages.ToList().ForEach(o =>
+                        {
+                            storages.Add(new StorageViewModel(o.Id, o.Column, o.Floor, o.Name, o.Company, o.StillTimeSpan, o.ProcTrayId));
+                        });
+                    }
                 }
                 return storages;
             }
@@ -50,9 +53,12 @@ namespace GMCC.Sorter
             {
                 if (mainMachine == null)
                 {
-                    var plc = Context.PLCs.FirstOrDefault();
-                    var commor = new Commor(plc);
-                    mainMachine = new MainMachineViewModel(commor);
+                    using (var db = new Data.AppContext())
+                    {
+                        var plc = db.PLCs.FirstOrDefault();
+                        var commor = new Commor(plc);
+                        mainMachine = new MainMachineViewModel(commor);
+                    }
                 }
                 return mainMachine;
             }
@@ -65,9 +71,12 @@ namespace GMCC.Sorter
             {
                 if (batteryScaner == null)
                 {
-                    var _batteryScaner = Context.BatteryScaners.FirstOrDefault();
-                    var commor = new Commor(_batteryScaner);
-                    batteryScaner = new BatteryScanerViewModel(commor);
+                    using (var db = new Data.AppContext())
+                    {
+                        var _batteryScaner = db.BatteryScaners.FirstOrDefault();
+                        var commor = new Commor(_batteryScaner);
+                        batteryScaner = new BatteryScanerViewModel(commor);
+                    }
                 }
                 return batteryScaner;
             }
@@ -95,9 +104,12 @@ namespace GMCC.Sorter
             {
                 if (bindTrayScaner == null)
                 {
-                    var _trayScaner = Context.TrayScaners.ToList()[0];
-                    var commor = new Commor(_trayScaner);
-                    bindTrayScaner = new TrayScanerViewModel(commor);
+                    using (var db = new Data.AppContext())
+                    {
+                        var _trayScaner = db.TrayScaners.ToList()[0];
+                        var commor = new Commor(_trayScaner);
+                        bindTrayScaner = new TrayScanerViewModel(commor);
+                    }
                 }
                 return bindTrayScaner;
             }
@@ -113,9 +125,12 @@ namespace GMCC.Sorter
             {
                 if (unbindTrayScaner == null)
                 {
-                    var _trayScaner = Context.TrayScaners.ToList()[1];
-                    var commor = new Commor(_trayScaner);
-                    unbindTrayScaner = new TrayScanerViewModel(commor);
+                    using (var db = new Data.AppContext())
+                    {
+                        var _trayScaner = db.TrayScaners.ToList()[1];
+                        var commor = new Commor(_trayScaner);
+                        unbindTrayScaner = new TrayScanerViewModel(commor);
+                    }
                 }
                 return unbindTrayScaner;
             }
@@ -129,9 +144,12 @@ namespace GMCC.Sorter
             {
                 if (mes == null)
                 {
-                    var _mes = Context.MESs.FirstOrDefault();
-                    var commor = new Commor(_mes);
-                    mes = new MesViewModel(commor);
+                    using (var db = new Data.AppContext())
+                    {
+                        var _mes = db.MESs.FirstOrDefault();
+                        var commor = new Commor(_mes);
+                        mes = new MesViewModel(commor);
+                    }
                 }
                 return mes;
             }
@@ -144,7 +162,10 @@ namespace GMCC.Sorter
             {
                 if (task == null)
                 {
-                    task = new CurrentTaskViewModel(Context.CurrentTask);
+                    using (var db = new Data.AppContext())
+                    {
+                        task = new CurrentTaskViewModel(db.CurrentTasks.FirstOrDefault());
+                    }
                 }
                 return task;
             }

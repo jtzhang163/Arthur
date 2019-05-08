@@ -18,6 +18,14 @@ namespace GMCC.Sorter.ViewModel
 
         public int Id => this.Commor.Communicator.Id;
 
+        public Commor Commor { get; private set; }
+
+        public CommorViewModel(Commor commor)
+        {
+            this.Commor = commor;
+
+            this.Timer = new System.Threading.Timer(new TimerCallback(this.Comm), null, 5000, this.CommInterval);
+        }
 
         private string name = null;
         public string Name
@@ -179,8 +187,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if(isEnabled != value)
                 {
-                    this.Commor.Communicator.IsEnabled = value;
-                    Context.AppContext.SaveChanges();
+                    using (var db = new Data.AppContext())
+                    {
+                        this.Commor.Communicator.IsEnabled = value;
+                        db.SaveChanges();
+                    }
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}启用状态: [{1}] 修改为 [{2}]", Name, isEnabled, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref isEnabled, value);
                 }
@@ -245,16 +256,6 @@ namespace GMCC.Sorter.ViewModel
 
 
         private System.Threading.Timer Timer = null;// new System.Threading.Timer(new System.Threading.TimerCallback(obj.Method3), null, 0, 100);
-
-
-        public Commor Commor { get; private set; }
-
-        public CommorViewModel(Commor commor)
-        {
-            this.Commor = commor;
-
-            this.Timer = new System.Threading.Timer(new TimerCallback(this.Comm), null, 5000, this.CommInterval);
-        }
 
         public virtual void Comm(object o)
         {

@@ -164,7 +164,10 @@ namespace GMCC.Sorter.Dispatcher.Utils
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var id = (int)value;
-            return (Context.ProcTrays.FirstOrDefault(o => o.Id == id) ?? new Model.ProcTray()).Code;
+            using (var db = new Data.AppContext())
+            {
+                return (db.ProcTrays.FirstOrDefault(o => o.Id == id) ?? new Model.ProcTray()).Code;
+            }
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -227,7 +230,10 @@ namespace GMCC.Sorter.Dispatcher.Utils
             }
             else
             {
-                return (Context.ProcTrays.FirstOrDefault(o => o.Id == Current.Task.ProcTrayId) ?? new Model.ProcTray()).Code;
+                using (var db = new Data.AppContext())
+                {
+                    return (db.ProcTrays.FirstOrDefault(o => o.Id == Current.Task.ProcTrayId) ?? new Model.ProcTray()).Code;
+                }
             }
         }
 

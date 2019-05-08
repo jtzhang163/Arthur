@@ -42,7 +42,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (type != value)
                 {
-                    Context.CurrentTask.Type = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        db.CurrentTasks.FirstOrDefault().Type = value;
+                        db.SaveChanges();
+                    }
                     this.SetProperty(ref type, value);
                 }
             }
@@ -55,7 +59,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (preType != value)
                 {
-                    Context.CurrentTask.PreType = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        db.CurrentTasks.FirstOrDefault().PreType = value;
+                        db.SaveChanges();
+                    }
                     this.SetProperty(ref preType, value);
                 }
             }
@@ -68,7 +76,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (status != value)
                 {
-                    Context.CurrentTask.Status = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        db.CurrentTasks.FirstOrDefault().Status = value;
+                        db.SaveChanges();
+                    }
                     this.SetProperty(ref status, value);
                 }
             }
@@ -81,7 +93,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (procTrayId != value)
                 {
-                    Context.CurrentTask.ProcTrayId = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        db.CurrentTasks.FirstOrDefault().ProcTrayId = value;
+                        db.SaveChanges();
+                    }
                     this.SetProperty(ref procTrayId, value);
                 }
             }
@@ -94,7 +110,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (storageId != value)
                 {
-                    Context.CurrentTask.StorageId = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        db.CurrentTasks.FirstOrDefault().StorageId = value;
+                        db.SaveChanges();
+                    }
                     this.SetProperty(ref storageId, value);
                 }
             }
@@ -107,7 +127,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (startTime != value)
                 {
-                    Context.CurrentTask.StartTime = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        db.CurrentTasks.FirstOrDefault().StartTime = value;
+                        db.SaveChanges();
+                    }
                     this.SetProperty(ref startTime, value);
                 }
             }

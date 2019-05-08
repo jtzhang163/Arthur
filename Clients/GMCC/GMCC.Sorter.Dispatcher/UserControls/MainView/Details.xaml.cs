@@ -100,7 +100,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
                             try
                             {
                                 procTrayViewModel.StillTimeSpan = o.StillTimeSpan;
-                                Context.AppContext.SaveChanges();
                             }
                             catch (Exception ex)
                             {

@@ -24,6 +24,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MachinePlc
     /// </summary>
     public partial class Edit : UserControl
     {
+        private readonly Data.AppContext _AppContext = new Data.AppContext();
         public Edit(int id)
         {
             InitializeComponent();
@@ -71,7 +72,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MachinePlc
                     Current.MainMachine.Port = port;
                     Current.MainMachine.CommInterval = Convert.ToInt32(comm_interval);
 
-                    Context.AppContext.SaveChanges();
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
                 }
@@ -91,13 +91,13 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.MachinePlc
             {
                 id = 0;
             }
-            else if (Context.ProcTrays.Count(o => o.Code == code) == 0)
+            else if (_AppContext.ProcTrays.Count(o => o.Code == code) == 0)
             {
                 throw new Exception(string.Format("系统中不存在条码为[{0}]的托盘", code));
             }
             else
             {
-                id = Context.ProcTrays.OrderByDescending(o => o.Id).FirstOrDefault(o => o.Code == code).Id;
+                id = _AppContext.ProcTrays.OrderByDescending(o => o.Id).FirstOrDefault(o => o.Code == code).Id;
             }
             return id;
         }

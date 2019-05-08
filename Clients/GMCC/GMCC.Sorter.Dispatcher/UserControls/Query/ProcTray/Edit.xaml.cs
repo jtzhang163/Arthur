@@ -25,12 +25,13 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
     /// </summary>
     public partial class Edit : UserControl
     {
+        private readonly Data.AppContext _AppContext = new Data.AppContext();
         private ProcTrayViewModel ProcTray;
 
         public Edit(int id)
         {
             InitializeComponent();
-            this.ProcTray = ContextToViewModel.Convert(Context.ProcTrays.Single(t => t.Id == id));
+            this.ProcTray = ContextToViewModel.Convert(_AppContext.ProcTrays.Single(t => t.Id == id));
             this.DataContext = this.ProcTray;
 
             this.storage.Items.Add("——未知——");
@@ -89,7 +90,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
                     this.ProcTray.StorageId = storageId;
                     this.ProcTray.StartStillTime = startstill_time;
 
-                    Context.AppContext.SaveChanges();
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
 

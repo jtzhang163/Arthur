@@ -23,11 +23,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
     /// </summary>
     public partial class Details : UserControl
     {
+        private readonly Data.AppContext _AppContext = new Data.AppContext();
         private GMCC.Sorter.Model.Tray Tray;
         public Details(int id)
         {
             InitializeComponent();
-            this.Tray = Context.Trays.Single(t => t.Id == id);
+            this.Tray = _AppContext.Trays.Single(t => t.Id == id);
             this.DataContext = this.Tray;
         }
 

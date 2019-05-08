@@ -97,7 +97,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.TrayScaner
                 this.TrayScaner.CommInterval = Convert.ToInt32(comm_interval);
                 this.TrayScaner.ScanCommand = scan_command;
 
-                Context.AppContext.SaveChanges();
                 tip.Background = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";
             }

@@ -25,11 +25,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
     /// </summary>
     public partial class Details : UserControl
     {
+        private readonly Data.AppContext _AppContext = new Data.AppContext();
         private BatteryViewModel Battery;
         public Details(int id)
         {
             InitializeComponent();
-            this.Battery = ContextToViewModel.Convert(Context.Batteries.Single(t => t.Id == id));
+            this.Battery = ContextToViewModel.Convert(_AppContext.Batteries.Single(t => t.Id == id));
             this.DataContext = this.Battery;
         }
 

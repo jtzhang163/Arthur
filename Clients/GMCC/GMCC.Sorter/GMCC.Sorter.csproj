@@ -58,7 +58,6 @@
     <Compile Include="Current.cs" />
     <Compile Include="Data\ShareContext.cs" />
     <Compile Include="Data\AppContext.cs" />
-    <Compile Include="Data\Context.cs" />
     <Compile Include="Extensions\ModelExtension.cs" />
     <Compile Include="Factory\CommorHelper.cs" />
     <Compile Include="Factory\TaskHelper.cs" />

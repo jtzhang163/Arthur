@@ -26,15 +26,16 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
     /// </summary>
     public partial class Edit : UserControl
     {
+        private readonly Data.AppContext _AppContext = new Data.AppContext();
         private BatteryViewModel Battery;
 
         public Edit(int id)
         {
             InitializeComponent();
-            this.Battery = ContextToViewModel.Convert(Context.Batteries.Single(t => t.Id == id));
+            this.Battery = ContextToViewModel.Convert(_AppContext.Batteries.Single(t => t.Id == id));
             this.DataContext = this.Battery;
 
-            var trays = Context.Trays.ToList();
+            var trays = _AppContext.Trays.ToList();
             this.proctray.Items.Add("——未知——");
             trays.ForEach(o => this.proctray.Items.Add(o.Code));
             var proctray_index = -1;
@@ -69,7 +70,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
         private void edit_Click(object sender, RoutedEventArgs e)
         {
 
-            var trays = Context.Trays.ToList();
+            var trays = _AppContext.Trays.ToList();
 
             var code = this.code.Text.Trim();
             var pos = this.pos.Text.Trim();
@@ -77,7 +78,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
             if (this.proctray.SelectedIndex > 0)
             {
                 var tray = trays[this.proctray.SelectedIndex - 1];
-                var proc_tray = Context.ProcTrays.Where(o => o.TrayId == tray.Id).OrderByDescending(o => o.Id).FirstOrDefault() ?? new Model.ProcTray();
+                var proc_tray = _AppContext.ProcTrays.Where(o => o.TrayId == tray.Id).OrderByDescending(o => o.Id).FirstOrDefault() ?? new Model.ProcTray();
                 procTrayId = proc_tray.Id;
             }
 
@@ -95,7 +96,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
                     this.Battery.ProcTrayId = procTrayId;
                     this.Battery.Pos = Convert.ToInt32(pos);
 
-                    Context.AppContext.SaveChanges();
+                    _AppContext.SaveChanges();
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
 

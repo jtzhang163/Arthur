@@ -62,7 +62,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (name != value)
                 {
-                    Context.Storages.FirstOrDefault(o => o.Id == this.Id).Name = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        db.Storages.FirstOrDefault(o => o.Id == this.Id).Name = value;
+                        db.SaveChanges();
+                    }
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. [{0}] 名称修改为 [{1}]", name, value), Arthur.App.Model.OpType.编辑);
                     this.SetProperty(ref name, value);
                 }
@@ -81,7 +85,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (company != value)
                 {
-                    Context.Storages.FirstOrDefault(o => o.Id == this.Id).Company = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        db.Storages.FirstOrDefault(o => o.Id == this.Id).Company = value;
+                        db.SaveChanges();
+                    }
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 品牌: [{1}] 修改为 [{2}]", Name, company, value), Arthur.App.Model.OpType.编辑);
                     this.SetProperty(ref company, value);
                 }
@@ -102,7 +110,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (stillTimeSpan != value)
                 {
-                    Context.Storages.FirstOrDefault(o => o.Id == this.Id).StillTimeSpan = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        db.Storages.FirstOrDefault(o => o.Id == this.Id).StillTimeSpan = value;
+                        db.SaveChanges();
+                    }
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 静置时间: [{1}] 修改为 [{2}]", Name, stillTimeSpan, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref stillTimeSpan, value);
                 }
@@ -124,7 +136,12 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (procTrayId != value)
                 {
-                    var storage = Context.Storages.FirstOrDefault(o => o.Id == this.Id);
+                    Storage storage = null;
+                    using (var db = new Data.AppContext())
+                    {
+                        storage = db.Storages.FirstOrDefault(o => o.Id == this.Id);
+                    }
+
                     if (storage != null)
                     {
                         storage.ProcTrayId = value;
@@ -149,7 +166,10 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (procTray == null)
                 {
-                    procTray = Context.ProcTrays.FirstOrDefault(o => o.Id == this.ProcTrayId)?? new ProcTray();
+                    using (var db = new Data.AppContext())
+                    {
+                        procTray = db.ProcTrays.FirstOrDefault(o => o.Id == this.ProcTrayId) ?? new ProcTray();
+                    }
                 }
                 return procTray;
             }

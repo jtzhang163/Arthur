@@ -33,17 +33,19 @@ namespace GMCC.Sorter.Business
                 //{
                 //    return new Result(string.Format("系统中已存在条码为{0}的电池！", battery.Code));
                 //}
-                //lock (Arthur.App.Application.DbLocker)
-                //{
-                    Context.Batteries.Add(new Battery() {
+                using (var db = new Data.AppContext())
+                {
+                    db.Batteries.Add(new Battery()
+                    {
                         Code = battery.Code,
                         ScanTime = DateTime.Now,
                         ProcTrayId = Current.Option.Tray11_Id,
                         Pos = GetObject.GetById<ProcTray>(Current.Option.Tray11_Id).GetBatteries().Count + 1,
                         SortResult = SortResult.Unknown
                     });
-                    Context.AppContext.SaveChanges();
-                //}
+                    db.SaveChanges();
+                }
+                
                 if (isScan)
                 {
                     LogHelper.WriteInfo("电池扫码：" + battery.Code);

@@ -51,17 +51,20 @@ namespace GMCC.Sorter.Business
         {
             try
             {
-                Context.TaskLogs.Add(new TaskLog()
+                using (var db = new Data.AppContext())
                 {
-                    ProcTrayId = Current.Task.ProcTrayId,
-                    EndTime = DateTime.Now,
-                    StartTime = Current.Task.StartTime,
-                    StorageId = Current.Task.StorageId,
-                    TaskType = Current.Task.Type,
-                    UserId = Current.User.Id,
-                    Time = DateTime.Now
-                });
-                Context.AppContext.SaveChanges();
+                    db.TaskLogs.Add(new TaskLog()
+                    {
+                        ProcTrayId = Current.Task.ProcTrayId,
+                        EndTime = DateTime.Now,
+                        StartTime = Current.Task.StartTime,
+                        StorageId = Current.Task.StorageId,
+                        TaskType = Current.Task.Type,
+                        UserId = Current.User.Id,
+                        Time = DateTime.Now
+                    });
+                    db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {

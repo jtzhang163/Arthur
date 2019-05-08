@@ -129,7 +129,6 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
                 Current.Task.StartTime = DateTime.Now;
                 Current.Task.ProcTrayId = type == TaskType.上料 ? Current.Option.Tray13_Id : this.Storage.ProcTrayId;
                 Current.Task.Status = Model.TaskStatus.就绪;
-                Context.AppContext.SaveChanges();
             }
         }
     }

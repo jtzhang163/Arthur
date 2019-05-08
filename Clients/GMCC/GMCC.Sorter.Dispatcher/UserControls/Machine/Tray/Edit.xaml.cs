@@ -24,12 +24,14 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
     /// </summary>
     public partial class Edit : UserControl
     {
+        private readonly Data.AppContext _AppContext = new Data.AppContext();
+
         private GMCC.Sorter.Model.Tray Tray;
 
         public Edit(int id)
         {
             InitializeComponent();
-            this.Tray = Context.Trays.Single(t => t.Id == id);
+            this.Tray = _AppContext.Trays.Single(t => t.Id == id);
             this.DataContext = this.Tray;
         }
 
@@ -55,10 +57,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
 
             try
             {
-
                 this.Tray.Company = company;
+                _AppContext.SaveChanges();
 
-                Context.AppContext.SaveChanges();
                 tip.Background = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";
 
