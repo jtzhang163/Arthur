@@ -87,6 +87,7 @@
     <Compile Include="ViewModel\CurrentTaskViewModel.cs" />
     <Compile Include="ViewModel\ProcTrayViewModel.cs" />
     <Compile Include="ViewModel\BatteryViewModel.cs" />
+    <Compile Include="ViewModel\ProductivityViewModel.cs" />
     <Compile Include="ViewModel\ShareDataViewModel.cs" />
     <Compile Include="ViewModel\TrayScanerViewModel.cs" />
     <Compile Include="ViewModel\BatteryScanerViewModel.cs" />

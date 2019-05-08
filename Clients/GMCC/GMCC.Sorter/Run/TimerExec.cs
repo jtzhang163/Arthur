@@ -219,6 +219,25 @@ namespace GMCC.Sorter.Run
                         {
                             Current.MainMachine.Commor.Write(string.Format("D{0:D3}", 401 + i), ushort.Parse(results[i]));
                         }
+
+                        var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray23_Id);
+                        var batteries = procTray.GetBatteries();
+                        var batteryViewModels = ContextToViewModel.Convert(batteries);
+
+                        for (int i = 0; i < results.Length; i++)
+                        {
+                            var result = int.Parse(results[i]);
+                            if (result > 0)
+                            {
+                                var battery = batteryViewModels.FirstOrDefault(o => o.Pos == i + 1);
+                                if (battery != null)
+                                {
+                                    battery.SortResult = (SortResult)result;
+                                }
+                            }
+                        }
+                        Context.AppContext.SaveChanges();
+
                         sortingResults.Status = 2;
                     }
                 }

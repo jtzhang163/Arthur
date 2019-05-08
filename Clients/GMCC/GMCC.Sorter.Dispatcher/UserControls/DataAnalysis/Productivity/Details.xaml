@@ -5,10 +5,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.DataAnalysis.Productivity"
              xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
             <utils:RightInfoConverter x:Key="rightInfoConverter"/>
             <utils:VersionConverter x:Key="versionConverter"/>
             <utils:UpdateTimeConverter x:Key="updateTimeConverter"/>
@@ -27,12 +33,17 @@
     </UserControl.Resources>
     <Grid>
         <DockPanel>
-
-            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-
-            </StackPanel>
             <DockPanel>
-                <!--<TextBlock x:Name="tip" Foreground="White" Background="Red" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>-->
+                <DockPanel DockPanel.Dock="Top" Height="40">
+                    <Button DockPanel.Dock="Right" Style="{DynamicResource ChamferButton}" Click="update_Click" Width="60">刷 新</Button>
+                    <WrapPanel VerticalAlignment="Center">
+                        <Label Content="时间：" VerticalAlignment="Center"/>
+                        <xctk:DateTimePicker x:Name="start_time" Format="Custom" FormatString="yyyy-MM-dd" Height="24"/>
+                        <Label Content="到" VerticalAlignment="Center"/>
+                        <xctk:DateTimePicker x:Name="end_time" Format="Custom" FormatString="yyyy-MM-dd" Height="24" Margin="0,0,20,0"/>
+                    </WrapPanel>
+                </DockPanel>
+                <TextBlock x:Name="tip" Foreground="White" Background="Green" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>
                 <Grid x:Name="grid" Background="Blue" ContextMenu="{x:Null}">
                     <WebBrowser x:Name="browser" Navigating="Browser_Navigating"/>
                 </Grid>
