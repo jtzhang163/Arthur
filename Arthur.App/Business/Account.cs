@@ -49,26 +49,28 @@ namespace Arthur.Business
 
         public static Result Register(string name, string number, string password, bool isEnabled)
         {
-
             User user = new User();
-            if (Context.Users.Where(u => u.Name == name).Count() > 0)
-            {
-                return new Result("系统中已存在用户：" + name);
-            }
-            user.Name = name;
-            user.Number = number;
-            user.Email = string.Empty;
-            user.Gender = Gender.Unknown;
-            user.Nickname = name;
-            user.PhoneNumber = string.Empty;
-            user.Password = EncryptHelper.EncodeBase64(password);
-            user.IsEnabled = isEnabled;
-            user.RegisterTime = DateTime.Now;
-            user.RoleId = Context.Roles.Single(r => r.Name == "操作员").Id;
             try
             {
-                Context.Users.Add(user);
-                Context.AppContext.SaveChanges();
+                using (var db = new Arthur.App.AppContext())
+                {
+                    if (db.Users.Where(u => u.Name == name).Count() > 0)
+                    {
+                        return new Result("系统中已存在用户：" + name);
+                    }
+                    user.Name = name;
+                    user.Number = number;
+                    user.Email = string.Empty;
+                    user.Gender = Gender.Unknown;
+                    user.Nickname = name;
+                    user.PhoneNumber = string.Empty;
+                    user.Password = EncryptHelper.EncodeBase64(password);
+                    user.IsEnabled = isEnabled;
+                    user.RegisterTime = DateTime.Now;
+                    user.RoleId = db.Roles.Single(r => r.Name == "操作员").Id;
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                }
                 Arthur.Business.Logging.AddOplog(user.Id, string.Format("注册用户[{0}]", user.Name), App.Model.OpType.创建);
             }
             catch (Exception ex)
@@ -96,27 +98,31 @@ namespace Arthur.Business
                 return new Result("请输入密码！");
             }
 
-            var user = new User();
-
             var entityPassword = EncryptHelper.EncodeBase64(password);
-            user = Context.Users.FirstOrDefault(u => u.Name == name && u.Password == entityPassword) ?? new User();
 
-            if (user.Id < 1)
-            {
-                return new Result("用户名或密码错误！");
-            }
-
-            if (!user.IsEnabled)
-            {
-                return new Result(user.Name + "尚未激活或被禁用！");
-            }
-
-            user.LastLoginTime = DateTime.Now;
-            user.LoginTimes++;
+            var user = new User();
 
             try
             {
-                Context.AppContext.SaveChanges();
+                using (var db = new Arthur.App.AppContext())
+                {
+                    user = db.Users.FirstOrDefault(u => u.Name == name && u.Password == entityPassword) ?? new User();
+
+                    if (user.Id < 1)
+                    {
+                        return new Result("用户名或密码错误！");
+                    }
+
+                    if (!user.IsEnabled)
+                    {
+                        return new Result(user.Name + "尚未激活或被禁用！");
+                    }
+
+                    user.LastLoginTime = DateTime.Now;
+                    user.LoginTimes++;
+
+                    db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
@@ -163,46 +169,49 @@ namespace Arthur.Business
             }
             #endregion
 
-            var user = Context.Users.FirstOrDefault(u => u.Name == username) ?? new User();
-            if (user.Id < 1)
+            using (var db = new Arthur.App.AppContext())
             {
-                return new Result("不存在用户：" + username);
-            }
+                var user = db.Users.FirstOrDefault(u => u.Name == username) ?? new User();
+                if (user.Id < 1)
+                {
+                    return new Result("不存在用户：" + username);
+                }
 
-            if (user.Password != EncryptHelper.EncodeBase64(old_pwd))
-            {
-                return new Result("原密码输入错误！");
-            }
+                if (user.Password != EncryptHelper.EncodeBase64(old_pwd))
+                {
+                    return new Result("原密码输入错误！");
+                }
 
-            user.Password = EncryptHelper.EncodeBase64(new_pwd);
-            Context.AppContext.SaveChanges();
+                user.Password = EncryptHelper.EncodeBase64(new_pwd);
+                db.SaveChanges();
+            }
 
             return Result.OK;
         }
 
-        public static User GetUser(int id)
-        {
-            return Context.Users.FirstOrDefault(u => u.Id == id) ?? new User();
-        }
+        //public static User GetUser(int id)
+        //{
+        //    using (var db = new Arthur.App.AppContext())
+        //    {
+        //        return db.Users.FirstOrDefault(u => u.Id == id) ?? new User();
+        //    }
+        //}
 
-        public static Role GetRole(int id)
-        {
-            return Context.Roles.FirstOrDefault(u => u.Id == id) ?? new Role();
-        }
+        //public static Role GetRole(int id)
+        //{
+        //    using (var db = new Arthur.App.AppContext())
+        //    {
+        //        return db.Roles.FirstOrDefault(u => u.Id == id) ?? new Role();
+        //    }
+        //}
 
         public static IEnumerable<Role> GetRoles()
         {
-            var roles = Context.Roles.ToList();
-            return roles;
-            //return roles.Where(r => r.Level <= Current.User.Role.Level);
+            using (var db = new Arthur.App.AppContext())
+            {
+                return db.Roles.ToList();
+            }
         }
 
-
-        //public static bool Logout()
-        //{
-        //    OperationHelper.ShowTips(AppCurrent.User.Name + "成功注销");
-        //    AppCurrent.User = new User(-1);
-        //    return true;
-        //}
     }
 }

@@ -23,6 +23,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
     /// </summary>
     public partial class Details : UserControl
     {
+        private readonly Arthur.App.AppContext _ArthurContext = new Arthur.App.AppContext();
         private readonly Data.AppContext _AppContext = new Data.AppContext();
         private GMCC.Sorter.Model.Tray Tray;
         public Details(int id)
@@ -39,7 +40,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            if (Current.User.Role.Level < Arthur.App.Data.Context.Roles.Single(r => r.Name == "管理员").Level)
+            if (Current.User.Role.Level < _ArthurContext.Roles.Single(r => r.Name == "管理员").Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

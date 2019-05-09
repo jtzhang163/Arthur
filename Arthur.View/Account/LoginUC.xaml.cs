@@ -2,6 +2,7 @@
 using Arthur.Security;
 using Arthur.View.Utils;
 using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Windows;
@@ -24,7 +25,11 @@ namespace Arthur.View.Account
             }
             else
             {
-                var user = Arthur.Business.Account.GetUser(Current.Option.RememberUserId);
+                var user = new App.Model.User();
+                using (var db = new Arthur.App.AppContext())
+                {
+                    user = db.Users.FirstOrDefault(o => o.Id == Current.Option.RememberUserId);
+                }
                 if (user.Id > 0)
                 {
                     this.username.Text = user.Name;

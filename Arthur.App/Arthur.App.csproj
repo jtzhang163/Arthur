@@ -70,7 +70,6 @@
     <Compile Include="Comm\SerialComm.cs" />
     <Compile Include="Current.cs" />
     <Compile Include="Data\AppContext.cs" />
-    <Compile Include="Data\Context.cs" />
     <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="Factory\AccountFactory.cs" />
     <Compile Include="Model\Base\EthernetCommor.cs" />

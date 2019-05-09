@@ -27,6 +27,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
     /// </summary>
     public partial class Index : UserControl
     {
+        private readonly Arthur.App.AppContext _ArthurContext = new Arthur.App.AppContext();
         private readonly Data.AppContext _AppContext = new Data.AppContext();
         public Index(int id)
         {
@@ -79,7 +80,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 
         private void create_Click(object sender, RoutedEventArgs e)
         {
-            if (Current.User.Role.Level < Arthur.App.Data.Context.Roles.Single(r => r.Name == "管理员").Level)
+            if (Current.User.Role.Level < _ArthurContext.Roles.Single(r => r.Name == "管理员").Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -104,7 +105,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
                 return;
             }
 
-            if (Current.User.Role.Level < Arthur.App.Data.Context.Roles.Single(r => r.Name == "管理员").Level)
+            if (Current.User.Role.Level < _ArthurContext.Roles.Single(r => r.Name == "管理员").Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -122,7 +123,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 
         private void edit_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Current.User.Role.Level < Arthur.App.Data.Context.Roles.Single(r => r.Name == "管理员").Level)
+            if (Current.User.Role.Level < _ArthurContext.Roles.Single(r => r.Name == "管理员").Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

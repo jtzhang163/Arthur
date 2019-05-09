@@ -60,7 +60,11 @@ namespace Arthur.View.Utils
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var id = (int)value;
-            var name = Arthur.Business.Account.GetUser(id).Name;
+            var name = "";
+            using (var db = new Arthur.App.AppContext())
+            {
+                name = db.Users.FirstOrDefault(o => o.Id == id)?.Name;
+            }
             if (string.IsNullOrEmpty(name)) name = "Unknown";
             return name;
         }

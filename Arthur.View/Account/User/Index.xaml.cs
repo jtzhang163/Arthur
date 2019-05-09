@@ -26,6 +26,7 @@ namespace Arthur.View.Account.User
     /// </summary>
     public partial class Index : UserControl
     {
+        private readonly App.AppContext _AppContext = new App.AppContext();
         public Index(int id)
         {
             InitializeComponent();
@@ -40,11 +41,11 @@ namespace Arthur.View.Account.User
                 var queryText = this.queryText.Text.Trim();
                 if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return Context.Users.OrderBy(o => o.Id);
+                    return _AppContext.Users.OrderBy(o => o.Id);
                 }
                 else
                 {
-                    return Context.Users.Where(r => r.Name.Contains(queryText) 
+                    return _AppContext.Users.Where(r => r.Name.Contains(queryText) 
                     || r.Role.Name.Contains(queryText)
                     || r.Number.Contains(queryText)
                     || r.PhoneNumber.Contains(queryText)
@@ -83,7 +84,7 @@ namespace Arthur.View.Account.User
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            var user = Context.Users.SingleOrDefault(r => r.Id == id);
+            var user = _AppContext.Users.SingleOrDefault(r => r.Id == id);
 
             if (user == null)
             {
@@ -97,7 +98,7 @@ namespace Arthur.View.Account.User
                 return;
             }
 
-            if (Current.User.Role.Level <= Context.Users.Single(r => r.Id == id).Role.Level)
+            if (Current.User.Role.Level <= _AppContext.Users.Single(r => r.Id == id).Role.Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -105,8 +106,8 @@ namespace Arthur.View.Account.User
 
             if (MessageBox.Show(string.Format("确定要删除用户【{0}】吗？", user.Name), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Context.Users.Remove(user);
-                Context.AppContext.SaveChanges();
+                _AppContext.Users.Remove(user);
+                _AppContext.SaveChanges();
                 Arthur.Business.Logging.AddOplog(string.Format("删除用户[{0}]", user.Name), App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }
@@ -115,7 +116,7 @@ namespace Arthur.View.Account.User
         private void edit_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            if (Current.User != Context.Users.Single(r => r.Id == id) && Current.User.Role.Level <= Context.Users.Single(r => r.Id == id).Role.Level)
+            if (Current.User != _AppContext.Users.Single(r => r.Id == id) && Current.User.Role.Level <= _AppContext.Users.Single(r => r.Id == id).Role.Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

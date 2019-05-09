@@ -24,6 +24,7 @@ namespace Arthur.View.Account.Role
     /// </summary>
     public partial class Create : UserControl
     {
+        private readonly App.AppContext _AppContext = new App.AppContext();
         public Create(int id)
         {
             InitializeComponent();
@@ -49,7 +50,7 @@ namespace Arthur.View.Account.Role
             {                 
                 tip.Text = "角色等级输入有误！";
             }
-            else if (iLevel >= Context.Roles.Single(r => r.Name == "系统管理员").Level)
+            else if (iLevel >= _AppContext.Roles.Single(r => r.Name == "系统管理员").Level)
             {                
                 tip.Text = "角色等级必须小于系统管理员！";
             }

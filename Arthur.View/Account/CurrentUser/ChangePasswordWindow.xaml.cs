@@ -1,5 +1,6 @@
 ﻿using Arthur.App;
 using Arthur.App.Data;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
@@ -10,12 +11,13 @@ namespace Arthur.View.Account
     /// </summary>
     public partial class ChangePasswordWindow : Window
     {
+        private readonly App.AppContext _AppContext = new App.AppContext();
         private Arthur.App.Model.User User;
 
         public ChangePasswordWindow(int id)
         {
             InitializeComponent();
-            this.User = Arthur.Business.Account.GetUser(id);
+            this.User = _AppContext.Users.FirstOrDefault(o => o.Id == id);
             this.DataContext = this.User;
         }
 

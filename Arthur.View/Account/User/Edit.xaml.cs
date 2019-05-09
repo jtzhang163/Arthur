@@ -25,15 +25,16 @@ namespace Arthur.View.Account.User
     /// </summary>
     public partial class Edit : UserControl
     {
+        private readonly App.AppContext _AppContext = new App.AppContext();
         private Arthur.App.Model.User User;
 
         public Edit(int id)
         {
             InitializeComponent();
-            this.User = Arthur.Business.Account.GetUser(id);
+            this.User = _AppContext.Users.FirstOrDefault(o => o.Id == id);
             this.DataContext = this.User;
 
-            this.role.SelectedIndex = Context.Roles.ToList().IndexOf(this.User.Role);
+            this.role.SelectedIndex = _AppContext.Roles.ToList().IndexOf(this.User.Role);
 
             if (this.User.Role.Level >= Current.User.Role.Level)
             {
@@ -65,7 +66,7 @@ namespace Arthur.View.Account.User
             var phoneNumber = this.phoneNumber.Text.Trim();
             var email = this.email.Text.Trim();
             var isEnabled = this.isEnabled.IsChecked;
-            var role = Context.Roles.ToList()[this.role.SelectedIndex];
+            var role = _AppContext.Roles.ToList()[this.role.SelectedIndex];
 
             try
             {
@@ -80,7 +81,7 @@ namespace Arthur.View.Account.User
                 this.User.IsEnabled = isEnabled.Value;
                 this.User.Role = role;
 
-                Arthur.App.Data.Context.AppContext.SaveChanges();
+                _AppContext.SaveChanges();
                 tip.Background = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";
 

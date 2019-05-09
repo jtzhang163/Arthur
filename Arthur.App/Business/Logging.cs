@@ -28,8 +28,11 @@ namespace Arthur.Business
             };
             try
             {
-                Context.EventLogs.Add(log);
-                Context.AppContext.SaveChanges();
+                using (var db = new App.AppContext())
+                {
+                    db.EventLogs.Add(log);
+                    db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {
@@ -55,8 +58,11 @@ namespace Arthur.Business
             };
             try
             {
-                Context.Oplogs.Add(log);
-                Context.AppContext.SaveChanges();
+                using (var db = new App.AppContext())
+                {
+                    db.Oplogs.Add(log);
+                    db.SaveChanges();
+                }
             }
             catch (Exception ex)
             {

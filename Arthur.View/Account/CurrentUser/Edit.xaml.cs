@@ -25,15 +25,14 @@ namespace Arthur.View.Account.CurrentUser
     /// </summary>
     public partial class Edit : UserControl
     {
+        private readonly App.AppContext _AppContext = new App.AppContext();
         private Arthur.App.Model.User User;
-
         public Edit(int id)
         {
             InitializeComponent();
-            this.User = Arthur.Business.Account.GetUser(id);
+            this.User = _AppContext.Users.FirstOrDefault(o => o.Id == id);
             this.DataContext = this.User;
-
-            this.role.SelectedIndex = Context.Roles.ToList().IndexOf(this.User.Role);
+            this.role.SelectedIndex = _AppContext.Roles.ToList().IndexOf(this.User.Role);
         }
 
         private void textbox_GotFocus(object sender, RoutedEventArgs e)
@@ -67,7 +66,8 @@ namespace Arthur.View.Account.CurrentUser
                 this.User.PhoneNumber = phoneNumber;
                 this.User.Email = email;
 
-                Arthur.App.Data.Context.AppContext.SaveChanges();
+                _AppContext.SaveChanges();
+
                 tip.Background = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";
 

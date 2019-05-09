@@ -23,12 +23,13 @@ namespace Arthur.View.Account.Role
     /// </summary>
     public partial class Edit : UserControl
     {
+        private readonly App.AppContext _AppContext = new App.AppContext();
         private Arthur.App.Model.Role Role;
 
         public Edit(int id)
         {
             InitializeComponent();
-            this.Role = Arthur.Business.Account.GetRole(id);
+            this.Role = _AppContext.Roles.FirstOrDefault(o => o.Id == id);
             this.DataContext = this.Role;
         }
 
@@ -56,18 +57,15 @@ namespace Arthur.View.Account.Role
             tip.Background = new SolidColorBrush(Colors.Red);
 
             if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(level))
-            {
-                 
+            {  
                 tip.Text = "请填写数据！";
             }
             else if (!int.TryParse(level, out int iLevel))
-            {
-                 
+            {  
                 tip.Text = "角色等级输入有误！";
             }
-            else if (iLevel > Context.Roles.Single(r => r.Name == "系统管理员").Level)
-            {
-                 
+            else if (iLevel > _AppContext.Roles.Single(r => r.Name == "系统管理员").Level)
+            {    
                 tip.Text = "角色等级不能大于管理员等级！";
             }
             else
@@ -77,7 +75,8 @@ namespace Arthur.View.Account.Role
                     this.Role.Name = name;
                     this.Role.Level = iLevel;
 
-                    Arthur.App.Data.Context.AppContext.SaveChanges();
+                    _AppContext.SaveChanges();
+
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
                 }

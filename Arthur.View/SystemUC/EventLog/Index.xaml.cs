@@ -28,6 +28,7 @@ namespace Arthur.View.SystemUC.EventLog
     /// </summary>
     public partial class Index : UserControl
     {
+        private readonly App.AppContext _AppContext = new App.AppContext();
         public Index(int id)
         {
             InitializeComponent();
@@ -55,11 +56,11 @@ namespace Arthur.View.SystemUC.EventLog
                 if (this.event_type.SelectedIndex > 0)
                 {
                     var type = (Arthur.App.Model.EventType)Enum.Parse(typeof(Arthur.App.Model.EventType), this.event_type.SelectedItem.ToString());
-                    return Context.EventLogs.Where(r => r.Time > startTime && r.Time < endTime && r.EventType == type).OrderBy(o => o.Id);
+                    return _AppContext.EventLogs.Where(r => r.Time > startTime && r.Time < endTime && r.EventType == type).OrderBy(o => o.Id);
                 }
                 else
                 {
-                    return Context.EventLogs.Where(r => r.Time > startTime && r.Time < endTime).OrderBy(o => o.Id);
+                    return _AppContext.EventLogs.Where(r => r.Time > startTime && r.Time < endTime).OrderBy(o => o.Id);
                 }
             }
         }
@@ -93,7 +94,7 @@ namespace Arthur.View.SystemUC.EventLog
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            var EventLog = Context.EventLogs.SingleOrDefault(r => r.Id == id);
+            var EventLog = _AppContext.EventLogs.SingleOrDefault(r => r.Id == id);
 
             if (EventLog == null)
             {
@@ -101,7 +102,7 @@ namespace Arthur.View.SystemUC.EventLog
                 return;
             }
 
-            if (Current.User.Role.Level < Context.Roles.FirstOrDefault(r => r.Name == "管理员").Level)
+            if (Current.User.Role.Level < _AppContext.Roles.FirstOrDefault(r => r.Name == "管理员").Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -110,8 +111,8 @@ namespace Arthur.View.SystemUC.EventLog
 
             if (MessageBox.Show(string.Format("确定要删除该记录吗？", ""), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Context.EventLogs.Remove(EventLog);
-                Context.AppContext.SaveChanges();
+                _AppContext.EventLogs.Remove(EventLog);
+                _AppContext.SaveChanges();
                 UpdateDataGrid(PageIndex);
             }
         }

@@ -13,14 +13,17 @@ namespace Arthur.Business
 
         public Result Create(Role role)
         {
-            if (Context.Roles.Count(r => r.Name == role.Name) > 0)
-            {
-                return new Result(string.Format("系统中已存在名为{0}的角色！", role.Name));
-            }
             try
             {
-                Context.Roles.Add(new App.Model.Role() { Level = role.Level, Name = role.Name });
-                Context.AppContext.SaveChanges();
+                using (var db = new Arthur.App.AppContext())
+                {
+                    if (db.Roles.Count(r => r.Name == role.Name) > 0)
+                    {
+                        return new Result(string.Format("系统中已存在名为{0}的角色！", role.Name));
+                    }
+                    db.Roles.Add(new App.Model.Role() { Level = role.Level, Name = role.Name });
+                    db.SaveChanges();
+                }
                 Arthur.Business.Logging.AddOplog(string.Format("新增角色[{0}]", role.Name), App.Model.OpType.创建);
                 return Result.OK;
             }
@@ -28,9 +31,6 @@ namespace Arthur.Business
             {
                 return new Result(ex.Message);
             }
-
         }
-
-
     }
 }

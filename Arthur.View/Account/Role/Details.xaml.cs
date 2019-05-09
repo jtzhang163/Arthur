@@ -23,10 +23,11 @@ namespace Arthur.View.Account.Role
     /// </summary>
     public partial class Details : UserControl
     {
+        private readonly App.AppContext _AppContext = new App.AppContext();
         public Details(int id)
         {
             InitializeComponent();
-            this.DataContext = Arthur.Business.Account.GetRole(id);
+            this.DataContext = _AppContext.Roles.FirstOrDefault(o => o.Id == id);
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)
@@ -36,7 +37,7 @@ namespace Arthur.View.Account.Role
 
         private void edit_Click(object sender, RoutedEventArgs e)
         {
-            if (Current.User.Role.Level < Context.Roles.Single(r => r.Name == "系统管理员").Level)
+            if (Current.User.Role.Level < _AppContext.Roles.Single(r => r.Name == "系统管理员").Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

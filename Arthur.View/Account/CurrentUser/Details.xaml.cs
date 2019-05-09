@@ -21,10 +21,11 @@ namespace Arthur.View.Account.CurrentUser
     /// </summary>
     public partial class Details : UserControl
     {
+        private readonly App.AppContext _AppContext = new App.AppContext();
         public Details(int id)
         {
             InitializeComponent();
-            this.DataContext = Arthur.Business.Account.GetUser(id);
+            this.DataContext = _AppContext.Users.FirstOrDefault(o=>o.Id == id);
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)

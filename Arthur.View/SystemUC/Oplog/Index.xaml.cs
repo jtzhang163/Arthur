@@ -27,6 +27,7 @@ namespace Arthur.View.SystemUC.Oplog
     /// </summary>
     public partial class Index : UserControl
     {
+        private readonly App.AppContext _AppContext = new App.AppContext();
         public Index(int id)
         {
             InitializeComponent();
@@ -55,11 +56,11 @@ namespace Arthur.View.SystemUC.Oplog
                 if (this.op_type.SelectedIndex > 0)
                 {
                     var type = (Arthur.App.Model.OpType)Enum.Parse(typeof(Arthur.App.Model.OpType), this.op_type.SelectedItem.ToString());
-                    return Context.Oplogs.Where(r => r.Time > startTime && r.Time < endTime && r.OpType == type).OrderBy(o => o.Id);
+                    return _AppContext.Oplogs.Where(r => r.Time > startTime && r.Time < endTime && r.OpType == type).OrderBy(o => o.Id);
                 }
                 else
                 {
-                    return Context.Oplogs.Where(r => r.Time > startTime && r.Time < endTime).OrderBy(o => o.Id);
+                    return _AppContext.Oplogs.Where(r => r.Time > startTime && r.Time < endTime).OrderBy(o => o.Id);
                 }
             }
         }
@@ -93,7 +94,7 @@ namespace Arthur.View.SystemUC.Oplog
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            var Oplog = Context.Oplogs.SingleOrDefault(r => r.Id == id);
+            var Oplog = _AppContext.Oplogs.SingleOrDefault(r => r.Id == id);
 
             if (Oplog == null)
             {
@@ -101,7 +102,7 @@ namespace Arthur.View.SystemUC.Oplog
                 return;
             }
 
-            if (Current.User.Role.Level < Context.Roles.FirstOrDefault(r => r.Name == "管理员").Level)
+            if (Current.User.Role.Level < _AppContext.Roles.FirstOrDefault(r => r.Name == "管理员").Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -110,8 +111,8 @@ namespace Arthur.View.SystemUC.Oplog
 
             if (MessageBox.Show(string.Format("确定要删除该条日志吗？", ""), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Context.Oplogs.Remove(Oplog);
-                Context.AppContext.SaveChanges();
+                _AppContext.Oplogs.Remove(Oplog);
+                _AppContext.SaveChanges();
                 UpdateDataGrid(PageIndex);
             }
         }

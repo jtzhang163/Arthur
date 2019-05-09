@@ -23,10 +23,11 @@ namespace Arthur.View.Account.User
     /// </summary>
     public partial class Details : UserControl
     {
+        private readonly App.AppContext _AppContext = new App.AppContext();
         public Details(int id)
         {
             InitializeComponent();
-            this.DataContext = Arthur.Business.Account.GetUser(id);
+            this.DataContext = _AppContext.Users.FirstOrDefault(o => o.Id == id);
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)
@@ -38,7 +39,7 @@ namespace Arthur.View.Account.User
         {
             var id = Convert.ToInt32((sender as Button).Tag);
 
-            if (Current.User != Context.Users.Single(r => r.Id == id) && Current.User.Role.Level <= Context.Users.Single(r => r.Id == id).Role.Level)
+            if (Current.User != _AppContext.Users.Single(r => r.Id == id) && Current.User.Role.Level <= _AppContext.Users.Single(r => r.Id == id).Role.Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

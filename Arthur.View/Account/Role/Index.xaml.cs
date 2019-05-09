@@ -26,6 +26,7 @@ namespace Arthur.View.Account.Role
     /// </summary>
     public partial class Index : UserControl
     {
+        private readonly App.AppContext _AppContext = new App.AppContext();
         public Index(int id)
         {
             InitializeComponent();
@@ -40,11 +41,11 @@ namespace Arthur.View.Account.Role
                 var queryText = this.queryText.Text.Trim();
                 if (string.IsNullOrWhiteSpace(queryText))
                 {
-                    return Context.Roles.OrderBy(o => o.Id);
+                    return _AppContext.Roles.OrderBy(o => o.Id);
                 }
                 else
                 {
-                    return Context.Roles.Where(r => r.Name.Contains(queryText)).OrderBy(o => o.Id);
+                    return _AppContext.Roles.Where(r => r.Name.Contains(queryText)).OrderBy(o => o.Id);
                 }
             }
         }
@@ -72,7 +73,7 @@ namespace Arthur.View.Account.Role
 
         private void create_Click(object sender, RoutedEventArgs e)
         {
-            if (Current.User.Role.Level < Context.Roles.Single(r => r.Name == "系统管理员").Level)
+            if (Current.User.Role.Level < _AppContext.Roles.Single(r => r.Name == "系统管理员").Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -89,7 +90,7 @@ namespace Arthur.View.Account.Role
         private void delete_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            var role = Context.Roles.SingleOrDefault(r => r.Id == id);
+            var role = _AppContext.Roles.SingleOrDefault(r => r.Id == id);
 
             if (role == null)
             {
@@ -97,7 +98,7 @@ namespace Arthur.View.Account.Role
                 return;
             }
 
-            if (Current.User.Role.Level < Context.Roles.Single(r => r.Name == "系统管理员").Level)
+            if (Current.User.Role.Level < _AppContext.Roles.Single(r => r.Name == "系统管理员").Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -118,8 +119,8 @@ namespace Arthur.View.Account.Role
 
             if (MessageBox.Show(preTip + string.Format("确定要删除角色【{0}】吗？", role.Name), "删除确认", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
             {
-                Context.Roles.Remove(role);
-                Context.AppContext.SaveChanges();
+                _AppContext.Roles.Remove(role);
+                _AppContext.SaveChanges();
                 Arthur.Business.Logging.AddOplog(string.Format("删除角色[{0}]", role.Name), App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }
@@ -127,7 +128,7 @@ namespace Arthur.View.Account.Role
 
         private void edit_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Current.User.Role.Level < Context.Roles.Single(r => r.Name == "系统管理员").Level)
+            if (Current.User.Role.Level < _AppContext.Roles.Single(r => r.Name == "系统管理员").Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
