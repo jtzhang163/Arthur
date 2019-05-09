@@ -34,8 +34,7 @@ namespace GMCC.Sorter.ViewModel
                 {
                     using (var db = new Data.AppContext())
                     {
-                        ProcTray contextProcTray = null;
-                        contextProcTray = db.ProcTrays.FirstOrDefault(o => o.Id == this.Id);
+                        var contextProcTray = db.ProcTrays.FirstOrDefault(o => o.Id == this.Id);
                         if(contextProcTray != null)
                         {
                             contextProcTray.Code = value;

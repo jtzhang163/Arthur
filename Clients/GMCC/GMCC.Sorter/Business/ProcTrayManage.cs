@@ -44,7 +44,6 @@ namespace GMCC.Sorter.Business
                             IsEnabled = true,
                             Name = procTray.Code,
                         });
-                        db.SaveChanges();
                     }
 
                     var proctray = db.ProcTrays.Add(new ProcTray()

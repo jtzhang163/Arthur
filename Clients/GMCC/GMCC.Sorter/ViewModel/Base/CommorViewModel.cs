@@ -22,6 +22,13 @@ namespace GMCC.Sorter.ViewModel
 
         public CommorViewModel(Commor commor)
         {
+            this.name = commor.Communicator.Name;
+            this.company = commor.Communicator.Company;
+            this.location = commor.Communicator.Location;
+            this.modelNumber = commor.Communicator.ModelNumber;
+            this.serialNumber = commor.Communicator.SerialNumber;
+            this.isEnabled = commor.Communicator.IsEnabled;
+
             this.Commor = commor;
 
             this.Timer = new System.Threading.Timer(new TimerCallback(this.Comm), null, 5000, this.CommInterval);
@@ -42,7 +49,26 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (name != value)
                 {
-                    this.Commor.Communicator.Name = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        if (this == Current.MainMachine)
+                        {
+                            db.PLCs.FirstOrDefault(o => o.Id == this.Id).Name = value;
+                        }
+                        else if (this == Current.BatteryScaner)
+                        {
+                            db.BatteryScaners.FirstOrDefault(o => o.Id == this.Id).Name = value;
+                        }
+                        else if (this == Current.Mes)
+                        {
+                            db.MESs.FirstOrDefault(o => o.Id == this.Id).Name = value;
+                        }
+                        else if (Current.TrayScaners.Contains(this))
+                        {
+                            db.TrayScaners.FirstOrDefault(o => o.Id == this.Id).Name = value;
+                        }
+                        db.SaveChanges();
+                    }
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. [{0}] 名称修改为 [{1}]", name, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref name, value);
                 }
@@ -64,7 +90,26 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (company != value)
                 {
-                    this.Commor.Communicator.Company = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        if (this == Current.MainMachine)
+                        {
+                            db.PLCs.FirstOrDefault(o => o.Id == this.Id).Company = value;
+                        }
+                        else if (this == Current.BatteryScaner)
+                        {
+                            db.BatteryScaners.FirstOrDefault(o => o.Id == this.Id).Company = value;
+                        }
+                        else if (this == Current.Mes)
+                        {
+                            db.MESs.FirstOrDefault(o => o.Id == this.Id).Company = value;
+                        }
+                        else if (Current.TrayScaners.Contains(this))
+                        {
+                            db.TrayScaners.FirstOrDefault(o => o.Id == this.Id).Company = value;
+                        }
+                        db.SaveChanges();
+                    }
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}品牌: [{1}] 修改为 [{2}]", Name, company, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref company, value);
                 }
@@ -87,7 +132,26 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (location != value)
                 {
-                    this.Commor.Communicator.Location = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        if (this == Current.MainMachine)
+                        {
+                            db.PLCs.FirstOrDefault(o => o.Id == this.Id).Location = value;
+                        }
+                        else if (this == Current.BatteryScaner)
+                        {
+                            db.BatteryScaners.FirstOrDefault(o => o.Id == this.Id).Location = value;
+                        }
+                        else if (this == Current.Mes)
+                        {
+                            db.MESs.FirstOrDefault(o => o.Id == this.Id).Location = value;
+                        }
+                        else if (Current.TrayScaners.Contains(this))
+                        {
+                            db.TrayScaners.FirstOrDefault(o => o.Id == this.Id).Location = value;
+                        }
+                        db.SaveChanges();
+                    }
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}位置: [{1}] 修改为 [{2}]", Name, location, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref location, value);
                 }
@@ -110,7 +174,27 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (modelNumber != value)
                 {
-                    this.Commor.Communicator.ModelNumber = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        if (this == Current.MainMachine)
+                        {
+                            db.PLCs.FirstOrDefault(o => o.Id == this.Id).ModelNumber = value;
+                        }
+                        else if (this == Current.BatteryScaner)
+                        {
+                            db.BatteryScaners.FirstOrDefault(o => o.Id == this.Id).ModelNumber = value;
+                        }
+                        else if (this == Current.Mes)
+                        {
+                            db.MESs.FirstOrDefault(o => o.Id == this.Id).ModelNumber = value;
+                        }
+                        else if (Current.TrayScaners.Contains(this))
+                        {
+                            db.TrayScaners.FirstOrDefault(o => o.Id == this.Id).ModelNumber = value;
+                        }
+                        db.SaveChanges();
+                    }
+
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}型号: [{1}] 修改为 [{2}]", Name, modelNumber, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref modelNumber, value);
                 }
@@ -134,13 +218,69 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (serialNumber != value)
                 {
-                    this.Commor.Communicator.SerialNumber = value;
+                    using (var db = new Data.AppContext())
+                    {
+                        if (this == Current.MainMachine)
+                        {
+                            db.PLCs.FirstOrDefault(o => o.Id == this.Id).SerialNumber = value;
+                        }
+                        else if (this == Current.BatteryScaner)
+                        {
+                            db.BatteryScaners.FirstOrDefault(o => o.Id == this.Id).SerialNumber = value;
+                        }
+                        else if (this == Current.Mes)
+                        {
+                            db.MESs.FirstOrDefault(o => o.Id == this.Id).SerialNumber = value;
+                        }
+                        else if (Current.TrayScaners.Contains(this))
+                        {
+                            db.TrayScaners.FirstOrDefault(o => o.Id == this.Id).SerialNumber = value;
+                        }
+                        db.SaveChanges();
+                    }
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}序列号: [{1}] 修改为 [{2}]", Name, serialNumber, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref serialNumber, value);
                 }
             }
         }
 
+
+        private bool isEnabled;
+        public bool IsEnabled
+        {
+            get
+            {
+                return isEnabled;
+            }
+            set
+            {
+                if (isEnabled != value)
+                {
+                    using (var db = new Data.AppContext())
+                    {
+                        if (this == Current.MainMachine)
+                        {
+                            db.PLCs.FirstOrDefault(o => o.Id == this.Id).IsEnabled = value;
+                        }
+                        else if (this == Current.BatteryScaner)
+                        {
+                            db.BatteryScaners.FirstOrDefault(o => o.Id == this.Id).IsEnabled = value;
+                        }
+                        else if (this == Current.Mes)
+                        {
+                            db.MESs.FirstOrDefault(o => o.Id == this.Id).IsEnabled = value;
+                        }
+                        else if (Current.TrayScaners.Contains(this))
+                        {
+                            db.TrayScaners.FirstOrDefault(o => o.Id == this.Id).IsEnabled = value;
+                        }
+                        db.SaveChanges();
+                    }
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}启用状态: [{1}] 修改为 [{2}]", Name, isEnabled, value), Arthur.App.Model.OpType.编辑);
+                    SetProperty(ref isEnabled, value);
+                }
+            }
+        }
 
 
         private string commorInfo = null;
@@ -173,31 +313,6 @@ namespace GMCC.Sorter.ViewModel
                 SetProperty(ref commorInfo, value);
             }
         }
-
-
-        private bool isEnabled;
-        public bool IsEnabled
-        {
-            get
-            {
-                isEnabled = this.Commor.Communicator.IsEnabled;
-                return isEnabled;
-            }
-            set
-            {
-                if(isEnabled != value)
-                {
-                    using (var db = new Data.AppContext())
-                    {
-                        this.Commor.Communicator.IsEnabled = value;
-                        db.SaveChanges();
-                    }
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}启用状态: [{1}] 修改为 [{2}]", Name, isEnabled, value), Arthur.App.Model.OpType.编辑);
-                    SetProperty(ref isEnabled, value);
-                }
-            }
-        }
-
 
         private bool isAlive;
         public bool IsAlive
