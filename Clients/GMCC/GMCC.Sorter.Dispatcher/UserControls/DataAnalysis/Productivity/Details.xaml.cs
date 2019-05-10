@@ -48,8 +48,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.DataAnalysis.Productivity
         private void UpdateChart()
         {
 
-            var startDate = this.start_time.Value.Value;
-            var endDate = this.end_time.Value.Value.AddDays(1);
+            var startDate = DateTime.Parse(this.start_time.Value.Value.ToString("yyyy-MM-dd"));
+            var endDate = DateTime.Parse(this.end_time.Value.Value.AddDays(1).ToString("yyyy-MM-dd"));
 
             if (endDate < startDate)
             {

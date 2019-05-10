@@ -23,6 +23,17 @@
         option = {
             tooltip: {
                 trigger: 'axis',
+                formatter:function(params)
+                {
+                    var relVal = params[0].name;
+                    for (var i = 0; i < params.length; i++) {
+                        var flag = '';
+                        if(params[i].seriesName=="合格率")
+                            flag = "%";
+                        relVal += '<div class="circle"><span style="width:10px;height:10px;vertical-align:middle;display:inline-block;background:' + params[i].color + '"></span>&nbsp' + params[i].seriesName + ' : ' + params[i].value + flag + "</div>";
+                    }
+                    return relVal;
+                },
                 axisPointer: {
                     type: 'cross',
                     crossStyle: {
