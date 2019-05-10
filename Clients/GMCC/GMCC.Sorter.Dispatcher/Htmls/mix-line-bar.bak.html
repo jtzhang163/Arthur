@@ -1,100 +1,115 @@
 ﻿<!DOCTYPE html>
 <html style="height: 100%">
-   <head>
-       <meta charset="utf-8">
-   </head>
-   <body style="height: 100%; margin: 0">
-       <div id="container" style="height: 100%"></div>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
-       <script type="text/javascript">
-            var dom = document.getElementById("container");
-            var myChart = echarts.init(dom);
-            var app = {};
-            option = null;
-            app.title = '折柱混合';
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+    <div id="container" style="height: 100%"></div>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+    <script type="text/javascript">
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        app.title = '折柱混合';
 
-            option = {
-                tooltip: {
-                    trigger: 'axis',
+        option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'cross',
+                    crossStyle: {
+                        color: '#999'
+                    }
+                }
+            },
+            toolbox: {
+                feature: {
+                    dataView: { show: true, readOnly: false },
+                    magicType: { show: true, type: ['line', 'bar'] },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            legend: {
+                data: ['产能', '合格', '合格率']
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: ['{xAxis-data}'],
                     axisPointer: {
-                        type: 'cross',
-                        crossStyle: {
-                            color: '#999'
+                        type: 'shadow'
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    name: '产能',
+                    min: 0,
+                    max: 3000,
+                    interval: 300,
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                },
+                {
+                    type: 'value',
+                    name: '合格率',
+                    min: 0,
+                    max: 100,
+                    interval: 10,
+                    axisLabel: {
+                        formatter: '{value} %'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '产能',
+                    type: 'bar',
+                    data: ['{productivity-all}'],
+                    itemStyle: {
+                        normal: {
+                            color: '#7EB5EA'
                         }
                     }
                 },
-                toolbox: {
-                    feature: {
-                        dataView: {show: true, readOnly: false},
-                        magicType: {show: true, type: ['line', 'bar']},
-                        restore: {show: true},
-                        saveAsImage: {show: true}
+                {
+                    name: '合格',
+                    type: 'bar',
+                    data: ['{productivity-good}'],
+                    itemStyle: {
+                        normal: {
+                            color: '#91ED80'
+                        }
                     }
                 },
-                legend: {
-                    data:['产能','合格','合格率']
-                },
-                xAxis: [
-                    {
-                        type: 'category',
-                        data: ['{xAxis-data}'],
-                        axisPointer: {
-                            type: 'shadow'
+                {
+                    name: '合格率',
+                    type: 'line',
+                    yAxisIndex: 1,
+                    data: ['{productivity-ratio}'],
+                    itemStyle: {
+                        normal: {
+                            color: '#F7A260'
                         }
                     }
-                ],
-                yAxis: [
-                    {
-                        type: 'value',
-                        name: '产能',
-                        min: 0,
-                        max: 3000,
-                        interval: 300,
-                        axisLabel: {
-                            formatter: '{value}'
-                        }
-                    },
-                    {
-                        type: 'value',
-                        name: '合格率',
-                        min: 0,
-                        max: 100,
-                        interval: 10,
-                        axisLabel: {
-                            formatter: '{value} %'
-                        }
-                    }
-                ],
-                series: [
-                    {
-                        name:'产能',
-                        type:'bar',
-                        data:['{productivity-all}']
-                    },
-                    {
-                        name:'合格',
-                        type:'bar',
-                        data:['{productivity-good}']
-                    },
-                    {
-                        name:'合格率',
-                        type:'line',
-                        yAxisIndex: 1,
-                        data:['{productivity-ratio}']
-                    }
-                ]
-            };
-            ;
-            if (option && typeof option === "object") {
-                myChart.setOption(option, true);
-            }
-       </script>
-   </body>
+                }
+            ]
+        };
+        ;
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    </script>
+</body>
 </html>
