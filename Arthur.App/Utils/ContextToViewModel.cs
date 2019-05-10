@@ -11,12 +11,12 @@ namespace Arthur.App.Utils
     {
         public static UserViewModel Convert(Model.User user)
         {
-            return new UserViewModel(user.Id, user.Name, user.Gender, user.Number, user.PhoneNumber, user.Email, user.IsEnabled, user.RoleId);
+            return new UserViewModel(user.Id, user.Name, user.Gender, user.Number, user.PhoneNumber, user.Email, user.IsEnabled, user.RoleId, user.RegisterTime, user.LastLoginTime, user.LoginTimes);
         }
 
         public static List<UserViewModel> Convert(List<Model.User> users)
         {
-            return users.ConvertAll<UserViewModel>(o => new UserViewModel(o.Id, o.Name, o.Gender, o.Number, o.PhoneNumber, o.Email, o.IsEnabled, o.RoleId));
+            return users.ConvertAll<UserViewModel>(o => new UserViewModel(o.Id, o.Name, o.Gender, o.Number, o.PhoneNumber, o.Email, o.IsEnabled, o.RoleId, o.RegisterTime, o.LastLoginTime, o.LoginTimes));
         }
 
         public static RoleViewModel Convert(Model.Role role)

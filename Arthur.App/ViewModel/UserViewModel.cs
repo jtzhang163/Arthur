@@ -19,7 +19,7 @@ namespace Arthur.App.ViewModel
         private int _roleId;
         private RoleViewModel _role;
 
-        public UserViewModel(int id, string name ,Gender gender, string number, string phoneNumber, string email, bool? isEnabled, int roleId)
+        public UserViewModel(int id, string name ,Gender gender, string number, string phoneNumber, string email, bool? isEnabled, int roleId, DateTime? registerTime, DateTime? lastLoginTime, int loginTimes)
         {
             Id = id;
             Name = name;
@@ -29,6 +29,9 @@ namespace Arthur.App.ViewModel
             _email = email;
             _isEnabled = isEnabled;
             _roleId = roleId;
+            RegisterTime = registerTime;
+            LastLoginTime = lastLoginTime;
+            LoginTimes = loginTimes;
         }
 
         public int Id { get; set; }
