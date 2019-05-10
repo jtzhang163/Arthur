@@ -104,7 +104,7 @@ namespace Arthur.View.Account.Role
                 return;
             } 
 
-            if (role == Current.User.Role)
+            if (role.Id == Current.User.Role.Id)
             {
                 MessageBox.Show("不能删除当前用户所在角色！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

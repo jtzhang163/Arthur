@@ -1,4 +1,5 @@
 ﻿using Arthur.App.Data;
+using Arthur.App.Utils;
 using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;
@@ -24,12 +25,12 @@ namespace Arthur.View.Account.Role
     public partial class Edit : UserControl
     {
         private readonly App.AppContext _AppContext = new App.AppContext();
-        private Arthur.App.Model.Role Role;
+        private Arthur.App.ViewModel.RoleViewModel Role;
 
         public Edit(int id)
         {
             InitializeComponent();
-            this.Role = _AppContext.Roles.FirstOrDefault(o => o.Id == id);
+            this.Role = ContextToViewModel.Convert(_AppContext.Roles.FirstOrDefault(o => o.Id == id));
             this.DataContext = this.Role;
         }
 
@@ -74,8 +75,6 @@ namespace Arthur.View.Account.Role
                 {
                     this.Role.Name = name;
                     this.Role.Level = iLevel;
-
-                    _AppContext.SaveChanges();
 
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";

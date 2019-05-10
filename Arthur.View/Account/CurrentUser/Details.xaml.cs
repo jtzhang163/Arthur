@@ -1,4 +1,5 @@
-﻿using Arthur.View.Utils;
+﻿using Arthur.App.Utils;
+using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace Arthur.View.Account.CurrentUser
         public Details(int id)
         {
             InitializeComponent();
-            this.DataContext = _AppContext.Users.FirstOrDefault(o=>o.Id == id);
+            this.DataContext = ContextToViewModel.Convert(_AppContext.Users.FirstOrDefault(o => o.Id == id));
         }
 
         private void edit_Click(object sender, RoutedEventArgs e)

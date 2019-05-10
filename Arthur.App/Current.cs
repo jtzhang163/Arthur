@@ -7,13 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Arthur.App.Data;
 using Arthur.App.Model;
+using Arthur.App.ViewModel;
 
 namespace Arthur.App
 {
     public static class Current
     {
 
-        public static User User = new User();
+        public static UserViewModel User;
 
         public static AppOption Option = new AppOption();
 

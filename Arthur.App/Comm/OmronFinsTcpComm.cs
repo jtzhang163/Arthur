@@ -24,7 +24,7 @@ namespace Arthur.App.Comm
                 omronFinsNet.ConnectTimeOut = 2000;
                 omronFinsNet.IpAddress = ethernetCommor.IP;
                 omronFinsNet.Port = ethernetCommor.Port;
-                omronFinsNet.SA1 = Utils.NetHelper.GetIpLastValue(Utils.NetHelper.GetLocalIpByRegex("192.168.1.*")); ;
+                omronFinsNet.SA1 = Arthur.Utils.NetHelper.GetIpLastValue(Arthur.Utils.NetHelper.GetLocalIpByRegex("192.168.1.*")); ;
                 omronFinsNet.DA2 = 0;
                 omronFinsNet.ByteTransform.DataFormat = (HslCommunication.Core.DataFormat)Enum.Parse(typeof(HslCommunication.Core.DataFormat), "CDAB");
 

@@ -1,5 +1,6 @@
 ﻿using Arthur.App;
 using Arthur.App.Data;
+using Arthur.App.Utils;
 using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace Arthur.View.Account.User
         public Details(int id)
         {
             InitializeComponent();
-            this.DataContext = _AppContext.Users.FirstOrDefault(o => o.Id == id);
+            this.DataContext = ContextToViewModel.Convert(_AppContext.Users.FirstOrDefault(o => o.Id == id));
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)
@@ -38,8 +39,14 @@ namespace Arthur.View.Account.User
         private void edit_Click(object sender, RoutedEventArgs e)
         {
             var id = Convert.ToInt32((sender as Button).Tag);
+            var user = _AppContext.Users.SingleOrDefault(r => r.Id == id);
+            if (user == null)
+            {
+                MessageBox.Show("用户不存在！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-            if (Current.User != _AppContext.Users.Single(r => r.Id == id) && Current.User.Role.Level <= _AppContext.Users.Single(r => r.Id == id).Role.Level)
+            if (Current.User.Id != user.Id && Current.User.Role.Level <= user.Role.Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

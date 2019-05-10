@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Arthur.App;
 using Arthur.App.Model;
+using Arthur.App.Utils;
 
 namespace Arthur.Business
 {
@@ -131,7 +132,7 @@ namespace Arthur.Business
                 return new Result("登录失败，msg：" + ex.Message);
             }
 
-            Current.User = user;
+            Current.User = ContextToViewModel.Convert(user);
             return Result.OK;
         }
 

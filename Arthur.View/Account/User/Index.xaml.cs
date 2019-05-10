@@ -92,7 +92,7 @@ namespace Arthur.View.Account.User
                 return;
             }
 
-            if (user == Current.User)
+            if (user.Id == Current.User.Id)
             {
                 MessageBox.Show("不能删除当前用户！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
@@ -116,7 +116,15 @@ namespace Arthur.View.Account.User
         private void edit_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var id = Convert.ToInt32((sender as TextBlock).Tag);
-            if (Current.User != _AppContext.Users.Single(r => r.Id == id) && Current.User.Role.Level <= _AppContext.Users.Single(r => r.Id == id).Role.Level)
+
+            var user = _AppContext.Users.SingleOrDefault(r => r.Id == id);
+            if (user == null)
+            {
+                MessageBox.Show("用户不存在！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (Current.User.Id != user.Id && Current.User.Role.Level <= user.Role.Level)
             {
                 MessageBox.Show("当前用户权限不足！", "异常提示", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;

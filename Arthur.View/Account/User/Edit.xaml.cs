@@ -1,6 +1,7 @@
 ﻿using Arthur.App;
 using Arthur.App.Data;
 using Arthur.App.Model;
+using Arthur.App.Utils;
 using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;
@@ -26,15 +27,15 @@ namespace Arthur.View.Account.User
     public partial class Edit : UserControl
     {
         private readonly App.AppContext _AppContext = new App.AppContext();
-        private Arthur.App.Model.User User;
+        private Arthur.App.ViewModel.UserViewModel User;
 
         public Edit(int id)
         {
             InitializeComponent();
-            this.User = _AppContext.Users.FirstOrDefault(o => o.Id == id);
-            this.DataContext = this.User;
 
-            this.role.SelectedIndex = _AppContext.Roles.ToList().IndexOf(this.User.Role);
+            this.User = ContextToViewModel.Convert(_AppContext.Users.FirstOrDefault(o => o.Id == id));
+            this.DataContext = this.User;
+            this.role.SelectedIndex = _AppContext.Roles.ToList().ConvertAll<int>(o => o.Id).IndexOf(this.User.Role.Id);
 
             if (this.User.Role.Level >= Current.User.Role.Level)
             {
@@ -66,7 +67,7 @@ namespace Arthur.View.Account.User
             var phoneNumber = this.phoneNumber.Text.Trim();
             var email = this.email.Text.Trim();
             var isEnabled = this.isEnabled.IsChecked;
-            var role = _AppContext.Roles.ToList()[this.role.SelectedIndex];
+            var role = ContextToViewModel.Convert(_AppContext.Roles.ToList())[this.role.SelectedIndex];
 
             try
             {
@@ -81,7 +82,6 @@ namespace Arthur.View.Account.User
                 this.User.IsEnabled = isEnabled.Value;
                 this.User.Role = role;
 
-                _AppContext.SaveChanges();
                 tip.Background = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";
 

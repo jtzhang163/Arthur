@@ -13,7 +13,7 @@ namespace GMCC.Sorter
 {
     public static class Current
     {
-        public static Arthur.App.Model.User User
+        public static Arthur.App.ViewModel.UserViewModel User
         {
             get
             {
