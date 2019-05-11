@@ -80,6 +80,7 @@ namespace GMCC.Sorter.Run
         public static void ShowErrorMsg(string msg)
         {
             Current.App.ErrorMsg = string.Format("[{0}] {1}", DateTime.Now.ToString("M/d HH:mm:ss"), msg);
+            LogHelper.WriteError(msg);
         }
     }
 }

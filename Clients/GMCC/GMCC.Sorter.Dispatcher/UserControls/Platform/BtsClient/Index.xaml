@@ -212,7 +212,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="流程托盘ID" Width="2*"  CanUserSort="True" SortMemberPath="ProcTrayId">
+                        <DataGridTemplateColumn Header="托盘ID" Width="*"  CanUserSort="True" SortMemberPath="ProcTrayId">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

@@ -2,6 +2,7 @@
 using Arthur.View.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Model;
+using GMCC.Sorter.Run;
 using GMCC.Sorter.Utils;
 using System;
 using System.Collections.Generic;
@@ -64,7 +65,18 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Setting.Option
 
             try
             {
-                Current.Option.Tray11_Id = GetObject.GetByCode<ProcTray>(tray11_code).Id;
+
+                var tray11_id = GetObject.GetByCode<ProcTray>(tray11_code).Id;
+                if (tray11_id != Current.Option.Tray11_Id && tray11_id > 0)
+                {
+                    var result = Current.MainMachine.Commor.Write("D434", (ushort)1);
+                    if (!result.IsOk)
+                    {
+                        Running.ShowErrorMsg("手动输入绑盘托盘条码后发送给PLC结果失败，msg：" + result.Msg);
+                    }
+                }
+
+                Current.Option.Tray11_Id = tray11_id;
                 Current.Option.Tray12_Id = GetObject.GetByCode<ProcTray>(tray12_code).Id;
                 Current.Option.Tray13_Id = GetObject.GetByCode<ProcTray>(tray13_code).Id;
                 Current.Option.Tray21_Id = GetObject.GetByCode<ProcTray>(tray21_code).Id;
