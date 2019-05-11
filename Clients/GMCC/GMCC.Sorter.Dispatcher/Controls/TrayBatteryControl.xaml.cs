@@ -41,7 +41,7 @@ namespace GMCC.Sorter.Dispatcher.Controls
                 Grid.SetRow(lab, (o.Pos - 1) / 4);
                 Grid.SetColumn(lab, 3 - (o.Pos - 1) % 4);
             });
-            //  this.
+
         }
     }
 }

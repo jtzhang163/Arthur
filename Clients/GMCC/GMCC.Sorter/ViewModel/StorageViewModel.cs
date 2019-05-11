@@ -136,18 +136,21 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (procTrayId != value)
                 {
-                    Storage storage = null;
                     using (var db = new Data.AppContext())
                     {
-                        storage = db.Storages.FirstOrDefault(o => o.Id == this.Id);
-                    }
-
-                    if (storage != null)
-                    {
-                        storage.ProcTrayId = value;
-                        if(value > 0)
+                        var storage = db.Storages.FirstOrDefault(o => o.Id == this.Id);
+                        if (storage != null)
                         {
-                            GetObject.GetById<ProcTray>(value).StorageId = storage.Id;
+                            storage.ProcTrayId = value;
+                            if (value > 0)
+                            {
+                                var procTray = db.ProcTrays.FirstOrDefault(o => o.Id == value);
+                                if (procTray != null)
+                                {
+                                    procTray.StorageId = this.Id;
+                                }
+                            }
+                            db.SaveChanges();
                         }
                     }
 
