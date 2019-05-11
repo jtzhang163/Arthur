@@ -41,8 +41,10 @@ namespace GMCC.Sorter.Model
         [Description("电压不良")]
         VNG = 6,
         [Description("电阻不良")]
-        RNG = 8,
+        RNG = 7,
         [Description("容量不良")]
-        CNG = 9
+        CNG = 8,
+        [Description("其他不良")]
+        UNG = 9,
     }
 }
