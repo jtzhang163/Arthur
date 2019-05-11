@@ -30,12 +30,14 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition Height="180"/>
+                        <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="150"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
@@ -46,11 +48,15 @@
                     <Label Content="{Binding Key}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="值：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="value" Text="{Binding Value, Mode=OneWay}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"
-                          Height="100" TextWrapping="Wrap"   />
+                          Height="160" TextWrapping="Wrap"   />
                     <Label Content="状态：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="status" Text="{Binding Status, Mode=OneWay}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" />
-                    <Label Content="说明：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding Desc}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="流程托盘ID：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="proctrayId" Text="{Binding ProcTrayId, Mode=OneWay}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" />
+                    <Label Content="更新时间：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding UpdateTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="说明：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Desc}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     
                 </Grid>
             </DockPanel>

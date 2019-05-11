@@ -13,6 +13,8 @@ namespace GMCC.Sorter.Utils
         public string Value { get; set; }
         public int Status { get; set; }
         public string Desc { get; set; }
+        public int ProcTrayId { get; set; }
+        public DateTime UpdateTime { get; set; }
     }
 
     public class BindCode

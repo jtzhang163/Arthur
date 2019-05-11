@@ -149,7 +149,7 @@ namespace GMCC.Sorter.Run
 
                     if (procTray.Id > 0 && chargeData.Status == 2)
                     {
-                        if (bindCode.TrayCode == procTray.Code)
+                        if (procTray.Id == chargeData.ProcTrayId)
                         {
 
                         }
@@ -167,8 +167,9 @@ namespace GMCC.Sorter.Run
                             var value = new BindCode { TrayCode = procTray.Code, BatteryCodes = string.Join(",", codes.ToArray()) };
                             chargeData.Value = JsonHelper.SerializeObject(value);
                             chargeData.Status = 1;
+                            chargeData.ProcTrayId = procTray.Id;
+                            chargeData.UpdateTime = DateTime.Now;
                         }
-
                     }
                 }
 
@@ -177,9 +178,10 @@ namespace GMCC.Sorter.Run
                     var dischargeData = Current.ShareDatas.First(o => o.Key == "dischargeCodes");
                     var bindCode = JsonHelper.DeserializeJsonToObject<BindCode>(dischargeData.Value);
                     var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray22_Id);
+
                     if (procTray.Id > 0 && dischargeData.Status == 2)
                     {
-                        if (bindCode.TrayCode == procTray.Code)
+                        if (procTray.Id == dischargeData.ProcTrayId)
                         {
 
                         }
@@ -197,9 +199,10 @@ namespace GMCC.Sorter.Run
                             var value = new BindCode { TrayCode = procTray.Code, BatteryCodes = string.Join(",", codes.ToArray()) };
                             dischargeData.Value = JsonHelper.SerializeObject(value);
                             dischargeData.Status = 1;
+                            dischargeData.ProcTrayId = procTray.Id;
+                            dischargeData.UpdateTime = DateTime.Now;
                         }
                     }
-
                 }
 
                 if (Current.Option.Tray23_Id > 0)
@@ -207,33 +210,45 @@ namespace GMCC.Sorter.Run
 
                     var sortingResults = Current.ShareDatas.First(o => o.Key == "sortingResults");
                     var bindResults = JsonHelper.DeserializeJsonToObject<SortingResult>(sortingResults.Value);
+                    var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray23_Id);
+
                     if (sortingResults.Status == 1)
                     {
-                        var results = bindResults.Results.Split(',');
-                        for (int i = 0; i < results.Length; i++)
+                        if (bindResults.TrayCode == procTray.Code)
                         {
-                            Current.MainMachine.Commor.Write(string.Format("D{0:D3}", 401 + i), ushort.Parse(results[i]));
-                        }
-                        LogHelper.WriteInfo("-----------------------成功发送分选结果数据给PLC--------------------");
-
-                        var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray23_Id);
-                        var batteries = procTray.GetBatteries();
-                        var batteryViewModels = ContextToViewModel.Convert(batteries);
-
-                        for (int i = 0; i < results.Length; i++)
-                        {
-                            var result = int.Parse(results[i]);
-                            if (result > 0)
+                            var results = bindResults.Results.Split(',');
+                            for (int i = 0; i < results.Length; i++)
                             {
-                                var battery = batteryViewModels.FirstOrDefault(o => o.Pos == i + 1);
-                                if (battery != null)
+                                Current.MainMachine.Commor.Write(string.Format("D{0:D3}", 401 + i), ushort.Parse(results[i]));
+                            }
+                            LogHelper.WriteInfo("-----------------------成功发送分选结果数据给PLC--------------------");
+
+                            var batteries = procTray.GetBatteries();
+                            var batteryViewModels = ContextToViewModel.Convert(batteries);
+
+                            for (int i = 0; i < results.Length; i++)
+                            {
+                                var result = int.Parse(results[i]);
+                                if (result > 0)
                                 {
-                                    battery.SortResult = (SortResult)result;
+                                    var battery = batteryViewModels.FirstOrDefault(o => o.Pos == i + 1);
+                                    if (battery != null)
+                                    {
+                                        battery.SortResult = (SortResult)result;
+                                    }
                                 }
                             }
+
+                            sortingResults.Status = 2;
+                            sortingResults.ProcTrayId = procTray.Id;
+                            sortingResults.UpdateTime = DateTime.Now;
+
+                        }
+                        else
+                        {
+                            Running.ShowErrorMsg("BTS客户端返回分选结果的托盘条码和实际不符");
                         }
 
-                        sortingResults.Status = 2;
                     }
                 }
             }

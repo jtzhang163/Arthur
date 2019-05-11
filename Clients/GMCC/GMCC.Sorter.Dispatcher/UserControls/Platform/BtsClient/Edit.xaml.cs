@@ -56,10 +56,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.BtsClient
         {
             var value = this.value.Text.Trim();
             var status = this.status.Text.Trim();
+            var proctrayId = this.proctrayId.Text.Trim();
 
             tip.Background = new SolidColorBrush(Colors.Red);
 
-            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(status))
+            if (string.IsNullOrWhiteSpace(value) || string.IsNullOrWhiteSpace(status) || string.IsNullOrWhiteSpace(proctrayId))
             {
                 tip.Text = "请填写数据！";
             }
@@ -79,6 +80,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.BtsClient
 
                     Current.ShareDatas.Single(o => o.Id == this.ShareData.Id).Value = value;
                     Current.ShareDatas.Single(o => o.Id == this.ShareData.Id).Status = Convert.ToInt32(status);
+                    Current.ShareDatas.Single(o => o.Id == this.ShareData.Id).ProcTrayId = Convert.ToInt32(proctrayId);
 
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";

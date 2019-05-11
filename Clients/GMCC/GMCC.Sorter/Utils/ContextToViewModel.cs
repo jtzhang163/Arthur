@@ -33,12 +33,12 @@ namespace GMCC.Sorter.Utils
 
         public static ShareDataViewModel Convert(ShareData shareData)
         {
-            return new ShareDataViewModel(shareData.Id, shareData.Key, shareData.Value, shareData.Status, shareData.Desc);
+            return new ShareDataViewModel(shareData.Id, shareData.Key, shareData.Value, shareData.Status, shareData.ProcTrayId, shareData.UpdateTime, shareData.Desc);
         }
 
         public static List<ShareDataViewModel> Convert(List<ShareData> shareDatas)
         {
-            return shareDatas.ConvertAll<ShareDataViewModel>(o => new ShareDataViewModel(o.Id, o.Key, o.Value, o.Status, o.Desc));
+            return shareDatas.ConvertAll<ShareDataViewModel>(o => new ShareDataViewModel(o.Id, o.Key, o.Value, o.Status, o.ProcTrayId, o.UpdateTime, o.Desc));
         }
     }
 }

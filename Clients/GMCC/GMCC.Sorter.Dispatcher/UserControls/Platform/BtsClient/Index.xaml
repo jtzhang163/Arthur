@@ -179,17 +179,7 @@
 
                     <DataGrid.Columns>
 
-                        <DataGridTemplateColumn Header="编号" Width="*"  CanUserSort="True" SortMemberPath="Id">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding Id}"></TextBlock>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="键" Width="*"  CanUserSort="True" SortMemberPath="Key">
+                        <DataGridTemplateColumn Header="键" Width="2*"  CanUserSort="True" SortMemberPath="Key">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -199,7 +189,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="值" Width="4*" CanUserSort="True" SortMemberPath="Value">
+                        <DataGridTemplateColumn Header="值" Width="8*" CanUserSort="True" SortMemberPath="Value">
                             <!--数据表格模板列的单元格模板属性-->
                             <DataGridTemplateColumn.CellTemplate>
                                 <!--数据模板-->
@@ -222,7 +212,27 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="说明" Width="*"  CanUserSort="True" SortMemberPath="Desc">
+                        <DataGridTemplateColumn Header="流程托盘ID" Width="2*"  CanUserSort="True" SortMemberPath="ProcTrayId">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding ProcTrayId}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="更新时间" Width="2*"  CanUserSort="True" SortMemberPath="UpdateTime">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding UpdateTime, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <DataGridTemplateColumn Header="说明" Width="2*"  CanUserSort="True" SortMemberPath="Desc">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

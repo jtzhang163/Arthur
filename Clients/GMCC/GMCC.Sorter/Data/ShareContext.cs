@@ -17,12 +17,5 @@ namespace GMCC.Sorter.Data
         public ShareContext() : base(Current.Option.ShareConnString)
         {
         }
-
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Tray>().ToTable("t_tray");
-        //}
-
-        //public DbSet<Tray> Trays { get; set; }
     }
 }

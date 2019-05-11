@@ -61,14 +61,64 @@ namespace GMCC.Sorter.ViewModel
             }
         }
 
+        private int _procTrayId = -1;
+        public int ProcTrayId
+        {
+            get
+            {
+                return _procTrayId;
+            }
+            set
+            {
+                if (_procTrayId != value && _procTrayId != -1)
+                {
+                    using (var db = new ShareContext())
+                    {
+                        var count = db.Database.ExecuteSqlCommand(string.Format("UPDATE dbo.t_data SET [ProcTrayId] = {0} WHERE [Key] = '{1}'", value, this.Key));
+                        if (count > 0)
+                        {
+                            Arthur.Business.Logging.AddOplog(string.Format("交互平台. BTS客户端. 键:{0} 流程托盘ID: [{1}] 修改为 [{2}]", Key, _procTrayId, value), Arthur.App.Model.OpType.编辑);
+                        }
+                    }
+                }
+                this.SetProperty(ref _procTrayId, value);
+            }
+        }
+
+        private DateTime _updateTime = Arthur.Default.DateTime;
+        public DateTime UpdateTime
+        {
+            get
+            {
+                return _updateTime;
+            }
+            set
+            {
+                if (_updateTime != value && _updateTime != Arthur.Default.DateTime)
+                {
+                    using (var db = new ShareContext())
+                    {
+                        var count = db.Database.ExecuteSqlCommand(string.Format("UPDATE dbo.t_data SET [UpdateTime] = '{0}' WHERE [Key] = '{1}'", value, this.Key));
+                        if (count > 0)
+                        {
+                            Arthur.Business.Logging.AddOplog(string.Format("交互平台. BTS客户端. 键:{0} 更新时间: [{1}] 修改为 [{2}]", Key, _updateTime, value), Arthur.App.Model.OpType.编辑);
+                        }
+                    }
+                }
+                this.SetProperty(ref _updateTime, value);
+            }
+        }
+
         public string Desc { get; set; }
 
-        public ShareDataViewModel(int id, string key, string value, int status, string desc)
+        public ShareDataViewModel(int id, string key, string value, int status, int procTrayId, DateTime updateTime, string desc)
         {
             this.Id = id;
             this.Key = key;
             this.Value = value;
             this.Status = status;
+            this.ProcTrayId = procTrayId;
+            this.UpdateTime = updateTime;
             this.Desc = desc;
         }
     }
