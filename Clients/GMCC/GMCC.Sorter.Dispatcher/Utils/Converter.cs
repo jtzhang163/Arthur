@@ -258,21 +258,35 @@ namespace GMCC.Sorter.Dispatcher.Utils
     }
 
 
-    public class StorageStatusToBackConverter : IValueConverter
+    public class StorageBackgroundConverter : IMultiValueConverter
     {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var status = (StorageStatus)value;
+            var status = StorageStatus.未知;
+            var isEnabled = false;
+
+            if (parameter as string == "StatusAndIsEnabled")
+            {
+                status = (StorageStatus)values[0];
+                isEnabled = (bool)values[1];
+            }
+
+            if (!isEnabled)
+            {
+                return Brushes.LightGray;
+            }
+
             return status == StorageStatus.无托盘 ? Brushes.White :
                 status == StorageStatus.正在静置 ? Brushes.LightGreen :
                 status == StorageStatus.静置完成 ? Brushes.Cyan :
                 Brushes.White;
         }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
+
     }
 
 

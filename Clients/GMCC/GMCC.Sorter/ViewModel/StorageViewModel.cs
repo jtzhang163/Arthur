@@ -24,7 +24,7 @@ namespace GMCC.Sorter.ViewModel
 
         }
 
-        public StorageViewModel(int id, int column, int floor, string name, string company, int stillTimeSpan, int procTrayId)
+        public StorageViewModel(int id, int column, int floor, string name, string company, int stillTimeSpan, int procTrayId, bool isEnabled)
         {
             this.Id = id;
             this.Column = column;
@@ -33,6 +33,7 @@ namespace GMCC.Sorter.ViewModel
             this.company = company;
             this.stillTimeSpan = stillTimeSpan;
             this.procTrayId = procTrayId;
+            this.isEnabled = isEnabled;
         }
 
         private string showInfo;
@@ -118,6 +119,45 @@ namespace GMCC.Sorter.ViewModel
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 静置时间: [{1}] 修改为 [{2}]", Name, stillTimeSpan, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref stillTimeSpan, value);
                 }
+            }
+        }
+
+
+
+        private bool? isEnabled;
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public bool IsEnabled
+        {
+            get
+            {
+                if (this.Floor != 1)
+                {
+                    return Current.Storages.FirstOrDefault(o => o.Column == this.Column && o.Floor == 1).IsEnabled;
+                }
+                return isEnabled.HasValue ? isEnabled.Value : false;
+            }
+            set
+            {
+                //确保每层设置一次，且不出现死循环
+                var storage = Current.Storages.FirstOrDefault(o => o.Column == this.Column && o.Floor == this.Floor - 1);
+                if (storage != null)
+                {
+                    storage.IsEnabled = value;
+                }
+
+                if (this.Floor == 1 && isEnabled != value && isEnabled.HasValue)
+                {
+                    using (var db = new Data.AppContext())
+                    {
+                        db.Storages.FirstOrDefault(o => o.Id == this.Id).IsEnabled = value;
+                        db.SaveChanges();
+                    }
+                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 是否启用: [{1}] 修改为 [{2}]", Name, isEnabled, value), Arthur.App.Model.OpType.编辑);
+                }
+
+                SetProperty(ref isEnabled, value);
             }
         }
 

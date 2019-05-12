@@ -30,6 +30,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150"/>
@@ -44,6 +45,8 @@
                     <Label Content="{Binding ProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="品牌：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding Company}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="是否启用：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding IsEnabled}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

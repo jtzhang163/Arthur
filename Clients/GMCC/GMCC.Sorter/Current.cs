@@ -38,7 +38,7 @@ namespace GMCC.Sorter
                     {
                         db.Storages.ToList().ForEach(o =>
                         {
-                            storages.Add(new StorageViewModel(o.Id, o.Column, o.Floor, o.Name, o.Company, o.StillTimeSpan, o.ProcTrayId));
+                            storages.Add(new StorageViewModel(o.Id, o.Column, o.Floor, o.Name, o.Company, o.StillTimeSpan, o.ProcTrayId, o.IsEnabled));
                         });
                     }
                 }

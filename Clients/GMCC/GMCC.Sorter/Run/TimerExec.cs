@@ -169,6 +169,7 @@ namespace GMCC.Sorter.Run
                             chargeData.Status = 1;
                             chargeData.ProcTrayId = procTray.Id;
                             chargeData.UpdateTime = DateTime.Now;
+                            LogHelper.WriteInfo(string.Format("--------成功发送充电位条码绑定信息给BTS【流程托盘ID：{0}，条码：{1}】---------", procTray.Id, procTray.Code));
                         }
                     }
                 }
@@ -201,6 +202,7 @@ namespace GMCC.Sorter.Run
                             dischargeData.Status = 1;
                             dischargeData.ProcTrayId = procTray.Id;
                             dischargeData.UpdateTime = DateTime.Now;
+                            LogHelper.WriteInfo(string.Format("--------成功发送放电位条码绑定信息给BTS【流程托盘ID：{0}，条码：{1}】---------", procTray.Id, procTray.Code));
                         }
                     }
                 }
@@ -221,7 +223,7 @@ namespace GMCC.Sorter.Run
                             {
                                 Current.MainMachine.Commor.Write(string.Format("D{0:D3}", 401 + i), ushort.Parse(results[i]));
                             }
-                            LogHelper.WriteInfo("-----------------------成功发送分选结果数据给PLC--------------------");
+                            LogHelper.WriteInfo(string.Format("--------成功发送分选结果数据给PLC【流程托盘ID：{0}，条码：{1}】---------", procTray.Id, procTray.Code));
 
                             var batteries = procTray.GetBatteries();
                             var batteryViewModels = ContextToViewModel.Convert(batteries);

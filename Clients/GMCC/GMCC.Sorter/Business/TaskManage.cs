@@ -43,7 +43,7 @@ namespace GMCC.Sorter.Business
             /// 
             /// 排序
             /// 
-            return storages;
+            return storages.Where(o => o.IsEnabled).ToList();
         }
 
 

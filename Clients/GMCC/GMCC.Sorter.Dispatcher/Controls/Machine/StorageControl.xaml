@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <utils:StorageStatusToBackConverter x:Key="storageStatusToBackConverter"/>
+        <utils:StorageBackgroundConverter x:Key="storageBackgroundConverter"/>
         <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
         <ContextMenu x:Key="manu_get_put">
             <MenuItem Header="手动【上料】" Click="MenuItem_Click"/>
@@ -23,9 +23,14 @@
                 <!--<RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>-->
             </Grid.RowDefinitions>
-            <Label Content="{Binding ShowInfo}" Background="{Binding Status, Converter={StaticResource storageStatusToBackConverter}}"
-                   MouseDoubleClick="Label_MouseDoubleClick" MouseDown="Label_MouseDown"
+            <Label Content="{Binding ShowInfo}" MouseDoubleClick="Label_MouseDoubleClick" MouseDown="Label_MouseDown"
                    Foreground="Gray" FontSize="12" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Label.Background>
+                    <MultiBinding Converter="{StaticResource storageBackgroundConverter}" ConverterParameter="StatusAndIsEnabled">
+                        <Binding Path="Status"/>
+                        <Binding Path="IsEnabled"/>
+                    </MultiBinding>
+                </Label.Background>
                 <Label.ToolTip>
                     <Grid>
                         <Grid.RowDefinitions>

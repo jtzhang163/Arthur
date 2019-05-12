@@ -54,11 +54,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
         {
             var name = this.name.Text.Trim();
             var company = this.company.Text.Trim();
+            var isEnabled = this.isEnabled.IsChecked;
 
             tip.Background = new SolidColorBrush(Colors.Red);
 
             if (string.IsNullOrWhiteSpace(name))
-            {                
+            {
                 tip.Text = "请填写数据！";
             }
             else
@@ -67,6 +68,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
                 {
                     this.Storage.Name = name;
                     this.Storage.Company = company;
+                    //确保每层设置一次，且不出现死循环
+                    Current.Storages.FirstOrDefault(o => o.Column == Storage.Column && o.Floor == Common.STOR_FLOOR_COUNT).IsEnabled = isEnabled.Value;
 
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";
@@ -74,29 +77,12 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
                 }
                 catch (Exception ex)
                 {
-                     
+
                     tip.Text = "修改信息失败：" + ex.Message;
                 }
             }
             tip.Visibility = Visibility.Visible;
         }
 
-        private int GetProcTrayId(string code)
-        {
-            var id = -1;
-            if (string.IsNullOrEmpty(code))
-            {
-                id = 0;
-            }
-            else if (_AppContext.ProcTrays.Count(o => o.Code == code) == 0)
-            {
-                throw new Exception(string.Format("系统中不存在条码为[{0}]的托盘", code));
-            }
-            else
-            {
-                id = _AppContext.ProcTrays.OrderByDescending(o => o.Id).FirstOrDefault(o => o.Code == code).Id;
-            }
-            return id;
-        }
     }
 }

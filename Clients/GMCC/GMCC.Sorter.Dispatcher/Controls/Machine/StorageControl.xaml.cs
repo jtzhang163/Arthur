@@ -53,6 +53,9 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
                 if (Current.App.TaskMode == TaskMode.自动任务)
                     return;
 
+                if (!this.Storage.IsEnabled)
+                    return;
+
                 ContextMenu cm = this.FindResource("manu_get_put") as ContextMenu;
                 cm.PlacementTarget = sender as Button;
                 cm.IsOpen = true;
@@ -67,18 +70,11 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
             if (header == "手动【上料】" || header == "手动【下料】")
             {
 
-                if (Current.App.TaskMode != TaskMode.手动任务)
-                {
-                    MessageBox.Show("当前不是手动任务状态，无法手动发送指令！", "提示");
-                    return;
-                }
-
                 if (Current.Task.Status != Model.TaskStatus.完成)
                 {
                     MessageBox.Show("当前任务尚未完成！", "提示");
                     return;
                 }
-
 
                 if (!Current.Option.IsTaskReady)
                 {
