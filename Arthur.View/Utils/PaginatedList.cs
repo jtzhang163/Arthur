@@ -15,11 +15,13 @@ namespace Arthur.View.Utils
     {
         public int PageIndex { get; set; }
         public int TotalPages { get; set; }
+        public int TotalCount { get; set; }
 
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (decimal)pageSize);
+            TotalCount = count;
             this.AddRange(items);
         }
 

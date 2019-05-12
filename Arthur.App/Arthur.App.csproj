@@ -63,6 +63,8 @@
     <Compile Include="Business\IManage.cs" />
     <Compile Include="Business\UserManage.cs" />
     <Compile Include="Business\RoleManage.cs" />
+    <Compile Include="Cache\CacheHelper.cs" />
+    <Compile Include="Cache\CacheItem.cs" />
     <Compile Include="Comm\Commor.cs" />
     <Compile Include="Comm\OmronFinsTcpComm.cs" />
     <Compile Include="Comm\EthernetComm.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Comm\SerialComm.cs" />
     <Compile Include="Current.cs" />
     <Compile Include="Data\AppContext.cs" />
+    <Compile Include="Data\CacheData.cs" />
     <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="Factory\AccountFactory.cs" />
     <Compile Include="Model\Base\EthernetCommor.cs" />

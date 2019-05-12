@@ -21,9 +21,36 @@ namespace Arthur.Utility
                 if (str == null) { throw new Exception("str为null"); }
                 return Convert.ToInt32(str);
             }
-            catch (Exception ex)
+            catch
             {
-               // LogHelper.WriteError(ex);
+                return defaultValue;
+            }
+        }
+
+        public static T To<T>(object obj, T defaultValue)
+        {
+            try
+            {
+                if (obj == null)
+                    throw new Exception();
+
+                var val = new object();
+                if (typeof(T).Name == "Int32")
+                {
+                    val = Convert.ToInt32(obj);
+                }
+                else if (typeof(T).Name == "DateTime")
+                {
+                    val = Convert.ToDateTime(obj);
+                }
+                else if (typeof(T).Name == "String")
+                {
+                    val = Convert.ToString(obj);
+                }
+                return (T)val;
+            }
+            catch
+            {
                 return defaultValue;
             }
         }
@@ -35,14 +62,11 @@ namespace Arthur.Utility
                 if (str == null) { throw new Exception("str为null"); }
                 return DateTime.Parse(str);
             }
-            catch (Exception ex)
+            catch
             {
-               // LogHelper.WriteError(ex);
                 return defaultValue;
             }
         }
-
-
 
         public static bool StrToBool(string str, bool defaultValue)
         {
@@ -51,9 +75,8 @@ namespace Arthur.Utility
                 if (str == null) { throw new Exception("str为null"); }
                 return bool.Parse(str.ToLower());
             }
-            catch (Exception ex)
+            catch
             {
-             //   LogHelper.WriteError(ex);
                 return defaultValue;
             }
         }
@@ -65,13 +88,11 @@ namespace Arthur.Utility
                 if (str == null) { throw new Exception("str为null"); }
                 return bool.Parse(str.ToLower());
             }
-            catch (Exception ex)
+            catch
             {
-              //  LogHelper.WriteError(ex);
                 return null;
             }
         }
-
 
         public static float StrToFloat(string str, float defaultValue)
         {
@@ -80,9 +101,8 @@ namespace Arthur.Utility
                 if (str == null) { throw new Exception("str为null"); }
                 return Convert.ToSingle(str);
             }
-            catch (Exception ex)
+            catch
             {
-               // LogHelper.WriteError(ex);
                 return defaultValue;
             }
         }
