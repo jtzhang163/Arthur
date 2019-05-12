@@ -1,6 +1,8 @@
-﻿using GMCC.Sorter.Data;
+﻿using Arthur;
+using GMCC.Sorter.Data;
 using GMCC.Sorter.Dispatcher.Utils;
 using GMCC.Sorter.Model;
+using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -125,6 +127,10 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
                 Current.Task.StartTime = DateTime.Now;
                 Current.Task.ProcTrayId = type == TaskType.上料 ? Current.Option.Tray13_Id : this.Storage.ProcTrayId;
                 Current.Task.Status = Model.TaskStatus.就绪;
+
+                LogHelper.WriteInfo(string.Format("=== 手动生成任务 类型：{0}，料仓：{1}，流程托盘ID：{2}，托盘条码：{3} ===",
+                    Current.Task.Type, this.Storage.Name, Current.Task.ProcTrayId, GetObject.GetById<ProcTray>(Current.Task.ProcTrayId).Code));
+
             }
         }
     }

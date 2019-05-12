@@ -80,7 +80,7 @@ namespace GMCC.Sorter.Dispatcher.Views
                 var result = Running.Start();
                 if (result.IsOk)
                 {
-                    Logging.AddEvent("启动运行", Arthur.App.Model.EventType.信息);
+                    Logging.AddEvent("点击【启动】", Arthur.App.Model.EventType.信息);
                 }
                 else
                 {
@@ -100,7 +100,7 @@ namespace GMCC.Sorter.Dispatcher.Views
                 var result = Running.Stop();
                 if (result.IsOk)
                 {
-                    Logging.AddEvent("停止运行", Arthur.App.Model.EventType.信息);
+                    Logging.AddEvent("点击【停止】", Arthur.App.Model.EventType.信息);
                 }
                 else
                 {
@@ -120,7 +120,7 @@ namespace GMCC.Sorter.Dispatcher.Views
                 var result = Running.Reset();
                 if (result.IsOk)
                 {
-                    Logging.AddEvent("成功复位", Arthur.App.Model.EventType.信息);
+                    Logging.AddEvent("点击【复位】", Arthur.App.Model.EventType.信息);
                 }
                 else
                 {
@@ -140,35 +140,14 @@ namespace GMCC.Sorter.Dispatcher.Views
                     return;
                 }
 
-                //if (Current.App.TaskMode == TaskMode.手动任务 && Current.Task.Status != TaskStatus.完成)
-                //{
-                //    Tip.Alert("当前手动任务尚未完成，无法切换为自动任务！若要强制切换，请先点击任务复位。");
-                //    return;
-                //}
-
-
-                //if (Current.App.TaskMode == TaskMode.手动任务)
-                //{
-
-
-                //}
-
-
-
-                //if (Current.App.TaskMode == TaskMode.自动任务 && Current.Task.Status != TaskStatus.完成)
-                //{
-
-                //    Tip.Alert("当前任务完成后会切换至手动任务。若要立即切换，请点击任务复位");
-                //    CurrentTask.ToSwitchManuTaskMode = true;
-                //    return;
-                //}
-
                 Current.App.TaskMode = Current.App.TaskMode == TaskMode.自动任务 ? TaskMode.手动任务 : TaskMode.自动任务;
                 MessageBox.Show(string.Format("成功切换为{0}！", Current.App.TaskMode), "提示", MessageBoxButton.OK);
+                Logging.AddEvent(string.Format("点击【切换{0}】", Current.App.TaskMode), Arthur.App.Model.EventType.信息);
             }
             else if (btn.Name == "task_reset")
             {
                 Current.Task.Status = Model.TaskStatus.完成;
+                Logging.AddEvent("点击【任务复位】", Arthur.App.Model.EventType.信息);
             }
         }
 

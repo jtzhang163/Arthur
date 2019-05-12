@@ -64,14 +64,14 @@ namespace GMCC.Sorter.Run
                                     Current.Task.StartTime = DateTime.Now;
                                     Current.Task.ProcTrayId = type == Model.TaskType.上料 ? Current.Option.Tray13_Id : storage.ProcTrayId;
                                     Current.Task.Status = Model.TaskStatus.就绪;
+
+                                    LogHelper.WriteInfo(string.Format("=== 生成自动任务 类型：{0}，料仓：{1}，流程托盘ID：{2}，托盘条码：{3} ===",
+                                        Current.Task.Type, storage.Name, Current.Task.ProcTrayId, GetObject.GetById<ProcTray>(Current.Task.ProcTrayId).Code));
+
                                     break;
                                 }
                             }
                         }
-                    }
-                    else
-                    {
-
                     }
                 }
                 else if (Current.Task.Status == Model.TaskStatus.就绪)

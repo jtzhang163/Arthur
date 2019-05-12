@@ -15,6 +15,8 @@ namespace Arthur.Business
     {
         public static Result AddEvent(string content, EventType type)
         {
+            LogHelper.WriteInfo(string.Format("********【事件】：{0}", content));
+
             if (content.Length > 250)
             {
                 content = content.Substring(0, 250);
@@ -44,6 +46,8 @@ namespace Arthur.Business
 
         public static Result AddOplog(int userId, string content, OpType type)
         {
+            LogHelper.WriteInfo(string.Format("********【操作】：{0}", content));
+
             if (content.Length > 250)
             {
                 content = content.Substring(0, 250);

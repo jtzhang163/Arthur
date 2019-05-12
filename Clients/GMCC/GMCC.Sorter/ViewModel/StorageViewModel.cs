@@ -134,9 +134,9 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (this.Floor != 1)
                 {
-                    return Current.Storages.FirstOrDefault(o => o.Column == this.Column && o.Floor == 1).IsEnabled;
+                    isEnabled = Current.Storages.FirstOrDefault(o => o.Column == this.Column && o.Floor == 1).IsEnabled;
                 }
-                return isEnabled.HasValue ? isEnabled.Value : false;
+                return isEnabled.Value;
             }
             set
             {
