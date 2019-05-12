@@ -29,6 +29,8 @@
                     <MultiBinding Converter="{StaticResource storageBackgroundConverter}" ConverterParameter="StatusAndIsEnabled">
                         <Binding Path="Status"/>
                         <Binding Path="IsEnabled"/>
+                        <Binding Path="TaskType"/>
+                        <Binding Path="TimeNow"/>
                     </MultiBinding>
                 </Label.Background>
                 <Label.ToolTip>

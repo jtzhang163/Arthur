@@ -264,16 +264,32 @@ namespace GMCC.Sorter.Dispatcher.Utils
         {
             var status = StorageStatus.未知;
             var isEnabled = false;
+            var taskType = Model.TaskType.未知;
+            var timeNow = Arthur.Default.DateTime;
 
             if (parameter as string == "StatusAndIsEnabled")
             {
                 status = (StorageStatus)values[0];
                 isEnabled = (bool)values[1];
+                taskType = (Model.TaskType)values[2];
+                timeNow = (DateTime)values[3];
             }
 
             if (!isEnabled)
             {
                 return Brushes.LightGray;
+            }
+
+            if (taskType != TaskType.未知 && timeNow.Second % 2 == 1)
+            {
+                if (taskType == TaskType.上料)
+                {
+                    return Brushes.LightGreen;
+                }
+                else
+                {
+                    return Brushes.White;
+                }
             }
 
             return status == StorageStatus.无托盘 ? Brushes.White :

@@ -113,6 +113,18 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
                     o.Status = ViewModel.StorageStatus.无托盘;
                     o.ShowInfo = o.Name;
                 }
+
+                if (o.Id == Current.Task.StorageId && Current.Task.Status != Model.TaskStatus.完成 && Current.Task.Status != Model.TaskStatus.未知)
+                {
+                    o.TaskType = Current.Task.Type;
+                }
+                else
+                {
+                    o.TaskType = Model.TaskType.未知;
+                }
+
+                o.TimeNow = DateTime.Now;
+
             });
         }
     }

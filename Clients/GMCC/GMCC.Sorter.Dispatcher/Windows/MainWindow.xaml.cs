@@ -180,7 +180,7 @@ namespace GMCC.Sorter.Dispatcher
                 return;
             }
 
-            var result = MessageBox.Show("确定要退出当前程序？", "关闭确认", MessageBoxButton.OKCancel);
+            var result = MessageBox.Show("确定要关闭当前程序？", "关闭确认", MessageBoxButton.OKCancel);
             if (result == MessageBoxResult.Cancel)
             {
                 e.Cancel = true;

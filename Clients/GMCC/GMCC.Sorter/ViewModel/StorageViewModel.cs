@@ -230,6 +230,32 @@ namespace GMCC.Sorter.ViewModel
                 SetProperty(ref status, value);
             }
         }
+
+        private TaskType taskType = TaskType.未知;
+        public TaskType TaskType
+        {
+            get
+            {
+                return taskType;
+            }
+            set
+            {
+                SetProperty(ref taskType, value);
+            }
+        }
+
+        private DateTime timeNow;
+        public DateTime TimeNow
+        {
+            get
+            {
+                return timeNow;
+            }
+            set
+            {
+                SetProperty(ref timeNow, value);
+            }
+        }
     }
 
     public enum StorageStatus
