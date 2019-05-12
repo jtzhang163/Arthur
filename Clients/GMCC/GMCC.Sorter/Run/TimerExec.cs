@@ -38,7 +38,7 @@ namespace GMCC.Sorter.Run
                             {
                                 continue;
                             }
-                            else if (type == TaskType.上料 && Current.Option.Tray21_Id > 0)
+                            else if (type == TaskType.下料 && Current.Option.Tray21_Id > 0)
                             {
                                 continue;
                             }
@@ -243,10 +243,6 @@ namespace GMCC.Sorter.Run
                             sortingResults.ProcTrayId = procTray.Id;
                             sortingResults.UpdateTime = DateTime.Now;
 
-                        }
-                        else
-                        {
-                            Running.ShowErrorMsg("BTS客户端返回分选结果的托盘条码和实际不符");
                         }
 
                     }
