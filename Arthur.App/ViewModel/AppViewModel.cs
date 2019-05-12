@@ -1,5 +1,5 @@
 ﻿using Arthur.App;
-using Arthur.Utility;
+using Arthur.Utils;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

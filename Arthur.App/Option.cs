@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Arthur.Utility;
+using Arthur.Utils;
 
 namespace Arthur.App
 {
@@ -18,7 +18,7 @@ namespace Arthur.App
             {
                 if (rememberUserId < 0)
                 {
-                    rememberUserId = _Convert.StrToInt(Business.Application.GetOption("RememberUserId"), -1);
+                    rememberUserId = _Convert.To(Business.Application.GetOption("RememberUserId"), -1);
                     if (rememberUserId < -1)
                     {
                         rememberUserId = -1;
@@ -103,7 +103,7 @@ namespace Arthur.App
             {
                 if (dataGridPageSize < 0)
                 {
-                    dataGridPageSize = _Convert.StrToInt(Business.Application.GetOption("DataGridPageSize"), -1);
+                    dataGridPageSize = _Convert.To(Business.Application.GetOption("DataGridPageSize"), -1);
                     if (dataGridPageSize < 0)
                     {
                         dataGridPageSize = 100;

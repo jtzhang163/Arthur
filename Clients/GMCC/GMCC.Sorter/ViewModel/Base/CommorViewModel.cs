@@ -1,7 +1,7 @@
 ﻿using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
-using Arthur.Utility;
+using Arthur.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Run;
 using System;
@@ -349,7 +349,7 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (commInterval < 0)
                 {
-                    commInterval = _Convert.StrToInt(Arthur.Business.Application.GetOption(string.Format("CommInterval_{0}", this.Name)), -1);
+                    commInterval = _Convert.To(Arthur.Business.Application.GetOption(string.Format("CommInterval_{0}", this.Name)), -1);
                     if (commInterval < 0)
                     {
                         commInterval = 1000;

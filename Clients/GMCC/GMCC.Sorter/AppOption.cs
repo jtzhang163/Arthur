@@ -44,7 +44,7 @@ namespace GMCC.Sorter
             {
                 if (taskExecInterval < 0)
                 {
-                    taskExecInterval = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("TaskExecInterval"), -1);
+                    taskExecInterval = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("TaskExecInterval"), -1);
                     if (taskExecInterval < 0)
                     {
                         taskExecInterval = 3000;
@@ -75,7 +75,7 @@ namespace GMCC.Sorter
             {
                 if (getShareDataExecInterval < 0)
                 {
-                    getShareDataExecInterval = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("GetShareDataExecInterval"), -1);
+                    getShareDataExecInterval = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("GetShareDataExecInterval"), -1);
                     if (getShareDataExecInterval < 0)
                     {
                         getShareDataExecInterval = 3000;
@@ -106,7 +106,7 @@ namespace GMCC.Sorter
             {
                 if (stillTimeSpan == -2)
                 {
-                    stillTimeSpan = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("StillTimeSpan"), -1);
+                    stillTimeSpan = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("StillTimeSpan"), -1);
                     if (stillTimeSpan == -1)
                     {
                         stillTimeSpan = 120;
@@ -179,7 +179,7 @@ namespace GMCC.Sorter
             {
                 if (jawProcTrayId == -2)
                 {
-                    jawProcTrayId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("JawProcTrayId"), -1);
+                    jawProcTrayId = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("JawProcTrayId"), -1);
                     if (jawProcTrayId == -1)
                     {
                         jawProcTrayId = 0;
@@ -208,7 +208,7 @@ namespace GMCC.Sorter
             {
                 if (jawPos == -2)
                 {
-                    jawPos = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("JawPos"), -1);
+                    jawPos = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("JawPos"), -1);
                     if (jawPos == -1)
                     {
                         jawPos = 0;
@@ -542,7 +542,7 @@ namespace GMCC.Sorter
             {
                 if (tray11_Id == -2)
                 {
-                    tray11_Id = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray11_Id"), -1);
+                    tray11_Id = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray11_Id"), -1);
                     if (tray11_Id == -1)
                     {
                         tray11_Id = 0;
@@ -572,7 +572,7 @@ namespace GMCC.Sorter
             {
                 if (tray12_Id == -2)
                 {
-                    tray12_Id = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray12_Id"), -1);
+                    tray12_Id = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray12_Id"), -1);
                     if (tray12_Id == -1)
                     {
                         tray12_Id = 0;
@@ -602,7 +602,7 @@ namespace GMCC.Sorter
             {
                 if (tray13_Id == -2)
                 {
-                    tray13_Id = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray13_Id"), -1);
+                    tray13_Id = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray13_Id"), -1);
                     if (tray13_Id == -1)
                     {
                         tray13_Id = 0;
@@ -632,7 +632,7 @@ namespace GMCC.Sorter
             {
                 if (tray21_Id == -2)
                 {
-                    tray21_Id = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray21_Id"), -1);
+                    tray21_Id = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray21_Id"), -1);
                     if (tray21_Id == -1)
                     {
                         tray21_Id = 0;
@@ -661,7 +661,7 @@ namespace GMCC.Sorter
             {
                 if (tray22_Id == -2)
                 {
-                    tray22_Id = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray22_Id"), -1);
+                    tray22_Id = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray22_Id"), -1);
                     if (tray22_Id == -1)
                     {
                         tray22_Id = 0;
@@ -691,7 +691,7 @@ namespace GMCC.Sorter
             {
                 if (tray23_Id == -2)
                 {
-                    tray23_Id = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray23_Id"), -1);
+                    tray23_Id = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray23_Id"), -1);
                     if (tray23_Id == -1)
                     {
                         tray23_Id = 0;
@@ -724,7 +724,7 @@ namespace GMCC.Sorter
             {
                 if (tray11_PreId == -2)
                 {
-                    tray11_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray11_PreId"), -1);
+                    tray11_PreId = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray11_PreId"), -1);
                     if (tray11_PreId == -1)
                     {
                         tray11_PreId = 0;
@@ -754,7 +754,7 @@ namespace GMCC.Sorter
             {
                 if (tray12_PreId == -2)
                 {
-                    tray12_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray12_PreId"), -1);
+                    tray12_PreId = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray12_PreId"), -1);
                     if (tray12_PreId == -1)
                     {
                         tray12_PreId = 0;
@@ -784,7 +784,7 @@ namespace GMCC.Sorter
         //    {
         //        if (tray13_PreId == -2)
         //        {
-        //            tray13_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray13_PreId"), -1);
+        //            tray13_PreId = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray13_PreId"), -1);
         //            if (tray13_PreId == -1)
         //            {
         //                tray13_PreId = 0;
@@ -814,7 +814,7 @@ namespace GMCC.Sorter
             {
                 if (tray21_PreId == -2)
                 {
-                    tray21_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray21_PreId"), -1);
+                    tray21_PreId = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray21_PreId"), -1);
                     if (tray21_PreId == -1)
                     {
                         tray21_PreId = 0;
@@ -843,7 +843,7 @@ namespace GMCC.Sorter
             {
                 if (tray22_PreId == -2)
                 {
-                    tray22_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray22_PreId"), -1);
+                    tray22_PreId = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray22_PreId"), -1);
                     if (tray22_PreId == -1)
                     {
                         tray22_PreId = 0;
@@ -873,7 +873,7 @@ namespace GMCC.Sorter
         //    {
         //        if (tray23_PreId == -2)
         //        {
-        //            tray23_PreId = Arthur.Utility._Convert.StrToInt(Arthur.Business.Application.GetOption("Tray23_PreId"), -1);
+        //            tray23_PreId = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray23_PreId"), -1);
         //            if (tray23_PreId == -1)
         //            {
         //                tray23_PreId = 0;

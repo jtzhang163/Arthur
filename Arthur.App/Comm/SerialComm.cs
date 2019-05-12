@@ -64,7 +64,7 @@ namespace Arthur.App.Comm
                 }
                 else
                 {
-                    var bytes = Arthur.Utility._Convert.StrToToHexBytes(input);
+                    var bytes = Arthur.Utils._Convert.StrToToHexBytes(input);
                     serialPort.Write(bytes, 0, bytes.Length);
                 }
                 Thread.Sleep(800);

@@ -1,4 +1,4 @@
-﻿using Arthur.Utility;
+﻿using Arthur.Utils;
 using Arthur.View.Utils;
 using GMCC.Sorter.Data;
 using System;
@@ -51,7 +51,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.BatteryScaner
             var company = this.company.Text.Trim();
             var modelNumber = this.model_number.Text.Trim();
             var ip = this.ip.Text.Trim();
-            var port = _Convert.StrToInt(this.port.Text.Trim(), -1);
+            var port = _Convert.To(this.port.Text.Trim(), -1);
             var comm_interval = this.comm_interval.Text.Trim();
             var scan_command = this.scan_command.Text.Trim();
 

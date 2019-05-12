@@ -7,25 +7,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arthur.Utility
+namespace Arthur.Utils
 {
     /// <summary>
     /// 自定义类型转化公用类
     /// </summary>
     public static class _Convert
     {
-        public static int StrToInt(string str, int defaultValue)
-        {
-            try
-            {
-                if (str == null) { throw new Exception("str为null"); }
-                return Convert.ToInt32(str);
-            }
-            catch
-            {
-                return defaultValue;
-            }
-        }
 
         public static T To<T>(object obj, T defaultValue)
         {
@@ -39,6 +27,18 @@ namespace Arthur.Utility
                 {
                     val = Convert.ToInt32(obj);
                 }
+                else if (typeof(T).Name == "Boolean")
+                {
+                    val = Convert.ToBoolean(obj);
+                }
+                else if (typeof(T).Name == "Single")
+                {
+                    val = Convert.ToSingle(obj);
+                }
+                else if (typeof(T).Name == "Double")
+                {
+                    val = Convert.ToDouble(obj);
+                }
                 else if (typeof(T).Name == "DateTime")
                 {
                     val = Convert.ToDateTime(obj);
@@ -48,58 +48,6 @@ namespace Arthur.Utility
                     val = Convert.ToString(obj);
                 }
                 return (T)val;
-            }
-            catch
-            {
-                return defaultValue;
-            }
-        }
-
-        public static DateTime StrToDateTime(string str, DateTime defaultValue)
-        {
-            try
-            {
-                if (str == null) { throw new Exception("str为null"); }
-                return DateTime.Parse(str);
-            }
-            catch
-            {
-                return defaultValue;
-            }
-        }
-
-        public static bool StrToBool(string str, bool defaultValue)
-        {
-            try
-            {
-                if (str == null) { throw new Exception("str为null"); }
-                return bool.Parse(str.ToLower());
-            }
-            catch
-            {
-                return defaultValue;
-            }
-        }
-
-        public static bool? StrToBoolOrNull(string str)
-        {
-            try
-            {
-                if (str == null) { throw new Exception("str为null"); }
-                return bool.Parse(str.ToLower());
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public static float StrToFloat(string str, float defaultValue)
-        {
-            try
-            {
-                if (str == null) { throw new Exception("str为null"); }
-                return Convert.ToSingle(str);
             }
             catch
             {
@@ -192,7 +140,6 @@ namespace Arthur.Utility
             }
             return dt;
         }
-
 
         /// <summary>    
         /// DataTable 转换为List 集合    

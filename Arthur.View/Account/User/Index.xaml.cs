@@ -1,6 +1,6 @@
 ﻿using Arthur.App;
 using Arthur.App.Data;
-using Arthur.Utility;
+using Arthur.Utils;
 using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;

@@ -1,7 +1,7 @@
 ﻿using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
-using Arthur.Utility;
+using Arthur.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Model;
