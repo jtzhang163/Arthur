@@ -44,7 +44,7 @@
                     <Label Content="品牌：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="company" Grid.Row="2" Grid.Column="1" Text="{Binding Company, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
                     <Label Content="是否启用：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <CheckBox x:Name="isEnabled" IsChecked="{Binding IsEnabled, Mode=OneWay}" Grid.Row="7" Grid.Column="1" VerticalContentAlignment="Center"/>
+                    <CheckBox x:Name="isEnabled" IsChecked="{Binding IsEnabled, Mode=OneWay}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center"/>
                 </Grid>
             </DockPanel>
         </DockPanel>
