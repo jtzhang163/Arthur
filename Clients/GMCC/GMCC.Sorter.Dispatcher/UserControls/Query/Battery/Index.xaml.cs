@@ -1,4 +1,6 @@
-﻿using Arthur.View.Utils;
+﻿using Arthur.App;
+using Arthur.Utility;
+using Arthur.View.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
@@ -32,9 +34,10 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
         public Index(int id)
         {
             InitializeComponent();
-
-            this.start_time.Value = DateTime.Now.AddDays(-1);
-            this.end_time.Value = DateTime.Now.AddDays(1);
+            this.start_time.Value = _Convert.To(CacheHelper.GetValue("Query.Battery.StartTime"), DateTime.Now.AddDays(-1));
+            this.end_time.Value = _Convert.To(CacheHelper.GetValue("Query.Battery.EndTime"), DateTime.Now.AddDays(1));
+            this.queryText.Text = _Convert.To(CacheHelper.GetValue("Query.Battery.QueryText"), "");
+            this.PageIndex = _Convert.To(CacheHelper.GetValue("Query.Battery.PageIndex"), 1);
         }
 
         private int PageIndex = 1;
@@ -67,8 +70,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
         {
             var dtos = PaginatedList<Model.Battery>.Create(Batteries, PageIndex, Arthur.App.Current.Option.DataGridPageSize);
 
-            this.count.Content = Batteries.Count();
-            this.pageIndex.Content = PageIndex;
+            this.count.Content = dtos.TotalCount;
+            this.pageIndex.Content = dtos.PageIndex;
             this.totalPages.Content = dtos.TotalPages;
             this.size.Content = Arthur.App.Current.Option.DataGridPageSize;
             this.tbPageIndex.Text = PageIndex.ToString();
@@ -76,6 +79,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
             this.next_page.IsEnabled = dtos.HasNextPage;
 
             this.dataGrid.ItemsSource = ContextToViewModel.Convert(dtos);
+
+            CacheHelper.SetValue("Query.Battery.StartTime", this.start_time.Value);
+            CacheHelper.SetValue("Query.Battery.EndTime", this.end_time.Value);
+            CacheHelper.SetValue("Query.Battery.QueryText", this.queryText.Text);
+            CacheHelper.SetValue("Query.Battery.PageIndex", this.PageIndex);
         }
 
         private void create_Click(object sender, RoutedEventArgs e)

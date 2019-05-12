@@ -1,4 +1,6 @@
-﻿using Arthur.View.Utils;
+﻿using Arthur.App;
+using Arthur.Utility;
+using Arthur.View.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.ViewModel;
 using System;
@@ -30,6 +32,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
         public Index(int id)
         {
             InitializeComponent();
+            this.queryText.Text = _Convert.To(CacheHelper.GetValue("Machine.Storage.QueryText"), "");
+            this.PageIndex = _Convert.To(CacheHelper.GetValue("Machine.Storage.PageIndex"), 1);
         }
 
         private int PageIndex = 1;
@@ -69,6 +73,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
             this.next_page.IsEnabled = dtos.HasNextPage;
 
             this.dataGrid.ItemsSource = dtos;
+
+            CacheHelper.SetValue("Machine.Storage.QueryText", this.queryText.Text);
+            CacheHelper.SetValue("Machine.Storage.PageIndex", this.PageIndex);
         }
 
 

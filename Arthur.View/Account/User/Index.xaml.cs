@@ -1,5 +1,6 @@
 ﻿using Arthur.App;
 using Arthur.App.Data;
+using Arthur.Utility;
 using Arthur.View.Utils;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace Arthur.View.Account.User
         public Index(int id)
         {
             InitializeComponent();
+            this.queryText.Text = _Convert.To(CacheHelper.GetValue("Account.User.QueryText"), "");
+            this.PageIndex = _Convert.To(CacheHelper.GetValue("Account.User.PageIndex"), 1);
         }
 
         private int PageIndex = 1;
@@ -74,6 +77,9 @@ namespace Arthur.View.Account.User
             this.next_page.IsEnabled = dtos.HasNextPage;
 
             this.dataGrid.ItemsSource = dtos;
+
+            CacheHelper.SetValue("Account.User.QueryText", this.queryText.Text);
+            CacheHelper.SetValue("Account.User.PageIndex", this.PageIndex);
         }
 
         private void query_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,6 @@
-﻿using Arthur.View.Utils;
+﻿using Arthur.App;
+using Arthur.Utility;
+using Arthur.View.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
@@ -32,9 +34,10 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
         public Index(int id)
         {
             InitializeComponent();
-
-            this.start_time.Value = DateTime.Now.AddDays(-1);
-            this.end_time.Value = DateTime.Now.AddDays(1);
+            this.start_time.Value = _Convert.To(CacheHelper.GetValue("Query.ProcTray.StartTime"), DateTime.Now.AddDays(-1));
+            this.end_time.Value = _Convert.To(CacheHelper.GetValue("Query.ProcTray.EndTime"), DateTime.Now.AddDays(1));
+            this.queryText.Text = _Convert.To(CacheHelper.GetValue("Query.ProcTray.QueryText"), "");
+            this.PageIndex = _Convert.To(CacheHelper.GetValue("Query.ProcTray.PageIndex"), 1);
         }
 
         private int PageIndex = 1;
@@ -76,6 +79,11 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
             this.next_page.IsEnabled = dtos.HasNextPage;
 
             this.dataGrid.ItemsSource = ContextToViewModel.Convert(dtos);
+
+            CacheHelper.SetValue("Query.ProcTray.StartTime", this.start_time.Value);
+            CacheHelper.SetValue("Query.ProcTray.EndTime", this.end_time.Value);
+            CacheHelper.SetValue("Query.ProcTray.QueryText", this.queryText.Text);
+            CacheHelper.SetValue("Query.ProcTray.PageIndex", this.PageIndex);
         }
 
         private void create_Click(object sender, RoutedEventArgs e)
