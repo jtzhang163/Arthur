@@ -19,6 +19,8 @@
         <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
         <utils:IdToStorageNameConverter x:Key="idToStorageNameConverter"/>
         <utils:TaskTypeToVisibilityConverter x:Key="taskTypeToVisibilityConverter"/>
+        <utils:TaskStatusToForegroundConverter x:Key="taskStatusToForegroundConverter"/>
+        <utils:TaskStatusToBackgroundConverter x:Key="taskStatusToBackgroundConverter"/>
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -38,7 +40,8 @@
         <Label Grid.Column="1" Content="类型"></Label>
         <Label Grid.Column="2" Content="{Binding Type}" Foreground="Green" Visibility="{Binding Type, Converter={StaticResource taskTypeToVisibilityConverter}}"></Label>
         <Label Grid.Column="3" Content="状态"></Label>
-        <Label Grid.Column="4" Content="{Binding Status}" Foreground="Green" Visibility="{Binding Type, Converter={StaticResource taskTypeToVisibilityConverter}}"></Label>
+        <Label Grid.Column="4" Content="{Binding Status}" Foreground="{Binding Status, Converter={StaticResource taskStatusToForegroundConverter}}"
+               Background="{Binding Status, Converter={StaticResource taskStatusToBackgroundConverter}}" Visibility="{Binding Type, Converter={StaticResource taskTypeToVisibilityConverter}}"></Label>
         <Label Grid.Column="5" Content="料仓"></Label>
         <Label Grid.Column="6" Content="{Binding StorageId, Converter={StaticResource idToStorageNameConverter}}" Foreground="Green" Visibility="{Binding Type, Converter={StaticResource taskTypeToVisibilityConverter}}"></Label>
         <Label Grid.Column="7" Content="托盘"></Label>

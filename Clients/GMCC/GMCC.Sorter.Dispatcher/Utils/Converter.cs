@@ -210,7 +210,7 @@ namespace GMCC.Sorter.Dispatcher.Utils
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var isJawHasTray = (bool)value;
-            return isJawHasTray ? Brushes.LightGreen : Brushes.White;
+            return isJawHasTray ? (Current.Task.Type == TaskType.上料 ? Brushes.LightGreen : Brushes.Cyan) : Brushes.White;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -282,6 +282,36 @@ namespace GMCC.Sorter.Dispatcher.Utils
         {
             var taskType = (TaskType)value;
             return taskType == TaskType.未知 ? Visibility.Hidden : Visibility.Visible;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    public class TaskStatusToForegroundConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var taskStatus = (Model.TaskStatus)value;
+            return taskStatus == Model.TaskStatus.未知 || taskStatus == Model.TaskStatus.完成 ? Brushes.Green : Brushes.White;
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    public class TaskStatusToBackgroundConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var taskStatus = (Model.TaskStatus)value;
+            return taskStatus == Model.TaskStatus.未知 || taskStatus == Model.TaskStatus.完成 ? Brushes.Transparent : Brushes.Green;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
