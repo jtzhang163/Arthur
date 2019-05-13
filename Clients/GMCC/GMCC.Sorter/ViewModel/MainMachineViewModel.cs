@@ -1,4 +1,5 @@
-﻿using Arthur.App;
+﻿using Arthur;
+using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
 using Arthur.Utils;
@@ -69,22 +70,18 @@ namespace GMCC.Sorter.ViewModel
 
         public void SendCommand(JawMoveInfo toMoveInfo)
         {
-            this.Commor.Write("D450",(ushort)toMoveInfo.Col);
+            this.Commor.Write("D450", (ushort)toMoveInfo.Col);
             this.Commor.Write("D451", (ushort)toMoveInfo.Row);
             this.Commor.Write("D452", (ushort)toMoveInfo.Floor);
 
-            if (toMoveInfo.Type == TaskType.上料)
-            {
-                this.Commor.Write("D400", (ushort)1);
-            }
-            else
-            {
-                this.Commor.Write("D400", (ushort)2);
-            }
+            var d400 = toMoveInfo.Type == TaskType.上料 ? 1 : 2;
+
+            this.Commor.Write("D400", (ushort)d400);
+            LogHelper.WriteInfo(string.Format("------ 给PLC发送{4}信号 D400：{3}，D450：{0}，D451：{1}，D452：{2}-----", toMoveInfo.Col, toMoveInfo.Row, toMoveInfo.Floor, d400, toMoveInfo.Type));
         }
 
 
-        private System.Threading.Timer TaskTimer;// = new System.Threading.Timer(new TimerCallback(TaskExec), null, 5000, Current.MainMachine.TaskExecInterval);
+        private System.Threading.Timer TaskTimer;
         private System.Threading.Timer GetShareDataTimer;
 
         public MainMachineViewModel(Commor commor) : base(commor)

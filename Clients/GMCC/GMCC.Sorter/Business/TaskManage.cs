@@ -28,7 +28,7 @@ namespace GMCC.Sorter.Business
                     if (type == TaskType.上料 && storage1.ProcTrayId < 1)
                     {
                         storages.Add(storage1);
-                        continue;
+                        break;
                     }
                     else if (type == TaskType.下料 && storage2.ProcTrayId > 0)
                     {
@@ -36,7 +36,7 @@ namespace GMCC.Sorter.Business
                         {
                             storages.Add(storage2);
                         }
-                        continue;
+                        break;
                     }
                 }
             }

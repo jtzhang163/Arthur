@@ -72,7 +72,8 @@ namespace GMCC.Sorter.Data
                         SerialNumber = "",
                         IsEnabled = true,
                         Column = i + 1,
-                        Floor = j + 1
+                        Floor = j + 1,
+                        StillTimeSpan = 120
                     });
                 }
             }
