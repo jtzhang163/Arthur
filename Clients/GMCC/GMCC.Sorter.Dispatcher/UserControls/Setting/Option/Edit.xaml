@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="/Style/Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
+            <utils:TaskPriorityTypeToRadioButtonConverter x:Key="taskPriorityTypeToRadioButtonConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -35,9 +36,10 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="300"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
@@ -58,6 +60,12 @@
                     <TextBox x:Name="jaw_traycode" Grid.Row="6" Grid.Column="1" Text="{Binding JawProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                     <Label Content="静置时长(min)：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="still_timespan" Grid.Row="7" Grid.Column="1" Text="{Binding StillTimeSpan, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" />
+
+                    <Label Content="任务优先模式：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <StackPanel Grid.Row="8" Grid.Column="1" Orientation="Horizontal" Name="taskPriorityType">
+                        <RadioButton x:Name="taskPriorityType1" Content="层优先" GroupName="TaskPriorityType" IsChecked="{Binding TaskPriorityType,Mode=OneWay, Converter={StaticResource taskPriorityTypeToRadioButtonConverter},ConverterParameter=1}" Style="{StaticResource property_RadioButton}" Margin="10,0" VerticalAlignment="Center"/>
+                        <RadioButton x:Name="taskPriorityType2" Content="列优先" GroupName="TaskPriorityType" IsChecked="{Binding TaskPriorityType,Mode=OneWay, Converter={StaticResource taskPriorityTypeToRadioButtonConverter},ConverterParameter=2}"  Style="{StaticResource property_RadioButton}" Margin="10,0" VerticalAlignment="Center"/>
+                    </StackPanel>
                 </Grid>
             </DockPanel>
         </DockPanel>

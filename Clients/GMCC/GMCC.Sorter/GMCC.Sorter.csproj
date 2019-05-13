@@ -73,6 +73,7 @@
     <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="AppOption.cs" />
     <Compile Include="Model\TrayScaner.cs" />
+    <Compile Include="Other\TaskPriorityType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Run\Running.cs" />
     <Compile Include="Run\TimerExec.cs" />

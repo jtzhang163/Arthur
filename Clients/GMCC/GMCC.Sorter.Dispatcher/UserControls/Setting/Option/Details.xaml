@@ -34,9 +34,10 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="300"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
@@ -57,6 +58,8 @@
                     <Label Content="{Binding JawProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="静置时长(min)：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding StillTimeSpan}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="任务优先模式：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding TaskPriorityType}" Grid.Row="8" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

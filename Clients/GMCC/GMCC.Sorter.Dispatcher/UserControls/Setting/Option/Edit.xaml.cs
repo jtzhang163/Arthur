@@ -2,6 +2,7 @@
 using Arthur.View.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Model;
+using GMCC.Sorter.Other;
 using GMCC.Sorter.Run;
 using GMCC.Sorter.Utils;
 using System;
@@ -85,6 +86,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Setting.Option
 
                 Current.Option.JawProcTrayId = GetObject.GetByCode<ProcTray>(jaw_traycode).Id;
                 Current.Option.StillTimeSpan = Convert.ToInt32(still_timespan);
+                Current.Option.TaskPriorityType = GetTaskPriorityType();
 
                 tip.Background = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";
@@ -98,5 +100,17 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Setting.Option
             tip.Visibility = Visibility.Visible;
         }
 
+        private TaskPriorityType GetTaskPriorityType()
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                var radioButton = ControlsSearchHelper.GetChildObject<RadioButton>(taskPriorityType, string.Format("taskPriorityType{0}", i + 1));
+                if (radioButton.IsChecked.Value)
+                {
+                    return (TaskPriorityType)Enum.Parse(typeof(TaskPriorityType), radioButton.Content.ToString());
+                }
+            }
+            return TaskPriorityType.未知;
+        }
     }
 }

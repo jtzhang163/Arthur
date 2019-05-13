@@ -364,4 +364,23 @@ namespace GMCC.Sorter.Dispatcher.Utils
         }
     }
 
+    public class TaskPriorityTypeToRadioButtonConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var type = (Other.TaskPriorityType)value;
+            return type == (Other.TaskPriorityType)int.Parse(parameter.ToString());
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            bool isChecked = (bool)value;
+            if (!isChecked)
+            {
+                return null;
+            }
+            return (Other.TaskPriorityType)int.Parse(parameter.ToString());
+        }
+    }
+
 }

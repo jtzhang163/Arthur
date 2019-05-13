@@ -50,13 +50,27 @@ namespace GMCC.Sorter.Run
                                 {
                                     StorageViewModel storage = null;
 
-                                    if (type == TaskType.上料)
+                                    if (Current.Option.TaskPriorityType == Other.TaskPriorityType.层优先)
                                     {
-                                        storage = storages.OrderByDescending(o => o.Floor).First();
+                                        if (type == TaskType.上料)
+                                        {
+                                            storage = storages.OrderByDescending(o => o.Floor).First();
+                                        }
+                                        else
+                                        {
+                                            storage = storages.OrderBy(o => o.Floor).First();
+                                        }
                                     }
                                     else
                                     {
-                                        storage = storages.OrderBy(o => o.Floor).First();
+                                        if (type == TaskType.上料)
+                                        {
+                                            storage = storages.OrderBy(o => o.Column).First();
+                                        }
+                                        else
+                                        {
+                                            storage = storages.OrderByDescending(o => o.Column).First();
+                                        }
                                     }
 
                                     Current.Task.StorageId = storage.Id;

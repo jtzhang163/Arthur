@@ -2,6 +2,7 @@
 using Arthur.App;
 using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Model;
+using GMCC.Sorter.Other;
 using GMCC.Sorter.Utils;
 using System;
 using System.Collections.Generic;
@@ -163,6 +164,41 @@ namespace GMCC.Sorter
         /// 上下料任务完成
         /// </summary>
         public bool IsTaskFinished { get; set; }
+
+
+        private TaskPriorityType taskPriorityType = TaskPriorityType.未知;
+        /// <summary>
+        /// 自动任务优先级类型（层优先/列优先）
+        /// </summary>
+        public TaskPriorityType TaskPriorityType
+        {
+            get
+            {
+                if (taskPriorityType == TaskPriorityType.未知)
+                {
+                    var type = Arthur.Business.Application.GetOption("TaskPriorityType");
+                    if (type == null)
+                    {
+                        taskPriorityType = TaskPriorityType.层优先;
+                        Arthur.Business.Application.SetOption("TaskPriorityType", taskPriorityType.ToString(), "自动任务优先级类型（层优先/列优先）");
+                    }
+                    else
+                    {
+                        taskPriorityType = (TaskPriorityType)Enum.Parse(typeof(TaskPriorityType), type);
+                    }
+                }
+                return taskPriorityType;
+            }
+            set
+            {
+                if (taskPriorityType != value)
+                {
+                    Arthur.Business.Application.SetOption("TaskPriorityType", value.ToString());
+                    Arthur.Business.Logging.AddOplog(string.Format("设置. {0} 自动任务优先级类型（层优先/列优先）: [{1}] 修改为 [{2}]", Name, taskPriorityType, value), Arthur.App.Model.OpType.编辑);
+                    SetProperty(ref taskPriorityType, value);
+                }
+            }
+        }
 
 
         #region 横移相关
