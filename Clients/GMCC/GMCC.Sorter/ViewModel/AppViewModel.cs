@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GMCC.Sorter.Utils;
+using GMCC.Sorter.Other;
 
 namespace GMCC.Sorter.ViewModel
 {
-    public class AppViewModel : Arthur.ViewModel.AppViewModel
+    public sealed class AppViewModel : Arthur.ViewModel.AppViewModel
     {
 
         private string appName = null;
@@ -118,7 +118,7 @@ namespace GMCC.Sorter.ViewModel
                 if (runStatus != value)
                 {
                     var selectedEnabled = value == RunStatus.闲置;
-                    Factory.CommorHelper.GetCommors().ForEach(c => c.SelectedEnabled = selectedEnabled);
+                    Factory.CommorFactory.GetCommors().ForEach(c => c.SelectedEnabled = selectedEnabled);
                     SetProperty(ref runStatus, value);
                 }
             }

@@ -13,7 +13,7 @@ namespace GMCC.Sorter.ViewModel
     /// <summary>
     /// 主设备
     /// </summary>
-    public class MesViewModel : CommorViewModel
+    public sealed class MesViewModel : CommorViewModel
     {
 
         private string host = null;

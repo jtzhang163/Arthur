@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Model
 {
-    public class Battery : Product
+    public sealed class Battery : Product
     {
         /// <summary>
         /// 所在流程托盘

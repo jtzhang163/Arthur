@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arthur.App.ViewModel
 {
-    public class RoleViewModel
+    public sealed class RoleViewModel
     {
 
 

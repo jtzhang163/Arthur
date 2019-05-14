@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Business
 {
-    public class ProcTrayManage : IManage<ProcTray>
+    public sealed class ProcTrayManage : IManage<ProcTray>
     {
         public Result Create(ProcTray procTray)
         {

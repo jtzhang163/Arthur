@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Model
 {
-    public class PLC : EthernetCommor
+    public sealed class PLC : EthernetCommor
     {
     }
 }

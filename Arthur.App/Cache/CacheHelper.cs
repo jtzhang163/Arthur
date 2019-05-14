@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arthur.App
 {
-    public class CacheHelper
+    public static class CacheHelper
     {
         public static object GetValue(string key)
         {

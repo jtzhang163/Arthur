@@ -16,7 +16,7 @@ namespace GMCC.Sorter.ViewModel
     /// <summary>
     /// 电池扫码枪
     /// </summary>
-    public class BatteryScanerViewModel : CommorViewModel
+    public sealed class BatteryScanerViewModel : CommorViewModel
     {
 
 
@@ -76,11 +76,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (scanCommand == null)
                 {
-                    scanCommand = Arthur.Business.Application.GetOption("ScanCommand_BatteryScaner");
+                    scanCommand = Arthur.Business.Setting.GetOption("ScanCommand_BatteryScaner");
                     if (scanCommand == null)
                     {
                         scanCommand = "T";
-                        Arthur.Business.Application.SetOption("ScanCommand_BatteryScaner", scanCommand, this.Name + "扫码指令");
+                        Arthur.Business.Setting.SetOption("ScanCommand_BatteryScaner", scanCommand, this.Name + "扫码指令");
                     }
                 }
                 return scanCommand;
@@ -89,7 +89,7 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (scanCommand != value)
                 {
-                    Arthur.Business.Application.SetOption("ScanCommand_BatteryScaner", value);
+                    Arthur.Business.Setting.SetOption("ScanCommand_BatteryScaner", value);
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}扫码指令: [{1}] 修改为 [{2}]", Name, scanCommand, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref scanCommand, value);
                 }

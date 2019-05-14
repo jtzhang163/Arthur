@@ -59,7 +59,7 @@
     <Compile Include="BindableObject.cs" />
     <Compile Include="Business\Logging.cs" />
     <Compile Include="Business\Account.cs" />
-    <Compile Include="Business\Application.cs" />
+    <Compile Include="Business\Setting.cs" />
     <Compile Include="Business\IManage.cs" />
     <Compile Include="Business\UserManage.cs" />
     <Compile Include="Business\RoleManage.cs" />

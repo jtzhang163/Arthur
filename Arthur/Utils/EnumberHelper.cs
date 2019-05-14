@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Arthur.Utils
 {
 
-    public class EnumberHelper
+    public static class EnumberHelper
     {
         public static List<EnumberEntity> EnumToList<T>()
         {

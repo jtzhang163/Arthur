@@ -5,9 +5,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace GMCC.Sorter.Utils
+namespace GMCC.Sorter.Other
 {
-    public class AppInfo
+    public sealed class AppInfo
     {
         public string AppTitle
         {

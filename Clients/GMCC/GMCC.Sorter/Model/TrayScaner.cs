@@ -10,7 +10,7 @@ namespace GMCC.Sorter.Model
     /// <summary>
     /// 托盘扫码枪
     /// </summary>
-    public class TrayScaner : SerialCommor
+    public sealed class TrayScaner : SerialCommor
     {
     }
 }

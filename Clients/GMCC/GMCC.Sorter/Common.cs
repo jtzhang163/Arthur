@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter
 {
-    public class Common
+    public static class Common
     {
         /// <summary>
         /// 料仓列数

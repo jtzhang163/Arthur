@@ -8,7 +8,7 @@ using Arthur.Utils;
 
 namespace Arthur.App
 {
-    public class AppOption : BindableObject
+    public sealed class AppOption : BindableObject
     {
         private int rememberUserId = -1;
 
@@ -18,11 +18,11 @@ namespace Arthur.App
             {
                 if (rememberUserId < 0)
                 {
-                    rememberUserId = _Convert.To(Business.Application.GetOption("RememberUserId"), -1);
+                    rememberUserId = _Convert.To(Business.Setting.GetOption("RememberUserId"), -1);
                     if (rememberUserId < -1)
                     {
                         rememberUserId = -1;
-                        Business.Application.SetOption("RememberUserId", rememberUserId.ToString(), "记住的用户ID");
+                        Business.Setting.SetOption("RememberUserId", rememberUserId.ToString(), "记住的用户ID");
                     }
                 }
                 return rememberUserId;
@@ -31,7 +31,7 @@ namespace Arthur.App
             {
                 if (rememberUserId != value)
                 {
-                    Business.Application.SetOption("RememberUserId", value.ToString());
+                    Business.Setting.SetOption("RememberUserId", value.ToString());
                     rememberUserId = value;
                 }
             }
@@ -45,11 +45,11 @@ namespace Arthur.App
             {
                 if (appName == null)
                 {
-                    appName = Business.Application.GetOption("AppName");
+                    appName = Business.Setting.GetOption("AppName");
                     if (appName == null)
                     {
                         appName = string.Empty;
-                        Business.Application.SetOption("AppName", appName, "应用程序名称");
+                        Business.Setting.SetOption("AppName", appName, "应用程序名称");
                     }
                 }
                 return appName;
@@ -58,7 +58,7 @@ namespace Arthur.App
             {
                 if (appName != value)
                 {
-                    Business.Application.SetOption("AppName", value);
+                    Business.Setting.SetOption("AppName", value);
                     appName = value;
                     // SetProperty(ref checkTesterInfoInterval, value);
                 }
@@ -75,11 +75,11 @@ namespace Arthur.App
             {
                 if (companyName == null)
                 {
-                    companyName = Business.Application.GetOption("CompanyName");
+                    companyName = Business.Setting.GetOption("CompanyName");
                     if (companyName == null)
                     {
                         companyName = string.Empty;
-                        Business.Application.SetOption("CompanyName", companyName, "公司名");
+                        Business.Setting.SetOption("CompanyName", companyName, "公司名");
                     }
                 }
                 return companyName;
@@ -88,7 +88,7 @@ namespace Arthur.App
             {
                 if (companyName != value)
                 {
-                    Business.Application.SetOption("CompanyName", value);
+                    Business.Setting.SetOption("CompanyName", value);
                     companyName = value;
                 }
             }
@@ -103,11 +103,11 @@ namespace Arthur.App
             {
                 if (dataGridPageSize < 0)
                 {
-                    dataGridPageSize = _Convert.To(Business.Application.GetOption("DataGridPageSize"), -1);
+                    dataGridPageSize = _Convert.To(Business.Setting.GetOption("DataGridPageSize"), -1);
                     if (dataGridPageSize < 0)
                     {
                         dataGridPageSize = 100;
-                        Business.Application.SetOption("DataGridPageSize", dataGridPageSize.ToString(), "数据表每页的数据个数");
+                        Business.Setting.SetOption("DataGridPageSize", dataGridPageSize.ToString(), "数据表每页的数据个数");
                     }
                 }
                 return dataGridPageSize;
@@ -116,7 +116,7 @@ namespace Arthur.App
             {
                 if (dataGridPageSize != value)
                 {
-                    Business.Application.SetOption("DataGridPageSize", value.ToString());
+                    Business.Setting.SetOption("DataGridPageSize", value.ToString());
                     dataGridPageSize = value;
                 }
             }

@@ -16,7 +16,7 @@ namespace GMCC.Sorter.ViewModel
     /// <summary>
     /// 电池
     /// </summary>
-    public class BatteryViewModel : BindableObject
+    public sealed class BatteryViewModel : BindableObject
     {
 
         public int Id { get; set; }

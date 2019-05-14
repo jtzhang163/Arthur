@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Utils
 {
-    public class GetObject
+    public static class GetObject
     {
         public static T GetById<T>(int id)
         {

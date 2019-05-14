@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Business
 {
-    public class TrayManage : IManage<Tray>
+    public sealed class TrayManage : IManage<Tray>
     {
 
         public Result Create(Tray tray)

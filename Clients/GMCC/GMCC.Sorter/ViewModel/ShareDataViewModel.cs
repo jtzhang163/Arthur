@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.ViewModel
 {
-    public class ShareDataViewModel : BindableObject
+    public sealed class ShareDataViewModel : BindableObject
     {
         public int Id { get; set; }
         public string Key { get; set; }

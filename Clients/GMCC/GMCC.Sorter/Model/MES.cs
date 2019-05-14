@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Model
 {
-    public class MES : Server
+    public sealed class MES : Server
     {
         public MES() : this(-1)
         {

@@ -349,11 +349,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (commInterval < 0)
                 {
-                    commInterval = _Convert.To(Arthur.Business.Application.GetOption(string.Format("CommInterval_{0}", this.Name)), -1);
+                    commInterval = _Convert.To(Arthur.Business.Setting.GetOption(string.Format("CommInterval_{0}", this.Name)), -1);
                     if (commInterval < 0)
                     {
                         commInterval = 1000;
-                        Arthur.Business.Application.SetOption(string.Format("CommInterval_{0}", this.Name), commInterval.ToString(), string.Format("上位机-{0}通讯时间间隔", this.Name));
+                        Arthur.Business.Setting.SetOption(string.Format("CommInterval_{0}", this.Name), commInterval.ToString(), string.Format("上位机-{0}通讯时间间隔", this.Name));
                     }
                 }
                 return commInterval;
@@ -362,7 +362,7 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (commInterval != value)
                 {
-                    Arthur.Business.Application.SetOption(string.Format("CommInterval_{0}", this.Name), value.ToString());
+                    Arthur.Business.Setting.SetOption(string.Format("CommInterval_{0}", this.Name), value.ToString());
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}与上位机通讯间隔: [{1}] 修改为 [{2}]", Name, commInterval, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref commInterval, value);
                 }

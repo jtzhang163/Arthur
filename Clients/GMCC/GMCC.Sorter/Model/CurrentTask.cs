@@ -11,7 +11,7 @@ namespace GMCC.Sorter.Model
     /// <summary>
     /// 当前任务
     /// </summary>
-    public class CurrentTask : Service
+    public sealed class CurrentTask : Service
     {
         public TaskType Type { get; set; }
 

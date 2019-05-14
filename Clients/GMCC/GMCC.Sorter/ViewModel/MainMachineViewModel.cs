@@ -19,7 +19,7 @@ namespace GMCC.Sorter.ViewModel
     /// <summary>
     /// 主设备
     /// </summary>
-    public class MainMachineViewModel : CommorViewModel
+    public sealed class MainMachineViewModel : CommorViewModel
     {
 
         private string ip = null;

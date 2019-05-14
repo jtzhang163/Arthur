@@ -10,7 +10,7 @@ namespace GMCC.Sorter.Model
     /// <summary>
     /// 流程托盘
     /// </summary>
-    public class ProcTray : Product
+    public sealed class ProcTray : Product
     {
         /// <summary>
         /// 所在托盘

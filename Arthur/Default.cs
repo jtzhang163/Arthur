@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arthur
 {
-    public class Default
+    public static class Default
     {
         /// <summary>
         /// 默认时间（2000-01-01 00:00:00）

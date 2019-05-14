@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Arthur.App
 {
-    public class Application
+    public static class Application
     {
         public static string ConnectionString = ConfigurationManager.ConnectionStrings["DefaultDatabase"].ToString();
 

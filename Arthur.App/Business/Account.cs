@@ -12,7 +12,7 @@ using Arthur.App.Utils;
 
 namespace Arthur.Business
 {
-    public class Account
+    public static class Account
     {
         public static Result Register(string name, string password, string confirm_pwd)
         {
@@ -189,22 +189,6 @@ namespace Arthur.Business
 
             return Result.OK;
         }
-
-        //public static User GetUser(int id)
-        //{
-        //    using (var db = new Arthur.App.AppContext())
-        //    {
-        //        return db.Users.FirstOrDefault(u => u.Id == id) ?? new User();
-        //    }
-        //}
-
-        //public static Role GetRole(int id)
-        //{
-        //    using (var db = new Arthur.App.AppContext())
-        //    {
-        //        return db.Roles.FirstOrDefault(u => u.Id == id) ?? new Role();
-        //    }
-        //}
 
         public static IEnumerable<Role> GetRoles()
         {

@@ -16,7 +16,7 @@ namespace GMCC.Sorter.ViewModel
     /// <summary>
     /// 流程托盘
     /// </summary>
-    public class ProcTrayViewModel : BindableObject
+    public sealed class ProcTrayViewModel : BindableObject
     {
 
         public int Id { get; set; }

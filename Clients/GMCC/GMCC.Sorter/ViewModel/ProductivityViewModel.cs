@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.ViewModel
 {
-    public class ProductivityViewModel
+    public sealed class ProductivityViewModel
     {
         public string Date { get; set; }
 

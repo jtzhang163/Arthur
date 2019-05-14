@@ -11,7 +11,7 @@ using Arthur.App.Model;
 
 namespace Arthur.Business
 {
-    public class Logging
+    public static class Logging
     {
         public static Result AddEvent(string content, EventType type)
         {

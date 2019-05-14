@@ -18,7 +18,7 @@ using System.Timers;
 
 namespace GMCC.Sorter.Run
 {
-    public class TimerExec
+    public static class TimerExec
     {
         public static bool IsRunning { get; set; }
 
@@ -32,7 +32,7 @@ namespace GMCC.Sorter.Run
                 {
                     if (Current.App.TaskMode == ViewModel.TaskMode.自动任务)
                     {
-                        foreach (var type in TaskHelper.TaskTypes)
+                        foreach (var type in Factory.TaskFactory.TaskTypes)
                         {
                             if (type == TaskType.上料 && Current.Option.Tray13_Id < 1)
                             {
@@ -45,7 +45,7 @@ namespace GMCC.Sorter.Run
 
                             if (Current.Option.IsTaskReady)
                             {
-                                var storages = TaskManage.CanGetOrPutStorages(type);
+                                var storages = Factory.TaskFactory.CanGetOrPutStorages(type);
                                 if (storages.Count > 0)
                                 {
                                     StorageViewModel storage = null;
@@ -138,7 +138,7 @@ namespace GMCC.Sorter.Run
                     {
                         Current.Task.PreType = Current.Task.Type;
                         Current.Task.Status = Model.TaskStatus.完成;
-                        TaskManage.AddTaskLog();
+                        new TaskManage().AddTaskLog();
                     }
                 }
             }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Arthur.App.ViewModel
 {
-    public class UserViewModel
+    public sealed class UserViewModel
     {
 
         private Gender _gender;

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Business
 {
-    public class BatteryManage : IManage<Battery>
+    public sealed class BatteryManage : IManage<Battery>
     {
         public Result Create(Battery battery)
         {

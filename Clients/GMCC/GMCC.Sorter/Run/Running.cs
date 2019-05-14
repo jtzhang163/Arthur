@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Run
 {
-    public class Running
+    public static class Running
     {
         public static Result Start()
         {
-            var commors = Factory.CommorHelper.GetCommors();
+            var commors = Factory.CommorFactory.GetCommors();
             for (var i = 0; i < commors.Count; i++)
             {
                 if (commors[i].IsEnabled)
@@ -35,7 +35,7 @@ namespace GMCC.Sorter.Run
 
         public static Result Stop()
         {
-            var commors = Factory.CommorHelper.GetCommors();
+            var commors = Factory.CommorFactory.GetCommors();
             for (var i = 0; i < commors.Count; i++)
             {
                 if (commors[i].IsEnabled)
@@ -50,7 +50,7 @@ namespace GMCC.Sorter.Run
 
         public static Result Reset()
         {
-            var commors = Factory.CommorHelper.GetCommors();
+            var commors = Factory.CommorFactory.GetCommors();
             for (var i = 0; i < commors.Count; i++)
             {
                 if (commors[i].IsEnabled)

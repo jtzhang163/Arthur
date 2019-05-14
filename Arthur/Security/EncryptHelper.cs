@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arthur.Security
 {
-    public class EncryptHelper
+    public static class EncryptHelper
     {
         /// <summary>
         /// Base64加密

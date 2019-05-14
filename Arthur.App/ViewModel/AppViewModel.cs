@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Arthur.ViewModel
 {
-    public class AppViewModel : BindableObject
+    public abstract class AppViewModel : BindableObject
     {
 
         private string userName = null;

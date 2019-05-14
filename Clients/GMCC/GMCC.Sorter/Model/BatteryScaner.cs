@@ -10,7 +10,7 @@ namespace GMCC.Sorter.Model
     /// <summary>
     /// 电池扫码枪
     /// </summary>
-    public class BatteryScaner : EthernetCommor
+    public sealed class BatteryScaner : EthernetCommor
     {
     }
 }

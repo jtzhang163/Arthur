@@ -19,7 +19,7 @@ namespace GMCC.Sorter.ViewModel
     /// <summary>
     /// 主设备
     /// </summary>
-    public class TrayScanerViewModel : CommorViewModel
+    public sealed class TrayScanerViewModel : CommorViewModel
     {
         private string portName = null;
         public string PortName
@@ -138,11 +138,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (scanCommand == null)
                 {
-                    scanCommand = Arthur.Business.Application.GetOption("ScanCommand_TrayScaner_" + this.Id);
+                    scanCommand = Arthur.Business.Setting.GetOption("ScanCommand_TrayScaner_" + this.Id);
                     if (scanCommand == null)
                     {
                         scanCommand = "16 54 0D";
-                        Arthur.Business.Application.SetOption("ScanCommand_TrayScaner_" + this.Id, scanCommand, this.Name + "扫码指令");
+                        Arthur.Business.Setting.SetOption("ScanCommand_TrayScaner_" + this.Id, scanCommand, this.Name + "扫码指令");
                     }
                 }
                 return scanCommand;
@@ -151,7 +151,7 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (scanCommand != value)
                 {
-                    Arthur.Business.Application.SetOption("ScanCommand_TrayScaner_" + this.Id, value);
+                    Arthur.Business.Setting.SetOption("ScanCommand_TrayScaner_" + this.Id, value);
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}扫码指令: [{1}] 修改为 [{2}]", Name, stopBits, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref scanCommand, value);
                 }

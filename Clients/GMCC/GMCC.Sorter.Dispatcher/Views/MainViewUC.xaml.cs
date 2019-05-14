@@ -36,7 +36,7 @@ namespace GMCC.Sorter.Dispatcher.Views
             }
 
             this.DataContext = Current.App;
-            this.commorList.DataContext = GMCC.Sorter.Factory.CommorHelper.GetCommors();
+            this.commorList.DataContext = GMCC.Sorter.Factory.CommorFactory.GetCommors();
         }
         /// <summary>
         /// 

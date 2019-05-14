@@ -16,7 +16,7 @@ namespace GMCC.Sorter.ViewModel
     /// <summary>
     /// 当前任务
     /// </summary>
-    public class CurrentTaskViewModel : BindableObject
+    public sealed class CurrentTaskViewModel : BindableObject
     {
         private Model.TaskType type = Model.TaskType.未知;
         private Model.TaskType preType = Model.TaskType.未知;

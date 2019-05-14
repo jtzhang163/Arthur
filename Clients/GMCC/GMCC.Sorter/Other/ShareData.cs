@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Utils
 {
-    public class ShareData
+    public sealed class ShareData
     {
         public int Id { get; set; }
         public string Key { get; set; }

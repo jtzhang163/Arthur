@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arthur
 {
-    public class LogHelper
+    public static class LogHelper
     {
 
         private static readonly log4net.ILog loginfo = log4net.LogManager.GetLogger("loginfo");

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Model
 {
-    public class TaskLog : Logging
+    public sealed class TaskLog : Logging
     {
         public TaskType TaskType { get; set; }
 

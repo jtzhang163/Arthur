@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Cache
 {
-    public class AppCache
+    public static class AppCache
     {
         public static List<ProcTray> ProcTrays = new List<ProcTray>();
     }

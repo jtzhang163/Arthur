@@ -8,7 +8,7 @@ using Arthur.App.Model;
 
 namespace Arthur.Business
 {
-    public class UserManage : IManage<User>
+    public sealed class UserManage : IManage<User>
     {
 
         public Result Create(User user)

@@ -12,7 +12,7 @@ namespace GMCC.Sorter.Model
     /// <summary>
     /// 托盘
     /// </summary>
-    public class Tray : Machine
+    public sealed class Tray : Machine
     {
         /// <summary>
         /// 条码

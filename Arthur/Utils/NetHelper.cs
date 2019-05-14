@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Arthur.Utils
 {
-    public class NetHelper
+    public static class NetHelper
     {
         /// <summary>
         /// 获取本地电脑IP列表

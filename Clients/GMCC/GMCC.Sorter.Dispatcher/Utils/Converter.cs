@@ -1,6 +1,6 @@
 ﻿using GMCC.Sorter.Data;
 using GMCC.Sorter.Model;
-using GMCC.Sorter.Utils;
+using GMCC.Sorter.Other;
 using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;

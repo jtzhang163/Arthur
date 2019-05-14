@@ -11,7 +11,7 @@ namespace GMCC.Sorter
     /// <summary>
     /// 横移移动的信息（从PLC中读得的值）
     /// </summary>
-    public class JawMoveInfo
+    public sealed class JawMoveInfo
     {
 
         public TaskType Type { get; set; }

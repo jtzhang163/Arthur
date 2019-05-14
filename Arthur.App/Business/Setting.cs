@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Arthur.Business
 {
-    public class Application
+    public static class Setting
     {
         public static string GetOption(string key)
         {

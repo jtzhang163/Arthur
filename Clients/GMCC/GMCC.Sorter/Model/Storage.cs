@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Model
 {
-    public class Storage : Machine
+    public sealed class Storage : Machine
     {
         /// <summary>
         /// 所在列

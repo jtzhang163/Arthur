@@ -1,4 +1,5 @@
 ﻿using Arthur;
+using Arthur.Business;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Model;
 using GMCC.Sorter.ViewModel;
@@ -10,44 +11,10 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Business
 {
-    public class TaskManage
+    public sealed class TaskManage : IManage<TaskLog>
     {
 
-        public static List<StorageViewModel> CanGetOrPutStorages(TaskType type)
-        {
-            var storages = new List<StorageViewModel>();
-
-            // 满足条件的
-            for (var i = 0; i < Common.STOR_COL_COUNT; i++)
-            {
-                for (var j = 0; j < Common.STOR_FLOOR_COUNT; j++)
-                {
-                    var storage1 = Current.Storages.First(o => o.Column == i + 1 && o.Floor == 5 - j);
-                    var storage2 = Current.Storages.First(o => o.Column == i + 1 && o.Floor == j + 1);
-
-                    if (type == TaskType.上料 && storage1.ProcTrayId < 1)
-                    {
-                        storages.Add(storage1);
-                        break;
-                    }
-                    else if (type == TaskType.下料 && storage2.ProcTrayId > 0)
-                    {
-                        if (storage2.Status == StorageStatus.静置完成)
-                        {
-                            storages.Add(storage2);
-                        }
-                        break;
-                    }
-                }
-            }
-            /// 
-            /// 排序
-            /// 
-            return storages.Where(o => o.IsEnabled).ToList();
-        }
-
-
-        public static Result AddTaskLog()
+        public Result AddTaskLog()
         {
             try
             {
@@ -71,6 +38,11 @@ namespace GMCC.Sorter.Business
                 return new Result(ex);
             }
             return Result.OK;
+        }
+
+        public Result Create(TaskLog t)
+        {
+            throw new NotImplementedException();
         }
     }
 }

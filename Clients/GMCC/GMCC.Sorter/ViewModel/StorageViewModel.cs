@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.ViewModel
 {
-    public class StorageViewModel : BindableObject
+    public sealed class StorageViewModel : BindableObject
     {
 
         public int Id { get; set; }
