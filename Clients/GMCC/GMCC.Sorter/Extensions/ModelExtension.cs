@@ -1,4 +1,5 @@
-﻿using GMCC.Sorter.Data;
+﻿using GMCC.Sorter.Business;
+using GMCC.Sorter.Data;
 using GMCC.Sorter.Model;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,16 @@ namespace GMCC.Sorter.Extensions
             {
                 return db.Batteries.Where(o => o.ProcTrayId == procTray.Id).ToList();
             }
+        }
+
+        /// <summary>
+        /// 获取通道序号
+        /// </summary>
+        /// <param name="battery"></param>
+        /// <returns></returns>
+        public static int GetChargeOrder(this Battery battery)
+        {
+            return OrderManage.GetChargeOrder(battery.Pos);
         }
     }
 }

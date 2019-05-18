@@ -1,4 +1,5 @@
-﻿using GMCC.Sorter.Data;
+﻿using GMCC.Sorter.Business;
+using GMCC.Sorter.Data;
 using GMCC.Sorter.Model;
 using GMCC.Sorter.Other;
 using GMCC.Sorter.ViewModel;
@@ -380,6 +381,21 @@ namespace GMCC.Sorter.Dispatcher.Utils
                 return null;
             }
             return (Other.TaskPriorityType)int.Parse(parameter.ToString());
+        }
+    }
+
+
+    public class PosToWithChargeOrderConverter : IValueConverter
+    {
+        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            var pos = (int)value;
+            return string.Format("{0} ( {1} )", pos, OrderManage.GetChargeOrder(pos));
+        }
+
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 

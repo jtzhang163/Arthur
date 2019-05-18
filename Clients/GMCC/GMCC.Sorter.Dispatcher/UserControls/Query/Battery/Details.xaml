@@ -14,6 +14,7 @@
             </ResourceDictionary.MergedDictionaries>
             <utils:IdToStorageNameConverter x:Key="idToStorageNameConverter"/>
             <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
+            <utils:PosToWithChargeOrderConverter x:Key="posToWithChargeOrderConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -46,7 +47,7 @@
                     <Label Content="托盘条码：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding ProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="位置：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding Pos}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="{Binding Pos, Converter={StaticResource posToWithChargeOrderConverter}}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="静置料仓：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding StorageId, Converter={StaticResource idToStorageNameConverter}}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="开始静置时间：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>

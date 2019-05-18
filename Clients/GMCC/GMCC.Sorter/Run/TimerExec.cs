@@ -169,13 +169,19 @@ namespace GMCC.Sorter.Run
                         }
                         else
                         {
-                            //充电位条码绑定信息传给BTS客户端
-                            var codes = procTray.GetBatteries().ConvertAll<string>(o => o.Code);
 
-                            //清料时条码个数不足32，用空字符串补上
-                            while (codes.Count < Common.TRAY_BATTERY_COUNT)
+                            //充电位条码绑定信息传给BTS客户端
+                            var batteries = procTray.GetBatteries();
+                            var codes = new List<string>();
+                            for (var i = 1; i <= Common.TRAY_BATTERY_COUNT; i++)
                             {
-                                codes.Add("");
+                                var code = "";
+                                var battery = batteries.FirstOrDefault(o => o.GetChargeOrder() == i);
+                                if (battery != null)
+                                {
+                                    code = battery.Code;
+                                }
+                                codes.Add(code);
                             }
 
                             var value = new BindCode { TrayCode = procTray.Code, BatteryCodes = string.Join(",", codes.ToArray()) };
@@ -203,12 +209,17 @@ namespace GMCC.Sorter.Run
                         else
                         {
                             //放电位条码绑定信息传给BTS客户端
-                            var codes = procTray.GetBatteries().ConvertAll<string>(o => o.Code);
-
-                            //清料时条码个数不足32，用空字符串补上
-                            while (codes.Count < Common.TRAY_BATTERY_COUNT)
+                            var batteries = procTray.GetBatteries();
+                            var codes = new List<string>();
+                            for (var i = 1; i <= Common.TRAY_BATTERY_COUNT; i++)
                             {
-                                codes.Add("");
+                                var code = "";
+                                var battery = batteries.FirstOrDefault(o => o.GetChargeOrder() == i);
+                                if (battery != null)
+                                {
+                                    code = battery.Code;
+                                }
+                                codes.Add(code);
                             }
 
                             var value = new BindCode { TrayCode = procTray.Code, BatteryCodes = string.Join(",", codes.ToArray()) };
@@ -235,7 +246,8 @@ namespace GMCC.Sorter.Run
                             var results = bindResults.Results.Split(',');
                             for (int i = 0; i < results.Length; i++)
                             {
-                                Current.MainMachine.Commor.Write(string.Format("D{0:D3}", 401 + i), ushort.Parse(results[i]));
+                                //i:绑盘序号
+                                Current.MainMachine.Commor.Write(string.Format("D{0:D3}", 401 + i), ushort.Parse(results[OrderManage.GetChargeOrder(i + 1) - 1]));
                             }
                             LogHelper.WriteInfo(string.Format("--------成功发送分选结果数据给PLC【流程托盘ID：{0}，条码：{1}】---------", procTray.Id, procTray.Code));
 
@@ -244,10 +256,11 @@ namespace GMCC.Sorter.Run
 
                             for (int i = 0; i < results.Length; i++)
                             {
+                                //i:通道序号
                                 var result = int.Parse(results[i]);
                                 if (result > 0)
                                 {
-                                    var battery = batteryViewModels.FirstOrDefault(o => o.Pos == i + 1);
+                                    var battery = batteryViewModels.FirstOrDefault(o => o.Pos == OrderManage.GetBindOrder(i + 1));
                                     if (battery != null)
                                     {
                                         battery.SortResult = (SortResult)result;

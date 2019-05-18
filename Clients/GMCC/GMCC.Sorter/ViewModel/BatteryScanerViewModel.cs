@@ -104,15 +104,14 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
-            //绑盘位电池已满，不扫码，直到出现新托盘再扫
-            if (ProcTrayManage.GetBatteryCount(Current.Option.Tray11_Id) >= Common.TRAY_BATTERY_COUNT)
-            {
-                Running.ShowErrorMsg("绑盘位扫码电池数超过最大值：" + Common.TRAY_BATTERY_COUNT);
-                return;
-            }
-
             if (Current.MainMachine.IsAlive && Current.Option.IsBatteryScanReady && !Current.Option.IsAlreadyBatteryScan && Current.Option.Tray11_Id > 0)
             {
+                //绑盘位电池已满，不扫码，直到出现新托盘再扫
+                if (ProcTrayManage.GetBatteryCount(Current.Option.Tray11_Id) >= Common.TRAY_BATTERY_COUNT)
+                {
+                    Running.ShowErrorMsg("绑盘位扫码电池数超过最大值：" + Common.TRAY_BATTERY_COUNT);
+                    return;
+                }
                 var ret = this.Commor.Comm(this.ScanCommand);
                 if (ret.IsOk)
                 {

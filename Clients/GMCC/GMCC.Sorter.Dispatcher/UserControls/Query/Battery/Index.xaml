@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.Query.Battery"
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
@@ -40,6 +40,7 @@
             </Style>
             <utils:IdToStorageNameConverter x:Key="idToStorageNameConverter"/>
             <utils:IdToProcTrayCodeConverter x:Key="idToProcTrayCodeConverter"/>
+            <utils:PosToWithChargeOrderConverter x:Key="posToWithChargeOrderConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -225,7 +226,7 @@
                                 <DataTemplate>
                                     <!--堆叠盘-->
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding Pos}"></TextBlock>
+                                        <TextBlock Text="{Binding Pos, Converter={StaticResource posToWithChargeOrderConverter}}"></TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

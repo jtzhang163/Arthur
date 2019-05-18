@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\OrderManage.cs" />
     <Compile Include="Business\ProcTrayManage.cs" />
     <Compile Include="Business\BatteryManage.cs" />
     <Compile Include="Business\TaskManage.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Cache\AppCache.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Current.cs" />
+    <Compile Include="Data\OrderData.cs" />
     <Compile Include="Data\ShareContext.cs" />
     <Compile Include="Data\AppContext.cs" />
     <Compile Include="Extensions\ModelExtension.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="AppOption.cs" />
     <Compile Include="Model\TrayScaner.cs" />
+    <Compile Include="Other\BindChargeOrder.cs" />
     <Compile Include="Other\TaskPriorityType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Run\Running.cs" />
