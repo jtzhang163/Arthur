@@ -40,7 +40,7 @@ namespace GMCC.Sorter.Business
                         Code = battery.Code,
                         ScanTime = DateTime.Now,
                         ProcTrayId = Current.Option.Tray11_Id,
-                        Pos = GetObject.GetById<ProcTray>(Current.Option.Tray11_Id).GetBatteries().Count + 1,
+                        Pos = ProcTrayManage.GetBatteryCount(Current.Option.Tray11_Id) + 1,
                         SortResult = SortResult.Unknown
                     });
                     db.SaveChanges();

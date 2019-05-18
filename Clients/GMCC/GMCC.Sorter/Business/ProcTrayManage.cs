@@ -81,10 +81,13 @@ namespace GMCC.Sorter.Business
         //    return Context.Batteries.Where(o => o.ProcTrayId == procTrayId).AsNoTracking().ToList();
         //}
 
-        //public static int GetBatteryCount(int procTrayId)
-        //{
-        //    return Context.Batteries.Count(o => o.ProcTrayId == procTrayId);
-        //}
+        public static int GetBatteryCount(int procTrayId)
+        {
+            using (var db = new Data.AppContext())
+            {
+                return db.Batteries.Count(o => o.ProcTrayId == procTrayId);
+            }
+        }
 
         //public static ProcTray CreateById(int id)
         //{

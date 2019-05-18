@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GMCC.Sorter.Business;
 using GMCC.Sorter.Dispatcher.Utils;
 using GMCC.Sorter.Extensions;
 using GMCC.Sorter.ViewModel;
@@ -40,7 +41,7 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
         {
             this.grid.Dispatcher.BeginInvoke(new Action(() =>{
 
-                var batteryCount = Current.Option.BindBatteriesCount;
+                var batteryCount = ProcTrayManage.GetBatteryCount(Current.Option.Tray11_Id);
 
                 this.grid.Children.Clear();
 

@@ -2,6 +2,7 @@
 using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
+using GMCC.Sorter.Business;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Run;
 using System;
@@ -104,9 +105,10 @@ namespace GMCC.Sorter.ViewModel
         public void Comm()
         {
             //绑盘位电池已满，不扫码，直到出现新托盘再扫
-            if (Current.Option.BindBatteriesCount >= Common.TRAY_BATTERY_COUNT)
+            if (ProcTrayManage.GetBatteryCount(Current.Option.Tray11_Id) >= Common.TRAY_BATTERY_COUNT)
             {
-                Current.Option.BindBatteriesCount = -2;
+                Running.ShowErrorMsg("绑盘位扫码电池数超过最大值：" + Common.TRAY_BATTERY_COUNT);
+                return;
             }
 
             if (Current.MainMachine.IsAlive && Current.Option.IsBatteryScanReady && !Current.Option.IsAlreadyBatteryScan && Current.Option.Tray11_Id > 0)
@@ -140,7 +142,6 @@ namespace GMCC.Sorter.ViewModel
                         var saveRet = new Business.BatteryManage().Create(new Model.Battery() { Code = code }, true);
                         if (saveRet.IsOk)
                         {
-                            Current.Option.BindBatteriesCount++;
                             var t = new Thread(() =>
                             {
                                 //界面交替显示扫码状态

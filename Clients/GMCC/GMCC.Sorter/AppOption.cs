@@ -131,30 +131,6 @@ namespace GMCC.Sorter
         }
 
 
-        private int bindBatteriesCount = -2;
-        /// <summary>
-        /// 当前绑盘位托盘里面电池个数
-        /// </summary>
-        public int BindBatteriesCount
-        {
-            get
-            {
-                if (bindBatteriesCount < 0)
-                {
-                    bindBatteriesCount = GetObject.GetById<ProcTray>(Current.Option.Tray11_Id).GetBatteries().Count;
-                }
-                return bindBatteriesCount;
-            }
-            set
-            {
-                if (bindBatteriesCount != value)
-                {
-                    SetProperty(ref bindBatteriesCount, value);
-                }
-            }
-        }
-
-
         /// <summary>
         /// 上下料任务准备就绪
         /// </summary>

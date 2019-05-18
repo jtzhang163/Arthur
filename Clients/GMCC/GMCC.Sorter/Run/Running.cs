@@ -64,8 +64,6 @@ namespace GMCC.Sorter.Run
             Current.App.RunStatus = RunStatus.闲置;
             Current.App.ErrorMsg = "";
 
-            Current.Option.BindBatteriesCount = -2;
-
             return Result.OK;
         }
 
