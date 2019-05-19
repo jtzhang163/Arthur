@@ -85,7 +85,7 @@ namespace GMCC.Sorter.Data
                 Host = "127.0.0.1",
                 Company = "GMCC",
                 CreateTime = DateTime.Now,
-                IsEnabled = true,
+                IsEnabled = false,
                 Location = "",
                 SerialNumber = "",
                 ModelNumber = "",
