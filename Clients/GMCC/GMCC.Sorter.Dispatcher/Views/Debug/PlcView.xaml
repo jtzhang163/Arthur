@@ -9,7 +9,7 @@
         <DockPanel>
             <StackPanel DockPanel.Dock="Top" Orientation="Vertical">
                 <TextBlock FontSize="24" FontFamily="Times New Roman,宋体" Foreground="#FF222D32" FontWeight="Bold" Height="40">
-                    <Label Content="手动调试 > 扫码枪调试"/>
+                    <Label Content="手动调试 > PLC调试"/>
                 </TextBlock>
                 <Canvas Height="1" Background="WhiteSmoke"/>
             </StackPanel>
