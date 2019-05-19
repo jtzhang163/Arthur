@@ -75,6 +75,11 @@
     <Compile Include="Data\CacheData.cs" />
     <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="Factory\AccountFactory.cs" />
+    <Compile Include="Migrations\201905190944388_Arthur_Init.cs" />
+    <Compile Include="Migrations\201905190944388_Arthur_Init.Designer.cs">
+      <DependentUpon>201905190944388_Arthur_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Base\EthernetCommor.cs" />
     <Compile Include="Model\Base\Logging.cs" />
     <Compile Include="Model\Base\Server.cs" />
@@ -106,6 +111,11 @@
       <Project>{1090299D-1C85-4E87-B155-B28AB93985FA}</Project>
       <Name>Arthur</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201905190944388_Arthur_Init.resx">
+      <DependentUpon>201905190944388_Arthur_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -63,6 +63,11 @@
     <Compile Include="Extensions\ModelExtension.cs" />
     <Compile Include="Factory\CommorFactory.cs" />
     <Compile Include="Factory\TaskFactory.cs" />
+    <Compile Include="Migrations\201905190949556_GMCC_Init.cs" />
+    <Compile Include="Migrations\201905190949556_GMCC_Init.Designer.cs">
+      <DependentUpon>201905190949556_GMCC_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\BatteryScaner.cs" />
     <Compile Include="Model\MES.cs" />
     <Compile Include="Model\PLC.cs" />
@@ -111,6 +116,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201905190949556_GMCC_Init.resx">
+      <DependentUpon>201905190949556_GMCC_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
