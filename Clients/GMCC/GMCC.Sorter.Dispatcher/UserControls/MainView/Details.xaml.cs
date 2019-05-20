@@ -93,19 +93,6 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
                         o.Status = ViewModel.StorageStatus.静置完成;
                         var timespan = DateTime.Now - o.ProcTray.StartStillTime.AddMinutes(o.StillTimeSpan);
                         o.ShowInfo = string.Format("{0}∶{1:D2}", (int)timespan.TotalMinutes, timespan.Seconds);
-
-                        var procTrayViewModel = ContextToViewModel.Convert(o.ProcTray);
-                        if (procTrayViewModel.StillTimeSpan == 0)
-                        {
-                            try
-                            {
-                                procTrayViewModel.StillTimeSpan = o.StillTimeSpan;
-                            }
-                            catch (Exception ex)
-                            {
-                                LogHelper.WriteError(ex);
-                            }
-                        }
                     }
                 }
                 else

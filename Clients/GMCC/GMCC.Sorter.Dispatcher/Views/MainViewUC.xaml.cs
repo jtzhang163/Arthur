@@ -84,7 +84,7 @@ namespace GMCC.Sorter.Dispatcher.Views
                 }
                 else
                 {
-                    Current.App.ErrorMsg = result.Msg;
+                    Running.ShowErrorMsg(result.Msg);
                 }
 
             }
@@ -104,7 +104,7 @@ namespace GMCC.Sorter.Dispatcher.Views
                 }
                 else
                 {
-                    Current.App.ErrorMsg = result.Msg;
+                    Running.ShowErrorMsg(result.Msg);
                 }
 
             }
@@ -124,7 +124,7 @@ namespace GMCC.Sorter.Dispatcher.Views
                 }
                 else
                 {
-                    Current.App.ErrorMsg = result.Msg;
+                    Running.ShowErrorMsg(result.Msg);
                 }
             }
         }
@@ -132,7 +132,7 @@ namespace GMCC.Sorter.Dispatcher.Views
         private void TaskControl_Click(object sender, RoutedEventArgs e)
         {
             var btn = (ProcButton)sender;
-            if(btn.Name == "task_mode_switch")
+            if (btn.Name == "task_mode_switch")
             {
                 if (!Current.App.IsTerminalInitFinished)
                 {

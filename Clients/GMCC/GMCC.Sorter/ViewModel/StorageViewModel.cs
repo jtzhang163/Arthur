@@ -201,9 +201,9 @@ namespace GMCC.Sorter.ViewModel
             }
         }
 
-        private ProcTray procTray = null;
+        private ProcTrayViewModel procTray = null;
 
-        public ProcTray ProcTray
+        public ProcTrayViewModel ProcTray
         {
             get
             {
@@ -211,7 +211,7 @@ namespace GMCC.Sorter.ViewModel
                 {
                     using (var db = new Data.AppContext())
                     {
-                        procTray = db.ProcTrays.FirstOrDefault(o => o.Id == this.ProcTrayId) ?? new ProcTray();
+                        procTray = ContextToViewModel.Convert(db.ProcTrays.FirstOrDefault(o => o.Id == this.ProcTrayId) ?? new ProcTray());
                     }
                 }
                 return procTray;

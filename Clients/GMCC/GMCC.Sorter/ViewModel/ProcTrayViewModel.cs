@@ -98,6 +98,9 @@ namespace GMCC.Sorter.ViewModel
         }
 
         private DateTime startStillTime;
+        /// <summary>
+        /// 开始静置时间
+        /// </summary>
         public DateTime StartStillTime
         {
             get

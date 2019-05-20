@@ -204,7 +204,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
-                        <DataGridTemplateColumn Header="静置总时间(min)" Width="*"  CanUserSort="True" SortMemberPath="StillTimeSpan">
+                        <DataGridTemplateColumn Header="静置时长(min)" Width="*"  CanUserSort="True" SortMemberPath="StillTimeSpan">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">

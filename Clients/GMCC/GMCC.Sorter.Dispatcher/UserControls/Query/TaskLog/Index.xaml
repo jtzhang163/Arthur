@@ -229,7 +229,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                        <TextBlock Text="{Binding StartTime, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"></TextBlock>
+                                        <TextBlock Text="{Binding EndTime, StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"></TextBlock>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

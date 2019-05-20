@@ -70,7 +70,9 @@ namespace GMCC.Sorter.Run
         public static void StopRunAndShowMsg(string msg)
         {
             Current.MainMachine.Commor.Write("D437", (ushort)1);
-            ShowErrorMsg(msg);
+            Current.App.ErrorMsg = string.Format("[{0}] {1}", DateTime.Now.ToString("M/d HH:mm:ss"), msg);
+            Arthur.Business.Logging.AddEvent(msg, Arthur.App.Model.EventType.错误);
+            LogHelper.WriteError("【严重异常】" + msg);
             Current.App.RunStatus = RunStatus.异常;
             TimerExec.IsRunning = false;
         }
@@ -78,6 +80,7 @@ namespace GMCC.Sorter.Run
         public static void ShowErrorMsg(string msg)
         {
             Current.App.ErrorMsg = string.Format("[{0}] {1}", DateTime.Now.ToString("M/d HH:mm:ss"), msg);
+            Arthur.Business.Logging.AddEvent(msg, Arthur.App.Model.EventType.警告);
             LogHelper.WriteError(msg);
         }
     }

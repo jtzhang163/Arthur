@@ -127,6 +127,7 @@ namespace GMCC.Sorter.Run
                         {
                             storage.ProcTrayId = 0;
                             Current.Option.Tray21_Id = Current.Task.ProcTrayId;
+                            storage.ProcTray.StillTimeSpan = Convert.ToInt32((DateTime.Now - storage.ProcTray.StartStillTime).TotalMinutes);
                         }
                         Current.Option.JawProcTrayId = 0;
                         Current.Task.Status = Model.TaskStatus.回位中;

@@ -141,14 +141,7 @@ namespace GMCC.Sorter.ViewModel
             get => errorMsg;
             set
             {
-                if (errorMsg != value)
-                {
-                    if (!string.IsNullOrEmpty(value))
-                    {
-                        Arthur.Business.Logging.AddEvent(value, Arthur.App.Model.EventType.警告);
-                    }
-                    SetProperty(ref errorMsg, value);
-                }
+                SetProperty(ref errorMsg, value);
             }
         }
 

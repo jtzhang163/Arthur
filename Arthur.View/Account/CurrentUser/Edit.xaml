@@ -70,8 +70,7 @@
                     <Label Content="邮箱：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="email" Grid.Row="6" Grid.Column="1" Text="{Binding Email, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                     <Label Content="是否激活：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <CheckBox x:Name="isEnabled" IsChecked="{Binding IsEnabled, Mode=OneWay}" Grid.Row="7" Grid.Column="1" VerticalContentAlignment="Center" IsEnabled="False"/>
-
+                    <CheckBox x:Name="isEnabled" IsChecked="{Binding IsEnabled, Mode=OneWay}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" IsEnabled="False"/>
                 </Grid>
             </DockPanel>
         </DockPanel>
