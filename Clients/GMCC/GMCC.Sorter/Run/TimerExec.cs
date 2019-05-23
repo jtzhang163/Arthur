@@ -125,9 +125,12 @@ namespace GMCC.Sorter.Run
                         }
                         else
                         {
-                            storage.ProcTrayId = 0;
                             Current.Option.Tray21_Id = Current.Task.ProcTrayId;
-                            storage.ProcTray.StillTimeSpan = Convert.ToInt32((DateTime.Now - storage.ProcTray.StartStillTime).TotalMinutes);
+                            if(storage.ProcTrayId > 0)
+                            {
+                                storage.ProcTray.StillTimeSpan = Convert.ToInt32((DateTime.Now - storage.ProcTray.StartStillTime).TotalMinutes);
+                                storage.ProcTrayId = 0;
+                            }
                         }
                         Current.Option.JawProcTrayId = 0;
                         Current.Task.Status = Model.TaskStatus.回位中;

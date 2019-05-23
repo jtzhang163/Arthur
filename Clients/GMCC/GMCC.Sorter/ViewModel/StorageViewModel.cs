@@ -196,7 +196,7 @@ namespace GMCC.Sorter.ViewModel
 
                     Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 流程托盘Id: [{1}] 修改为 [{2}]", Name, procTrayId, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref procTrayId, value);
-                    procTray = null;
+                    procTray = null; //很重要
                 }
             }
         }
