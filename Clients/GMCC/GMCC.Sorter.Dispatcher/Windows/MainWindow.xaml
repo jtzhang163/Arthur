@@ -639,7 +639,7 @@
                             <local:TabItemClose Header="主界面" Height="30"  Width="100" IsCanClose="False">
                                 <Grid x:Name="grid_mainview">
                                     <Grid.Background>
-                                        <ImageBrush ImageSource="pack://application:,,,/Images/Character.jpg" Opacity="0.2"></ImageBrush>
+                                        <ImageBrush ImageSource="pack://application:,,,/Images/Character.jpg" Opacity="0.1"></ImageBrush>
                                     </Grid.Background>
                                 </Grid>
                             </local:TabItemClose>

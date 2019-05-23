@@ -80,7 +80,7 @@ namespace GMCC.Sorter.Dispatcher
                 g.Children.Add(GetTabItem(tabName));
 
                 //g.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFECF0F5"));
-                ImageBrush ib = new ImageBrush() {ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/Character.jpg", UriKind.RelativeOrAbsolute)), Opacity = 0.2 };
+                ImageBrush ib = new ImageBrush() {ImageSource = new BitmapImage(new Uri("pack://application:,,,/Images/Character.jpg", UriKind.RelativeOrAbsolute)), Opacity = 0.1 };
                 g.Background = ib;
 
                 a.Content = g;

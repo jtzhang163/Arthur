@@ -54,7 +54,6 @@
     <Compile Include="Business\BatteryManage.cs" />
     <Compile Include="Business\TaskManage.cs" />
     <Compile Include="Business\TrayManage.cs" />
-    <Compile Include="Cache\AppCache.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Current.cs" />
     <Compile Include="Data\OrderData.cs" />

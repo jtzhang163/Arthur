@@ -1,5 +1,4 @@
-﻿using GMCC.Sorter.Cache;
-using GMCC.Sorter.Data;
+﻿using GMCC.Sorter.Data;
 using GMCC.Sorter.Model;
 using System;
 using System.Collections.Generic;
@@ -9,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Utils
 {
+    /// <summary>
+    /// 获取对象，如果不存在返回一个默认对象
+    /// </summary>
     public static class GetObject
     {
         public static T GetById<T>(int id)
@@ -23,26 +25,10 @@ namespace GMCC.Sorter.Utils
             }
             else if (typeof(T).Name == "ProcTray")
             {
-                if (AppCache.ProcTrays.Count(o => o.Id == id) > 0)
+                using (var db = new Data.AppContext())
                 {
-                    obj = AppCache.ProcTrays.Single(o => o.Id == id);
+                    obj = db.ProcTrays.SingleOrDefault(o => o.Id == id) ?? new ProcTray();
                 }
-                else
-                {
-                    using (var db = new Data.AppContext())
-                    {
-                        obj = db.ProcTrays.SingleOrDefault(o => o.Id == id);
-                    }
-                    if (obj == null)
-                    {
-                        obj = new ProcTray();
-                    }
-                    else
-                    {
-                        AppCache.ProcTrays.Add(obj as ProcTray);
-                    }
-                }
-
             }
             else if (typeof(T).Name == "StorageViewModel")
             {
