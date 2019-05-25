@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using GMCC.Sorter.ViewModel;
 using GMCC.Sorter.Model;
 using System.Threading;
+using System.Diagnostics;
 
 namespace GMCC.Sorter.Dispatcher.UserControls.DataAnalysis.Productivity
 {
@@ -165,5 +166,10 @@ namespace GMCC.Sorter.Dispatcher.UserControls.DataAnalysis.Productivity
             }
         }
 
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            Hyperlink link = sender as Hyperlink;
+            Process.Start(link.NavigateUri.AbsoluteUri);
+        }
     }
 }

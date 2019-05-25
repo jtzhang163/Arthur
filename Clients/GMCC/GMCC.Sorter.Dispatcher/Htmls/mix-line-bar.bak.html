@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
 </head>
-<body style="height: 100%; margin: 0">
-    <div id="container" style="height: 100%"></div>
+<body style="height: 100%; margin: 0; padding-top: 15px">
+    <div id="container" style="height: 100%;"></div>
     <script type="text/javascript" src="./js/echarts.min.js"></script>
     <script type="text/javascript" src="./js/echarts-gl.min.js"></script>
     <script type="text/javascript" src="./js/ecStat.min.js"></script>
@@ -23,12 +23,11 @@
         option = {
             tooltip: {
                 trigger: 'axis',
-                formatter:function(params)
-                {
+                formatter: function (params) {
                     var relVal = params[0].name;
                     for (var i = 0; i < params.length; i++) {
                         var flag = '';
-                        if(params[i].seriesName=="合格率")
+                        if (params[i].seriesName == "合格率")
                             flag = "%";
                         relVal += '<div class="circle"><span style="width:10px;height:10px;vertical-align:middle;display:inline-block;background:' + params[i].color + '"></span>&nbsp' + params[i].seriesName + ' : ' + params[i].value + flag + "</div>";
                     }
