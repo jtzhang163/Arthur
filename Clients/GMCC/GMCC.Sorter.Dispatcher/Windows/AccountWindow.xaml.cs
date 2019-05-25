@@ -105,5 +105,11 @@ namespace GMCC.Sorter.Dispatcher
             loginUC.VerticalAlignment = VerticalAlignment.Center;
             grid.Children.Add(loginUC);
         }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            Hyperlink link = sender as Hyperlink;
+            System.Diagnostics.Process.Start(link.NavigateUri.AbsoluteUri);
+        }
     }
 }

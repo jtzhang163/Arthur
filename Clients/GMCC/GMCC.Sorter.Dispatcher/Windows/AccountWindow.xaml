@@ -11,5 +11,8 @@
         <Grid.Background>
             <ImageBrush ImageSource="/Images/nightsky2.jpg"/>
         </Grid.Background>
+        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="3" FontFamily="宋体,Times New Roman" FontSize="10" Foreground="Gray" Opacity="0.5">
+            背景素材来源：<Hyperlink NavigateUri="http://wallpaperswide.com/" Click="Hyperlink_Click" Foreground="Gray">http://wallpaperswide.com/</Hyperlink>
+        </TextBlock>
     </Grid>
 </Window>

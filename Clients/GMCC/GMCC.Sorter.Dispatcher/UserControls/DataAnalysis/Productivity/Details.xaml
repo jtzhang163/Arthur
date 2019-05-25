@@ -33,7 +33,7 @@
     </UserControl.Resources>
     <Grid>
         <DockPanel>
-            <TextBlock DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="0,5,0,0" FontFamily="宋体,Times New Roman" FontSize="12" Foreground="Gray" Opacity="0.7">
+            <TextBlock DockPanel.Dock="Bottom" HorizontalAlignment="Right" Margin="0,5,0,0" FontFamily="宋体,Times New Roman" FontSize="12" Foreground="Gray" Opacity="0.3">
                 技术支持：<Hyperlink NavigateUri="https://echarts.baidu.com/" Click="Hyperlink_Click" Foreground="Gray">https://echarts.baidu.com/</Hyperlink>
             </TextBlock>
             <DockPanel>
