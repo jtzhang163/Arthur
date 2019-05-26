@@ -1,4 +1,4 @@
-﻿using Arthur.App.Data;
+﻿using Arthur.Core;
 using Arthur.App.Model;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arthur.Business
+namespace Arthur.App.Business
 {
     public static class Setting
     {

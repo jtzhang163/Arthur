@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="Arthur.App.View.Account.CurrentUser.Details"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Arthur.App.View.Account.CurrentUser"
+             xmlns:utils="clr-namespace:Arthur.App.View.Utils"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <utils:GenderToStringConverter x:Key="genderToStringConverter"/>
+            <utils:BoolToStringConverter x:Key="boolToStringConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="用户详情"  Style="{StaticResource PageTitleTextBlock}"/>
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <Button x:Name="edit" Tag="{Binding Id}" Click="edit_Click" Style="{StaticResource ChamferButton}">编辑</Button>
+                <Button x:Name="changePwd" Tag="{Binding Id}" Click="changePwd_Click"  Style="{StaticResource ChamferButton}">修改密码</Button>
+            </StackPanel>
+            <DockPanel>
+                <TextBlock x:Name="tip" Foreground="White" Background="Red" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>
+                <Grid x:Name="grid" Margin="0,10,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="用户名：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Name}" x:Name="level" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="所属角色：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Role.Name}" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="性别：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Gender, Converter={StaticResource genderToStringConverter}}" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="工号：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Number}" Grid.Row="4" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="电话：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding PhoneNumber}" Grid.Row="5" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="邮箱：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Email}" Grid.Row="6" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="注册时间：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding RegisterTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="最近登录：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding LastLoginTime}" ContentStringFormat="{}{0:yyyy-MM-dd HH:mm}" Grid.Row="8" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="登录次数：" Grid.Row="9" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding LoginTimes}" Grid.Row="9" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="是否激活：" Grid.Row="10" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding IsEnabled, Converter={StaticResource boolToStringConverter}}" Grid.Row="10" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                </Grid>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

@@ -1,5 +1,5 @@
-﻿using Arthur.Business;
-using Arthur.Core;
+﻿using Arthur.App.Business;
+using Arthur.Controls;
 using GMCC.Sorter.Run;
 using GMCC.Sorter.ViewModel;
 using System;

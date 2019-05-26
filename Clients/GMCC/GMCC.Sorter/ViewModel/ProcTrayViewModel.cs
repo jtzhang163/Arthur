@@ -40,7 +40,7 @@ namespace GMCC.Sorter.ViewModel
                             contextProcTray.Code = value;
                             db.Trays.Single(o => o.Id == contextProcTray.TrayId).Code = value;
                             db.SaveChanges();
-                            Arthur.Business.Logging.AddOplog(string.Format("数据追溯. 流程托盘. Id:{0} 条码: [{1}] 修改为 [{2}]", Id, code, value), Arthur.App.Model.OpType.编辑);
+                            Arthur.App.Business.Logging.AddOplog(string.Format("数据追溯. 流程托盘. Id:{0} 条码: [{1}] 修改为 [{2}]", Id, code, value), Arthur.App.Model.OpType.编辑);
                         }
                     }
                     this.SetProperty(ref code, value);
@@ -64,7 +64,7 @@ namespace GMCC.Sorter.ViewModel
                         db.ProcTrays.FirstOrDefault(o => o.Id == this.Id).ScanTime = value;
                         db.SaveChanges();
                     }
-                    Arthur.Business.Logging.AddOplog(string.Format("数据追溯. 流程托盘. 条码:{0} 扫码时间: [{1}] 修改为 [{2}]", Code, scanTime, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("数据追溯. 流程托盘. 条码:{0} 扫码时间: [{1}] 修改为 [{2}]", Code, scanTime, value), Arthur.App.Model.OpType.编辑);
                     this.SetProperty(ref scanTime, value);
                 }
             }
@@ -87,7 +87,7 @@ namespace GMCC.Sorter.ViewModel
                         db.SaveChanges();
                     }
 
-                    Arthur.Business.Logging.AddOplog(string.Format("数据追溯. 流程托盘. 条码:{0} 料仓Id: [{1}] 修改为 [{2}]", Code, storageId, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("数据追溯. 流程托盘. 条码:{0} 料仓Id: [{1}] 修改为 [{2}]", Code, storageId, value), Arthur.App.Model.OpType.编辑);
                     this.SetProperty(ref storageId, value);
 
                     //同时更新Storage的ProcTrayId属性
@@ -117,7 +117,7 @@ namespace GMCC.Sorter.ViewModel
                         db.SaveChanges();
                     }
 
-                    Arthur.Business.Logging.AddOplog(string.Format("数据追溯. 流程托盘. 条码:{0} 开始静置时间: [{1}] 修改为 [{2}]", Code, startStillTime, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("数据追溯. 流程托盘. 条码:{0} 开始静置时间: [{1}] 修改为 [{2}]", Code, startStillTime, value), Arthur.App.Model.OpType.编辑);
                     this.SetProperty(ref startStillTime, value);
                 }
             }

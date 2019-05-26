@@ -266,7 +266,7 @@ namespace GMCC.Sorter.Dispatcher.Utils
             var status = StorageStatus.未知;
             var isEnabled = false;
             var taskType = Model.TaskType.未知;
-            var timeNow = Arthur.Default.DateTime;
+            var timeNow = Arthur.Core.Default.DateTime;
 
             if (parameter as string == "StatusAndIsEnabled")
             {

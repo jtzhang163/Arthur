@@ -1,5 +1,5 @@
-﻿using Arthur;
-using Arthur.Business;
+﻿using Arthur.Core;
+using Arthur.App.Business;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Model;
@@ -52,7 +52,7 @@ namespace GMCC.Sorter.Business
                 }
                 else
                 {
-                    Arthur.Business.Logging.AddOplog(string.Format("新增电池[{0}]", battery.Code), Arthur.App.Model.OpType.创建);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("新增电池[{0}]", battery.Code), Arthur.App.Model.OpType.创建);
                 }
                 return Result.OK;
             }

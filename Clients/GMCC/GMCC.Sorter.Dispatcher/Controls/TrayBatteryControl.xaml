@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.Controls"
-             xmlns:utils="clr-namespace:Arthur.View.Utils;assembly=Arthur.View"
+             xmlns:utils="clr-namespace:Arthur.App.View.Utils;assembly=Arthur.App.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1600">
     <Grid>

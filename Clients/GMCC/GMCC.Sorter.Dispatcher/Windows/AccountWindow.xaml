@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher"
-        xmlns:account="clr-namespace:Arthur.View.Account;assembly=Arthur.View"
+        xmlns:account="clr-namespace:Arthur.App.View.Account;assembly=Arthur.App.View"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d" Title="{Binding AppTitle}" Height="800" Width="1280">
     <Grid x:Name="grid">

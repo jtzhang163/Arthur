@@ -1,5 +1,5 @@
-﻿using Arthur;
-using Arthur.Business;
+﻿using Arthur.Core;
+using Arthur.App.Business;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Model;
 using System;
@@ -26,7 +26,7 @@ namespace GMCC.Sorter.Business
                     db.Trays.Add(new Tray() { Code = tray.Code, Company = tray.Company, CreateTime = DateTime.Now, IsEnabled = true });
                     db.SaveChanges();
                 }
-                Arthur.Business.Logging.AddOplog(string.Format("新增托盘[{0}]", tray.Code), Arthur.App.Model.OpType.创建);
+                Arthur.App.Business.Logging.AddOplog(string.Format("新增托盘[{0}]", tray.Code), Arthur.App.Model.OpType.创建);
                 return Result.OK;
             }
             catch (Exception ex)

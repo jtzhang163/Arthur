@@ -1,4 +1,4 @@
-﻿using Arthur;
+﻿using Arthur.Core;
 using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;

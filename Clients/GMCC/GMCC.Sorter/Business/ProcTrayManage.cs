@@ -1,5 +1,5 @@
-﻿using Arthur;
-using Arthur.Business;
+﻿using Arthur.Core;
+using Arthur.App.Business;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Model;
 using GMCC.Sorter.Run;
@@ -66,7 +66,7 @@ namespace GMCC.Sorter.Business
                 }
                 else
                 {
-                    Arthur.Business.Logging.AddOplog(string.Format("新增流程托盘[{0}]", procTray.Code), Arthur.App.Model.OpType.创建);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("新增流程托盘[{0}]", procTray.Code), Arthur.App.Model.OpType.创建);
                 }
                 return Result.OkHasData(id);
             }

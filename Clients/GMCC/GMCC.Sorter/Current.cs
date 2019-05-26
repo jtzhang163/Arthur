@@ -1,5 +1,5 @@
 ﻿using Arthur.App.Comm;
-using Arthur.ViewModel;
+using Arthur.App.ViewModel;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;

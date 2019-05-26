@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Arthur.Core;
+using Arthur.App.Business;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 using Arthur.App.Data;
 using Arthur.App.Model;
 
-namespace Arthur.Business
+namespace Arthur.App.Business
 {
     public sealed class RoleManage : IManage<Role>
     {
@@ -24,7 +26,7 @@ namespace Arthur.Business
                     db.Roles.Add(new App.Model.Role() { Level = role.Level, Name = role.Name });
                     db.SaveChanges();
                 }
-                Arthur.Business.Logging.AddOplog(string.Format("新增角色[{0}]", role.Name), App.Model.OpType.创建);
+                Arthur.App.Business.Logging.AddOplog(string.Format("新增角色[{0}]", role.Name), App.Model.OpType.创建);
                 return Result.OK;
             }
             catch (Exception ex)

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" x:Name="MainView"
-             xmlns:core="clr-namespace:Arthur.Core;assembly=Arthur.Core"
+             xmlns:ctrl="clr-namespace:Arthur.Controls;assembly=Arthur.Controls"
              xmlns:factory="clr-namespace:GMCC.Sorter.Factory;assembly=GMCC.Sorter"
              xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              xmlns:vm="clr-namespace:GMCC.Sorter.ViewModel;assembly=GMCC.Sorter"
@@ -56,11 +56,11 @@
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="100"/>
                     </Grid.ColumnDefinitions>
-                    <core:ProcButton x:Name="start" Grid.Row="1" Grid.Column="0" ContentCore="启动" AwesomeText="&#xf011;" ForegroundCore="Green" Click="RunningControl_Click"/>
-                    <core:ProcButton x:Name="stop" Grid.Row="1" Grid.Column="1" ContentCore="停止" AwesomeText="&#xf28c;" ForegroundCore="Green" Click="RunningControl_Click"/>
-                    <core:ProcButton x:Name="reset" Grid.Row="1" Grid.Column="2" ContentCore="复位" AwesomeText="&#xf0e2;" ForegroundCore="Green" Click="RunningControl_Click"/>
-                    <core:ProcButton x:Name="task_mode_switch" Grid.Row="1" Grid.Column="3" ContentCore="{Binding TaskMode, Converter={StaticResource taskModeSwitchBtnContentConverter}}" AwesomeText="&#xf021;" ForegroundCore="Blue" Click="TaskControl_Click"/>
-                    <core:ProcButton x:Name="task_reset" Grid.Row="1" Grid.Column="4" ContentCore="任务复位" AwesomeText="&#xf01e;" ForegroundCore="Blue" Click="TaskControl_Click"/>
+                    <ctrl:ProcButton x:Name="start" Grid.Row="1" Grid.Column="0" ContentCore="启动" AwesomeText="&#xf011;" ForegroundCore="Green" Click="RunningControl_Click"/>
+                    <ctrl:ProcButton x:Name="stop" Grid.Row="1" Grid.Column="1" ContentCore="停止" AwesomeText="&#xf28c;" ForegroundCore="Green" Click="RunningControl_Click"/>
+                    <ctrl:ProcButton x:Name="reset" Grid.Row="1" Grid.Column="2" ContentCore="复位" AwesomeText="&#xf0e2;" ForegroundCore="Green" Click="RunningControl_Click"/>
+                    <ctrl:ProcButton x:Name="task_mode_switch" Grid.Row="1" Grid.Column="3" ContentCore="{Binding TaskMode, Converter={StaticResource taskModeSwitchBtnContentConverter}}" AwesomeText="&#xf021;" ForegroundCore="Blue" Click="TaskControl_Click"/>
+                    <ctrl:ProcButton x:Name="task_reset" Grid.Row="1" Grid.Column="4" ContentCore="任务复位" AwesomeText="&#xf01e;" ForegroundCore="Blue" Click="TaskControl_Click"/>
                     <TextBlock Background="{Binding TaskMode, Converter={StaticResource taskModeSwitchBtnBackgroundConverter}}" Padding="5" Grid.Row="1" Grid.Column="6" Text="{Binding TaskMode}" FontSize="40" VerticalAlignment="Center" Foreground="Blue" HorizontalAlignment="Center"/>
                     <TextBlock Background="{Binding RunStatus, Converter={StaticResource runStatusBackgroundConverter}}" Padding="5" Grid.Row="1" Grid.Column="7" Text="{Binding RunStatus}" FontSize="40" VerticalAlignment="Center" Foreground="Green" HorizontalAlignment="Center" Margin="0,0,10,0"/>
                 </Grid>

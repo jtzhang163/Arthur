@@ -1,6 +1,6 @@
 ﻿using Arthur.App;
-using Arthur.Utils;
-using Arthur.View.Utils;
+using Arthur.Core;
+using Arthur.App.View.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.ViewModel;
 using System;
@@ -20,6 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Arthur.Core.Transfer;
 
 namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
 {

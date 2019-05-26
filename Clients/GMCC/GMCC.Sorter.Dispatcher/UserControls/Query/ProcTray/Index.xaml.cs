@@ -1,6 +1,6 @@
 ﻿using Arthur.App;
-using Arthur.Utils;
-using Arthur.View.Utils;
+using Arthur.Core;
+using Arthur.App.View.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
@@ -21,6 +21,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Arthur.Core.Transfer;
 
 namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 {
@@ -124,7 +125,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
             {
                 _AppContext.ProcTrays.Remove(ProcTray);
                 _AppContext.SaveChanges();
-                Arthur.Business.Logging.AddOplog(string.Format("删除流程托盘[{0}]", ProcTray.Code), Arthur.App.Model.OpType.删除);
+                Arthur.App.Business.Logging.AddOplog(string.Format("删除流程托盘[{0}]", ProcTray.Code), Arthur.App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }
         }

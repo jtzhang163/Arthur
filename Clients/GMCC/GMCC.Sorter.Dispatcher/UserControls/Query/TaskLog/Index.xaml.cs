@@ -1,4 +1,4 @@
-﻿using Arthur.View.Utils;
+﻿using Arthur.App.View.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
@@ -98,7 +98,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.TaskLog
             {
                 _AppContext.TaskLogs.Remove(taskLog);
                 _AppContext.SaveChanges();
-                Arthur.Business.Logging.AddOplog(string.Format("删除任务日志[ID:{0}]", taskLog.Id), Arthur.App.Model.OpType.删除);
+                Arthur.App.Business.Logging.AddOplog(string.Format("删除任务日志[ID:{0}]", taskLog.Id), Arthur.App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }
         }

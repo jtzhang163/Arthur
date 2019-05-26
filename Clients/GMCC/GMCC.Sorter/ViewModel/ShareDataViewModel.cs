@@ -29,7 +29,7 @@ namespace GMCC.Sorter.ViewModel
                         var count = db.Database.ExecuteSqlCommand(string.Format("UPDATE dbo.t_data SET [Value] = '{0}' WHERE [Key] = '{1}'", value, this.Key));
                         if (count > 0)
                         {
-                            Arthur.Business.Logging.AddOplog(string.Format("交互平台. BTS客户端. 键:{0} 值: [{1}] 修改为 [{2}]", Key, _value, value), Arthur.App.Model.OpType.编辑);
+                            Arthur.App.Business.Logging.AddOplog(string.Format("交互平台. BTS客户端. 键:{0} 值: [{1}] 修改为 [{2}]", Key, _value, value), Arthur.App.Model.OpType.编辑);
                         }
                     }
                 }
@@ -53,7 +53,7 @@ namespace GMCC.Sorter.ViewModel
                         var count = db.Database.ExecuteSqlCommand(string.Format("UPDATE dbo.t_data SET [Status] = '{0}' WHERE [Key] = '{1}'", value, this.Key));
                         if (count > 0)
                         {
-                            Arthur.Business.Logging.AddOplog(string.Format("交互平台. BTS客户端. 键:{0} 状态: [{1}] 修改为 [{2}]", Key, _status, value), Arthur.App.Model.OpType.编辑);
+                            Arthur.App.Business.Logging.AddOplog(string.Format("交互平台. BTS客户端. 键:{0} 状态: [{1}] 修改为 [{2}]", Key, _status, value), Arthur.App.Model.OpType.编辑);
                         }
                     }
                 }
@@ -77,7 +77,7 @@ namespace GMCC.Sorter.ViewModel
                         var count = db.Database.ExecuteSqlCommand(string.Format("UPDATE dbo.t_data SET [ProcTrayId] = {0} WHERE [Key] = '{1}'", value, this.Key));
                         if (count > 0)
                         {
-                            Arthur.Business.Logging.AddOplog(string.Format("交互平台. BTS客户端. 键:{0} 流程托盘ID: [{1}] 修改为 [{2}]", Key, _procTrayId, value), Arthur.App.Model.OpType.编辑);
+                            Arthur.App.Business.Logging.AddOplog(string.Format("交互平台. BTS客户端. 键:{0} 流程托盘ID: [{1}] 修改为 [{2}]", Key, _procTrayId, value), Arthur.App.Model.OpType.编辑);
                         }
                     }
                 }
@@ -85,7 +85,7 @@ namespace GMCC.Sorter.ViewModel
             }
         }
 
-        private DateTime _updateTime = Arthur.Default.DateTime;
+        private DateTime _updateTime = Arthur.Core.Default.DateTime;
         public DateTime UpdateTime
         {
             get
@@ -94,14 +94,14 @@ namespace GMCC.Sorter.ViewModel
             }
             set
             {
-                if (_updateTime != value && _updateTime != Arthur.Default.DateTime)
+                if (_updateTime != value && _updateTime != Arthur.Core.Default.DateTime)
                 {
                     using (var db = new ShareContext())
                     {
                         var count = db.Database.ExecuteSqlCommand(string.Format("UPDATE dbo.t_data SET [UpdateTime] = '{0}' WHERE [Key] = '{1}'", value, this.Key));
                         if (count > 0)
                         {
-                            Arthur.Business.Logging.AddOplog(string.Format("交互平台. BTS客户端. 键:{0} 更新时间: [{1}] 修改为 [{2}]", Key, _updateTime, value), Arthur.App.Model.OpType.编辑);
+                            Arthur.App.Business.Logging.AddOplog(string.Format("交互平台. BTS客户端. 键:{0} 更新时间: [{1}] 修改为 [{2}]", Key, _updateTime, value), Arthur.App.Model.OpType.编辑);
                         }
                     }
                 }

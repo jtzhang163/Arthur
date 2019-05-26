@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="Arthur.App.View.Account.CurrentUser.Edit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Arthur.App.View.Account.CurrentUser"
+             xmlns:utils="clr-namespace:Arthur.App.View.Utils"
+             xmlns:bus="clr-namespace:Arthur.App.Business;assembly=Arthur.App"
+             xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <utils:GenderToRadioButtonConverter x:Key="genderToRadioButtonConverter"/>
+            <ObjectDataProvider x:Key="roles" ObjectType="bus:Account" MethodName="GetRoles"/>
+
+            <DataTemplate x:Key="roleDataTemplate">
+                <Label Content="{Binding Name}" Margin="0"/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <DockPanel>
+            <TextBlock DockPanel.Dock="Top" FontSize="30" Height="35" Text="编辑用户"  Style="{StaticResource PageTitleTextBlock}"/>
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                <Button x:Name="edit" Tag="{Binding Id}" Click="edit_Click" Style="{StaticResource ChamferButton}">保存</Button>
+                <Button x:Name="cancel" Tag="{Binding Id}" Click="cancel_Click" Style="{StaticResource ChamferButton}">返回</Button>
+            </StackPanel>
+            <DockPanel>
+                <TextBlock x:Name="tip" Foreground="White" Background="Red" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>
+                <Grid x:Name="grid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="300"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="编号：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Id}" Grid.Row="0" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="用户名：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding Name}" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="所属角色：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <ComboBox x:Name="role" Grid.Row="2" Grid.Column="1" DataContext="{StaticResource roles}" ItemsSource="{Binding}" ItemTemplate="{StaticResource ResourceKey=roleDataTemplate}"
+                              Style="{StaticResource property_ComboBox}"  IsHitTestVisible="False"/>
+                    <Label Content="性别：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Name="gender">
+                        <RadioButton x:Name="gender1" Content="男" GroupName="genderType" IsChecked="{Binding Gender,Mode=OneWay, Converter={StaticResource genderToRadioButtonConverter},ConverterParameter=1}" Style="{StaticResource property_RadioButton}"/>
+                        <RadioButton x:Name="gender2" Content="女" GroupName="genderType" IsChecked="{Binding Gender,Mode=OneWay, Converter={StaticResource genderToRadioButtonConverter},ConverterParameter=2}"  Style="{StaticResource property_RadioButton}"/>
+                        <RadioButton x:Name="gender0" Content="未知" GroupName="genderType" IsChecked="{Binding Gender,Mode=OneWay, Converter={StaticResource genderToRadioButtonConverter},ConverterParameter=0}" Style="{StaticResource property_RadioButton}" />
+                    </StackPanel>
+
+                    <Label Content="工号：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="number" Grid.Row="4" Grid.Column="1" Text="{Binding Number, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="电话：" Grid.Row="5" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="phoneNumber" Grid.Row="5" Grid.Column="1" Text="{Binding PhoneNumber, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False"  GotFocus="textbox_GotFocus"/>
+                    <Label Content="邮箱：" Grid.Row="6" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="email" Grid.Row="6" Grid.Column="1" Text="{Binding Email, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="是否激活：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <CheckBox x:Name="isEnabled" IsChecked="{Binding IsEnabled, Mode=OneWay}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" IsEnabled="False"/>
+                </Grid>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

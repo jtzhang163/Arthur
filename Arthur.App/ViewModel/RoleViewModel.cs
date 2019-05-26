@@ -42,7 +42,7 @@ namespace Arthur.App.ViewModel
                     }
                     if (_level != null && this.Id > 0)
                     {
-                        Arthur.Business.Logging.AddOplog(string.Format("角色[{2}]. 等级: [{0}] 修改为 [{1}]", _level, value, this.Name), Arthur.App.Model.OpType.编辑);
+                        Arthur.App.Business.Logging.AddOplog(string.Format("角色[{2}]. 等级: [{0}] 修改为 [{1}]", _level, value, this.Name), Arthur.App.Model.OpType.编辑);
                     }
                     _level = value;
                 }
@@ -69,7 +69,7 @@ namespace Arthur.App.ViewModel
                     }
                     if (_name != null && this.Id > 0)
                     {
-                        Arthur.Business.Logging.AddOplog(string.Format("角色. 名称: [{0}] 修改为 [{1}]", _level, value), Arthur.App.Model.OpType.编辑);
+                        Arthur.App.Business.Logging.AddOplog(string.Format("角色. 名称: [{0}] 修改为 [{1}]", _level, value), Arthur.App.Model.OpType.编辑);
                     }
                     _name = value;
                 }

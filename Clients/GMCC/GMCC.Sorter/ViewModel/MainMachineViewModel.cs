@@ -1,8 +1,7 @@
-﻿using Arthur;
+﻿using Arthur.Core;
 using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
-using Arthur.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Model;
@@ -38,7 +37,7 @@ namespace GMCC.Sorter.ViewModel
                 if (ip != value)
                 {
                     ((EthernetCommor)this.Commor.Communicator).IP = value;
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} IP地址: [{1}] 修改为 [{2}]", Name, ip, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0} IP地址: [{1}] 修改为 [{2}]", Name, ip, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref ip, value);
                     this.CommorInfo = null;
                 }
@@ -61,7 +60,7 @@ namespace GMCC.Sorter.ViewModel
                 if (port != value)
                 {
                     ((EthernetCommor)this.Commor.Communicator).Port = value;
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 端口: [{1}] 修改为 [{2}]", Name, port, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0} 端口: [{1}] 修改为 [{2}]", Name, port, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref port, value);
                     this.CommorInfo = null;
                 }

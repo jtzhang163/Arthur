@@ -1,4 +1,4 @@
-﻿using Arthur;
+﻿using Arthur.Core;
 using GMCC.Sorter.Model;
 using System;
 using System.Collections.Generic;

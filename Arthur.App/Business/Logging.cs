@@ -1,6 +1,6 @@
-﻿using Arthur;
+﻿using Arthur.Core;
+using Arthur.Core.Security;
 using Arthur.App.Data;
-using Arthur.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Arthur.App;
 using Arthur.App.Model;
 
-namespace Arthur.Business
+namespace Arthur.App.Business
 {
     public static class Logging
     {

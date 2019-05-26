@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-using Arthur.View.Utils;
+using Arthur.App.View.Utils;
 using GMCC.Sorter.Dispatcher.Views;
 using GMCC.Sorter.Dispatcher.Views.SystemUC;
 using GMCC.Sorter.Run;
@@ -38,7 +38,7 @@ namespace GMCC.Sorter.Dispatcher
             grid_mainview.Children.Add(new MainViewUC());
 
             this.DataContext = Current.App;
-            Arthur.Business.Logging.AddEvent(string.Format("打开软件", ""), Arthur.App.Model.EventType.信息);
+            Arthur.App.Business.Logging.AddEvent(string.Format("打开软件", ""), Arthur.App.Model.EventType.信息);
 
             WinSet.MainWindow = this;
 
@@ -188,7 +188,7 @@ namespace GMCC.Sorter.Dispatcher
             else
             {
                 GMCC.Sorter.Run.Running.Reset();
-                Arthur.Business.Logging.AddEvent(string.Format("关闭软件", ""), Arthur.App.Model.EventType.信息);
+                Arthur.App.Business.Logging.AddEvent(string.Format("关闭软件", ""), Arthur.App.Model.EventType.信息);
             }
         }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Collections.Generic;
-using Arthur.Security;
+using Arthur.Core.Security;
 using Arthur.App.Model;
 
 namespace Arthur.App
@@ -50,7 +50,7 @@ namespace Arthur.App
                         new User
                         {
                             Name = "Administrator",
-                            Password = EncryptHelper.EncodeBase64("Administrator"),
+                            Password = EncryptBase64Helper.EncodeBase64("Administrator"),
                             RegisterTime = DateTime.Now,
                             Email = string.Empty,
                             Number = string.Empty,
@@ -71,7 +71,7 @@ namespace Arthur.App
                         new User
                         {
                             Name = "Admin",
-                            Password =  EncryptHelper.EncodeBase64("Admin"),
+                            Password =  EncryptBase64Helper.EncodeBase64("Admin"),
                             RegisterTime = DateTime.Now,
                             Email = string.Empty,
                             Number = string.Empty,

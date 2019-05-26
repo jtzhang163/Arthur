@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Arthur.Core;
+using Arthur.App.Business;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 using Arthur.App.Data;
 using Arthur.App.Model;
 
-namespace Arthur.Business
+namespace Arthur.App.Business
 {
     public sealed class UserManage : IManage<User>
     {

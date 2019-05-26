@@ -58,7 +58,7 @@ namespace Arthur.App.ViewModel
                     }
                     if (this.Id > 0)
                     {
-                        Arthur.Business.Logging.AddOplog(string.Format("用户[{2}]. 性别: [{0}] 修改为 [{1}]", _gender, value, this.Name), Arthur.App.Model.OpType.编辑);
+                        Arthur.App.Business.Logging.AddOplog(string.Format("用户[{2}]. 性别: [{0}] 修改为 [{1}]", _gender, value, this.Name), Arthur.App.Model.OpType.编辑);
                     }
                     _gender = value;
                 }
@@ -102,7 +102,7 @@ namespace Arthur.App.ViewModel
 
                     if (_number != null && this.Id > 0)
                     {
-                        Arthur.Business.Logging.AddOplog(string.Format("用户[{2}]. 工号: [{0}] 修改为 [{1}]", _number, value, this.Name), Arthur.App.Model.OpType.编辑);
+                        Arthur.App.Business.Logging.AddOplog(string.Format("用户[{2}]. 工号: [{0}] 修改为 [{1}]", _number, value, this.Name), Arthur.App.Model.OpType.编辑);
                     }
                     _number = value;
                 }
@@ -131,7 +131,7 @@ namespace Arthur.App.ViewModel
 
                     if (_phoneNumber != null && this.Id > 0)
                     {
-                        Arthur.Business.Logging.AddOplog(string.Format("用户[{2}]. 手机号: [{0}] 修改为 [{1}]", _phoneNumber, value, this.Name), Arthur.App.Model.OpType.编辑);
+                        Arthur.App.Business.Logging.AddOplog(string.Format("用户[{2}]. 手机号: [{0}] 修改为 [{1}]", _phoneNumber, value, this.Name), Arthur.App.Model.OpType.编辑);
                     }
                     _phoneNumber = value;
                 }
@@ -160,7 +160,7 @@ namespace Arthur.App.ViewModel
 
                     if (_email != null && this.Id > 0)
                     {
-                        Arthur.Business.Logging.AddOplog(string.Format("用户[{2}]. 邮箱: [{0}] 修改为 [{1}]", _email, value, this.Name), Arthur.App.Model.OpType.编辑);
+                        Arthur.App.Business.Logging.AddOplog(string.Format("用户[{2}]. 邮箱: [{0}] 修改为 [{1}]", _email, value, this.Name), Arthur.App.Model.OpType.编辑);
                     }
                     _email = value;
                 }
@@ -212,7 +212,7 @@ namespace Arthur.App.ViewModel
 
                     if (_isEnabled != null && this.Id > 0)
                     {
-                        Arthur.Business.Logging.AddOplog(string.Format("用户[{2}]. 是否启用: [{0}] 修改为 [{1}]", _isEnabled, value, this.Name), Arthur.App.Model.OpType.编辑);
+                        Arthur.App.Business.Logging.AddOplog(string.Format("用户[{2}]. 是否启用: [{0}] 修改为 [{1}]", _isEnabled, value, this.Name), Arthur.App.Model.OpType.编辑);
                     }
                     _isEnabled = value;
                 }
@@ -256,7 +256,7 @@ namespace Arthur.App.ViewModel
 
                     if (_role != null && this.Id > 0)
                     {
-                        Arthur.Business.Logging.AddOplog(string.Format("用户[{2}]. 角色: [{0}] 修改为 [{1}]", _role.Name, value.Name, this.Name), Arthur.App.Model.OpType.编辑);
+                        Arthur.App.Business.Logging.AddOplog(string.Format("用户[{2}]. 角色: [{0}] 修改为 [{1}]", _role.Name, value.Name, this.Name), Arthur.App.Model.OpType.编辑);
                     }
 
                     _roleId = value.Id;

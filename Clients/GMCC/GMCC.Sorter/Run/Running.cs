@@ -1,4 +1,4 @@
-﻿using Arthur;
+﻿using Arthur.Core;
 using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -71,7 +71,7 @@ namespace GMCC.Sorter.Run
         {
             Current.MainMachine.Commor.Write("D437", (ushort)1);
             Current.App.ErrorMsg = string.Format("[{0}] {1}", DateTime.Now.ToString("M/d HH:mm:ss"), msg);
-            Arthur.Business.Logging.AddEvent(msg, Arthur.App.Model.EventType.错误);
+            Arthur.App.Business.Logging.AddEvent(msg, Arthur.App.Model.EventType.错误);
             LogHelper.WriteError("【严重异常】" + msg);
             Current.App.RunStatus = RunStatus.异常;
             TimerExec.IsRunning = false;
@@ -80,7 +80,7 @@ namespace GMCC.Sorter.Run
         public static void ShowErrorMsg(string msg)
         {
             Current.App.ErrorMsg = string.Format("[{0}] {1}", DateTime.Now.ToString("M/d HH:mm:ss"), msg);
-            Arthur.Business.Logging.AddEvent(msg, Arthur.App.Model.EventType.警告);
+            Arthur.App.Business.Logging.AddEvent(msg, Arthur.App.Model.EventType.警告);
             LogHelper.WriteError(msg);
         }
     }

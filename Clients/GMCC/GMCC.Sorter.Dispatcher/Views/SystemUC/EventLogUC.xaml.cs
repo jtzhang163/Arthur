@@ -43,8 +43,8 @@ namespace GMCC.Sorter.Dispatcher.Views.SystemUC
         public void SwitchWindow(string option, int id)
         {
             this.Option = option;
-            Assembly assembly = Assembly.LoadFile(AppDomain.CurrentDomain.BaseDirectory + "Arthur.View.dll");
-            Type type = assembly.GetType("Arthur.View.SystemUC.EventLog." + this.Option);
+            Assembly assembly = Assembly.LoadFile(AppDomain.CurrentDomain.BaseDirectory + "Arthur.App.View.dll");
+            Type type = assembly.GetType("Arthur.App.View.SystemUC.EventLog." + this.Option);
             object page = Activator.CreateInstance(type, new object[] { id });
             grid.Children.Clear();
             this.grid.Children.Add((UIElement)page);

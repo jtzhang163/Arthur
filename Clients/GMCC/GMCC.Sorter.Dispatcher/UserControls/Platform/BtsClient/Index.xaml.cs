@@ -1,4 +1,4 @@
-﻿using Arthur.View.Utils;
+﻿using Arthur.App.View.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;

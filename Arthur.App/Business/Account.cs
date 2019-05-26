@@ -1,6 +1,6 @@
-﻿using Arthur;
+﻿using Arthur.Core;
 using Arthur.App.Data;
-using Arthur.Security;
+using Arthur.Core.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using Arthur.App;
 using Arthur.App.Model;
 using Arthur.App.Utils;
 
-namespace Arthur.Business
+namespace Arthur.App.Business
 {
     public static class Account
     {
@@ -65,18 +65,18 @@ namespace Arthur.Business
                     user.Gender = Gender.Unknown;
                     user.Nickname = name;
                     user.PhoneNumber = string.Empty;
-                    user.Password = EncryptHelper.EncodeBase64(password);
+                    user.Password = EncryptBase64Helper.EncodeBase64(password);
                     user.IsEnabled = isEnabled;
                     user.RegisterTime = DateTime.Now;
                     user.RoleId = db.Roles.Single(r => r.Name == "操作员").Id;
                     db.Users.Add(user);
                     db.SaveChanges();
                 }
-                Arthur.Business.Logging.AddOplog(user.Id, string.Format("注册用户[{0}]", user.Name), App.Model.OpType.创建);
+                Arthur.App.Business.Logging.AddOplog(user.Id, string.Format("注册用户[{0}]", user.Name), App.Model.OpType.创建);
             }
             catch (Exception ex)
             {
-                Arthur.Business.Logging.AddEvent(string.Format("注册用户[{0}]出错", user.Name), EventType.错误);
+                Arthur.App.Business.Logging.AddEvent(string.Format("注册用户[{0}]出错", user.Name), EventType.错误);
                 LogHelper.WriteError(ex);
                 return new Result(ex.Message);
             }
@@ -99,7 +99,7 @@ namespace Arthur.Business
                 return new Result("请输入密码！");
             }
 
-            var entityPassword = EncryptHelper.EncodeBase64(password);
+            var entityPassword = EncryptBase64Helper.EncodeBase64(password);
 
             var user = new User();
 
@@ -178,12 +178,12 @@ namespace Arthur.Business
                     return new Result("不存在用户：" + username);
                 }
 
-                if (user.Password != EncryptHelper.EncodeBase64(old_pwd))
+                if (user.Password != EncryptBase64Helper.EncodeBase64(old_pwd))
                 {
                     return new Result("原密码输入错误！");
                 }
 
-                user.Password = EncryptHelper.EncodeBase64(new_pwd);
+                user.Password = EncryptBase64Helper.EncodeBase64(new_pwd);
                 db.SaveChanges();
             }
 

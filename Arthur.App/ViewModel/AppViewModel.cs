@@ -1,5 +1,5 @@
 ﻿using Arthur.App;
-using Arthur.Utils;
+using Arthur.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Arthur.ViewModel
+namespace Arthur.App.ViewModel
 {
     public abstract class AppViewModel : BindableObject
     {
@@ -43,7 +43,7 @@ namespace Arthur.ViewModel
                 if (dataGridPageSize != value)
                 {
                     Current.Option.DataGridPageSize = value;
-                    Arthur.Business.Logging.AddOplog(string.Format("系统参数. 表格每页显示数: [{0}] 修改为 [{1}]", dataGridPageSize, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("系统参数. 表格每页显示数: [{0}] 修改为 [{1}]", dataGridPageSize, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref dataGridPageSize, value);
                 }
             }

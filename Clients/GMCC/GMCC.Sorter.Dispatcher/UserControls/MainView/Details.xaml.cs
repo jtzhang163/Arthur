@@ -1,5 +1,5 @@
-﻿using Arthur;
-using Arthur.View.Utils;
+﻿using Arthur.Core;
+using Arthur.App.View.Utils;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Dispatcher.Controls;
 using GMCC.Sorter.Dispatcher.Controls.Machine;

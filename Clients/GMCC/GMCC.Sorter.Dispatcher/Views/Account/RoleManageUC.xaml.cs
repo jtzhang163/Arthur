@@ -1,4 +1,4 @@
-﻿using Arthur.View.Account.Role;
+﻿using Arthur.App.View.Account.Role;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,8 +41,8 @@ namespace GMCC.Sorter.Dispatcher.Views
         public void SwitchWindow(string option, int id)
         {
             this.Option = option;
-            Assembly assembly = Assembly.LoadFile(AppDomain.CurrentDomain.BaseDirectory + "Arthur.View.dll");
-            Type type = assembly.GetType("Arthur.View.Account.Role." + this.Option);
+            Assembly assembly = Assembly.LoadFile(AppDomain.CurrentDomain.BaseDirectory + "Arthur.App.View.dll");
+            Type type = assembly.GetType("Arthur.App.View.Account.Role." + this.Option);
             object page = Activator.CreateInstance(type, new object[] { id });
             grid.Children.Clear();
             this.grid.Children.Add((UIElement)page);

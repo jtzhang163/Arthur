@@ -1,4 +1,4 @@
-﻿using Arthur;
+﻿using Arthur.Core;
 using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
@@ -34,7 +34,7 @@ namespace GMCC.Sorter.ViewModel
                 if (portName != value)
                 {
                     ((SerialCommor)this.Commor.Communicator).PortName = value;
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}端口: [{1}] 修改为 [{2}]", Name, portName, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}端口: [{1}] 修改为 [{2}]", Name, portName, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref portName, value);
                     this.CommorInfo = null;
                 }
@@ -57,7 +57,7 @@ namespace GMCC.Sorter.ViewModel
                 if (baudRate != value)
                 {
                     ((SerialCommor)this.Commor.Communicator).BaudRate = value;
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}波特率: [{1}] 修改为 [{2}]", Name, baudRate, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}波特率: [{1}] 修改为 [{2}]", Name, baudRate, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref baudRate, value);
                     this.CommorInfo = null;
                 }
@@ -78,7 +78,7 @@ namespace GMCC.Sorter.ViewModel
                 if (parity != value)
                 {
                     ((SerialCommor)this.Commor.Communicator).Parity = value;
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}校验位: [{1}] 修改为 [{2}]", Name, parity, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}校验位: [{1}] 修改为 [{2}]", Name, parity, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref parity, value);
                 }
             }
@@ -101,7 +101,7 @@ namespace GMCC.Sorter.ViewModel
                 if (dataBits != value)
                 {
                     ((SerialCommor)this.Commor.Communicator).DataBits = value;
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}数据位: [{1}] 修改为 [{2}]", Name, dataBits, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}数据位: [{1}] 修改为 [{2}]", Name, dataBits, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref dataBits, value);
                 }
             }
@@ -121,7 +121,7 @@ namespace GMCC.Sorter.ViewModel
                 if (stopBits != value)
                 {
                     ((SerialCommor)this.Commor.Communicator).StopBits = value;
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}停止位: [{1}] 修改为 [{2}]", Name, stopBits, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}停止位: [{1}] 修改为 [{2}]", Name, stopBits, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref stopBits, value);
                 }
             }
@@ -138,11 +138,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (scanCommand == null)
                 {
-                    scanCommand = Arthur.Business.Setting.GetOption("ScanCommand_TrayScaner_" + this.Id);
+                    scanCommand = Arthur.App.Business.Setting.GetOption("ScanCommand_TrayScaner_" + this.Id);
                     if (scanCommand == null)
                     {
                         scanCommand = "16 54 0D";
-                        Arthur.Business.Setting.SetOption("ScanCommand_TrayScaner_" + this.Id, scanCommand, this.Name + "扫码指令");
+                        Arthur.App.Business.Setting.SetOption("ScanCommand_TrayScaner_" + this.Id, scanCommand, this.Name + "扫码指令");
                     }
                 }
                 return scanCommand;
@@ -151,8 +151,8 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (scanCommand != value)
                 {
-                    Arthur.Business.Setting.SetOption("ScanCommand_TrayScaner_" + this.Id, value);
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}扫码指令: [{1}] 修改为 [{2}]", Name, stopBits, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Setting.SetOption("ScanCommand_TrayScaner_" + this.Id, value);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}扫码指令: [{1}] 修改为 [{2}]", Name, stopBits, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref scanCommand, value);
                 }
             }

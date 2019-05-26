@@ -1,4 +1,5 @@
-﻿using Arthur.App.Model;
+﻿using Arthur.Core;
+using Arthur.App.Model;
 using HslCommunication.Profinet.Omron;
 using System.IO.Ports;
 using System.Net.Sockets;

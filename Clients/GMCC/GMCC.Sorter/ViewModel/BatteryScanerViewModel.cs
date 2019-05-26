@@ -1,4 +1,4 @@
-﻿using Arthur;
+﻿using Arthur.Core;
 using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
@@ -35,7 +35,7 @@ namespace GMCC.Sorter.ViewModel
                 {
                     ((EthernetCommor)this.Commor.Communicator).IP = value;
                     
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}IP地址: [{1}] 修改为 [{2}]", Name, ip, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}IP地址: [{1}] 修改为 [{2}]", Name, ip, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref ip, value);
                     this.CommorInfo = null;
                 }
@@ -59,7 +59,7 @@ namespace GMCC.Sorter.ViewModel
                 if (port != value)
                 {
                     ((EthernetCommor)this.Commor.Communicator).Port = value;
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}端口: [{1}] 修改为 [{2}]", Name, port, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}端口: [{1}] 修改为 [{2}]", Name, port, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref port, value);
                     this.CommorInfo = null;
                 }
@@ -77,11 +77,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (scanCommand == null)
                 {
-                    scanCommand = Arthur.Business.Setting.GetOption("ScanCommand_BatteryScaner");
+                    scanCommand = Arthur.App.Business.Setting.GetOption("ScanCommand_BatteryScaner");
                     if (scanCommand == null)
                     {
                         scanCommand = "T";
-                        Arthur.Business.Setting.SetOption("ScanCommand_BatteryScaner", scanCommand, this.Name + "扫码指令");
+                        Arthur.App.Business.Setting.SetOption("ScanCommand_BatteryScaner", scanCommand, this.Name + "扫码指令");
                     }
                 }
                 return scanCommand;
@@ -90,8 +90,8 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (scanCommand != value)
                 {
-                    Arthur.Business.Setting.SetOption("ScanCommand_BatteryScaner", value);
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0}扫码指令: [{1}] 修改为 [{2}]", Name, scanCommand, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Setting.SetOption("ScanCommand_BatteryScaner", value);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}扫码指令: [{1}] 修改为 [{2}]", Name, scanCommand, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref scanCommand, value);
                 }
             }

@@ -68,7 +68,7 @@ namespace GMCC.Sorter.ViewModel
                         db.Storages.FirstOrDefault(o => o.Id == this.Id).Name = value;
                         db.SaveChanges();
                     }
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. [{0}] 名称修改为 [{1}]", name, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. [{0}] 名称修改为 [{1}]", name, value), Arthur.App.Model.OpType.编辑);
                     this.SetProperty(ref name, value);
                 }
             }
@@ -91,7 +91,7 @@ namespace GMCC.Sorter.ViewModel
                         db.Storages.FirstOrDefault(o => o.Id == this.Id).Company = value;
                         db.SaveChanges();
                     }
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 品牌: [{1}] 修改为 [{2}]", Name, company, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0} 品牌: [{1}] 修改为 [{2}]", Name, company, value), Arthur.App.Model.OpType.编辑);
                     this.SetProperty(ref company, value);
                 }
             }
@@ -116,7 +116,7 @@ namespace GMCC.Sorter.ViewModel
                         db.Storages.FirstOrDefault(o => o.Id == this.Id).StillTimeSpan = value;
                         db.SaveChanges();
                     }
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 静置时间: [{1}] 修改为 [{2}]", Name, stillTimeSpan, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0} 静置时间: [{1}] 修改为 [{2}]", Name, stillTimeSpan, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref stillTimeSpan, value);
                 }
             }
@@ -154,7 +154,7 @@ namespace GMCC.Sorter.ViewModel
                         db.Storages.FirstOrDefault(o => o.Id == this.Id).IsEnabled = value;
                         db.SaveChanges();
                     }
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 是否启用: [{1}] 修改为 [{2}]", Name, isEnabled, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0} 是否启用: [{1}] 修改为 [{2}]", Name, isEnabled, value), Arthur.App.Model.OpType.编辑);
                 }
 
                 SetProperty(ref isEnabled, value);
@@ -194,7 +194,7 @@ namespace GMCC.Sorter.ViewModel
                         }
                     }
 
-                    Arthur.Business.Logging.AddOplog(string.Format("设备管理. {0} 流程托盘Id: [{1}] 修改为 [{2}]", Name, procTrayId, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0} 流程托盘Id: [{1}] 修改为 [{2}]", Name, procTrayId, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref procTrayId, value);
                     procTray = null; //很重要
                 }

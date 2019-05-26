@@ -1,4 +1,4 @@
-﻿using Arthur.View.Account;
+﻿using Arthur.App.View.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;

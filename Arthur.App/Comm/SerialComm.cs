@@ -1,4 +1,5 @@
-﻿using Arthur.App.Model;
+﻿using Arthur.Core;
+using Arthur.App.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -64,7 +65,7 @@ namespace Arthur.App.Comm
                 }
                 else
                 {
-                    var bytes = Arthur.Utils._Convert.StrToToHexBytes(input);
+                    var bytes = Arthur.Core.Transfer._Convert.StrToToHexBytes(input);
                     serialPort.Write(bytes, 0, bytes.Length);
                 }
                 Thread.Sleep(800);

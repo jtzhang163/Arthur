@@ -1,4 +1,4 @@
-﻿using Arthur;
+﻿using Arthur.Core;
 using Arthur.App;
 using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Model;
@@ -45,11 +45,11 @@ namespace GMCC.Sorter
             {
                 if (taskExecInterval < 0)
                 {
-                    taskExecInterval = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("TaskExecInterval"), -1);
+                    taskExecInterval = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("TaskExecInterval"), -1);
                     if (taskExecInterval < 0)
                     {
                         taskExecInterval = 3000;
-                        Arthur.Business.Setting.SetOption("TaskExecInterval", taskExecInterval.ToString(), "搬运任务执行定时器间隔(ms)");
+                        Arthur.App.Business.Setting.SetOption("TaskExecInterval", taskExecInterval.ToString(), "搬运任务执行定时器间隔(ms)");
                     }
                 }
                 return taskExecInterval;
@@ -58,8 +58,8 @@ namespace GMCC.Sorter
             {
                 if (taskExecInterval != value)
                 {
-                    Arthur.Business.Setting.SetOption("TaskExecInterval", value.ToString());
-                    Arthur.Business.Logging.AddOplog(string.Format("配置. 搬运任务执行定时器间隔(ms): [{0}] 修改为 [{1}]", taskExecInterval, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Setting.SetOption("TaskExecInterval", value.ToString());
+                    Arthur.App.Business.Logging.AddOplog(string.Format("配置. 搬运任务执行定时器间隔(ms): [{0}] 修改为 [{1}]", taskExecInterval, value), Arthur.App.Model.OpType.编辑);
                     this.SetProperty(ref taskExecInterval, value);
                 }
             }
@@ -76,11 +76,11 @@ namespace GMCC.Sorter
             {
                 if (getShareDataExecInterval < 0)
                 {
-                    getShareDataExecInterval = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("GetShareDataExecInterval"), -1);
+                    getShareDataExecInterval = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("GetShareDataExecInterval"), -1);
                     if (getShareDataExecInterval < 0)
                     {
                         getShareDataExecInterval = 3000;
-                        Arthur.Business.Setting.SetOption("GetShareDataExecInterval", getShareDataExecInterval.ToString(), "获取共享数据执行定时器间隔(ms)");
+                        Arthur.App.Business.Setting.SetOption("GetShareDataExecInterval", getShareDataExecInterval.ToString(), "获取共享数据执行定时器间隔(ms)");
                     }
                 }
                 return getShareDataExecInterval;
@@ -89,8 +89,8 @@ namespace GMCC.Sorter
             {
                 if (getShareDataExecInterval != value)
                 {
-                    Arthur.Business.Setting.SetOption("GetShareDataExecInterval", value.ToString());
-                    Arthur.Business.Logging.AddOplog(string.Format("配置. 获取共享数据执行定时器间隔(ms): [{0}] 修改为 [{1}]", getShareDataExecInterval, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Setting.SetOption("GetShareDataExecInterval", value.ToString());
+                    Arthur.App.Business.Logging.AddOplog(string.Format("配置. 获取共享数据执行定时器间隔(ms): [{0}] 修改为 [{1}]", getShareDataExecInterval, value), Arthur.App.Model.OpType.编辑);
                     this.SetProperty(ref getShareDataExecInterval, value);
                 }
             }
@@ -107,11 +107,11 @@ namespace GMCC.Sorter
             {
                 if (stillTimeSpan == -2)
                 {
-                    stillTimeSpan = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("StillTimeSpan"), -1);
+                    stillTimeSpan = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("StillTimeSpan"), -1);
                     if (stillTimeSpan == -1)
                     {
                         stillTimeSpan = 120;
-                        Arthur.Business.Setting.SetOption("StillTimeSpan", stillTimeSpan.ToString(), "静置时长(min)");
+                        Arthur.App.Business.Setting.SetOption("StillTimeSpan", stillTimeSpan.ToString(), "静置时长(min)");
                     }
                 }
                 return stillTimeSpan;
@@ -120,8 +120,8 @@ namespace GMCC.Sorter
             {
                 if (stillTimeSpan != value)
                 {
-                    Arthur.Business.Setting.SetOption("StillTimeSpan", value.ToString());
-                    Arthur.Business.Logging.AddOplog(string.Format("设置. {0} 静置时间: [{1}] 修改为 [{2}]", Name, stillTimeSpan, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Setting.SetOption("StillTimeSpan", value.ToString());
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设置. {0} 静置时间: [{1}] 修改为 [{2}]", Name, stillTimeSpan, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref stillTimeSpan, value);
 
                     //同步设置所有料仓静置时间
@@ -152,11 +152,11 @@ namespace GMCC.Sorter
             {
                 if (taskPriorityType == TaskPriorityType.未知)
                 {
-                    var type = Arthur.Business.Setting.GetOption("TaskPriorityType");
+                    var type = Arthur.App.Business.Setting.GetOption("TaskPriorityType");
                     if (type == null)
                     {
                         taskPriorityType = TaskPriorityType.层优先;
-                        Arthur.Business.Setting.SetOption("TaskPriorityType", taskPriorityType.ToString(), "自动任务优先级类型（层优先/列优先）");
+                        Arthur.App.Business.Setting.SetOption("TaskPriorityType", taskPriorityType.ToString(), "自动任务优先级类型（层优先/列优先）");
                     }
                     else
                     {
@@ -169,8 +169,8 @@ namespace GMCC.Sorter
             {
                 if (taskPriorityType != value)
                 {
-                    Arthur.Business.Setting.SetOption("TaskPriorityType", value.ToString());
-                    Arthur.Business.Logging.AddOplog(string.Format("设置. {0} 自动任务优先级类型（层优先/列优先）: [{1}] 修改为 [{2}]", Name, taskPriorityType, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Setting.SetOption("TaskPriorityType", value.ToString());
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设置. {0} 自动任务优先级类型（层优先/列优先）: [{1}] 修改为 [{2}]", Name, taskPriorityType, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref taskPriorityType, value);
                 }
             }
@@ -191,11 +191,11 @@ namespace GMCC.Sorter
             {
                 if (jawProcTrayId == -2)
                 {
-                    jawProcTrayId = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("JawProcTrayId"), -1);
+                    jawProcTrayId = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("JawProcTrayId"), -1);
                     if (jawProcTrayId == -1)
                     {
                         jawProcTrayId = 0;
-                        Arthur.Business.Setting.SetOption("JawProcTrayId", jawProcTrayId.ToString(), "横移流程托盘Id");
+                        Arthur.App.Business.Setting.SetOption("JawProcTrayId", jawProcTrayId.ToString(), "横移流程托盘Id");
                     }
                 }
                 return jawProcTrayId;
@@ -204,7 +204,7 @@ namespace GMCC.Sorter
             {
                 if (jawProcTrayId != value)
                 {
-                    Arthur.Business.Setting.SetOption("JawProcTrayId", value.ToString());
+                    Arthur.App.Business.Setting.SetOption("JawProcTrayId", value.ToString());
                     SetProperty(ref jawProcTrayId, value);
                 }
             }
@@ -220,11 +220,11 @@ namespace GMCC.Sorter
             {
                 if (jawPos == -2)
                 {
-                    jawPos = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("JawPos"), -1);
+                    jawPos = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("JawPos"), -1);
                     if (jawPos == -1)
                     {
                         jawPos = 0;
-                        Arthur.Business.Setting.SetOption("JawPos", jawPos.ToString(), "横移位置");
+                        Arthur.App.Business.Setting.SetOption("JawPos", jawPos.ToString(), "横移位置");
                     }
                 }
                 return jawPos;
@@ -250,7 +250,7 @@ namespace GMCC.Sorter
 
                 if (jawPos != value)
                 {
-                    Arthur.Business.Setting.SetOption("JawPos", value.ToString());
+                    Arthur.App.Business.Setting.SetOption("JawPos", value.ToString());
                     SetProperty(ref jawPos, value);
                 }
             }
@@ -554,11 +554,11 @@ namespace GMCC.Sorter
             {
                 if (tray11_Id == -2)
                 {
-                    tray11_Id = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("Tray11_Id"), -1);
+                    tray11_Id = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("Tray11_Id"), -1);
                     if (tray11_Id == -1)
                     {
                         tray11_Id = 0;
-                        Arthur.Business.Setting.SetOption("Tray11_Id", tray11_Id.ToString(), "绑盘位流程托盘Id");
+                        Arthur.App.Business.Setting.SetOption("Tray11_Id", tray11_Id.ToString(), "绑盘位流程托盘Id");
                     }
                 }
                 return tray11_Id;
@@ -567,7 +567,7 @@ namespace GMCC.Sorter
             {
                 if (tray11_Id != value)
                 {
-                    Arthur.Business.Setting.SetOption("Tray11_Id", value.ToString());
+                    Arthur.App.Business.Setting.SetOption("Tray11_Id", value.ToString());
                     SetProperty(ref tray11_Id, value);
                 }
             }
@@ -584,11 +584,11 @@ namespace GMCC.Sorter
             {
                 if (tray12_Id == -2)
                 {
-                    tray12_Id = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("Tray12_Id"), -1);
+                    tray12_Id = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("Tray12_Id"), -1);
                     if (tray12_Id == -1)
                     {
                         tray12_Id = 0;
-                        Arthur.Business.Setting.SetOption("Tray12_Id", tray12_Id.ToString(), "充电位流程托盘Id");
+                        Arthur.App.Business.Setting.SetOption("Tray12_Id", tray12_Id.ToString(), "充电位流程托盘Id");
                     }
                 }
                 return tray12_Id;
@@ -597,7 +597,7 @@ namespace GMCC.Sorter
             {
                 if (tray12_Id != value)
                 {
-                    Arthur.Business.Setting.SetOption("Tray12_Id", value.ToString());
+                    Arthur.App.Business.Setting.SetOption("Tray12_Id", value.ToString());
                     SetProperty(ref tray12_Id, value);
                 }
             }
@@ -614,11 +614,11 @@ namespace GMCC.Sorter
             {
                 if (tray13_Id == -2)
                 {
-                    tray13_Id = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("Tray13_Id"), -1);
+                    tray13_Id = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("Tray13_Id"), -1);
                     if (tray13_Id == -1)
                     {
                         tray13_Id = 0;
-                        Arthur.Business.Setting.SetOption("Tray13_Id", tray13_Id.ToString(), "上料位流程托盘Id");
+                        Arthur.App.Business.Setting.SetOption("Tray13_Id", tray13_Id.ToString(), "上料位流程托盘Id");
                     }
                 }
                 return tray13_Id;
@@ -627,7 +627,7 @@ namespace GMCC.Sorter
             {
                 if (tray13_Id != value)
                 {
-                    Arthur.Business.Setting.SetOption("Tray13_Id", value.ToString());
+                    Arthur.App.Business.Setting.SetOption("Tray13_Id", value.ToString());
                     SetProperty(ref tray13_Id, value);
                 }
             }
@@ -644,11 +644,11 @@ namespace GMCC.Sorter
             {
                 if (tray21_Id == -2)
                 {
-                    tray21_Id = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("Tray21_Id"), -1);
+                    tray21_Id = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("Tray21_Id"), -1);
                     if (tray21_Id == -1)
                     {
                         tray21_Id = 0;
-                        Arthur.Business.Setting.SetOption("Tray21_Id", tray21_Id.ToString(), "下料位流程托盘Id");
+                        Arthur.App.Business.Setting.SetOption("Tray21_Id", tray21_Id.ToString(), "下料位流程托盘Id");
                     }
                 }
                 return tray21_Id;
@@ -657,7 +657,7 @@ namespace GMCC.Sorter
             {
                 if (tray21_Id != value)
                 {
-                    Arthur.Business.Setting.SetOption("Tray21_Id", value.ToString());
+                    Arthur.App.Business.Setting.SetOption("Tray21_Id", value.ToString());
                     SetProperty(ref tray21_Id, value);
                 }
             }
@@ -673,11 +673,11 @@ namespace GMCC.Sorter
             {
                 if (tray22_Id == -2)
                 {
-                    tray22_Id = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("Tray22_Id"), -1);
+                    tray22_Id = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("Tray22_Id"), -1);
                     if (tray22_Id == -1)
                     {
                         tray22_Id = 0;
-                        Arthur.Business.Setting.SetOption("Tray22_Id", tray22_Id.ToString(), "放电位流程托盘Id");
+                        Arthur.App.Business.Setting.SetOption("Tray22_Id", tray22_Id.ToString(), "放电位流程托盘Id");
                     }
                 }
                 return tray22_Id;
@@ -686,7 +686,7 @@ namespace GMCC.Sorter
             {
                 if (tray22_Id != value)
                 {
-                    Arthur.Business.Setting.SetOption("Tray22_Id", value.ToString());
+                    Arthur.App.Business.Setting.SetOption("Tray22_Id", value.ToString());
                     SetProperty(ref tray22_Id, value);
                 }
             }
@@ -703,11 +703,11 @@ namespace GMCC.Sorter
             {
                 if (tray23_Id == -2)
                 {
-                    tray23_Id = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("Tray23_Id"), -1);
+                    tray23_Id = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("Tray23_Id"), -1);
                     if (tray23_Id == -1)
                     {
                         tray23_Id = 0;
-                        Arthur.Business.Setting.SetOption("Tray23_Id", tray23_Id.ToString(), "分选位流程托盘Id");
+                        Arthur.App.Business.Setting.SetOption("Tray23_Id", tray23_Id.ToString(), "分选位流程托盘Id");
                     }
                 }
                 return tray23_Id;
@@ -716,7 +716,7 @@ namespace GMCC.Sorter
             {
                 if (tray23_Id != value)
                 {
-                    Arthur.Business.Setting.SetOption("Tray23_Id", value.ToString());
+                    Arthur.App.Business.Setting.SetOption("Tray23_Id", value.ToString());
                     SetProperty(ref tray23_Id, value);
                 }
             }
@@ -736,11 +736,11 @@ namespace GMCC.Sorter
             {
                 if (tray11_PreId == -2)
                 {
-                    tray11_PreId = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("Tray11_PreId"), -1);
+                    tray11_PreId = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("Tray11_PreId"), -1);
                     if (tray11_PreId == -1)
                     {
                         tray11_PreId = 0;
-                        Arthur.Business.Setting.SetOption("Tray11_PreId", tray11_PreId.ToString(), "绑盘位流程托盘原ID");
+                        Arthur.App.Business.Setting.SetOption("Tray11_PreId", tray11_PreId.ToString(), "绑盘位流程托盘原ID");
                     }
                 }
                 return tray11_PreId;
@@ -749,7 +749,7 @@ namespace GMCC.Sorter
             {
                 if (tray11_PreId != value)
                 {
-                    Arthur.Business.Setting.SetOption("Tray11_PreId", value.ToString());
+                    Arthur.App.Business.Setting.SetOption("Tray11_PreId", value.ToString());
                     SetProperty(ref tray11_PreId, value);
                 }
             }
@@ -766,11 +766,11 @@ namespace GMCC.Sorter
             {
                 if (tray12_PreId == -2)
                 {
-                    tray12_PreId = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("Tray12_PreId"), -1);
+                    tray12_PreId = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("Tray12_PreId"), -1);
                     if (tray12_PreId == -1)
                     {
                         tray12_PreId = 0;
-                        Arthur.Business.Setting.SetOption("Tray12_PreId", tray12_PreId.ToString(), "充电位流程托盘原ID");
+                        Arthur.App.Business.Setting.SetOption("Tray12_PreId", tray12_PreId.ToString(), "充电位流程托盘原ID");
                     }
                 }
                 return tray12_PreId;
@@ -779,7 +779,7 @@ namespace GMCC.Sorter
             {
                 if (tray12_PreId != value)
                 {
-                    Arthur.Business.Setting.SetOption("Tray12_PreId", value.ToString());
+                    Arthur.App.Business.Setting.SetOption("Tray12_PreId", value.ToString());
                     SetProperty(ref tray12_PreId, value);
                 }
             }
@@ -796,11 +796,11 @@ namespace GMCC.Sorter
         //    {
         //        if (tray13_PreId == -2)
         //        {
-        //            tray13_PreId = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray13_PreId"), -1);
+        //            tray13_PreId = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Application.GetOption("Tray13_PreId"), -1);
         //            if (tray13_PreId == -1)
         //            {
         //                tray13_PreId = 0;
-        //                Arthur.Business.Application.SetOption("Tray13_PreId", tray13_PreId.ToString(), "上料位流程托盘原ID");
+        //                Arthur.App.Business.Application.SetOption("Tray13_PreId", tray13_PreId.ToString(), "上料位流程托盘原ID");
         //            }
         //        }
         //        return tray13_PreId;
@@ -809,7 +809,7 @@ namespace GMCC.Sorter
         //    {
         //        if (tray13_PreId != value)
         //        {
-        //            Arthur.Business.Application.SetOption("Tray13_PreId", value.ToString());
+        //            Arthur.App.Business.Application.SetOption("Tray13_PreId", value.ToString());
         //            SetProperty(ref tray13_PreId, value);
         //        }
         //    }
@@ -826,11 +826,11 @@ namespace GMCC.Sorter
             {
                 if (tray21_PreId == -2)
                 {
-                    tray21_PreId = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("Tray21_PreId"), -1);
+                    tray21_PreId = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("Tray21_PreId"), -1);
                     if (tray21_PreId == -1)
                     {
                         tray21_PreId = 0;
-                        Arthur.Business.Setting.SetOption("Tray21_PreId", tray21_PreId.ToString(), "下料位流程托盘原ID");
+                        Arthur.App.Business.Setting.SetOption("Tray21_PreId", tray21_PreId.ToString(), "下料位流程托盘原ID");
                     }
                 }
                 return tray21_PreId;
@@ -839,7 +839,7 @@ namespace GMCC.Sorter
             {
                 if (tray21_PreId != value)
                 {
-                    Arthur.Business.Setting.SetOption("Tray21_PreId", value.ToString());
+                    Arthur.App.Business.Setting.SetOption("Tray21_PreId", value.ToString());
                     SetProperty(ref tray21_PreId, value);
                 }
             }
@@ -855,11 +855,11 @@ namespace GMCC.Sorter
             {
                 if (tray22_PreId == -2)
                 {
-                    tray22_PreId = Arthur.Utils._Convert.To(Arthur.Business.Setting.GetOption("Tray22_PreId"), -1);
+                    tray22_PreId = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("Tray22_PreId"), -1);
                     if (tray22_PreId == -1)
                     {
                         tray22_PreId = 0;
-                        Arthur.Business.Setting.SetOption("Tray22_PreId", tray22_PreId.ToString(), "放电位流程托盘原ID");
+                        Arthur.App.Business.Setting.SetOption("Tray22_PreId", tray22_PreId.ToString(), "放电位流程托盘原ID");
                     }
                 }
                 return tray22_PreId;
@@ -868,7 +868,7 @@ namespace GMCC.Sorter
             {
                 if (tray22_PreId != value)
                 {
-                    Arthur.Business.Setting.SetOption("Tray22_PreId", value.ToString());
+                    Arthur.App.Business.Setting.SetOption("Tray22_PreId", value.ToString());
                     SetProperty(ref tray22_PreId, value);
                 }
             }
@@ -885,11 +885,11 @@ namespace GMCC.Sorter
         //    {
         //        if (tray23_PreId == -2)
         //        {
-        //            tray23_PreId = Arthur.Utils._Convert.To(Arthur.Business.Application.GetOption("Tray23_PreId"), -1);
+        //            tray23_PreId = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Application.GetOption("Tray23_PreId"), -1);
         //            if (tray23_PreId == -1)
         //            {
         //                tray23_PreId = 0;
-        //                Arthur.Business.Application.SetOption("Tray23_PreId", tray23_PreId.ToString(), "分选位流程托盘原ID");
+        //                Arthur.App.Business.Application.SetOption("Tray23_PreId", tray23_PreId.ToString(), "分选位流程托盘原ID");
         //            }
         //        }
         //        return tray23_PreId;
@@ -898,7 +898,7 @@ namespace GMCC.Sorter
         //    {
         //        if (tray23_PreId != value)
         //        {
-        //            Arthur.Business.Application.SetOption("Tray23_PreId", value.ToString());
+        //            Arthur.App.Business.Application.SetOption("Tray23_PreId", value.ToString());
         //            SetProperty(ref tray23_PreId, value);
         //        }
         //    }

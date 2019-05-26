@@ -107,15 +107,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Arthur\Arthur.csproj">
-      <Project>{1090299D-1C85-4E87-B155-B28AB93985FA}</Project>
-      <Name>Arthur</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201905190944388_Arthur_Init.resx">
       <DependentUpon>201905190944388_Arthur_Init.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Arthur.Core\Arthur.Core.csproj">
+      <Project>{1090299d-1c85-4e87-b155-b28ab93985fa}</Project>
+      <Name>Arthur.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

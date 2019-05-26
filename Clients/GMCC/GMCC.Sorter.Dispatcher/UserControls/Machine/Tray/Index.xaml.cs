@@ -1,4 +1,4 @@
-﻿using Arthur.View.Utils;
+﻿using Arthur.App.View.Utils;
 using GMCC.Sorter.Data;
 using System;
 using System.Collections.Generic;
@@ -109,7 +109,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Tray
             {
                 _AppContext.Trays.Remove(tray);
                 _AppContext.SaveChanges();
-                Arthur.Business.Logging.AddOplog(string.Format("删除托盘[{0}]", tray.Code), Arthur.App.Model.OpType.删除);
+                Arthur.App.Business.Logging.AddOplog(string.Format("删除托盘[{0}]", tray.Code), Arthur.App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }
         }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:baseViewUtil="clr-namespace:Arthur.View.Utils;assembly=Arthur.View"
+             xmlns:baseViewUtil="clr-namespace:Arthur.App.View.Utils;assembly=Arthur.App.View"
              xmlns:utils="clr-namespace:GMCC.Sorter.Dispatcher.Utils"
              xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.UserControls.Query.TaskLog"
              xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"

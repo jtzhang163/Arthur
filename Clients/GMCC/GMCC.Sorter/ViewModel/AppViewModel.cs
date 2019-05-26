@@ -7,7 +7,7 @@ using GMCC.Sorter.Other;
 
 namespace GMCC.Sorter.ViewModel
 {
-    public sealed class AppViewModel : Arthur.ViewModel.AppViewModel
+    public sealed class AppViewModel : Arthur.App.ViewModel.AppViewModel
     {
 
         private string appName = null;
@@ -35,7 +35,7 @@ namespace GMCC.Sorter.ViewModel
                     //更新AppName时同步更新AppTitle，使窗体标题栏变化
                     AppTitle = AppNameToTitle(value);
 
-                    Arthur.Business.Logging.AddOplog(string.Format("系统参数. 程序名称: [{0}] 修改为 [{1}]", appName, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("系统参数. 程序名称: [{0}] 修改为 [{1}]", appName, value), Arthur.App.Model.OpType.编辑);
 
                     SetProperty(ref appName, value);
                 }
@@ -102,7 +102,7 @@ namespace GMCC.Sorter.ViewModel
                     Arthur.App.Current.Option.CompanyName = value;
 
 
-                    Arthur.Business.Logging.AddOplog(string.Format("系统参数. 公司名: [{0}] 修改为 [{1}]", companyName, value), Arthur.App.Model.OpType.编辑);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("系统参数. 公司名: [{0}] 修改为 [{1}]", companyName, value), Arthur.App.Model.OpType.编辑);
 
                     SetProperty(ref companyName, value);
                 }
