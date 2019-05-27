@@ -608,7 +608,24 @@
                         </Grid>
                     </Expander.Content>
                 </Expander>
+                <Separator Height="2" Background="White"/>
 
+                <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">
+                    <Expander.Header>
+                        <WrapPanel>
+                            <TextBlock Text="&#xf0ad;" Style="{DynamicResource FontAwesome}" FontSize="18"/>
+                            <TextBlock Text="工具"/>
+                        </WrapPanel>
+                    </Expander.Header>
+                    <Expander.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <RadioButton Grid.Row="0" Checked="RadioButton_Checked">二维码生成器</RadioButton>
+                        </Grid>
+                    </Expander.Content>
+                </Expander>
                 <Separator Height="2" Background="White"/>
 
                 <Expander VerticalAlignment="Stretch" ExpandDirection="Down" HorizontalContentAlignment="Left" SnapsToDevicePixels="True">

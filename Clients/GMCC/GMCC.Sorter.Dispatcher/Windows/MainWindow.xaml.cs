@@ -158,6 +158,9 @@ namespace GMCC.Sorter.Dispatcher
                 case "MES":
                     return new MESView();
 
+                case "二维码生成器":
+                    return new QRCoderView();
+
                 case "关于":
                     return new AboutView();
                 default:

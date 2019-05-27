@@ -513,6 +513,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Tool\QRCoderView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\AccountWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -524,6 +528,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Tool\QRCoderView.xaml.cs">
+      <DependentUpon>QRCoderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\AccountWindow.xaml.cs">
       <DependentUpon>AccountWindow.xaml</DependentUpon>
