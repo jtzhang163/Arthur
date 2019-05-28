@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.ViewModel
 {
-    public sealed class ShareDataViewModel : BindableObject
+    public sealed class NewareDataViewModel : BindableObject
     {
         public int Id { get; set; }
         public string Key { get; set; }
@@ -24,7 +24,7 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (_value != value && _value != null)
                 {
-                    using (var db = new ShareContext())
+                    using (var db = new NewareContext())
                     {
                         var count = db.Database.ExecuteSqlCommand(string.Format("UPDATE dbo.t_data SET [Value] = '{0}' WHERE [Key] = '{1}'", value, this.Key));
                         if (count > 0)
@@ -48,7 +48,7 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (_status != value && _status != -1)
                 {
-                    using (var db = new ShareContext())
+                    using (var db = new NewareContext())
                     {
                         var count = db.Database.ExecuteSqlCommand(string.Format("UPDATE dbo.t_data SET [Status] = '{0}' WHERE [Key] = '{1}'", value, this.Key));
                         if (count > 0)
@@ -72,7 +72,7 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (_procTrayId != value && _procTrayId != -1)
                 {
-                    using (var db = new ShareContext())
+                    using (var db = new NewareContext())
                     {
                         var count = db.Database.ExecuteSqlCommand(string.Format("UPDATE dbo.t_data SET [ProcTrayId] = {0} WHERE [Key] = '{1}'", value, this.Key));
                         if (count > 0)
@@ -96,7 +96,7 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (_updateTime != value && _updateTime != Arthur.Core.Default.DateTime)
                 {
-                    using (var db = new ShareContext())
+                    using (var db = new NewareContext())
                     {
                         var count = db.Database.ExecuteSqlCommand(string.Format("UPDATE dbo.t_data SET [UpdateTime] = '{0}' WHERE [Key] = '{1}'", value, this.Key));
                         if (count > 0)
@@ -111,7 +111,7 @@ namespace GMCC.Sorter.ViewModel
 
         public string Desc { get; set; }
 
-        public ShareDataViewModel(int id, string key, string value, int status, int procTrayId, DateTime updateTime, string desc)
+        public NewareDataViewModel(int id, string key, string value, int status, int procTrayId, DateTime updateTime, string desc)
         {
             this.Id = id;
             this.Key = key;

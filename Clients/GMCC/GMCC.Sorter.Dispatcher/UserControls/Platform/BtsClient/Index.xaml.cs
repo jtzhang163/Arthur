@@ -35,7 +35,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.BtsClient
 
         private int PageIndex = 1;
 
-        private List<ShareDataViewModel> ShareDatas
+        private List<NewareDataViewModel> ShareDatas
         {
             get
             {
@@ -51,7 +51,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.BtsClient
 
         private void UpdateDataGrid(int index)
         {
-            var dtos = PaginatedList<ShareDataViewModel>.Create(ShareDatas, PageIndex, Arthur.App.Current.Option.DataGridPageSize);
+            var dtos = PaginatedList<NewareDataViewModel>.Create(ShareDatas, PageIndex, Arthur.App.Current.Option.DataGridPageSize);
 
             this.count.Content = ShareDatas.Count();
             this.pageIndex.Content = PageIndex;

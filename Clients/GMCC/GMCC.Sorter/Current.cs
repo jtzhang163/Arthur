@@ -1,6 +1,7 @@
 ﻿using Arthur.App.Comm;
 using Arthur.App.ViewModel;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Other;
 using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
 using System;
@@ -171,13 +172,13 @@ namespace GMCC.Sorter
             }
         }
 
-        public static List<ShareDataViewModel> ShareDatas
+        public static List<NewareDataViewModel> ShareDatas
         {
             get
             {
-                using (var db = new ShareContext())
+                using (var db = new NewareContext())
                 {
-                    var data = db.Database.SqlQuery<ShareData>("select * from t_data").ToList();
+                    var data = db.Database.SqlQuery<NewareData>("select * from t_data").ToList();
                     return ContextToViewModel.Convert(data);
                 }
             }

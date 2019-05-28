@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GMCC.Sorter.Utils
+namespace GMCC.Sorter.Other
 {
-    public sealed class ShareData
+    public sealed class NewareData
     {
         public int Id { get; set; }
         public string Key { get; set; }

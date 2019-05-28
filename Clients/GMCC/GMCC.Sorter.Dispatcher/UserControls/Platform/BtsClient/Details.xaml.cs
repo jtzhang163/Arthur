@@ -26,7 +26,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.BtsClient
     public partial class Details : UserControl
     {
         private readonly Arthur.App.AppContext _ArthurContext = new Arthur.App.AppContext();
-        private ShareDataViewModel ShareData;
+        private NewareDataViewModel ShareData;
 
         public Details(int id)
         {

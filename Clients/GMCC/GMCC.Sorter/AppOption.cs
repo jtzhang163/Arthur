@@ -21,16 +21,29 @@ namespace GMCC.Sorter
 
         public string Name = "配置";
 
-        private string shareConnString;
-        public string ShareConnString
+        private string newareConnString;
+        public string NewareConnString
         {
             get
             {
-                if (shareConnString == null)
+                if (newareConnString == null)
                 {
-                    shareConnString = ConfigurationManager.ConnectionStrings["ShareDatabase"].ToString();
+                    newareConnString = ConfigurationManager.ConnectionStrings["NewareShareDB"].ToString();
                 }
-                return shareConnString;
+                return newareConnString;
+            }
+        }
+
+        private string gmccConnString;
+        public string GMCCConnString
+        {
+            get
+            {
+                if (gmccConnString == null)
+                {
+                    gmccConnString = ConfigurationManager.ConnectionStrings["GMCCShareDB"].ToString();
+                }
+                return gmccConnString;
             }
         }
 

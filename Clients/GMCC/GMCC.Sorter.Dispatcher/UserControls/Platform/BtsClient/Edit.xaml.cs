@@ -19,6 +19,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GMCC.Sorter.Other;
 
 namespace GMCC.Sorter.Dispatcher.UserControls.Platform.BtsClient
 {
@@ -27,7 +28,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Platform.BtsClient
     /// </summary>
     public partial class Edit : UserControl
     {
-        private ShareDataViewModel ShareData;
+        private NewareDataViewModel ShareData;
 
         public Edit(int id)
         {

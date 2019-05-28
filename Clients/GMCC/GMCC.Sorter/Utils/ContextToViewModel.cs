@@ -1,4 +1,5 @@
 ﻿using GMCC.Sorter.Model;
+using GMCC.Sorter.Other;
 using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -31,14 +32,14 @@ namespace GMCC.Sorter.Utils
         }
 
 
-        public static ShareDataViewModel Convert(ShareData shareData)
+        public static NewareDataViewModel Convert(NewareData shareData)
         {
-            return new ShareDataViewModel(shareData.Id, shareData.Key, shareData.Value, shareData.Status, shareData.ProcTrayId, shareData.UpdateTime, shareData.Desc);
+            return new NewareDataViewModel(shareData.Id, shareData.Key, shareData.Value, shareData.Status, shareData.ProcTrayId, shareData.UpdateTime, shareData.Desc);
         }
 
-        public static List<ShareDataViewModel> Convert(List<ShareData> shareDatas)
+        public static List<NewareDataViewModel> Convert(List<NewareData> shareDatas)
         {
-            return shareDatas.ConvertAll<ShareDataViewModel>(o => new ShareDataViewModel(o.Id, o.Key, o.Value, o.Status, o.ProcTrayId, o.UpdateTime, o.Desc));
+            return shareDatas.ConvertAll<NewareDataViewModel>(o => new NewareDataViewModel(o.Id, o.Key, o.Value, o.Status, o.ProcTrayId, o.UpdateTime, o.Desc));
         }
     }
 }

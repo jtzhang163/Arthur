@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace GMCC.Sorter.Data
 {
     /// <summary>
-    /// 共享数据库上下文
+    /// Neware共享数据库上下文
     /// </summary>
-    public class ShareContext : DbContext
+    public class NewareContext : DbContext
     {
-        public ShareContext() : base(Current.Option.ShareConnString)
+        public NewareContext() : base(Current.Option.NewareConnString)
         {
         }
     }
