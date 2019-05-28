@@ -182,6 +182,28 @@ namespace GMCC.Sorter
                     return ContextToViewModel.Convert(data);
                 }
             }
-        } 
+        }
+
+        private static List<SortPackViewModel> sortPacks;
+        public static List<SortPackViewModel> SortPacks
+        {
+            get
+            {
+                if (sortPacks == null)
+                {
+                    sortPacks = new List<SortPackViewModel>();
+                    var random = new Random();
+                    for (int i = 0; i < 5; i++)
+                    {
+                        sortPacks.Add(new SortPackViewModel()
+                        {
+                            Type = string.Format("{0}档", i + 1),
+                            Count = random.Next(300)
+                        });
+                    }
+                }
+                return sortPacks;
+            }
+        }
     }
 }

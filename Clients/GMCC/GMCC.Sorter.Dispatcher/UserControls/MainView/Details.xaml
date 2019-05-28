@@ -38,6 +38,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="2*"/>
+                        <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -59,11 +60,13 @@
                     </Grid>
                     <Grid x:Name="jaw" Grid.Row="6" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="9">
                     </Grid>
-                    <Grid x:Name="bind_mach" Grid.Row="0" Grid.Column="11" Grid.RowSpan="13" Grid.ColumnSpan="2" Margin="20,20,20,0">
+                    <Grid x:Name="bind_mach" Grid.Row="0" Grid.Column="11" Grid.RowSpan="14" Grid.ColumnSpan="2" Margin="20,20,20,0">
                     </Grid>
-                    <Grid x:Name="unbind_mach" Grid.Row="0" Grid.Column="0" Grid.RowSpan="13" Grid.ColumnSpan="2" Margin="20,20,20,0">
+                    <Grid x:Name="unbind_mach" Grid.Row="0" Grid.Column="0" Grid.RowSpan="14" Grid.ColumnSpan="2" Margin="20,20,20,0">
                     </Grid>
-                    <Grid x:Name="current_task" Grid.Row="13" Grid.ColumnSpan="13" Margin="10">
+                    <Grid x:Name="sort_pack" Grid.Row="13" Grid.Column="2" Grid.ColumnSpan="9" Margin="0">
+                    </Grid>
+                    <Grid x:Name="current_task" Grid.Row="14" Grid.ColumnSpan="13" Margin="10">
                     </Grid>
                 </Grid>
             </DockPanel>

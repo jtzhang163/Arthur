@@ -98,6 +98,7 @@
     <Compile Include="ViewModel\BatteryViewModel.cs" />
     <Compile Include="ViewModel\ProductivityViewModel.cs" />
     <Compile Include="ViewModel\NewareDataViewModel.cs" />
+    <Compile Include="ViewModel\SortPackViewModel.cs" />
     <Compile Include="ViewModel\TrayScanerViewModel.cs" />
     <Compile Include="ViewModel\BatteryScanerViewModel.cs" />
     <Compile Include="ViewModel\MesViewModel.cs" />

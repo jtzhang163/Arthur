@@ -84,6 +84,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\SortPackControl.xaml.cs">
+      <DependentUpon>SortPackControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Machine\UnbindMachControl.xaml.cs">
       <DependentUpon>UnbindMachControl.xaml</DependentUpon>
     </Compile>
@@ -281,6 +284,10 @@
       <DependentUpon>RoleManageUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\Converter.cs" />
+    <Page Include="Controls\SortPackControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Machine\UnbindMachControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

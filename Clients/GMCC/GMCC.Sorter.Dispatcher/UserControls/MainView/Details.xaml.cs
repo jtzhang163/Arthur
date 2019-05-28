@@ -48,6 +48,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
 
             this.current_task.Children.Add(new CurrentTaskControl());
 
+            this.sort_pack.Children.Add(new SortPackControl());
+
             this.Timer = new System.Threading.Timer(new TimerCallback(this.CheckStorageStatus), null, 2000, 1000);
         }
 
