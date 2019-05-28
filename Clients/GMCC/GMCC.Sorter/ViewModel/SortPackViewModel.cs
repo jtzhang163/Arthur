@@ -13,6 +13,8 @@ namespace GMCC.Sorter.ViewModel
 
         private int count;
 
+        private int packId;
+
         public string Type
         {
             get => type;
@@ -28,6 +30,15 @@ namespace GMCC.Sorter.ViewModel
             set
             {
                 this.SetProperty(ref count, value);
+            }
+        }
+
+        public int PackId
+        {
+            get => packId;
+            set
+            {
+                this.SetProperty(ref packId, value);
             }
         }
     }

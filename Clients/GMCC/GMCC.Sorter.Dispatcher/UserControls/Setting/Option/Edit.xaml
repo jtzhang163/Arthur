@@ -37,6 +37,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200"/>
@@ -66,6 +67,9 @@
                         <RadioButton x:Name="taskPriorityType1" Content="层优先" GroupName="TaskPriorityType" IsChecked="{Binding TaskPriorityType,Mode=OneWay, Converter={StaticResource taskPriorityTypeToRadioButtonConverter},ConverterParameter=1}" Style="{StaticResource property_RadioButton}" Margin="10,0" VerticalAlignment="Center"/>
                         <RadioButton x:Name="taskPriorityType2" Content="列优先" GroupName="TaskPriorityType" IsChecked="{Binding TaskPriorityType,Mode=OneWay, Converter={StaticResource taskPriorityTypeToRadioButtonConverter},ConverterParameter=2}"  Style="{StaticResource property_RadioButton}" Margin="10,0" VerticalAlignment="Center"/>
                     </StackPanel>
+
+                    <Label Content="产品型号：" Grid.Row="9" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="product_model" Grid.Row="9" Grid.Column="1" Text="{Binding ProductModel, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

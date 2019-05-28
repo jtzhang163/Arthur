@@ -62,6 +62,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Setting.Option
             var jaw_traycode = this.jaw_traycode.Text.Trim();
             var still_timespan = this.still_timespan.Text.Trim();
 
+            var product_model = this.product_model.Text.Trim();
+
             tip.Background = new SolidColorBrush(Colors.Red);
 
             try
@@ -87,6 +89,8 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Setting.Option
                 Current.Option.JawProcTrayId = GetObject.GetByCode<ProcTray>(jaw_traycode).Id;
                 Current.Option.StillTimeSpan = Convert.ToInt32(still_timespan);
                 Current.Option.TaskPriorityType = GetTaskPriorityType();
+
+                Current.Option.ProductModel = product_model;
 
                 tip.Background = new SolidColorBrush(Colors.Green);
                 tip.Text = "修改信息成功！";

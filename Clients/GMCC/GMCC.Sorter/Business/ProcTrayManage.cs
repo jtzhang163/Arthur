@@ -53,6 +53,7 @@ namespace GMCC.Sorter.Business
                         Code = procTray.Code,
                         ScanTime = DateTime.Now,
                         StartStillTime = DateTime.Now,//Arthur.Default.DateTime
+                        Model = Current.Option.ProductModel
                     });
 
                     db.SaveChanges();

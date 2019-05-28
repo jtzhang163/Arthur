@@ -979,5 +979,36 @@ namespace GMCC.Sorter
         public bool isAlreadyUnbindTrayScan { get; set; }
         #endregion
 
+
+        private string productModel;
+
+        /// <summary>
+        /// 当前产品型号
+        /// </summary>
+        public string ProductModel
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(productModel))
+                {
+                    productModel = Arthur.App.Business.Setting.GetOption("ProductModel");
+                    if (string.IsNullOrEmpty(productModel))
+                    {
+                        productModel = "unknown";
+                        Arthur.App.Business.Setting.SetOption("ProductModel", productModel, "当前产品型号");
+                    }
+                }
+                return productModel;
+            }
+            set
+            {
+                if (productModel != value)
+                {
+                    Arthur.App.Business.Setting.SetOption("ProductModel", value);
+                    Arthur.App.Business.Logging.AddOplog(string.Format("配置. 当前产品型号: [{0}] 修改为 [{1}]", productModel, value), Arthur.App.Model.OpType.编辑);
+                    this.SetProperty(ref productModel, value);
+                }
+            }
+        }
     }
 }

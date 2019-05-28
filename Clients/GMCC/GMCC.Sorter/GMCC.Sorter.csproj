@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\OrderManage.cs" />
+    <Compile Include="Business\PackManage.cs" />
     <Compile Include="Business\ProcTrayManage.cs" />
     <Compile Include="Business\BatteryManage.cs" />
     <Compile Include="Business\TaskManage.cs" />
@@ -67,10 +68,15 @@
     <Compile Include="Migrations\201905190949556_GMCC_Init.Designer.cs">
       <DependentUpon>201905190949556_GMCC_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905281420329_GMCC_AddPack.cs" />
+    <Compile Include="Migrations\201905281420329_GMCC_AddPack.Designer.cs">
+      <DependentUpon>201905281420329_GMCC_AddPack.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\BatteryScaner.cs" />
     <Compile Include="Model\MES.cs" />
     <Compile Include="Model\PLC.cs" />
+    <Compile Include="Model\Pack.cs" />
     <Compile Include="Model\ProcTray.cs" />
     <Compile Include="Model\Storage.cs" />
     <Compile Include="Model\CurrentTask.cs" />
@@ -122,6 +128,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201905190949556_GMCC_Init.resx">
       <DependentUpon>201905190949556_GMCC_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905281420329_GMCC_AddPack.resx">
+      <DependentUpon>201905281420329_GMCC_AddPack.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

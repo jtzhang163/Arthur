@@ -21,6 +21,12 @@ namespace Arthur.App.Model
         public string Code { get; set; }
 
         /// <summary>
+        /// 型号
+        /// </summary>
+        [MaxLength(50)]
+        public string Model { get; set; }
+
+        /// <summary>
         /// 位置
         /// </summary>
         public int Pos { get; set; }

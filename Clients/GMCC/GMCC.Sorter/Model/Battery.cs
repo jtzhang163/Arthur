@@ -16,9 +16,28 @@ namespace GMCC.Sorter.Model
         public int ProcTrayId { get; set; }
 
         /// <summary>
+        /// 所在包装
+        /// </summary>
+        public int PackId { get; set; }
+
+        public decimal CAP { get; set; }
+
+        public decimal ESR { get; set; }
+
+        /// <summary>
         /// 分选结果
         /// </summary>
         public SortResult SortResult { get; set; } = SortResult.Unknown;
+
+        /// <summary>
+        /// 打包状态
+        /// </summary>
+        public PackStatus PackStatus { get; set; } = PackStatus.未知;
+
+        /// <summary>
+        /// 上传状态
+        /// </summary>
+        public bool IsUploaded { get; set; }
     }
 
     /// <summary>
@@ -46,5 +65,17 @@ namespace GMCC.Sorter.Model
         CNG = 8,
         [Description("其他不良")]
         UNG = 9,
+    }
+
+    /// <summary>
+    /// 打包状态
+    /// </summary>
+    public enum PackStatus
+    {
+        未知 = 0,
+        未打包 = 1,
+        打包中 = 2,
+        打包完 = 3,
+        不良品 = 4
     }
 }

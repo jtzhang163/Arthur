@@ -1,7 +1,9 @@
 ﻿using Arthur.App.Comm;
 using Arthur.App.ViewModel;
+using GMCC.Sorter.Business;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Other;
+using GMCC.Sorter.Run;
 using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
 using System;
@@ -195,10 +197,24 @@ namespace GMCC.Sorter
                     var random = new Random();
                     for (int i = 0; i < 5; i++)
                     {
+                        var packId = 0;
+                        var count = 0;
+                        var ret = PackManage.GetCurrentPackId((Model.SortResult)(i + 1));
+                        if (ret.IsOk)
+                        {
+                            packId = (int)ret.Data;
+                            count = PackManage.GetPackCount(packId);
+                        }
+                        else
+                        {
+                            Running.ShowErrorMsg(ret.Msg);
+                        }
+
                         sortPacks.Add(new SortPackViewModel()
                         {
                             Type = string.Format("{0}档", i + 1),
-                            Count = random.Next(300)
+                            Count = count,
+                            PackId = packId
                         });
                     }
                 }

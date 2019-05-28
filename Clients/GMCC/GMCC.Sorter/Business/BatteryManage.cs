@@ -42,7 +42,13 @@ namespace GMCC.Sorter.Business
                         ScanTime = DateTime.Now,
                         ProcTrayId = Current.Option.Tray11_Id,
                         Pos = ProcTrayManage.GetBatteryCount(Current.Option.Tray11_Id) + 1,
-                        SortResult = SortResult.Unknown
+                        SortResult = SortResult.Unknown,
+                        Model = Current.Option.ProductModel,
+                        IsUploaded = false,
+                        PackId = 0,
+                        PackStatus = PackStatus.未打包,
+                        CAP = 0,
+                        ESR = 0
                     });
                     db.SaveChanges();
                 }

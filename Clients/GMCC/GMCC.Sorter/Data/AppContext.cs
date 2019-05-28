@@ -24,6 +24,7 @@ namespace GMCC.Sorter.Data
 
             modelBuilder.Entity<Battery>().ToTable("t_battery");
             modelBuilder.Entity<ProcTray>().ToTable("t_proc_tray");
+            modelBuilder.Entity<Pack>().ToTable("t_pack");
 
             modelBuilder.Entity<BatteryScaner>().ToTable("t_battery_scaner");
             modelBuilder.Entity<TrayScaner>().ToTable("t_tray_scaner");
@@ -40,6 +41,7 @@ namespace GMCC.Sorter.Data
 
         public DbSet<Battery> Batteries { get; set; }
         public DbSet<ProcTray> ProcTrays { get; set; }
+        public DbSet<Pack> Packs { get; set; }
 
         public DbSet<MES> MESs { get; set; }
         public DbSet<PLC> PLCs { get; set; }

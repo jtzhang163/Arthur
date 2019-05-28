@@ -33,7 +33,7 @@
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="分选结果OK打包计数：" FontSize="14" FontWeight="Bold" VerticalAlignment="Bottom" Foreground="Black"/>
+        <TextBlock Text="分选结果OK打包计数：" FontSize="14" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="Black"/>
         <ListBox Name="sort_pack_list" Background="Transparent" Grid.Row="1" BorderThickness="0">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>

@@ -77,6 +77,16 @@ namespace GMCC.Sorter.Run
             TimerExec.IsRunning = false;
         }
 
+        public static void StopRunAndShowMsg(Exception ex)
+        {
+            Current.MainMachine.Commor.Write("D437", (ushort)1);
+            Current.App.ErrorMsg = string.Format("[{0}] {1}", DateTime.Now.ToString("M/d HH:mm:ss"), ex.Message);
+            Arthur.App.Business.Logging.AddEvent(ex.Message, Arthur.App.Model.EventType.错误);
+            LogHelper.WriteError("【严重异常】" + ex.ToString());
+            Current.App.RunStatus = RunStatus.异常;
+            TimerExec.IsRunning = false;
+        }
+
         public static void ShowErrorMsg(string msg)
         {
             Current.App.ErrorMsg = string.Format("[{0}] {1}", DateTime.Now.ToString("M/d HH:mm:ss"), msg);
