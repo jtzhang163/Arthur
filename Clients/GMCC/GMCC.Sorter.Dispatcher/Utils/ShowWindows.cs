@@ -26,5 +26,20 @@ namespace GMCC.Sorter.Dispatcher.Utils
             win.Content = new TrayBatteryControl(procTrayId);
             win.ShowDialog();
         }
+
+        public static void NgBatteryOutFromPack()
+        {
+
+            var win = new Window()
+            {
+                Height = 300,
+                Width = 600,
+                ResizeMode = ResizeMode.NoResize,
+                WindowStartupLocation = WindowStartupLocation.CenterScreen,
+                Title = "移除不良品"
+            };
+            win.Content = new NgBatteryOutFromPackControl();
+            win.ShowDialog();
+        }
     }
 }

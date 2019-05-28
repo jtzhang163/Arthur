@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GMCC.Sorter.Other;
+using Arthur.App.Model;
 
 namespace GMCC.Sorter.Business
 {
@@ -90,6 +91,41 @@ namespace GMCC.Sorter.Business
                     {
                         return new Result("远程数据库中不包含腔体测试结果，code：" + code);
                     }
+                }
+                catch (Exception ex)
+                {
+                    return new Result(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 不良品电池从包中移除
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
+        public static Result NgBatteryOutFromPack(string code)
+        {
+            using (var db = new Data.AppContext())
+            {
+                try
+                {
+                    var battery = db.Batteries.Where(o => o.Code == code).OrderByDescending(o => o.Id).FirstOrDefault();
+                    if (battery == null)
+                    {
+                        return new Result("系统中不存在电池：" + code);
+                    }
+                    if (battery.PackStatus == PackStatus.不良品)
+                    {
+                        return new Result("该电池已经被移除");
+                    }
+                    battery.PackStatus = PackStatus.不良品;
+                    battery.PackId = 0;
+                    if (db.SaveChanges() > 0)
+                    {
+                        Arthur.App.Business.Logging.AddOplog("不良品电池从包中移除" + code,  OpType.编辑);
+                    }
+                    return Result.OK;
                 }
                 catch (Exception ex)
                 {

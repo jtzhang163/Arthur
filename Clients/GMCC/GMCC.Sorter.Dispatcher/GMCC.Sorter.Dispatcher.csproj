@@ -105,6 +105,9 @@
     <Compile Include="Controls\ScanerSignalControl.xaml.cs">
       <DependentUpon>ScanerSignalControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NgBatteryOutFromPackControl.xaml.cs">
+      <DependentUpon>NgBatteryOutFromPackControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\TrayBatteryControl.xaml.cs">
       <DependentUpon>TrayBatteryControl.xaml</DependentUpon>
     </Compile>
@@ -309,6 +312,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\ScanerSignalControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NgBatteryOutFromPackControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

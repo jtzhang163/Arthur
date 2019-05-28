@@ -30,6 +30,13 @@ namespace GMCC.Sorter.Utils
                     obj = db.ProcTrays.SingleOrDefault(o => o.Id == id) ?? new ProcTray();
                 }
             }
+            else if (typeof(T).Name == "Pack")
+            {
+                using (var db = new Data.AppContext())
+                {
+                    obj = db.Packs.SingleOrDefault(o => o.Id == id) ?? new Pack();
+                }
+            }
             else if (typeof(T).Name == "StorageViewModel")
             {
                 obj = Current.Storages.SingleOrDefault(o => o.Id == id);
@@ -45,14 +52,21 @@ namespace GMCC.Sorter.Utils
             {
                 using (var db = new Data.AppContext())
                 {
-                    obj = db.Batteries.Where(o => o.Code == code).OrderByDescending(o => o.ScanTime).FirstOrDefault() ?? new Battery();
+                    obj = db.Batteries.Where(o => o.Code == code).OrderByDescending(o => o.Id).FirstOrDefault() ?? new Battery();
                 }
             }
             else if (typeof(T).Name == "ProcTray")
             {
                 using (var db = new Data.AppContext())
                 {
-                    obj = db.ProcTrays.Where(o => o.Code == code).OrderByDescending(o => o.ScanTime).FirstOrDefault() ?? new ProcTray();
+                    obj = db.ProcTrays.Where(o => o.Code == code).OrderByDescending(o => o.Id).FirstOrDefault() ?? new ProcTray();
+                }
+            }
+            else if (typeof(T).Name == "Pack")
+            {
+                using (var db = new Data.AppContext())
+                {
+                    obj = db.Packs.Where(o => o.Code == code).OrderByDescending(o => o.Id).FirstOrDefault() ?? new Pack();
                 }
             }
             return (T)obj;

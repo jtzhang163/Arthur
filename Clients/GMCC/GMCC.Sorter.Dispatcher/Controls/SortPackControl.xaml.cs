@@ -1,4 +1,5 @@
-﻿using GMCC.Sorter.Extensions;
+﻿using GMCC.Sorter.Dispatcher.Utils;
+using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Model;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,11 @@ namespace GMCC.Sorter.Dispatcher.Controls
         {
             InitializeComponent();
             this.sort_pack_list.ItemsSource = Current.SortPacks;
+        }
+
+        private void btnNgBatteryOutFromPack_Click(object sender, RoutedEventArgs e)
+        {
+            ShowWindows.NgBatteryOutFromPack();
         }
     }
 }

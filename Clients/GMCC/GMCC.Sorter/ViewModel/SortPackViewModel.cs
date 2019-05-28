@@ -1,4 +1,5 @@
 ﻿using Arthur.App;
+using GMCC.Sorter.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,8 @@ namespace GMCC.Sorter.ViewModel
 {
     public class SortPackViewModel : BindableObject
     {
+        private SortResult sortResult = SortResult.Unknown; 
+
         private string type;
 
         private int count;
@@ -39,6 +42,15 @@ namespace GMCC.Sorter.ViewModel
             set
             {
                 this.SetProperty(ref packId, value);
+            }
+        }
+
+        public SortResult SortResult
+        {
+            get => sortResult;
+            set
+            {
+                this.SetProperty(ref sortResult, value);
             }
         }
     }

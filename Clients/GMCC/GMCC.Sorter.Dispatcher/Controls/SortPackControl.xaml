@@ -51,7 +51,7 @@
         </ListBox>
 
         <TextBlock Text="手动操作：" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" VerticalAlignment="Bottom" Foreground="Black"/>
-        <Button Content="剔除不良" Grid.Column="1" Grid.Row="1" Style="{StaticResource ChamferButton}" Width="80" HorizontalAlignment="Right" Margin="0,0,5,0"></Button>
+        <Button Content="移除不良" Grid.Column="1" Grid.Row="1" Style="{StaticResource ChamferButton}" Width="80" HorizontalAlignment="Right" Margin="0,0,5,0" Click="btnNgBatteryOutFromPack_Click"></Button>
         <Button Content="生成二维码" Grid.Column="2" Grid.Row="1" Style="{StaticResource ChamferButton}" Width="80" HorizontalAlignment="Left" Margin="5,0,0,0"></Button>
     </Grid>
 </UserControl>

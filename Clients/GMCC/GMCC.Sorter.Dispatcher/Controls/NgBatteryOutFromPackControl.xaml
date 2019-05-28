@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="GMCC.Sorter.Dispatcher.Controls.NgBatteryOutFromPackControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GMCC.Sorter.Dispatcher.Controls"
+             xmlns:utils="clr-namespace:Arthur.App.View.Utils;assembly=Arthur.App.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Style/Style.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <DockPanel>
+        <TextBlock x:Name="tip" Foreground="White" Background="Red" DockPanel.Dock="Bottom" FontSize="20" Text="错误提示" Visibility="Collapsed"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="电池条码：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+            <TextBox x:Name="battery_code" Grid.Row="0" Grid.Column="1" Text="{Binding Company, Mode=OneWay}" Style="{StaticResource property_TextBox}" KeyDown="Battery_code_KeyDown" GotFocus="Battery_code_GotFocus"/>
+            <Label Content="分选结果：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+            <Label x:Name="sort_result" Grid.Row="1" Grid.Column="1" Style="{StaticResource property_Label}"/>
+            <Label Content="所在箱体：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+            <Label x:Name="pack_code" Grid.Row="2" Grid.Column="1" Style="{StaticResource property_Label}"/>
+            <Label Content="箱体电池数：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+            <Label x:Name="pack_battery_count" Grid.Row="3" Grid.Column="1" Style="{StaticResource property_Label}"/>
+            <Button x:Name="btnConfirm" Grid.Row="4" Grid.Column="1" Content="确定移除" Style="{StaticResource ChamferButton}" Click="btnConfirm_Click" />
+        </Grid>
+    </DockPanel>
+</UserControl>
