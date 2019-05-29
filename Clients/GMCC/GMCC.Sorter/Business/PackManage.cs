@@ -9,6 +9,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GMCC.Sorter.ViewModel;
 
 namespace GMCC.Sorter.Business
 {
@@ -83,6 +84,23 @@ namespace GMCC.Sorter.Business
             }
 
             return count;
+        }
+
+        public static Result Finish(SortPackViewModel sortPack)
+        {
+            var result = BatteryManage.SetPackFinish(sortPack.PackId);
+            if (result.IsFailed)
+            {
+                return result;
+            }
+
+            //生成二维码
+            result = QRCoderManage.Create(sortPack.PackId);
+            if (result.IsSucceed)
+            {
+                sortPack.PackId = 0;
+            }
+            return result;
         }
     }
 }

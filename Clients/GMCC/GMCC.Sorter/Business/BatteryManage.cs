@@ -49,7 +49,8 @@ namespace GMCC.Sorter.Business
                         PackId = 0,
                         PackStatus = PackStatus.未打包,
                         CAP = 0,
-                        ESR = 0
+                        ESR = 0,
+                        TestTime = DateTime.Now
                     });
                     db.SaveChanges();
                 }
@@ -105,7 +106,7 @@ namespace GMCC.Sorter.Business
             using (var db = new GMCCContext())
             {
                 var sql = string.Format("INSERT INTO AutoSorting (CaseNumber, BarCode, CAP, ESR, TestDate, UserID, UserName) VALUES ('{0}', '{1}', {2}, {3}, '{4}', {5}, '{6}')",
-                   GetObject.GetById<Pack>(battery.PackId).Code, battery.Code, battery.CAP, battery.ESR, DateTime.Now, Current.User.Id, Current.User.Name);
+                   GetObject.GetById<Pack>(battery.PackId).Code, battery.Code, battery.CAP, battery.ESR, battery.TestTime, Current.User.Id, Current.User.Name);
                 try
                 {
                     if (db.Database.ExecuteSqlCommand(sql) > 0)
@@ -193,7 +194,6 @@ namespace GMCC.Sorter.Business
                 }
             }
         }
-
 
         public static Result GetFillBatteryCount(int packId)
         {
@@ -288,6 +288,8 @@ namespace GMCC.Sorter.Business
                     }
                     battery.CAP = testResult.CAP;
                     battery.ESR = testResult.CAP;
+                    battery.TestTime = testResult.UpdateTime;
+
                     db.SaveChanges();
                     return Result.Success;
                 }

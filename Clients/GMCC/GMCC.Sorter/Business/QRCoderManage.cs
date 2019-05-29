@@ -14,6 +14,11 @@ namespace GMCC.Sorter.Business
     public class QRCoderManage
     {
 
+        public static string GetSaveQRCodeDirPath(SortResult sortResult)
+        {
+            return Current.Option.SaveQRCodeBaseDirectory + string.Format("{0}\\{1}", sortResult, DateTime.Now.ToString("yyyyMM"));
+        }
+
         public static Result Create(int packId)
         {
             var pack = GetObject.GetById<Pack>(packId);
@@ -30,7 +35,7 @@ namespace GMCC.Sorter.Business
             }
             var bimg = (Bitmap)result.Data;
 
-            var dirPath = string.Format("D:\\GMCC.Sorter\\QRCODE_FILES\\{0}\\{1}", pack.SortResult, DateTime.Now.ToString("yyyyMM"));
+            var dirPath = GetSaveQRCodeDirPath(pack.SortResult);
 
             if (!Directory.Exists(dirPath))
                 Directory.CreateDirectory(dirPath);

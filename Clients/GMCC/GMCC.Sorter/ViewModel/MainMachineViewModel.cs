@@ -178,6 +178,11 @@ namespace GMCC.Sorter.ViewModel
             //新建箱体
             if (sortPack.PackId == 0 || fillCount == Current.Option.PACK_FILL_COUNT)
             {
+                if (fillCount == Current.Option.PACK_FILL_COUNT)
+                {
+                    PackManage.Finish(sortPack);
+                }
+
                 var code = ""; //箱体号
                 result = new PackManage().Create(new Pack(code, sortResult));
                 if (result.IsFailed)
@@ -204,23 +209,6 @@ namespace GMCC.Sorter.ViewModel
                 }
             }
 
-            if (sortPack.Count == Current.Option.PACK_FILL_COUNT)
-            {
-                result = BatteryManage.SetPackFinish(sortPack.PackId);
-                if (result.IsFailed)
-                {
-                    return;
-                }
-
-                //生成二维码
-                result = QRCoderManage.Create(sortPack.PackId);
-                if (result.IsFailed)
-                {
-                    Running.ShowErrorMsg(result.Msg);
-                    return;
-                }
-
-            }
         }
     }
 }

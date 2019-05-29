@@ -2,6 +2,8 @@
 using GMCC.Sorter.Dispatcher.Utils;
 using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Model;
+using GMCC.Sorter.Run;
+using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,10 +37,33 @@ namespace GMCC.Sorter.Dispatcher.Controls
             ShowWindows.NgBatteryOutFromPack();
         }
 
-        private void btnCreateQRCode_Click(object sender, RoutedEventArgs e)
+        private void btnFinishPack_Click(object sender, RoutedEventArgs e)
         {
-            //var result = QRCoderManage.Create(1);
+            var sortPack = (SortPackViewModel)sort_pack_list.SelectedItem;
+            if (sortPack == null)
+            {
+                Running.ShowErrorMsg("请选中要打包的类型！");
+                return;
+            }
 
+            var text = string.Format("当前您选中的打包类型为：{0}, 箱体中包含电池个数：{1}\r\n确定要结束打包?", sortPack.SortResult, sortPack.Count);
+            if (MessageBox.Show(text, "结束打包确认", MessageBoxButton.OKCancel) != MessageBoxResult.OK)
+            {
+                return;
+            }
+
+            PackManage.Finish(sortPack);
+
+            //打开保存二维码的文件夹
+            var dirPath = QRCoderManage.GetSaveQRCodeDirPath(sortPack.SortResult);
+            try
+            {
+                System.Diagnostics.Process.Start(dirPath);
+            }
+            catch(Exception ex)
+            {
+                Running.ShowErrorMsg(ex.Message);
+            }
         }
     }
 }
