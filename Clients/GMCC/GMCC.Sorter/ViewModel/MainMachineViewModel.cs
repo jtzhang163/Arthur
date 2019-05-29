@@ -18,54 +18,8 @@ namespace GMCC.Sorter.ViewModel
     /// <summary>
     /// 主设备
     /// </summary>
-    public sealed class MainMachineViewModel : CommorViewModel
+    public sealed class MainMachineViewModel : EthernetCommorViewModel
     {
-
-        private string ip = null;
-        public string IP
-        {
-            get
-            {
-                if (ip == null)
-                {
-                    ip = ((EthernetCommor)this.Commor.Communicator).IP;
-                }
-                return ip;
-            }
-            set
-            {
-                if (ip != value)
-                {
-                    ((EthernetCommor)this.Commor.Communicator).IP = value;
-                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0} IP地址: [{1}] 修改为 [{2}]", Name, ip, value), Arthur.App.Model.OpType.编辑);
-                    SetProperty(ref ip, value);
-                    this.CommorInfo = null;
-                }
-            }
-        }
-
-        private int? port = null;
-        public int Port
-        {
-            get
-            {
-                if (port == null)
-                {
-                    port = ((EthernetCommor)this.Commor.Communicator).Port;
-                }
-                return port.Value;
-            }
-            set
-            {
-                if (port != value)
-                {
-                    ((EthernetCommor)this.Commor.Communicator).Port = value;
-                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0} 端口: [{1}] 修改为 [{2}]", Name, port, value), Arthur.App.Model.OpType.编辑);
-                    SetProperty(ref port, value);
-                    this.CommorInfo = null;
-                }
-            }
-        }
 
         public void SendCommand(JawMoveInfo toMoveInfo)
         {

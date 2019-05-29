@@ -98,6 +98,9 @@
     <Compile Include="Other\JawMoveInfo.cs" />
     <Compile Include="Other\NewareData.cs" />
     <Compile Include="ViewModel\AppViewModel.cs" />
+    <Compile Include="ViewModel\Base\IScanerViewModel.cs" />
+    <Compile Include="ViewModel\Base\SerialCommorViewModel.cs" />
+    <Compile Include="ViewModel\Base\EthernetCommorViewModel.cs" />
     <Compile Include="ViewModel\Base\CommorViewModel.cs" />
     <Compile Include="ViewModel\CurrentTaskViewModel.cs" />
     <Compile Include="ViewModel\ProcTrayViewModel.cs" />

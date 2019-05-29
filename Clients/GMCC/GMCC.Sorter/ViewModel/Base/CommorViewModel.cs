@@ -19,7 +19,7 @@ namespace GMCC.Sorter.ViewModel
 
         public int Id => this.Commor.Communicator.Id;
 
-        public Commor Commor { get; private set; }
+        public Commor Commor { get; set; }
 
         public CommorViewModel(Commor commor)
         {
@@ -201,7 +201,6 @@ namespace GMCC.Sorter.ViewModel
                 }
             }
         }
-
 
 
         private string serialNumber = null;

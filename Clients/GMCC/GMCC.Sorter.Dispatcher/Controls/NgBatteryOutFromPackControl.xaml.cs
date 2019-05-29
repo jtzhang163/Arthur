@@ -97,6 +97,10 @@ namespace GMCC.Sorter.Dispatcher.Controls
                     }
                 }
             }
+            else
+            {
+                tip.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void Battery_code_GotFocus(object sender, RoutedEventArgs e)

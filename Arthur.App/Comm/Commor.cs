@@ -26,18 +26,18 @@ namespace Arthur.App.Comm
         public Commor(Communicator communicator)
         {
             this.Communicator = communicator;
-            if(this.Communicator is SerialCommor)
-            {
-                var serialCommor = (SerialCommor)this.Communicator;
-            }
-            else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
-            {
-                var ethernetCommor = (EthernetCommor)this.Communicator;
-            }
-            else if (this.Communicator is EthernetCommor)
-            {
-                var ethernetCommor = (EthernetCommor)this.Communicator;
-            }
+            //if(this.Communicator is SerialCommor)
+            //{
+            //    var serialCommor = (SerialCommor)this.Communicator;
+            //}
+            //else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
+            //{
+            //    var ethernetCommor = (EthernetCommor)this.Communicator;
+            //}
+            //else if (this.Communicator is EthernetCommor)
+            //{
+            //    var ethernetCommor = (EthernetCommor)this.Communicator;
+            //}
         }
 
         public Result Connect()
