@@ -213,7 +213,7 @@ namespace GMCC.Sorter
                         sortPacks.Add(new SortPackViewModel()
                         {
                             SortResult = (Model.SortResult)(i + 1),
-                            Type = string.Format("{0}档", i + 1),
+                            Name = string.Format("{0}档", i + 1),
                             Count = count,
                             PackId = packId
                         });

@@ -35,9 +35,14 @@ namespace GMCC.Sorter.Model
         public PackStatus PackStatus { get; set; } = PackStatus.未知;
 
         /// <summary>
-        /// 上传状态
+        /// 是否已上传
         /// </summary>
         public bool IsUploaded { get; set; }
+
+        /// <summary>
+        /// 测试时间
+        /// </summary>
+        public DateTime TestTime { get; set; }
     }
 
     /// <summary>

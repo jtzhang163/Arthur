@@ -1,7 +1,9 @@
 ﻿using Arthur.App;
 using Arthur.App.Comm;
 using Arthur.App.Model;
+using GMCC.Sorter.Business;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,35 +15,8 @@ namespace GMCC.Sorter.ViewModel
     /// <summary>
     /// 主设备
     /// </summary>
-    public sealed class MesViewModel : CommorViewModel
+    public sealed class MesViewModel : ServerCommorViewModel
     {
-
-        private string host = null;
-        public string Host
-        {
-            get
-            {
-                host = ((Server)this.Commor.Communicator).Host;
-                return host;
-            }
-            set
-            {
-                if (host != value)
-                {
-                    using (var db = new Data.AppContext())
-                    {
-                        if (Current.Mes == this)
-                        {
-                            db.MESs.FirstOrDefault(o => o.Id == this.Id).Host = value;
-                        }
-                        db.SaveChanges();
-                    }
-                    Arthur.App.Business.Logging.AddOplog(string.Format("交互平台. MES: [{0}] 修改为 [{1}]", host, value), Arthur.App.Model.OpType.编辑);
-                    SetProperty(ref host, value);
-                    this.CommorInfo = null;
-                }
-            }
-        }
 
         public MesViewModel(Commor commor) : base(commor)
         {
@@ -50,18 +25,27 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
-            if (this.Commor.Connected)
+            lock (this)
             {
-                if (this.Commor.Comm("").IsOk)
+                if (BatteryManage.GetFirstBatteryNotUpload(out Battery battery).IsOk)
                 {
+                    this.CommorInfo = "获取测试数据" + battery.Code;
+                    var result = BatteryManage.GetAndSaveTestResult(battery);
+                    if (result.IsFailed)
+                    {
+                        return;
+                    }
+                    this.CommorInfo = "开始上传：" + battery.Code;
 
+                    result = BatteryManage.GetAndSaveTestResult(battery);
+                    if (result.IsFailed)
+                    {
+                        return;
+                    }
+                    this.CommorInfo = "上传完成：" + battery.Code;
                 }
-                this.IsAlive = true;
             }
-            else
-            {
-                this.IsAlive = false;
-            }
+            this.IsAlive = true;
         }
     }
 }

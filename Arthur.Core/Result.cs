@@ -24,6 +24,22 @@ namespace Arthur.Core
             }
         }
 
+        public bool IsSucceed
+        {
+            get
+            {
+                return this.Code == 0;
+            }
+        }
+
+        public bool IsFailed
+        {
+            get
+            {
+                return this.Code != 0;
+            }
+        }
+
         public Result()
         {
 
@@ -58,6 +74,14 @@ namespace Arthur.Core
         }
 
         public static Result OK
+        {
+            get
+            {
+                return new Result(0, string.Empty);
+            }
+        }
+
+        public static Result Success
         {
             get
             {

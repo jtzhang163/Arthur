@@ -12,8 +12,39 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.Business
 {
-    public sealed class PackManage
+    public sealed class PackManage : IManage<Pack>
     {
+        public Result Create(Pack pack)
+        {      
+            try
+            {
+                var id = -1;
+                using (var db = new Data.AppContext())
+                {
+                    var _pack = db.Packs.FirstOrDefault(o => o.Code == pack.Code);
+                    if (_pack == null)
+                    {
+                        _pack = db.Packs.Add(new Pack()
+                        {
+                            Code = pack.Code,
+                            Model = Current.Option.ProductModel,
+                            ScanTime = DateTime.Now,
+                            SortResult = pack.SortResult
+                        });
+                        db.SaveChanges();
+                    }
+                    id = _pack.Id;
+                }
+
+                Arthur.App.Business.Logging.AddOplog(string.Format("新增箱体[{0}]", pack.Code), Arthur.App.Model.OpType.创建);
+    
+                return Result.OkHasData(id);
+            }
+            catch (Exception ex)
+            {
+                return new Result(ex);
+            }
+        }
         public static Result GetCurrentPackId(SortResult sortResult)
         {
             try

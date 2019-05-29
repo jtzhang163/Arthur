@@ -151,7 +151,6 @@ namespace Arthur.App.View.Tool.QRCoder
                 }
                 catch (Exception ex)
                 {
-                    Arthur.Core.Coder.QRCoder.SaveQRCode(bimg, saveDialog.FileName);
                     tip.Background = new SolidColorBrush(Colors.Red);
                     tip.Text = "保存二维码出错！";
                     tip.Visibility = Visibility.Visible;

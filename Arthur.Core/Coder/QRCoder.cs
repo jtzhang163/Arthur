@@ -25,8 +25,8 @@ namespace Arthur.Core.Coder
             try
             {
                 qrEncoder.QRCodeEncodeMode = QRCodeEncoder.ENCODE_MODE.BYTE;
-                qrEncoder.QRCodeScale = Convert.ToInt32(scale);
-                qrEncoder.QRCodeVersion = Convert.ToInt32(version);
+                qrEncoder.QRCodeScale = scale;
+                qrEncoder.QRCodeVersion = version;
                 qrEncoder.QRCodeErrorCorrect = QRCodeEncoder.ERROR_CORRECTION.M;
 
                 Bitmap qrcode = qrEncoder.Encode(content, Encoding.UTF8);
@@ -54,16 +54,26 @@ namespace Arthur.Core.Coder
         /// 保存二维码，并为二维码添加白色背景。
         /// </summary>
         /// <param name="path"></param>
-        public static void SaveQRCode(Bitmap bimg, string path)
+        public static Result SaveQRCode(Bitmap bimg, string path)
         {
-            if (bimg != null)
+            try
             {
-                Bitmap bitmap = new Bitmap(bimg.Width + 30, bimg.Height + 30);
-                Graphics g = Graphics.FromImage(bitmap);
-                g.FillRectangle(System.Drawing.Brushes.White, 0, 0, bitmap.Width, bitmap.Height);
-                g.DrawImage(bimg, new PointF(15, 15));
-                bitmap.Save(path, System.Drawing.Imaging.ImageFormat.Png);
-                bitmap.Dispose();
+                if (bimg != null)
+                {
+                    Bitmap bitmap = new Bitmap(bimg.Width + 30, bimg.Height + 30);
+                    Graphics g = Graphics.FromImage(bitmap);
+                    g.FillRectangle(System.Drawing.Brushes.White, 0, 0, bitmap.Width, bitmap.Height);
+                    g.DrawImage(bimg, new PointF(15, 15));
+                    bitmap.Save(path, System.Drawing.Imaging.ImageFormat.Png);
+                    bitmap.Dispose();
+
+                    return Result.Success;
+                }
+                return new Result("生成二维码出错：传入图像为空");
+            }
+            catch (Exception ex)
+            {
+                return new Result("生成二维码出错", ex);
             }
         }
     }

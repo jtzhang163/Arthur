@@ -531,7 +531,7 @@ namespace GMCC.Sorter
                 {
                     if (this.Tray23_Id > 0)
                     {
-                        //this.Tray23_PreId = this.Tray23_Id;
+                        this.Tray23_PreId = this.Tray23_Id;
                         this.Tray23_Id = 0;
                     }
                 }
@@ -888,34 +888,34 @@ namespace GMCC.Sorter
         }
 
 
-        //private int tray23_PreId = -2;
-        ///// <summary>
-        ///// 分选位流程托盘原ID
-        ///// </summary>
-        //public int Tray23_PreId
-        //{
-        //    get
-        //    {
-        //        if (tray23_PreId == -2)
-        //        {
-        //            tray23_PreId = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Application.GetOption("Tray23_PreId"), -1);
-        //            if (tray23_PreId == -1)
-        //            {
-        //                tray23_PreId = 0;
-        //                Arthur.App.Business.Application.SetOption("Tray23_PreId", tray23_PreId.ToString(), "分选位流程托盘原ID");
-        //            }
-        //        }
-        //        return tray23_PreId;
-        //    }
-        //    set
-        //    {
-        //        if (tray23_PreId != value)
-        //        {
-        //            Arthur.App.Business.Application.SetOption("Tray23_PreId", value.ToString());
-        //            SetProperty(ref tray23_PreId, value);
-        //        }
-        //    }
-        //}
+        private int tray23_PreId = -2;
+        /// <summary>
+        /// 分选位流程托盘原ID
+        /// </summary>
+        public int Tray23_PreId
+        {
+            get
+            {
+                if (tray23_PreId == -2)
+                {
+                    tray23_PreId = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("Tray23_PreId"), -1);
+                    if (tray23_PreId == -1)
+                    {
+                        tray23_PreId = 0;
+                        Arthur.App.Business.Setting.SetOption("Tray23_PreId", tray23_PreId.ToString(), "分选位流程托盘原ID");
+                    }
+                }
+                return tray23_PreId;
+            }
+            set
+            {
+                if (tray23_PreId != value)
+                {
+                    Arthur.App.Business.Setting.SetOption("Tray23_PreId", value.ToString());
+                    SetProperty(ref tray23_PreId, value);
+                }
+            }
+        }
 
         #endregion
 
@@ -1010,5 +1010,9 @@ namespace GMCC.Sorter
                 }
             }
         }
+
+        public int PACK_ALARM_COUNT = 75;
+        public int PACK_FILL_COUNT = 300;
+        public string PackDetailWebSiteUrl = "http://oa.gmccchina.com:96/fenxuan.aspx?XH=[pack_code]";
     }
 }

@@ -12,18 +12,18 @@ namespace GMCC.Sorter.ViewModel
     {
         private SortResult sortResult = SortResult.Unknown; 
 
-        private string type;
+        private string name;
 
         private int count;
 
         private int packId;
 
-        public string Type
+        public string Name
         {
-            get => type;
+            get => name;
             set
             {
-                this.SetProperty(ref type, value);
+                this.SetProperty(ref name, value);
             }
         }
 

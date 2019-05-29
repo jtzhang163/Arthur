@@ -82,7 +82,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Base\EthernetCommor.cs" />
     <Compile Include="Model\Base\Logging.cs" />
-    <Compile Include="Model\Base\Server.cs" />
+    <Compile Include="Model\Base\ServerCommor.cs" />
     <Compile Include="Model\Base\SerialCommor.cs" />
     <Compile Include="Model\EventLog.cs" />
     <Compile Include="Model\Option.cs" />

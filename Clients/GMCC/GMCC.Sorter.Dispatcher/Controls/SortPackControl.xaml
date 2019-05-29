@@ -43,7 +43,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="0,0,0,0" HorizontalAlignment="Left">
-                        <TextBlock Text="{Binding Type}" FontSize="14" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
+                        <TextBlock Text="{Binding Name}" FontSize="14" Margin="0,0,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
                         <TextBlock Text="{Binding Count}" FontSize="20" FontWeight="Bold" Foreground="#09a3de" Padding="0" Margin="10,0,0,0" VerticalAlignment="Bottom"></TextBlock>
                     </StackPanel>
                 </DataTemplate>
@@ -52,6 +52,6 @@
 
         <TextBlock Text="手动操作：" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14" FontWeight="Bold" VerticalAlignment="Bottom" Foreground="Black"/>
         <Button Content="移除不良" Grid.Column="1" Grid.Row="1" Style="{StaticResource ChamferButton}" Width="80" HorizontalAlignment="Right" Margin="0,0,5,0" Click="btnNgBatteryOutFromPack_Click"></Button>
-        <Button Content="生成二维码" Grid.Column="2" Grid.Row="1" Style="{StaticResource ChamferButton}" Width="80" HorizontalAlignment="Left" Margin="5,0,0,0"></Button>
+        <Button Content="生成二维码" Grid.Column="2" Grid.Row="1" Style="{StaticResource ChamferButton}" Width="80" HorizontalAlignment="Left" Margin="5,0,0,0" Click="btnCreateQRCode_Click"></Button>
     </Grid>
 </UserControl>

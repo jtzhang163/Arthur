@@ -41,6 +41,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\QRCoderManage.cs" />
     <Compile Include="Business\OrderManage.cs" />
     <Compile Include="Business\PackManage.cs" />
     <Compile Include="Business\ProcTrayManage.cs" />
@@ -71,6 +73,10 @@
     <Compile Include="Migrations\201905281420329_GMCC_AddPack.cs" />
     <Compile Include="Migrations\201905281420329_GMCC_AddPack.Designer.cs">
       <DependentUpon>201905281420329_GMCC_AddPack.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905290925433_GMCC_PackOptimize.cs" />
+    <Compile Include="Migrations\201905290925433_GMCC_PackOptimize.Designer.cs">
+      <DependentUpon>201905290925433_GMCC_PackOptimize.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\BatteryScaner.cs" />
@@ -98,6 +104,7 @@
     <Compile Include="Other\JawMoveInfo.cs" />
     <Compile Include="Other\NewareData.cs" />
     <Compile Include="ViewModel\AppViewModel.cs" />
+    <Compile Include="ViewModel\Base\ServerCommorViewModel.cs" />
     <Compile Include="ViewModel\Base\IScanerViewModel.cs" />
     <Compile Include="ViewModel\Base\SerialCommorViewModel.cs" />
     <Compile Include="ViewModel\Base\EthernetCommorViewModel.cs" />
@@ -134,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905281420329_GMCC_AddPack.resx">
       <DependentUpon>201905281420329_GMCC_AddPack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905290925433_GMCC_PackOptimize.resx">
+      <DependentUpon>201905290925433_GMCC_PackOptimize.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

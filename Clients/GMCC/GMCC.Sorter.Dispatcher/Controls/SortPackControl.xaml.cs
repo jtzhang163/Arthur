@@ -1,4 +1,5 @@
-﻿using GMCC.Sorter.Dispatcher.Utils;
+﻿using GMCC.Sorter.Business;
+using GMCC.Sorter.Dispatcher.Utils;
 using GMCC.Sorter.Extensions;
 using GMCC.Sorter.Model;
 using System;
@@ -32,6 +33,12 @@ namespace GMCC.Sorter.Dispatcher.Controls
         private void btnNgBatteryOutFromPack_Click(object sender, RoutedEventArgs e)
         {
             ShowWindows.NgBatteryOutFromPack();
+        }
+
+        private void btnCreateQRCode_Click(object sender, RoutedEventArgs e)
+        {
+            //var result = QRCoderManage.Create(1);
+
         }
     }
 }

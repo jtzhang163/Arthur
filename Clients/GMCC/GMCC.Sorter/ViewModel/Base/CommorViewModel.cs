@@ -300,9 +300,9 @@ namespace GMCC.Sorter.ViewModel
                         var serialCommor = (SerialCommor)this.Commor.Communicator;
                         commorInfo = string.Format("{0}", serialCommor.PortName);
                     }
-                    else if (this.Commor.Communicator is Server)
+                    else if (this.Commor.Communicator is ServerCommor)
                     {
-                        var server = (Server)this.Commor.Communicator;
+                        var server = (ServerCommor)this.Commor.Communicator;
                         commorInfo = string.Format("{0}", server.Host);
                     }
                 }

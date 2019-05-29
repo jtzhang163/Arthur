@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GMCC.Sorter.Business;
 
 namespace GMCC.Sorter.ViewModel
 {
@@ -20,7 +21,8 @@ namespace GMCC.Sorter.ViewModel
     /// </summary>
     public sealed class MainMachineViewModel : EthernetCommorViewModel
     {
-
+        private int CurrentPackBatteryPos;
+        private bool IsPackEnabled = false;
         public void SendCommand(JawMoveInfo toMoveInfo)
         {
             this.Commor.Write("D450", (ushort)toMoveInfo.Col);
@@ -109,7 +111,7 @@ namespace GMCC.Sorter.ViewModel
                 this.RealtimeStatus = "通信中...";
 
                 // 最小值 -5540111 最大值 805192
-                Current.Option.JawPos = ((int)ret3.Data + 5542000)/ 11900;
+                Current.Option.JawPos = ((int)ret3.Data + 5542000) / 11900;
 
                 this.IsAlive = true;
             }
@@ -121,13 +123,104 @@ namespace GMCC.Sorter.ViewModel
 
             Current.App.IsTerminalInitFinished = true;
 
-            ////发送横移运动指令
-            //if (Current.Task.Status == Model.TaskStatus.就绪)
-            //{
+            if (IsPackEnabled)
+            {
+                var ret4 = this.Commor.Read("Dxxx");
+                if (ret4.IsOk)
+                {
+                    var recv = (ushort[])ret4.Data;
+                    var currentPackBatteryPos = Convert.ToInt32(recv[0]);
 
-            //}
+                    if (this.CurrentPackBatteryPos > 0 && currentPackBatteryPos == 0)
+                    {
+                        //电池放入拉带完成
+                        AfterPack(this.CurrentPackBatteryPos);
+                    }
+
+                    if (currentPackBatteryPos > 0)
+                    {
+                        this.Commor.Write("Dxxx", (ushort)0);
+                    }
+
+                    this.CurrentPackBatteryPos = currentPackBatteryPos;
+                }
+            }
+        }
+
+        public void AfterPack(int pos)
+        {
+            var procTrayId = Current.Option.Tray23_Id > 0 ? Current.Option.Tray23_Id : Current.Option.Tray23_PreId;
+            var result = BatteryManage.GetBattery(procTrayId, pos);
+            if (result.IsFailed)
+            {
+                return;
+            }
+
+            var battery = (Battery)result.Data;
+            if (battery.SortResult == SortResult.Unknown || (int)battery.SortResult > 5)
+            {
+                return;
+            }
+
+            var sortResult = battery.SortResult;
+
+            var sortPack = Current.SortPacks.FirstOrDefault(o => o.SortResult == sortResult);
 
 
+            result = BatteryManage.GetFillBatteryCount(sortPack.PackId);
+            if (result.IsFailed)
+            {
+                return;
+            }
+
+            var fillCount = (int)result.Data;
+
+            //新建箱体
+            if (sortPack.PackId == 0 || fillCount == Current.Option.PACK_FILL_COUNT)
+            {
+                var code = ""; //箱体号
+                result = new PackManage().Create(new Pack(code, sortResult));
+                if (result.IsFailed)
+                {
+                    return;
+                }
+                sortPack.PackId = (int)result.Data;
+                sortPack.Count = 0;
+            }
+
+            result = BatteryManage.SetPacking(battery.Id, sortPack.PackId);
+            if (result.IsFailed)
+            {
+                return;
+            }
+
+            sortPack.Count++;
+
+            if (sortPack.Count % Current.Option.PACK_ALARM_COUNT == 0)
+            {
+                if (IsPackEnabled)
+                {
+                    this.Commor.Write("Dxxx", (ushort)0);
+                }
+            }
+
+            if (sortPack.Count == Current.Option.PACK_FILL_COUNT)
+            {
+                result = BatteryManage.SetPackFinish(sortPack.PackId);
+                if (result.IsFailed)
+                {
+                    return;
+                }
+
+                //生成二维码
+                result = QRCoderManage.Create(sortPack.PackId);
+                if (result.IsFailed)
+                {
+                    Running.ShowErrorMsg(result.Msg);
+                    return;
+                }
+
+            }
         }
     }
 }
