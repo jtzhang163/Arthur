@@ -254,7 +254,7 @@ namespace GMCC.Sorter.Business
             {
                 try
                 {
-                    battery = db.Batteries.Where(o => !o.IsUploaded && o.PackStatus == PackStatus.打包完).FirstOrDefault();
+                    battery = db.Batteries.Where(o => !o.IsUploaded && o.PackStatus == PackStatus.打包完 && o.PackId > 0).FirstOrDefault();
                     if (battery == null)
                     {
                         return new Result(1, "全部上传完");

@@ -52,6 +52,7 @@ namespace GMCC.Sorter.ViewModel
                     }
                     Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}IP: [{1}] 修改为 [{2}]", Name, ip, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref ip, value);
+                    this.CommorInfo = null;
                 }
             }
         }
@@ -85,6 +86,7 @@ namespace GMCC.Sorter.ViewModel
                     }
                     Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}端口: [{1}] 修改为 [{2}]", Name, port, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref port, value);
+                    this.CommorInfo = null;
                 }
             }
         }

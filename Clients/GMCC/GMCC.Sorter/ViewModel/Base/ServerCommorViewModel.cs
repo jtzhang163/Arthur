@@ -47,6 +47,7 @@ namespace GMCC.Sorter.ViewModel
                     }
                     Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}服务器: [{1}] 修改为 [{2}]", Name, host, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref host, value);
+                    this.CommorInfo = null;
                 }
             }
         }

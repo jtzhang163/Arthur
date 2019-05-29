@@ -52,6 +52,7 @@ namespace GMCC.Sorter.ViewModel
                     }
                     Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}串口号: [{1}] 修改为 [{2}]", Name, portName, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref portName, value);
+                    this.CommorInfo = null;
                 }
             }
         }

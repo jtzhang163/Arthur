@@ -283,26 +283,26 @@ namespace GMCC.Sorter.ViewModel
         }
 
 
-        private string commorInfo = null;
+        private string commorInfo;
         public string CommorInfo
         {
             get
             {
                 if (commorInfo == null)
                 {
-                    if (this.Commor.Communicator is EthernetCommor)
+                    if (this is EthernetCommorViewModel)
                     {
-                        var ethernetCommor = (EthernetCommor)this.Commor.Communicator;
+                        var ethernetCommor = this as EthernetCommorViewModel;
                         commorInfo = string.Format("{0} : {1}", ethernetCommor.IP, ethernetCommor.Port);
                     }
-                    else if (this.Commor.Communicator is SerialCommor)
+                    else if (this is SerialCommorViewModel)
                     {
-                        var serialCommor = (SerialCommor)this.Commor.Communicator;
+                        var serialCommor = this as SerialCommorViewModel;
                         commorInfo = string.Format("{0}", serialCommor.PortName);
                     }
-                    else if (this.Commor.Communicator is ServerCommor)
+                    else if (this is ServerCommorViewModel)
                     {
-                        var server = (ServerCommor)this.Commor.Communicator;
+                        var server = this as ServerCommorViewModel;
                         commorInfo = string.Format("{0}", server.Host);
                     }
                 }
