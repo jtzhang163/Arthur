@@ -28,7 +28,7 @@ namespace Arthur.App.View.Account
             var confirm_new_pwd = this.confirm_new_pwd.Password.Trim();
 
             var ret = Arthur.App.Business.Account.ChangePassword(this.User.Name, old_pwd, new_pwd, confirm_new_pwd);
-            if (ret.IsOk)
+            if (ret.IsSucceed)
             {
                 lbTip.Text = "修改密码成功！";
                 lbTip.Foreground = new SolidColorBrush(Colors.Green);

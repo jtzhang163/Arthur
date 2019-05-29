@@ -69,7 +69,7 @@ namespace GMCC.Sorter.Business
                 {
                     Arthur.App.Business.Logging.AddOplog(string.Format("新增流程托盘[{0}]", procTray.Code), Arthur.App.Model.OpType.创建);
                 }
-                return Result.OkHasData(id);
+                return Result.SuccessHasData(id);
             }
             catch (Exception ex)
             {

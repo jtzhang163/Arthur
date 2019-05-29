@@ -103,7 +103,7 @@ namespace Arthur.App.View.Tool.QRCoder
             }
 
             var ret = Arthur.Core.Coder.QRCoder.Create(content.Text, Convert.ToInt32(scale.Text), Convert.ToInt32(version.Text), logoImagepath, Convert.ToInt32(logo_scale.Text));
-            if (ret.IsOk)
+            if (ret.IsSucceed)
             {
                 bimg = (Bitmap)ret.Data;
                 imgQRcode.Source = BitmapToBitmapImage(bimg);

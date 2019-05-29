@@ -64,14 +64,14 @@ namespace GMCC.Sorter.ViewModel
             {
                 LogHelper.WriteInfo("开始绑盘托盘扫码。。。");
                 var ret = this.Commor.Comm(this.ScanCommand);
-                if (ret.IsOk)
+                if (ret.IsSucceed)
                 {
                     var result = true;
                     var code = ret.Data.ToString();
                     if (code.StartsWith("NR"))
                     {
                         var ret2 = this.Commor.Comm(this.ScanCommand);
-                        if (ret2.IsOk && !ret2.Data.ToString().StartsWith("NR"))
+                        if (ret2.IsSucceed && !ret2.Data.ToString().StartsWith("NR"))
                         {
                             code = ret2.Data.ToString();
                         }
@@ -92,7 +92,7 @@ namespace GMCC.Sorter.ViewModel
                         Current.MainMachine.Commor.Write("D434", (ushort)1);
 
 
-                        var saveRet = Result.OK;
+                        var saveRet = Result.Success;
                         if (Current.Option.Tray11_Id < 1)
                         {
                             //把电池条码保存进数据库
@@ -100,7 +100,7 @@ namespace GMCC.Sorter.ViewModel
                             Current.Option.Tray11_Id = (int)saveRet.Data;
                         }
 
-                        if (saveRet.IsOk)
+                        if (saveRet.IsSucceed)
                         {
                             var t = new Thread(() =>
                             {
@@ -141,14 +141,14 @@ namespace GMCC.Sorter.ViewModel
             {
                 LogHelper.WriteInfo("开始解盘托盘扫码。。。");
                 var ret = this.Commor.Comm(this.ScanCommand);
-                if (ret.IsOk)
+                if (ret.IsSucceed)
                 {
                     var result = true;
                     var code = ret.Data.ToString();
                     if (code.StartsWith("NR"))
                     {
                         var ret2 = this.Commor.Comm(this.ScanCommand);
-                        if (ret2.IsOk && !ret2.Data.ToString().StartsWith("NR"))
+                        if (ret2.IsSucceed && !ret2.Data.ToString().StartsWith("NR"))
                         {
                             code = ret2.Data.ToString();
                         }
@@ -167,7 +167,7 @@ namespace GMCC.Sorter.ViewModel
                         Current.MainMachine.Commor.Write("D435", (ushort)1);
 
 
-                        var saveRet = Result.OK;
+                        var saveRet = Result.Success;
 
                         //逻辑处理
                         var procTrayId = GetObject.GetByCode<ProcTray>(code).Id;
@@ -176,7 +176,7 @@ namespace GMCC.Sorter.ViewModel
                             Current.Option.Tray21_Id = procTrayId;
                         }
 
-                        if (saveRet.IsOk)
+                        if (saveRet.IsSucceed)
                         {
                             var t = new Thread(() =>
                             {

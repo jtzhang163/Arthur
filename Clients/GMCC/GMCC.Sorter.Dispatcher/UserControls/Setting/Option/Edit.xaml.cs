@@ -73,7 +73,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Setting.Option
                 if (tray11_id != Current.Option.Tray11_Id && tray11_id > 0)
                 {
                     var result = Current.MainMachine.Commor.Write("D434", (ushort)1);
-                    if (!result.IsOk)
+                    if (!result.IsSucceed)
                     {
                         Running.ShowErrorMsg("手动输入绑盘托盘条码后发送给PLC结果失败，msg：" + result.Msg);
                     }

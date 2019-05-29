@@ -56,7 +56,7 @@ namespace Arthur.App.Comm
                 result = new EthernetComm().Connect(this);
             }
 
-            this.Connected = result.IsOk;
+            this.Connected = result.IsSucceed;
             return result;
         }
 
@@ -76,7 +76,7 @@ namespace Arthur.App.Comm
                 result = new EthernetComm().EndConnect(this);
             }
             Connected = false;
-            return Result.OK;
+            return Result.Success;
         }
 
         public Result Comm(string input)

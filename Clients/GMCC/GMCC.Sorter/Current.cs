@@ -200,7 +200,7 @@ namespace GMCC.Sorter
                         var packId = 0;
                         var count = 0;
                         var ret = PackManage.GetCurrentPackId((Model.SortResult)(i + 1));
-                        if (ret.IsOk)
+                        if (ret.IsSucceed)
                         {
                             packId = (int)ret.Data;
                             count = PackManage.GetPackCount(packId);

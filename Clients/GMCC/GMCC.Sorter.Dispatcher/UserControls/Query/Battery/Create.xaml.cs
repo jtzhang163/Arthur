@@ -47,7 +47,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.Battery
             else
             {
                 var ret = new Business.BatteryManage().Create(new Model.Battery() { Code = code});
-                if (ret.IsOk)
+                if (ret.IsSucceed)
                 {
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "新增电池成功！";

@@ -18,7 +18,7 @@ namespace GMCC.Sorter.Run
                 if (commors[i].IsEnabled)
                 {
                     var result = commors[i].Commor.Connect();
-                    if (!result.IsOk)
+                    if (!result.IsSucceed)
                     {
                         Current.App.RunStatus = RunStatus.异常;
                         return result;
@@ -30,7 +30,7 @@ namespace GMCC.Sorter.Run
 
             Current.App.RunStatus = RunStatus.运行;
             TimerExec.IsRunning = true;
-            return Result.OK;
+            return Result.Success;
         }
 
         public static Result Stop()
@@ -45,7 +45,7 @@ namespace GMCC.Sorter.Run
             }
             TimerExec.IsRunning = false;
             Current.App.RunStatus = RunStatus.停止;
-            return Result.OK;
+            return Result.Success;
         }
 
         public static Result Reset()
@@ -64,7 +64,7 @@ namespace GMCC.Sorter.Run
             Current.App.RunStatus = RunStatus.闲置;
             Current.App.ErrorMsg = "";
 
-            return Result.OK;
+            return Result.Success;
         }
 
         public static void StopRunAndShowMsg(string msg)

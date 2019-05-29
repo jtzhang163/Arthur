@@ -57,7 +57,7 @@ namespace Arthur.App.View.Account.Role
             else
             {
                 var ret = new Arthur.App.Business.RoleManage().Create(new Arthur.App.Model.Role() { Level = iLevel, Name = name });
-                if (ret.IsOk)
+                if (ret.IsSucceed)
                 {
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "新增角色成功！";

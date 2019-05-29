@@ -26,7 +26,7 @@ namespace Arthur.App.Business
                     db.Users.Add(new App.Model.User() { Name = user.Name });
                     db.SaveChanges();
                 }
-                return Result.OK;
+                return Result.Success;
             }
             catch (Exception ex)
             {

@@ -40,7 +40,7 @@ namespace Arthur.App.Comm
                 return new Result(string.Format("连接失败：{0}：{1}", ethernetCommor.IP, ethernetCommor.Port));
             }
             commor.Connector = socket;
-            return Result.OK;
+            return Result.Success;
         }
 
         public Result EndConnect(Commor commor)
@@ -50,7 +50,7 @@ namespace Arthur.App.Comm
             {
                 socket.Close();
             }
-            return Result.OK;
+            return Result.Success;
         }
 
         public Result Comm(Commor commor, string input)
@@ -132,7 +132,7 @@ namespace Arthur.App.Comm
                 var msg = string.Format("和{0}通信出现异常！原因：{1}", ethernetCommor.Name, ex.Message);
                 return new Result(msg);
             }
-            return Result.OkHasData(recvData);
+            return Result.SuccessHasData(recvData);
         }
 
         private delegate string ConnectSocketDelegate(Socket socket, string ip, int port);

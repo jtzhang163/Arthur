@@ -27,7 +27,7 @@ namespace GMCC.Sorter.ViewModel
         {
             lock (this)
             {
-                if (BatteryManage.GetFirstBatteryNotUpload(out Battery battery).IsOk)
+                if (BatteryManage.GetFirstBatteryNotUpload(out Battery battery).IsSucceed)
                 {
                     this.CommorInfo = "获取数据：" + battery.Code;
                     var result = BatteryManage.GetAndSaveTestResult(battery);

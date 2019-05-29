@@ -51,7 +51,7 @@ namespace GMCC.Sorter.ViewModel
             Current.MainMachine.Commor.Write("D441", (ushort)1);
 
             var ret = this.Commor.Read("D400", (ushort)60);
-            if (ret.IsOk)
+            if (ret.IsSucceed)
             {
                 this.RealtimeStatus = "通信中...";
 
@@ -72,7 +72,7 @@ namespace GMCC.Sorter.ViewModel
             }
 
             var ret2 = this.Commor.Read("W400", (ushort)10);
-            if (ret2.IsOk)
+            if (ret2.IsSucceed)
             {
                 this.RealtimeStatus = "通信中...";
 
@@ -106,7 +106,7 @@ namespace GMCC.Sorter.ViewModel
             }
 
             var ret3 = this.Commor.ReadInt("D439");
-            if (ret3.IsOk)
+            if (ret3.IsSucceed)
             {
                 this.RealtimeStatus = "通信中...";
 
@@ -126,7 +126,7 @@ namespace GMCC.Sorter.ViewModel
             if (IsPackEnabled)
             {
                 var ret4 = this.Commor.Read("Dxxx");
-                if (ret4.IsOk)
+                if (ret4.IsSucceed)
                 {
                     var recv = (ushort[])ret4.Data;
                     var currentPackBatteryPos = Convert.ToInt32(recv[0]);

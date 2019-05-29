@@ -51,7 +51,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Debug.MainMachine
             new Thread(() => {
                 this.Dispatcher.Invoke(new Action(() => {
                     var result = Current.MainMachine.Commor.Read(this.read_addr.Text.Trim());
-                    if (result.IsOk)
+                    if (result.IsSucceed)
                     {
                         this.read_value.Text = ((ushort[])result.Data)[0].ToString();
                     }
@@ -84,7 +84,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Debug.MainMachine
             new Thread(() => {
                 this.Dispatcher.Invoke(new Action(() => {
                     var result = Current.MainMachine.Commor.Write(this.write_addr.Text.Trim(), val);
-                    if (result.IsOk)
+                    if (result.IsSucceed)
                     {
                         this.write_result.Content = "成功";
                         return;

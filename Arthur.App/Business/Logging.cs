@@ -40,7 +40,7 @@ namespace Arthur.App.Business
             {
                 return new Result(ex.Message);
             }
-            return Result.OK;
+            return Result.Success;
         }
 
 
@@ -72,7 +72,7 @@ namespace Arthur.App.Business
             {
                 return new Result(ex.Message);
             }
-            return Result.OK;
+            return Result.Success;
         }
 
         public static Result AddOplog(string content, OpType type)

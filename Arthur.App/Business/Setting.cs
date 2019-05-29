@@ -59,7 +59,7 @@ namespace Arthur.App.Business
                 Logging.AddEvent(ex.Message, EventType.错误);
                 return new Result(ex);
             }
-            return Result.OK;
+            return Result.Success;
         }
     }
 }

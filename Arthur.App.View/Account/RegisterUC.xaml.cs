@@ -21,7 +21,7 @@ namespace Arthur.App.View.Account
         private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             var ret = Arthur.App.Business.Account.Register(this.username.Text, this.password.Password, this.password_confirm.Password);
-            if (ret.IsOk)
+            if (ret.IsSucceed)
             {
                 new Thread(() => {
 

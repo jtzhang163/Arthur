@@ -27,7 +27,7 @@ namespace GMCC.Sorter.Business
                     db.SaveChanges();
                 }
                 Arthur.App.Business.Logging.AddOplog(string.Format("新增托盘[{0}]", tray.Code), Arthur.App.Model.OpType.创建);
-                return Result.OK;
+                return Result.Success;
             }
             catch (Exception ex)
             {

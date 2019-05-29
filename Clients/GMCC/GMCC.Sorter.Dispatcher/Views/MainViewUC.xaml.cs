@@ -78,7 +78,7 @@ namespace GMCC.Sorter.Dispatcher.Views
                 }
 
                 var result = Running.Start();
-                if (result.IsOk)
+                if (result.IsSucceed)
                 {
                     Logging.AddEvent("点击【启动】", Arthur.App.Model.EventType.信息);
                 }
@@ -98,7 +98,7 @@ namespace GMCC.Sorter.Dispatcher.Views
                 }
 
                 var result = Running.Stop();
-                if (result.IsOk)
+                if (result.IsSucceed)
                 {
                     Logging.AddEvent("点击【停止】", Arthur.App.Model.EventType.信息);
                 }
@@ -118,7 +118,7 @@ namespace GMCC.Sorter.Dispatcher.Views
                 }
 
                 var result = Running.Reset();
-                if (result.IsOk)
+                if (result.IsSucceed)
                 {
                     Logging.AddEvent("点击【复位】", Arthur.App.Model.EventType.信息);
                 }

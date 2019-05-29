@@ -81,7 +81,7 @@ namespace Arthur.App.Business
                 return new Result(ex.Message);
             }
 
-            return Result.OK;
+            return Result.Success;
         }
 
         public static Result Login(string name, string password)
@@ -133,7 +133,7 @@ namespace Arthur.App.Business
             }
 
             Current.User = ContextToViewModel.Convert(user);
-            return Result.OK;
+            return Result.Success;
         }
 
         public static Result ChangePassword(string username, string old_pwd, string new_pwd, string confirm_new_pwd)
@@ -187,7 +187,7 @@ namespace Arthur.App.Business
                 db.SaveChanges();
             }
 
-            return Result.OK;
+            return Result.Success;
         }
 
         public static IEnumerable<Role> GetRoles()

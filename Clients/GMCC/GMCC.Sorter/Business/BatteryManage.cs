@@ -63,7 +63,7 @@ namespace GMCC.Sorter.Business
                 {
                     Arthur.App.Business.Logging.AddOplog(string.Format("新增电池[{0}]", battery.Code), Arthur.App.Model.OpType.创建);
                 }
-                return Result.OK;
+                return Result.Success;
             }
             catch (Exception ex)
             {
@@ -86,7 +86,7 @@ namespace GMCC.Sorter.Business
                     var testResults = db.Database.SqlQuery<MonomerTestResult>(sql).ToList();
                     if (testResults.Count > 0)
                     {
-                        return Result.OkHasData(testResults[0]);
+                        return Result.SuccessHasData(testResults[0]);
                     }
                     else
                     {
@@ -166,7 +166,7 @@ namespace GMCC.Sorter.Business
                     {
                         Arthur.App.Business.Logging.AddOplog("不良品电池从包中移除" + code,  OpType.编辑);
                     }
-                    return Result.OK;
+                    return Result.Success;
                 }
                 catch (Exception ex)
                 {
@@ -186,7 +186,7 @@ namespace GMCC.Sorter.Business
                     {
                         return new Result("系统中不存在电池");
                     }
-                    return Result.OkHasData(battery);
+                    return Result.SuccessHasData(battery);
                 }
                 catch (Exception ex)
                 {
@@ -202,7 +202,7 @@ namespace GMCC.Sorter.Business
                 try
                 {
                     var count = db.Batteries.Count(o => o.PackId == packId);
-                    return Result.OkHasData(count);
+                    return Result.SuccessHasData(count);
                 }
                 catch (Exception ex)
                 {
@@ -221,7 +221,7 @@ namespace GMCC.Sorter.Business
                     battery.PackId = packId;
                     battery.PackStatus = PackStatus.打包中;
                     db.SaveChanges();
-                    return Result.OK;
+                    return Result.Success;
                 }
                 catch (Exception ex)
                 {
@@ -238,7 +238,7 @@ namespace GMCC.Sorter.Business
                 {
                     db.Batteries.Where(o => o.PackId == packId).ToList().ForEach(o => o.PackStatus = PackStatus.打包完);
                     db.SaveChanges();
-                    return Result.OK;
+                    return Result.Success;
                 }
                 catch (Exception ex)
                 {
@@ -259,7 +259,7 @@ namespace GMCC.Sorter.Business
                     {
                         return new Result(1, "全部上传完");
                     }
-                    return Result.OkHasData(battery);
+                    return Result.SuccessHasData(battery);
                 }
                 catch (Exception ex)
                 {

@@ -37,7 +37,7 @@ namespace GMCC.Sorter.Dispatcher.Controls
         {
             var code = this.battery_code.Text.Trim();
             var result = BatteryManage.NgBatteryOutFromPack(code);
-            if (result.IsOk)
+            if (result.IsSucceed)
             {
                 tip.Background = new SolidColorBrush(Colors.Green);
                 tip.Text = "移除成功";

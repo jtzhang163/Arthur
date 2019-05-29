@@ -16,14 +16,6 @@ namespace Arthur.Core
 
         public object Data { get; set; }
 
-        public bool IsOk
-        {
-            get
-            {
-                return this.Code == 0;
-            }
-        }
-
         public bool IsSucceed
         {
             get
@@ -73,14 +65,6 @@ namespace Arthur.Core
             this.Data = data;
         }
 
-        public static Result OK
-        {
-            get
-            {
-                return new Result(0, string.Empty);
-            }
-        }
-
         public static Result Success
         {
             get
@@ -89,7 +73,7 @@ namespace Arthur.Core
             }
         }
 
-        public static Result OkHasData(object data)
+        public static Result SuccessHasData(object data)
         {
             return new Result(0, "", data);
         }

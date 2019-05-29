@@ -66,14 +66,14 @@ namespace GMCC.Sorter.ViewModel
                     return;
                 }
                 var ret = this.Commor.Comm(this.ScanCommand);
-                if (ret.IsOk)
+                if (ret.IsSucceed)
                 {
                     var result = true;
                     var code = ret.Data.ToString();
                     if (code.StartsWith("NG"))
                     {
                         var ret2 = this.Commor.Comm(this.ScanCommand);
-                        if (ret2.IsOk && !ret2.Data.ToString().StartsWith("NG"))
+                        if (ret2.IsSucceed && !ret2.Data.ToString().StartsWith("NG"))
                         {
                             code = ret2.Data.ToString();
                         }
@@ -92,7 +92,7 @@ namespace GMCC.Sorter.ViewModel
 
                         //把电池条码保存进数据库
                         var saveRet = new Business.BatteryManage().Create(new Model.Battery() { Code = code }, true);
-                        if (saveRet.IsOk)
+                        if (saveRet.IsSucceed)
                         {
                             var t = new Thread(() =>
                             {

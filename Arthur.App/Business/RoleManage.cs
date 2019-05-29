@@ -27,7 +27,7 @@ namespace Arthur.App.Business
                     db.SaveChanges();
                 }
                 Arthur.App.Business.Logging.AddOplog(string.Format("新增角色[{0}]", role.Name), App.Model.OpType.创建);
-                return Result.OK;
+                return Result.Success;
             }
             catch (Exception ex)
             {

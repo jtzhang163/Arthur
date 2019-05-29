@@ -41,7 +41,7 @@ namespace Arthur.App.View.Account
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             var ret = Arthur.App.Business.Account.Login(this.username.Text, this.password.Password);
-            if (ret.IsOk)
+            if (ret.IsSucceed)
             {
                 if (this.remember_me.IsChecked.Value)
                 {

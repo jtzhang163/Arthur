@@ -48,7 +48,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
             else
             {
                 var ret = new Business.ProcTrayManage().Create(new Model.ProcTray() { Code = code});
-                if (ret.IsOk)
+                if (ret.IsSucceed)
                 {
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "新增托盘成功！";

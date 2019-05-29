@@ -39,7 +39,7 @@ namespace GMCC.Sorter.Business
 
                 Arthur.App.Business.Logging.AddOplog(string.Format("新增箱体[{0}]", pack.Code), Arthur.App.Model.OpType.创建);
     
-                return Result.OkHasData(id);
+                return Result.SuccessHasData(id);
             }
             catch (Exception ex)
             {
@@ -58,9 +58,9 @@ namespace GMCC.Sorter.Business
 
                 if (pack != null && pack.Id > 0)
                 {
-                    return Result.OkHasData(pack.Id);
+                    return Result.SuccessHasData(pack.Id);
                 }
-                return Result.OkHasData(0);
+                return Result.SuccessHasData(0);
             }
             catch (Exception ex)
             {

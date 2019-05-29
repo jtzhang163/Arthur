@@ -31,7 +31,7 @@ namespace Arthur.App.Comm
                 return new Result(string.Format("连接{0}失败", commor.Communicator.Name), ex);
             }
             commor.Connector = serialPort;
-            return Result.OK;
+            return Result.Success;
         }
 
         public Result EndConnect(Commor commor)
@@ -49,7 +49,7 @@ namespace Arthur.App.Comm
             {
                 return new Result(ex.Message);
             }
-            return Result.OK;
+            return Result.Success;
         }
 
         public Result Comm(Commor commor, string input)
@@ -82,7 +82,7 @@ namespace Arthur.App.Comm
             {
                 return new Result(ex.Message);
             }
-            return Result.OkHasData(recvData);
+            return Result.SuccessHasData(recvData);
         }
     }
 }

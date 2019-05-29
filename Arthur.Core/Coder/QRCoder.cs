@@ -18,7 +18,7 @@ namespace Arthur.Core.Coder
         /// <param name="version">二维码版本(1-30，默认4)</param>
         /// <param name="logoImagepath">logo图片位置</param>
         /// <param name="logoSize">logo尺寸(默认50)</param>
-        /// <returns>结果为Result.OK时，Result.Data中保存着Bitmap类型的二维码图片</returns>
+        /// <returns>结果为Result.Success时，Result.Data中保存着Bitmap类型的二维码图片</returns>
         public static Result Create(string content, int scale = 5, int version = 4, string logoImagepath = "", int logoSize = 50)
         {
             QRCodeEncoder qrEncoder = new QRCodeEncoder();
@@ -38,7 +38,7 @@ namespace Arthur.Core.Coder
                     PointF point = new PointF(qrcode.Width / 2 - logoSize / 2, qrcode.Height / 2 - logoSize / 2);
                     g.DrawImage(bitmapLogo, point);
                 }
-                return Result.OkHasData(qrcode);
+                return Result.SuccessHasData(qrcode);
             }
             catch (IndexOutOfRangeException ex)
             {

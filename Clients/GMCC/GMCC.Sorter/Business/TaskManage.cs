@@ -37,7 +37,7 @@ namespace GMCC.Sorter.Business
             {
                 return new Result(ex);
             }
-            return Result.OK;
+            return Result.Success;
         }
 
         public Result Create(TaskLog t)

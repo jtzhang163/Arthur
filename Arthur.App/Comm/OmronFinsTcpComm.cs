@@ -33,7 +33,7 @@ namespace Arthur.App.Comm
                 if (connect.IsSuccess)
                 {
                     commor.Connector = omronFinsNet;
-                    return Result.OK;
+                    return Result.Success;
                 }
                 else
                 {
@@ -56,7 +56,7 @@ namespace Arthur.App.Comm
                 omronFinsNet.ConnectClose();
                 commor.Connector = null;
             }
-            return Result.OK;
+            return Result.Success;
         }
 
         public Result Comm(Commor commor, string input)
@@ -64,7 +64,7 @@ namespace Arthur.App.Comm
             var omronFinsNet = (OmronFinsNet)commor.Connector;
             var ethernetCommor = (EthernetCommor)commor.Communicator;
 
-            return Result.OK;
+            return Result.Success;
         }
 
         public Result Read(Commor commor, string addr, ushort length)
@@ -76,7 +76,7 @@ namespace Arthur.App.Comm
 
                 if (result.IsSuccess)
                 {
-                    return Result.OkHasData(result.Content);
+                    return Result.SuccessHasData(result.Content);
                 }
                 else
                 {
@@ -98,7 +98,7 @@ namespace Arthur.App.Comm
 
                 if (result.IsSuccess)
                 {
-                    return Result.OkHasData(result.Content);
+                    return Result.SuccessHasData(result.Content);
                 }
                 else
                 {
@@ -120,7 +120,7 @@ namespace Arthur.App.Comm
 
                 if (result.IsSuccess)
                 {
-                    return Result.OK;
+                    return Result.Success;
                 }
                 else
                 {
