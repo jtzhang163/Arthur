@@ -1,5 +1,7 @@
 ﻿using Arthur.App.View.Utils;
 using GMCC.Sorter.Data;
+using GMCC.Sorter.Model;
+using GMCC.Sorter.Utils;
 using GMCC.Sorter.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -54,6 +56,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
         {
             var name = this.name.Text.Trim();
             var company = this.company.Text.Trim();
+            var traycode = this.tray_code.Text.Trim();
             var isEnabled = this.isEnabled.IsChecked;
 
             tip.Background = new SolidColorBrush(Colors.Red);
@@ -70,6 +73,19 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.Storage
                     this.Storage.Company = company;
                     //确保每层设置一次，且不出现死循环
                     Current.Storages.FirstOrDefault(o => o.Column == Storage.Column && o.Floor == Common.STOR_FLOOR_COUNT).IsEnabled = isEnabled.Value;
+
+                    var procTrayId = GetObject.GetByCode<ProcTray>(traycode).Id;
+
+                    if (procTrayId < 1 && !string.IsNullOrEmpty(traycode))
+                    {
+                        throw new Exception("系统中不存在托盘：" + traycode);
+                    }
+
+                    this.Storage.ProcTrayId = procTrayId;
+                    if (procTrayId > 0)
+                    {
+                        this.Storage.ProcTray.StorageId = this.Storage.Id;
+                    }
 
                     tip.Background = new SolidColorBrush(Colors.Green);
                     tip.Text = "修改信息成功！";

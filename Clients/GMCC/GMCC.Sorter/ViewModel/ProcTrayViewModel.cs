@@ -92,7 +92,7 @@ namespace GMCC.Sorter.ViewModel
 
                     //同时更新Storage的ProcTrayId属性
                     Current.Storages.Where(o => o.ProcTrayId == this.Id).ToList().ForEach(o => o.ProcTrayId = -1);
-                    Current.Storages.Where(o => o.Id == value).ToList().ForEach(o => o.ProcTrayId = this.Id);
+                    Current.Storages.Single(o => o.Id == value).ProcTrayId = this.Id;
                 }
             }
         }

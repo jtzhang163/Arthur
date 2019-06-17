@@ -31,6 +31,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150"/>
@@ -43,8 +44,10 @@
                     <TextBox x:Name="name" Grid.Row="1" Grid.Column="1" Text="{Binding Name, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                     <Label Content="品牌：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="company" Grid.Row="2" Grid.Column="1" Text="{Binding Company, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
-                    <Label Content="是否启用：" Grid.Row="7" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <CheckBox x:Name="isEnabled" IsChecked="{Binding IsEnabled, Mode=OneWay}" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center"/>
+                    <Label Content="托盘条码：" Grid.Row="3" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="tray_code" Grid.Row="3" Grid.Column="1" Text="{Binding ProcTrayId, Converter={StaticResource idToProcTrayCodeConverter}, Mode=OneWay}" Style="{StaticResource property_TextBox}" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" GotFocus="textbox_GotFocus"/>
+                    <Label Content="是否启用：" Grid.Row="4" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <CheckBox x:Name="isEnabled" IsChecked="{Binding IsEnabled, Mode=OneWay}" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center"/>
                 </Grid>
             </DockPanel>
         </DockPanel>
