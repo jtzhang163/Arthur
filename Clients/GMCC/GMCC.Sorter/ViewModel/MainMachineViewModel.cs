@@ -21,8 +21,11 @@ namespace GMCC.Sorter.ViewModel
     /// </summary>
     public sealed class MainMachineViewModel : EthernetCommorViewModel
     {
-        private int CurrentPackBatteryPos;
-        private bool IsPackEnabled = false;
+        private bool chargeModelIsAuto = false;
+        private bool dischargeModelIsAuto = false;
+        private bool jawModelIsAuto = false;
+        private bool IsReadyIntoPack;
+        private bool IsPackEnabled = true;
         public void SendCommand(JawMoveInfo toMoveInfo)
         {
             this.Commor.Write("D450", (ushort)toMoveInfo.Col);
@@ -57,6 +60,10 @@ namespace GMCC.Sorter.ViewModel
 
                 var recv = (ushort[])ret.Data;
 
+                this.chargeModelIsAuto = recv[44] == 1;
+                this.dischargeModelIsAuto = recv[45] == 1;
+                this.jawModelIsAuto = recv[46] == 1;
+
                 Current.Option.JawMoveInfo.Col = Convert.ToInt32(recv[50]);
                 Current.Option.JawMoveInfo.Row = Convert.ToInt32(recv[51]);
                 Current.Option.JawMoveInfo.Floor = Convert.ToInt32(recv[52]);
@@ -86,14 +93,24 @@ namespace GMCC.Sorter.ViewModel
 
                 var bitStr2 = Convert.ToString(recv[5], 2).PadLeft(16, '0');
 
-                Current.Option.IsHasTray11 = bitStr2[15] == '1';
-                Current.Option.IsHasTray12 = bitStr2[14] == '1';
-                Current.Option.IsHasTray13 = bitStr2[13] == '1';
-                Current.Option.IsHasTray21 = bitStr2[12] == '1';
-                Current.Option.IsHasTray22 = bitStr2[11] == '1';
-                Current.Option.IsHasTray23 = bitStr2[10] == '1';
+                if (this.chargeModelIsAuto)
+                {
+                    Current.Option.IsHasTray11 = bitStr2[15] == '1';
+                    Current.Option.IsHasTray12 = bitStr2[14] == '1';
+                    Current.Option.IsHasTray13 = bitStr2[13] == '1';
+                }
 
-                Current.Option.IsJawHasTray = bitStr2[9] == '1';
+                if (dischargeModelIsAuto)
+                {
+                    Current.Option.IsHasTray21 = bitStr2[12] == '1';
+                    Current.Option.IsHasTray22 = bitStr2[11] == '1';
+                    Current.Option.IsHasTray23 = bitStr2[10] == '1';
+                }
+
+                if (this.jawModelIsAuto)
+                {
+                    Current.Option.IsJawHasTray = bitStr2[9] == '1';
+                }
 
                 Current.Option.IsTaskReady = bitStr2[8] == '1';
 
@@ -125,24 +142,25 @@ namespace GMCC.Sorter.ViewModel
 
             if (IsPackEnabled)
             {
-                var ret4 = this.Commor.Read("Dxxx");
+                var ret4 = this.Commor.Read("D443");
                 if (ret4.IsSucceed)
                 {
                     var recv = (ushort[])ret4.Data;
-                    var currentPackBatteryPos = Convert.ToInt32(recv[0]);
+                    var isReadyIntoPack = recv[0] == 1;
 
-                    if (this.CurrentPackBatteryPos > 0 && currentPackBatteryPos == 0)
+                    if (this.IsReadyIntoPack && !isReadyIntoPack)
                     {
                         //电池放入拉带完成
-                        AfterPack(this.CurrentPackBatteryPos);
+                        AfterPack(OrderManage.GetBindOrderByPackOrder(Current.Option.CurrentPackOrder));
+                        Current.Option.CurrentPackOrder = Current.Option.CurrentPackOrder % 32 + 1;
                     }
 
-                    if (currentPackBatteryPos > 0)
+                    if (this.IsReadyIntoPack)
                     {
-                        this.Commor.Write("Dxxx", (ushort)0);
+                        this.Commor.Write("D443", (ushort)0);
                     }
 
-                    this.CurrentPackBatteryPos = currentPackBatteryPos;
+                    this.IsReadyIntoPack = isReadyIntoPack;
                 }
             }
         }
@@ -201,13 +219,13 @@ namespace GMCC.Sorter.ViewModel
 
             sortPack.Count++;
 
-            if (sortPack.Count % Current.Option.PACK_ALARM_COUNT == 0)
-            {
-                if (IsPackEnabled)
-                {
-                    this.Commor.Write("Dxxx", (ushort)0);
-                }
-            }
+            //if (sortPack.Count % Current.Option.PACK_ALARM_COUNT == 0)
+            //{
+            //    if (IsPackEnabled)
+            //    {
+            //        this.Commor.Write("Dxxx", (ushort)0);
+            //    }
+            //}
 
         }
     }

@@ -251,7 +251,7 @@ namespace GMCC.Sorter.Run
                             for (int i = 0; i < results.Length; i++)
                             {
                                 //i:绑盘序号
-                                Current.MainMachine.Commor.Write(string.Format("D{0:D3}", 401 + i), ushort.Parse(results[OrderManage.GetChargeOrder(i + 1) - 1]));
+                                Current.MainMachine.Commor.Write(string.Format("D{0:D3}", 401 + i), ushort.Parse(results[OrderManage.GetChargeOrderBySortOrder(i + 1) - 1]));
                             }
                             LogHelper.WriteInfo(string.Format("--------成功发送分选结果数据给PLC【流程托盘ID：{0}，条码：{1}】---------", procTray.Id, procTray.Code));
 
@@ -264,7 +264,7 @@ namespace GMCC.Sorter.Run
                                 var result = int.Parse(results[i]);
                                 if (result > 0)
                                 {
-                                    var battery = batteryViewModels.FirstOrDefault(o => o.Pos == OrderManage.GetBindOrder(i + 1));
+                                    var battery = batteryViewModels.FirstOrDefault(o => o.Pos == OrderManage.GetBindOrderByChargeOrder(i + 1));
                                     if (battery != null)
                                     {
                                         battery.SortResult = (SortResult)result;

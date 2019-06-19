@@ -92,7 +92,7 @@
     <Compile Include="Data\DbInitializer.cs" />
     <Compile Include="AppOption.cs" />
     <Compile Include="Model\TrayScaner.cs" />
-    <Compile Include="Other\BindChargeOrder.cs" />
+    <Compile Include="Other\TrayOrder.cs" />
     <Compile Include="Other\GMCCData.cs" />
     <Compile Include="Other\TaskPriorityType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

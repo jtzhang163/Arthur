@@ -13,24 +13,26 @@ namespace GMCC.Sorter.Data
     public class OrderData
     {
 
-        private static List<BindChargeOrder> orders;
+        private static List<TrayOrder> orders;
 
-        public static List<BindChargeOrder> Orders
+        public static List<TrayOrder> Orders
         {
             get
             {
                 if (orders == null)
                 {
-                    orders = new List<BindChargeOrder>();
+                    orders = new List<TrayOrder>();
 
                     for (var i = 1; i <= 8; i++)
                     {
                         for (var j = 1; j <= 4; j++)
                         {
-                            orders.Add(new BindChargeOrder()
+                            orders.Add(new TrayOrder()
                             {
+                                SortOrder = (i - 1) * 4 + j,
                                 BindOrder = (i - 1) * 4 + 5 - j,
-                                ChargeOrder = (5 - j) * 8 - i + 1
+                                ChargeOrder = (5 - j) * 8 - i + 1,
+                                PackOrder = (i - 1) * 4 + (j % 4 < 2 ? j : j % 4 == 2 ? j + 1 : j - 1)
                             });
                         }
                     }

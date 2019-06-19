@@ -144,6 +144,37 @@ namespace GMCC.Sorter
         }
 
 
+        private int currentPackOrder = -2;
+        /// <summary>
+        /// 当前分选托盘打包次序
+        /// </summary>
+        public int CurrentPackOrder
+        {
+            get
+            {
+                if (currentPackOrder == -2)
+                {
+                    currentPackOrder = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("CurrentPackOrder"), -1);
+                    if (currentPackOrder == -1)
+                    {
+                        currentPackOrder = 1;
+                        Arthur.App.Business.Setting.SetOption("CurrentPackOrder", currentPackOrder.ToString(), "当前分选托盘打包次序");
+                    }
+                }
+                return currentPackOrder;
+            }
+            set
+            {
+                if (currentPackOrder != value)
+                {
+                    Arthur.App.Business.Setting.SetOption("CurrentPackOrder", value.ToString());
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设置. {0} 当前分选托盘打包次序: [{1}] 修改为 [{2}]", Name, currentPackOrder, value), Arthur.App.Model.OpType.编辑);
+                    SetProperty(ref currentPackOrder, value);
+                }
+            }
+        }
+
+
         /// <summary>
         /// 上下料任务准备就绪
         /// </summary>

@@ -390,7 +390,7 @@ namespace GMCC.Sorter.Dispatcher.Utils
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var pos = (int)value;
-            return string.Format("{0} ( {1} )", pos, OrderManage.GetChargeOrder(pos));
+            return string.Format("{0} ( {1} )", pos, OrderManage.GetChargeOrderByBindOrder(pos));
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

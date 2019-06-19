@@ -27,7 +27,7 @@ namespace GMCC.Sorter.Extensions
         /// <returns></returns>
         public static int GetChargeOrder(this Battery battery)
         {
-            return OrderManage.GetChargeOrder(battery.Pos);
+            return OrderManage.GetChargeOrderByBindOrder(battery.Pos);
         }
     }
 }
