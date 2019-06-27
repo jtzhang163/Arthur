@@ -52,7 +52,12 @@ namespace GMCC.Sorter.Dispatcher.Controls
                 return;
             }
 
-            PackManage.Finish(sortPack);
+            var result = PackManage.Finish(sortPack);
+            if (result.IsFailed)
+            {
+                Running.ShowErrorMsg(result.Msg);
+                return;
+            }
 
             //打开保存二维码的文件夹
             var dirPath = QRCoderManage.GetSaveQRCodeDirPath(sortPack.SortResult);

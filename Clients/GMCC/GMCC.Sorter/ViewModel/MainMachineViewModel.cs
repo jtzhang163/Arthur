@@ -184,10 +184,10 @@ namespace GMCC.Sorter.ViewModel
 
             var sortPack = Current.SortPacks.FirstOrDefault(o => o.SortResult == sortResult);
 
-
             result = BatteryManage.GetFillBatteryCount(sortPack.PackId);
             if (result.IsFailed)
             {
+                Running.ShowErrorMsg(result.Msg);
                 return;
             }
 
@@ -201,10 +201,11 @@ namespace GMCC.Sorter.ViewModel
                     PackManage.Finish(sortPack);
                 }
 
-                var code = ""; //箱体号
+                var code = sortResult + DateTime.Now.ToString("yyMMddHHmm"); //箱体号
                 result = new PackManage().Create(new Pack(code, sortResult));
                 if (result.IsFailed)
                 {
+                    Running.ShowErrorMsg("新建箱体异常：" + result.Msg);
                     return;
                 }
                 sortPack.PackId = (int)result.Data;

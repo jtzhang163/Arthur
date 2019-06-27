@@ -46,7 +46,7 @@ namespace GMCC.Sorter.Business
                         SortResult = SortResult.Unknown,
                         Model = Current.Option.ProductModel,
                         IsUploaded = false,
-                        PackId = 0,
+                        PackId = -1,
                         PackStatus = PackStatus.未打包,
                         CAP = 0,
                         ESR = 0,
