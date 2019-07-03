@@ -35,7 +35,7 @@
                     </Grid.ColumnDefinitions>
                     <Label Content="绑盘电池扫码枪：" Grid.Row="0" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="绑盘托盘扫码枪：" Grid.Row="1" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="接盘盘托盘扫码枪：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="解盘托盘扫码枪：" Grid.Row="2" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Button x:Name="btnScan1" Content="扫码" Click="Scan_Click" Grid.Row="0" Grid.Column="1" Style="{StaticResource ChamferButton}"></Button>
                     <Button x:Name="btnScan2" Content="扫码" Click="Scan_Click" Grid.Row="1" Grid.Column="1" Style="{StaticResource ChamferButton}"></Button>
                     <Button x:Name="btnScan3" Content="扫码" Click="Scan_Click" Grid.Row="2" Grid.Column="1" Style="{StaticResource ChamferButton}"></Button>
