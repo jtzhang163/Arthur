@@ -29,20 +29,20 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (BatteryManage.GetFirstBatteryNotUpload(out Battery battery).IsSucceed)
                 {
-                    this.CommorInfo = "获取数据：" + battery.Code;
+                    this.RealtimeStatus = "获取数据：" + battery.Code;
                     var result = BatteryManage.GetAndSaveTestResult(battery);
                     if (result.IsFailed)
                     {
                         return;
                     }
-                    this.CommorInfo = "开始上传：" + battery.Code;
+                    this.RealtimeStatus = "开始上传：" + battery.Code;
 
-                    result = BatteryManage.GetAndSaveTestResult(battery);
+                    result = BatteryManage.Upload(battery);
                     if (result.IsFailed)
                     {
                         return;
                     }
-                    this.CommorInfo = "上传完成：" + battery.Code;
+                    this.RealtimeStatus = "上传完成：" + battery.Code;
                 }
             }
             this.IsAlive = true;
