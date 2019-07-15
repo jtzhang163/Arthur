@@ -218,6 +218,8 @@ namespace GMCC.Sorter
         /// </summary>
         public bool IsTaskFinished { get; set; }
 
+        public bool IsGetShareDataExecting { get; set; }
+
 
         private TaskPriorityType taskPriorityType = TaskPriorityType.未知;
         /// <summary>

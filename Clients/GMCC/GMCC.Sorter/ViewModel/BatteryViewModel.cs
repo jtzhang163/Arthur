@@ -127,17 +127,62 @@ namespace GMCC.Sorter.ViewModel
             }
         }
 
-        public BatteryViewModel(int id, string code, int pos, DateTime scanTime, int storageId, int procTrayId, DateTime startStillTime, int stillTimeSpan, SortResult sortResult)
+
+        private decimal cap = 0;
+        public decimal CAP
+        {
+            get
+            {
+                return cap;
+            }
+            set
+            {
+                if (cap != value)
+                {
+                    using (var db = new Data.AppContext())
+                    {
+                        db.Batteries.FirstOrDefault(o => o.Id == this.Id).CAP = value;
+                        db.SaveChanges();
+                    }
+                    this.SetProperty(ref cap, value);
+                }
+            }
+        }
+
+        private decimal esr = 0;
+        public decimal ESR
+        {
+            get
+            {
+                return esr;
+            }
+            set
+            {
+                if (esr != value)
+                {
+                    using (var db = new Data.AppContext())
+                    {
+                        db.Batteries.FirstOrDefault(o => o.Id == this.Id).ESR = value;
+                        db.SaveChanges();
+                    }
+                    this.SetProperty(ref esr, value);
+                }
+            }
+        }
+
+        public BatteryViewModel(int id, string code, int pos, DateTime scanTime, int storageId, int procTrayId, DateTime startStillTime, int stillTimeSpan, SortResult sortResult, decimal cap, decimal esr)
         {
             this.Id = id;
             this.code = code;
-            this.Pos = pos;
+            this.pos = pos;
             this.ScanTime = scanTime;
             this.StorageId = storageId;
             this.ProcTrayId = procTrayId;
             this.StartStillTime = startStillTime;
             this.StillTimeSpan = stillTimeSpan;
-            this.SortResult = sortResult;
+            this.sortResult = sortResult;
+            this.cap = cap;
+            this.esr = esr;
         }
     }
 }

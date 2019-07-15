@@ -13,12 +13,12 @@ namespace GMCC.Sorter.Utils
     {
         public static BatteryViewModel Convert(Model.Battery battery)
         {
-            return new BatteryViewModel(battery.Id, battery.Code, battery.Pos, battery.ScanTime, GetObject.GetById<ProcTray>(battery.ProcTrayId).StorageId, battery.ProcTrayId, GetObject.GetById<ProcTray>(battery.ProcTrayId).StartStillTime, GetObject.GetById<ProcTray>(battery.ProcTrayId).StillTimeSpan, battery.SortResult);
+            return new BatteryViewModel(battery.Id, battery.Code, battery.Pos, battery.ScanTime, GetObject.GetById<ProcTray>(battery.ProcTrayId).StorageId, battery.ProcTrayId, GetObject.GetById<ProcTray>(battery.ProcTrayId).StartStillTime, GetObject.GetById<ProcTray>(battery.ProcTrayId).StillTimeSpan, battery.SortResult, battery.CAP, battery.ESR);
         }
 
         public static List<BatteryViewModel> Convert(List<Model.Battery> batteries)
         {
-            return batteries.ConvertAll<BatteryViewModel>(o => new BatteryViewModel(o.Id, o.Code, o.Pos, o.ScanTime, GetObject.GetById<ProcTray>(o.ProcTrayId).StorageId, o.ProcTrayId, GetObject.GetById<ProcTray>(o.ProcTrayId).StartStillTime, GetObject.GetById<ProcTray>(o.ProcTrayId).StillTimeSpan, o.SortResult));
+            return batteries.ConvertAll<BatteryViewModel>(o => new BatteryViewModel(o.Id, o.Code, o.Pos, o.ScanTime, GetObject.GetById<ProcTray>(o.ProcTrayId).StorageId, o.ProcTrayId, GetObject.GetById<ProcTray>(o.ProcTrayId).StartStillTime, GetObject.GetById<ProcTray>(o.ProcTrayId).StillTimeSpan, o.SortResult, o.CAP, o.ESR));
         }
 
         public static ProcTrayViewModel Convert(Model.ProcTray procTray)

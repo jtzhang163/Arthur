@@ -138,129 +138,164 @@ namespace GMCC.Sorter.Run
         {
             if (!IsRunning) return;
 
-            if (Current.ShareDatas.Count > 0)
+
+            if (!Current.Option.IsGetShareDataExecting)
             {
-                if (Current.Option.Tray12_Id > 0)
+                Current.Option.IsGetShareDataExecting = true;
+
+                if (Current.ShareDatas.Count > 0)
                 {
-                    var chargeData = Current.ShareDatas.First(o => o.Key == "chargeCodes");
-                    var bindCode = JsonHelper.DeserializeJsonToObject<BindCode>(chargeData.Value);
-                    var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray12_Id);
-
-                    if (procTray.Id > 0 && chargeData.Status == 2)
+                    if (Current.Option.Tray12_Id > 0)
                     {
-                        if (procTray.Id == chargeData.ProcTrayId)
-                        {
+                        var chargeData = Current.ShareDatas.First(o => o.Key == "chargeCodes");
+                        var bindCode = JsonHelper.DeserializeJsonToObject<BindCode>(chargeData.Value);
+                        var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray12_Id);
 
-                        }
-                        else
+                        if (procTray.Id > 0 && chargeData.Status == 2)
                         {
-
-                            //充电位条码绑定信息传给BTS客户端
-                            var batteries = procTray.GetBatteries();
-                            var codes = new List<string>();
-                            for (var i = 1; i <= Common.TRAY_BATTERY_COUNT; i++)
+                            if (procTray.Id == chargeData.ProcTrayId)
                             {
-                                var code = "";
-                                var battery = batteries.FirstOrDefault(o => o.GetChargeOrder() == i);
-                                if (battery != null)
-                                {
-                                    code = battery.Code;
-                                }
-                                codes.Add(code);
+
                             }
-
-                            var value = new BindCode { TrayCode = procTray.Code, BatteryCodes = string.Join(",", codes.ToArray()) };
-                            chargeData.Value = JsonHelper.SerializeObject(value);
-                            chargeData.Status = 1;
-                            chargeData.ProcTrayId = procTray.Id;
-                            chargeData.UpdateTime = DateTime.Now;
-                            LogHelper.WriteInfo(string.Format("--------成功发送充电位条码绑定信息给BTS【流程托盘ID：{0}，条码：{1}】---------", procTray.Id, procTray.Code));
-                        }
-                    }
-                }
-
-                if (Current.Option.Tray22_Id > 0)
-                {
-                    var dischargeData = Current.ShareDatas.First(o => o.Key == "dischargeCodes");
-                    var bindCode = JsonHelper.DeserializeJsonToObject<BindCode>(dischargeData.Value);
-                    var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray22_Id);
-
-                    if (procTray.Id > 0 && dischargeData.Status == 2)
-                    {
-                        if (procTray.Id == dischargeData.ProcTrayId)
-                        {
-
-                        }
-                        else
-                        {
-                            //放电位条码绑定信息传给BTS客户端
-                            var batteries = procTray.GetBatteries();
-                            var codes = new List<string>();
-                            for (var i = 1; i <= Common.TRAY_BATTERY_COUNT; i++)
+                            else
                             {
-                                var code = "";
-                                var battery = batteries.FirstOrDefault(o => o.GetChargeOrder() == i);
-                                if (battery != null)
+
+                                //充电位条码绑定信息传给BTS客户端
+                                var batteries = procTray.GetBatteries();
+                                var codes = new List<string>();
+                                for (var i = 1; i <= Common.TRAY_BATTERY_COUNT; i++)
                                 {
-                                    code = battery.Code;
-                                }
-                                codes.Add(code);
-                            }
-
-                            var value = new BindCode { TrayCode = procTray.Code, BatteryCodes = string.Join(",", codes.ToArray()) };
-                            dischargeData.Value = JsonHelper.SerializeObject(value);
-                            dischargeData.Status = 1;
-                            dischargeData.ProcTrayId = procTray.Id;
-                            dischargeData.UpdateTime = DateTime.Now;
-                            LogHelper.WriteInfo(string.Format("--------成功发送放电位条码绑定信息给BTS【流程托盘ID：{0}，条码：{1}】---------", procTray.Id, procTray.Code));
-                        }
-                    }
-                }
-
-                if (Current.Option.Tray23_Id > 0)
-                {
-
-                    var sortingResults = Current.ShareDatas.First(o => o.Key == "sortingResults");
-                    var bindResults = JsonHelper.DeserializeJsonToObject<SortingResult>(sortingResults.Value);
-                    var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray23_Id);
-
-                    if (sortingResults.Status == 1)
-                    {
-                        if (bindResults.TrayCode == procTray.Code)
-                        {
-                            var results = bindResults.Results.Split(',');
-                            for (int i = 0; i < results.Length; i++)
-                            {
-                                //i:绑盘序号
-                                Current.MainMachine.Commor.Write(string.Format("D{0:D3}", 401 + i), ushort.Parse(results[OrderManage.GetChargeOrderBySortOrder(i + 1) - 1]));
-                            }
-                            LogHelper.WriteInfo(string.Format("--------成功发送分选结果数据给PLC【流程托盘ID：{0}，条码：{1}】---------", procTray.Id, procTray.Code));
-
-                            var batteries = procTray.GetBatteries();
-                            var batteryViewModels = ContextToViewModel.Convert(batteries);
-
-                            for (int i = 0; i < results.Length; i++)
-                            {
-                                //i:通道序号
-                                var result = int.Parse(results[i]);
-                                if (result > 0)
-                                {
-                                    var battery = batteryViewModels.FirstOrDefault(o => o.Pos == OrderManage.GetBindOrderByChargeOrder(i + 1));
+                                    var code = "";
+                                    var battery = batteries.FirstOrDefault(o => o.GetChargeOrder() == i);
                                     if (battery != null)
                                     {
-                                        battery.SortResult = (SortResult)result;
+                                        code = battery.Code;
                                     }
+                                    codes.Add(code);
+                                }
+
+                                var value = new BindCode { TrayCode = procTray.Code, BatteryCodes = string.Join(",", codes.ToArray()) };
+                                chargeData.Value = JsonHelper.SerializeObject(value);
+                                chargeData.Status = 1;
+                                chargeData.ProcTrayId = procTray.Id;
+                                chargeData.UpdateTime = DateTime.Now;
+                                LogHelper.WriteInfo(string.Format("--------成功发送充电位条码绑定信息给BTS【流程托盘ID：{0}，条码：{1}】---------", procTray.Id, procTray.Code));
+                            }
+                        }
+                    }
+
+                    if (Current.Option.Tray22_Id > 0)
+                    {
+                        var dischargeData = Current.ShareDatas.First(o => o.Key == "dischargeCodes");
+                        var bindCode = JsonHelper.DeserializeJsonToObject<BindCode>(dischargeData.Value);
+                        var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray22_Id);
+
+                        if (procTray.Id > 0 && dischargeData.Status == 2)
+                        {
+                            if (procTray.Id == dischargeData.ProcTrayId)
+                            {
+
+                            }
+                            else
+                            {
+                                //放电位条码绑定信息传给BTS客户端
+                                var batteries = procTray.GetBatteries();
+                                var codes = new List<string>();
+                                for (var i = 1; i <= Common.TRAY_BATTERY_COUNT; i++)
+                                {
+                                    var code = "";
+                                    var battery = batteries.FirstOrDefault(o => o.GetChargeOrder() == i);
+                                    if (battery != null)
+                                    {
+                                        code = battery.Code;
+                                    }
+                                    codes.Add(code);
+                                }
+
+                                var value = new BindCode { TrayCode = procTray.Code, BatteryCodes = string.Join(",", codes.ToArray()) };
+                                dischargeData.Value = JsonHelper.SerializeObject(value);
+                                dischargeData.Status = 1;
+                                dischargeData.ProcTrayId = procTray.Id;
+                                dischargeData.UpdateTime = DateTime.Now;
+                                LogHelper.WriteInfo(string.Format("--------成功发送放电位条码绑定信息给BTS【流程托盘ID：{0}，条码：{1}】---------", procTray.Id, procTray.Code));
+                            }
+                        }
+                    }
+
+                    if (Current.Option.Tray23_Id > 0)
+                    {
+                        var procTray = GetObject.GetById<ProcTray>(Current.Option.Tray23_Id);
+
+                        var sortingResults = Current.ShareDatas.First(o => o.Key == "sortingResults");
+                        var capResults = Current.ShareDatas.First(o => o.Key == "capResults");
+                        var esrResults = Current.ShareDatas.First(o => o.Key == "esrResults");
+
+                        if (sortingResults.Status == 1 && capResults.Status == 1 && esrResults.Status == 1)
+                        {
+                            var sortingResult_sort = JsonHelper.DeserializeJsonToObject<SortingResult>(sortingResults.Value);
+                            var sortingResult_cap = JsonHelper.DeserializeJsonToObject<SortingResult>(capResults.Value);
+                            var sortingResult_esr = JsonHelper.DeserializeJsonToObject<SortingResult>(esrResults.Value);
+
+                            if (sortingResult_sort.TrayCode == procTray.Code)
+                            {
+                                try
+                                {
+                                    var sortList = sortingResult_sort.Results.Split(',');
+                                    var capList = sortingResult_cap.Results.Split(',');
+                                    var esrList = sortingResult_esr.Results.Split(',');
+
+                                    for (int i = 0; i < sortList.Length; i++)
+                                    {
+                                        //i:绑盘序号
+                                        Current.MainMachine.Commor.Write(string.Format("D{0:D3}", 401 + i), ushort.Parse(sortList[OrderManage.GetChargeOrderBySortOrder(i + 1) - 1]));
+                                    }
+                                    LogHelper.WriteInfo(string.Format("--------成功发送分选结果数据给PLC【流程托盘ID：{0}，条码：{1}】---------", procTray.Id, procTray.Code));
+
+                                    var batteries = procTray.GetBatteries();
+                                    var batteryViewModels = ContextToViewModel.Convert(batteries);
+
+                                    for (int i = 0; i < sortList.Length; i++)
+                                    {
+                                        //i:通道序号
+                                        var sort = int.Parse(sortList[i]);
+                                        var cap = int.Parse(capList[i]);
+                                        var esr = int.Parse(esrList[i]);
+
+                                        if (sort > 0)
+                                        {
+                                            var battery = batteryViewModels.FirstOrDefault(o => o.Pos == OrderManage.GetBindOrderByChargeOrder(i + 1));
+                                            if (battery != null)
+                                            {
+                                                battery.SortResult = (SortResult)sort;
+                                                battery.CAP = cap;
+                                                battery.ESR = esr;
+                                            }
+                                        }
+                                    }
+
+                                    sortingResults.Status = 2;
+                                    sortingResults.ProcTrayId = procTray.Id;
+                                    sortingResults.UpdateTime = DateTime.Now;
+
+                                    capResults.Status = 2;
+                                    capResults.ProcTrayId = procTray.Id;
+                                    capResults.UpdateTime = DateTime.Now;
+
+
+                                    esrResults.Status = 2;
+                                    esrResults.ProcTrayId = procTray.Id;
+                                    esrResults.UpdateTime = DateTime.Now;
+                                }
+                                catch (Exception ex)
+                                {
+                                    Running.StopRunAndShowMsg(ex);
                                 }
                             }
-
-                            sortingResults.Status = 2;
-                            sortingResults.ProcTrayId = procTray.Id;
-                            sortingResults.UpdateTime = DateTime.Now;
-
                         }
 
                     }
                 }
+                Current.Option.IsGetShareDataExecting = false;
             }
 
         }
