@@ -28,7 +28,7 @@ namespace GMCC.Sorter.Business
             }
             var content = Current.Option.PackDetailWebSiteUrl.Replace("[pack_code]", pack.Code);
 
-            var result = Arthur.Core.Coder.QRCoder.Create(content, 5, 4, AppDomain.CurrentDomain.BaseDirectory + "Images\\gmcc_logo.png", 30);
+            var result = Arthur.Core.Coder.QRCoder.Create(content, 5, 4, AppDomain.CurrentDomain.BaseDirectory + "Images\\gmcc_logo_4_qrcode.png", 36);
             if (result.IsFailed)
             {
                 return result;

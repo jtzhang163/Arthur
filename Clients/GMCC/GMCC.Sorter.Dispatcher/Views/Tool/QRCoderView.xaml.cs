@@ -45,7 +45,11 @@ namespace GMCC.Sorter.Dispatcher.Views
             this.Option = option;
             Assembly assembly = Assembly.LoadFile(AppDomain.CurrentDomain.BaseDirectory + "Arthur.App.View.dll");
             Type type = assembly.GetType("Arthur.App.View.Tool.QRCoder." + this.Option);
-            object page = Activator.CreateInstance(type, new object[] { id });
+            object page = Activator.CreateInstance(type, new object[]
+            {
+                "http://oa.gmccchina.com:96/fenxuan.aspx?XH=XXXX",
+                AppDomain.CurrentDomain.BaseDirectory + "Images\\gmcc_logo_4_qrcode.png"
+            });
             grid.Children.Clear();
             this.grid.Children.Add((UIElement)page);
         }

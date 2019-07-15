@@ -18,17 +18,16 @@ namespace Arthur.App.View.Tool.QRCoder
     {
 
         private Bitmap bimg = null; //保存生成的二维码，方便后面保存
-        private string logoImagepath = string.Empty; //存储Logo的路径
+        private string logoImagePath = string.Empty; //存储Logo的路径
 
-        public Details(int id)
+        public Details(string content, string logoPath)
         {
             InitializeComponent();
-        }
-
-
-        private void edit_Click(object sender, RoutedEventArgs e)
-        {
-
+            this.content.Text = content;
+            if (!string.IsNullOrEmpty(logoPath))
+            {
+                SetLogoImage(logoPath);
+            }
         }
 
         private void textbox_GotFocus(object sender, RoutedEventArgs e)
@@ -48,11 +47,16 @@ namespace Arthur.App.View.Tool.QRCoder
             openDialog.Filter = "图片文件|*.jpg;*.png;*.gif|All files(*.*)|*.*";
             if (openDialog.ShowDialog() == true)
             {
-                logoImagepath = openDialog.FileName;
-                Bitmap bImg = new Bitmap(logoImagepath);
-                imgLogo.Source = new BitmapImage(new Uri(openDialog.FileName));
-                ResetImageStrethch(imgLogo, bImg);
+                SetLogoImage(openDialog.FileName);
             }
+        }
+
+        private void SetLogoImage(string logoPath)
+        {
+            logoImagePath = logoPath;
+            Bitmap bImg = new Bitmap(logoPath);
+            imgLogo.Source = new BitmapImage(new Uri(logoPath));
+            ResetImageStrethch(imgLogo, bImg);
         }
 
         /// <summary>
@@ -102,7 +106,7 @@ namespace Arthur.App.View.Tool.QRCoder
                 return;
             }
 
-            var ret = Arthur.Core.Coder.QRCoder.Create(content.Text, Convert.ToInt32(scale.Text), Convert.ToInt32(version.Text), logoImagepath, Convert.ToInt32(logo_scale.Text));
+            var ret = Arthur.Core.Coder.QRCoder.Create(content.Text, Convert.ToInt32(scale.Text), Convert.ToInt32(version.Text), logoImagePath, Convert.ToInt32(logo_scale.Text));
             if (ret.IsSucceed)
             {
                 bimg = (Bitmap)ret.Data;
