@@ -1,6 +1,8 @@
 ﻿using Arthur.App;
+using Arthur.Core;
 using GMCC.Sorter.Data;
 using GMCC.Sorter.Model;
+using GMCC.Sorter.Other;
 using GMCC.Sorter.Utils;
 using System;
 using System.Collections.Generic;
@@ -254,6 +256,30 @@ namespace GMCC.Sorter.ViewModel
             set
             {
                 SetProperty(ref timeNow, value);
+            }
+        }
+
+        /// <summary>
+        /// 获取料仓任务优先级
+        /// </summary>
+        /// <param name="taskType"></param>
+        /// <param name="taskPriorityType"></param>
+        /// <returns></returns>
+        public long GetPriority(TaskType taskType, TaskPriorityType taskPriorityType)
+        {
+            if (taskType == TaskType.下料)
+            {
+                //最先开始静置的先下料
+                return TimeHelper.GetTimeStamp(this.ProcTray.StartStillTime);
+            }
+
+            if (Current.Option.TaskPriorityType == Other.TaskPriorityType.层优先)
+            {
+                return (this.Column >= Current.Option.LastFeedTaskStorageColumn ? 0 : 100) - this.Floor;
+            }
+            else
+            {
+                return (this.Column >= Current.Option.LastFeedTaskStorageColumn ? 0 : 100) + this.Column;
             }
         }
     }

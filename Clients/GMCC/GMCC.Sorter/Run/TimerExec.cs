@@ -48,30 +48,7 @@ namespace GMCC.Sorter.Run
                                 var storages = Factory.TaskFactory.CanGetOrPutStorages(type);
                                 if (storages.Count > 0)
                                 {
-                                    StorageViewModel storage = null;
-
-                                    if (Current.Option.TaskPriorityType == Other.TaskPriorityType.层优先)
-                                    {
-                                        if (type == TaskType.上料)
-                                        {
-                                            storage = storages.OrderByDescending(o => o.Floor).First();
-                                        }
-                                        else
-                                        {
-                                            storage = storages.OrderBy(o => o.Floor).First();
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (type == TaskType.上料)
-                                        {
-                                            storage = storages.OrderBy(o => o.Column).First();
-                                        }
-                                        else
-                                        {
-                                            storage = storages.OrderByDescending(o => o.Column).First();
-                                        }
-                                    }
+                                    StorageViewModel storage = storages.OrderBy(o => o.GetPriority(type, Current.Option.TaskPriorityType)).First();
 
                                     Current.Task.StorageId = storage.Id;
                                     Current.Task.Type = type;
@@ -126,7 +103,7 @@ namespace GMCC.Sorter.Run
                         else
                         {
                             Current.Option.Tray21_Id = Current.Task.ProcTrayId;
-                            if(storage.ProcTrayId > 0)
+                            if (storage.ProcTrayId > 0)
                             {
                                 storage.ProcTray.StillTimeSpan = Convert.ToInt32((DateTime.Now - storage.ProcTray.StartStillTime).TotalMinutes);
                                 storage.ProcTrayId = 0;
@@ -141,6 +118,10 @@ namespace GMCC.Sorter.Run
                     if (Current.Option.IsTaskReady)
                     {
                         Current.Task.PreType = Current.Task.Type;
+                        if (Current.Task.Type == Model.TaskType.上料)
+                        {
+                            Current.Option.LastFeedTaskStorageColumn = GetObject.GetById<StorageViewModel>(Current.Task.StorageId).Column;
+                        }
                         Current.Task.Status = Model.TaskStatus.完成;
                         new TaskManage().AddTaskLog();
                     }

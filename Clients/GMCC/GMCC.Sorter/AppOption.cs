@@ -175,6 +175,39 @@ namespace GMCC.Sorter
         }
 
 
+
+        private int lastFeedTaskStorageColumn = -2;
+        /// <summary>
+        /// 上个上料任务料仓的列序号
+        /// </summary>
+        public int LastFeedTaskStorageColumn
+        {
+            get
+            {
+                if (lastFeedTaskStorageColumn == -2)
+                {
+                    lastFeedTaskStorageColumn = Arthur.Core.Transfer._Convert.To(Arthur.App.Business.Setting.GetOption("LastFeedTaskStorageColumn"), -1);
+                    if (lastFeedTaskStorageColumn == -1)
+                    {
+                        lastFeedTaskStorageColumn = 0;
+                        Arthur.App.Business.Setting.SetOption("LastFeedTaskStorageColumn", lastFeedTaskStorageColumn.ToString(), "上个上料任务料仓的列序号");
+                    }
+                }
+                return lastFeedTaskStorageColumn;
+            }
+            set
+            {
+                if (lastFeedTaskStorageColumn != value)
+                {
+                    Arthur.App.Business.Setting.SetOption("LastFeedTaskStorageColumn", value.ToString());
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设置. {0} 上个上料任务料仓的列序号: [{1}] 修改为 [{2}]", Name, lastFeedTaskStorageColumn, value), Arthur.App.Model.OpType.编辑);
+                    SetProperty(ref lastFeedTaskStorageColumn, value);
+                }
+            }
+        }
+
+
+
         /// <summary>
         /// 上下料任务准备就绪
         /// </summary>
