@@ -86,6 +86,83 @@ namespace GMCC.Sorter.Business
             return count;
         }
 
+        public static void Init()
+        {
+            Current.SortPacks.ForEach(o =>
+            {
+                o.PackId = 0;
+                o.Count = 0;
+            });
+            Current.Option.CurrentPackOrder = 0;
+        }
+
+
+
+        public static void AfterPack(int pos)
+        {
+            var procTrayId = Current.Option.Tray23_Id > 0 ? Current.Option.Tray23_Id : Current.Option.Tray23_PreId;
+            var result = BatteryManage.GetBattery(procTrayId, pos);
+            if (result.IsFailed)
+            {
+                return;
+            }
+
+            var battery = (Battery)result.Data;
+            if (battery.SortResult == SortResult.Unknown || (int)battery.SortResult > 5)
+            {
+                return;
+            }
+
+            var sortResult = battery.SortResult;
+
+            var sortPack = Current.SortPacks.FirstOrDefault(o => o.SortResult == sortResult);
+
+            result = BatteryManage.GetFillBatteryCount(sortPack.PackId);
+            if (result.IsFailed)
+            {
+                Running.ShowErrorMsg(result.Msg);
+                return;
+            }
+
+            var fillCount = (int)result.Data;
+
+            //新建箱体
+            if (sortPack.PackId == 0 || fillCount == Current.Option.PACK_FILL_COUNT)
+            {
+                if (fillCount == Current.Option.PACK_FILL_COUNT)
+                {
+                    PackManage.Finish(sortPack);
+                }
+
+                var code = sortResult + DateTime.Now.ToString("yyMMddHHmm"); //箱体号
+                result = new PackManage().Create(new Pack(code, sortResult));
+                if (result.IsFailed)
+                {
+                    Running.ShowErrorMsg("新建箱体异常：" + result.Msg);
+                    return;
+                }
+                sortPack.PackId = (int)result.Data;
+                sortPack.Count = 0;
+            }
+
+            result = BatteryManage.SetPacking(battery.Id, sortPack.PackId);
+            if (result.IsFailed)
+            {
+                return;
+            }
+
+            sortPack.Count++;
+
+            //if (sortPack.Count % Current.Option.PACK_ALARM_COUNT == 0)
+            //{
+            //    if (IsPackEnabled)
+            //    {
+            //        this.Commor.Write("Dxxx", (ushort)0);
+            //    }
+            //}
+
+        }
+
         public static Result Finish(SortPackViewModel sortPack)
         {
             var result = BatteryManage.SetPackFinish(sortPack.PackId);

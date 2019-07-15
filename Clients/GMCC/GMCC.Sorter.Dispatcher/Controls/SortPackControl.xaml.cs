@@ -70,5 +70,15 @@ namespace GMCC.Sorter.Dispatcher.Controls
                 Running.ShowErrorMsg(ex.Message);
             }
         }
+
+        private void btnInitPack_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("确定当前打包状态为初始化状态（分选位托盘尚未开始打包，且全部打包箱体中电池个数为0）？", "初始化打包确认", MessageBoxButton.OKCancel) != MessageBoxResult.OK)
+            {
+                return;
+            }
+
+            PackManage.Init();
+        }
     }
 }
