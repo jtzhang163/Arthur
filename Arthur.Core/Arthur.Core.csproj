@@ -60,6 +60,7 @@
     <Compile Include="EnumberHelper.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="NetHelper.cs" />
+    <Compile Include="TimeHelper.cs" />
     <Compile Include="Transfer\_Convert.cs" />
   </ItemGroup>
   <ItemGroup>
