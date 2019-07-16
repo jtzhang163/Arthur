@@ -7,27 +7,6 @@ using System.Threading.Tasks;
 namespace GMCC.Sorter.Other
 {
     /// <summary>
-    /// 单体测试结果
-    /// 数据由BTS客户端生成
-    /// </summary>
-    public sealed class MonomerTestResult
-    {
-        public int ID { get; set; }
-        public DateTime UpdateTime { get; set; }
-        public string Barcode { get; set; }
-        
-        /// <summary>
-        /// 容量
-        /// </summary>
-        public decimal CAP { get; set; }
-
-        /// <summary>
-        /// 内阻
-        /// </summary>
-        public decimal ESR { get; set; }
-    }
-
-    /// <summary>
     /// 自动分选并打包结果，数据由调度系统生成
     /// </summary>
     public sealed class AutoSorting
@@ -59,5 +38,4 @@ namespace GMCC.Sorter.Other
 
         public string UserName { get; set; }
     }
-
 }

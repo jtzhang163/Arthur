@@ -71,35 +71,6 @@ namespace GMCC.Sorter.Business
             }
         }
 
-        /// <summary>
-        /// 获取腔体电容电阻参数
-        /// </summary>
-        /// <param name="code"></param>
-        /// <returns></returns>
-        public static Result GetTestResult(string code)
-        {
-            using (var db = new GMCCContext())
-            {
-                var sql = string.Format("SELECT TOP 1 [ID],[UpdateTime],[Barcode],[CAP],[ESR] FROM MonomerTestResult WHERE [Barcode] = '{0}' ORDER BY [ID] DESC;", code);
-                try
-                {
-                    var testResults = db.Database.SqlQuery<MonomerTestResult>(sql).ToList();
-                    if (testResults.Count > 0)
-                    {
-                        return Result.SuccessHasData(testResults[0]);
-                    }
-                    else
-                    {
-                        return new Result("远程数据库中不包含腔体测试结果，code：" + code);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    return new Result(ex);
-                }
-            }
-        }
-
         public static Result Upload(Battery battery)
         {
             Result result;
@@ -267,39 +238,5 @@ namespace GMCC.Sorter.Business
                 }
             }
         }
-
-        public static Result GetAndSaveTestResult(Battery battery)
-        {
-            var result = GetTestResult(battery.Code);
-            if (result.IsFailed)
-            {
-                return result;
-            }
-
-            var testResult = (MonomerTestResult)result.Data;
-            using (var db = new Data.AppContext())
-            {
-                try
-                {
-                    battery = db.Batteries.Where(o => o.Id == battery.Id).FirstOrDefault();
-                    if (battery == null)
-                    {
-                        return new Result("");
-                    }
-                    battery.CAP = testResult.CAP;
-                    battery.ESR = testResult.CAP;
-                    battery.TestTime = testResult.UpdateTime;
-
-                    db.SaveChanges();
-                    return Result.Success;
-                }
-                catch (Exception ex)
-                {
-                    return new Result(ex);
-                }
-            }
-        }
-
-
     }
 }

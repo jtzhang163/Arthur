@@ -29,15 +29,8 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (BatteryManage.GetFirstBatteryNotUpload(out Battery battery).IsSucceed)
                 {
-                    this.RealtimeStatus = "获取数据：" + battery.Code;
-                    var result = BatteryManage.GetAndSaveTestResult(battery);
-                    if (result.IsFailed)
-                    {
-                        return;
-                    }
                     this.RealtimeStatus = "开始上传：" + battery.Code;
-
-                    result = BatteryManage.Upload(battery);
+                    var result = BatteryManage.Upload(battery);
                     if (result.IsFailed)
                     {
                         return;
