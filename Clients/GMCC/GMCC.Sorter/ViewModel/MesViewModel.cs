@@ -29,16 +29,15 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (BatteryManage.GetFirstBatteryNotUpload(out Battery battery).IsSucceed)
                 {
-                    this.RealtimeStatus = "开始上传：" + battery.Code;
                     var result = BatteryManage.Upload(battery);
                     if (result.IsFailed)
                     {
                         return;
                     }
-                    this.RealtimeStatus = "上传完成：" + battery.Code;
+                    this.RealtimeStatus = battery.Code + " OK";
                 }
+                this.IsAlive = true;
             }
-            this.IsAlive = true;
         }
     }
 }
