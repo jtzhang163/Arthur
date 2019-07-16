@@ -34,6 +34,10 @@ namespace GMCC.Sorter.Dispatcher
             {
                 this.WindowState = WindowState.Maximized;
             }
+            else
+            {
+                this.ResizeMode = ResizeMode.CanMinimize;
+            }
 
             grid_mainview.Children.Add(new MainViewUC());
 
