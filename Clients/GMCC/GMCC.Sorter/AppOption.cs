@@ -147,6 +147,7 @@ namespace GMCC.Sorter
         private int currentPackOrder = -2;
         /// <summary>
         /// 当前分选托盘打包次序
+        /// 1-32
         /// </summary>
         public int CurrentPackOrder
         {

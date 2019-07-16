@@ -94,7 +94,7 @@ namespace GMCC.Sorter.Business
                 o.PackId = 0;
                 o.Count = 0;
             });
-            Current.Option.CurrentPackOrder = 0;
+            Current.Option.CurrentPackOrder = 1;
         }
 
 
