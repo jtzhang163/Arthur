@@ -258,8 +258,8 @@ namespace GMCC.Sorter.Run
                                     {
                                         //i:通道序号
                                         var sort = int.Parse(sortList[i]);
-                                        var cap = int.Parse(capList[i]);
-                                        var esr = int.Parse(esrList[i]);
+                                        var cap = decimal.Parse(capList[i]);
+                                        var esr = decimal.Parse(esrList[i]);
 
                                         if (sort > 0)
                                         {

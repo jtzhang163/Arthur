@@ -194,7 +194,6 @@ namespace GMCC.Sorter
                 if (sortPacks == null)
                 {
                     sortPacks = new List<SortPackViewModel>();
-                    var random = new Random();
                     for (int i = 0; i < 5; i++)
                     {
                         var packId = 0;

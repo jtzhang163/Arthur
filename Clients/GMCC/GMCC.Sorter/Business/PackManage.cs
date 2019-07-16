@@ -90,6 +90,7 @@ namespace GMCC.Sorter.Business
         {
             Current.SortPacks.ForEach(o =>
             {
+                BatteryManage.SetPackFinish(o.PackId);
                 o.PackId = 0;
                 o.Count = 0;
             });
