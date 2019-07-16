@@ -43,17 +43,21 @@ namespace Arthur.App.Comm
         public Result Connect()
         {
             var result = new Result();
-            if (this.Communicator is SerialCommor)
+
+            if (!this.Connected)
             {
-                result = new SerialComm().Connect(this);
-            }
-            else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
-            {
-                result = new OmronFinsTcpComm().Connect(this);
-            }
-            else if (this.Communicator is EthernetCommor)
-            {
-                result = new EthernetComm().Connect(this);
+                if (this.Communicator is SerialCommor)
+                {
+                    result = new SerialComm().Connect(this);
+                }
+                else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
+                {
+                    result = new OmronFinsTcpComm().Connect(this);
+                }
+                else if (this.Communicator is EthernetCommor)
+                {
+                    result = new EthernetComm().Connect(this);
+                }
             }
 
             this.Connected = result.IsSucceed;
