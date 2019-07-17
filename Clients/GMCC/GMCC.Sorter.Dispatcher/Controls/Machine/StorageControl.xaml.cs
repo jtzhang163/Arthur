@@ -33,12 +33,14 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
 
         public StorageControl(int id)
         {
-
             InitializeComponent();
+
             this.Storage = Current.Storages.FirstOrDefault(o => o.Id == id);
             this.DataContext = this.Storage;
             this.Col = this.Storage.Column;
             this.Floor = this.Storage.Floor;
+
+            this.lbShowInfo.FontSize = Common.PROJ_NO == "0079" ? 12 : 8;
         }
 
         private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)

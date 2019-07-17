@@ -39,7 +39,7 @@ namespace GMCC.Sorter.Factory
             {
                 for (var j = 0; j < Common.STOR_FLOOR_COUNT; j++)
                 {
-                    var storage1 = Current.Storages.First(o => o.Column == i + 1 && o.Floor == 5 - j);
+                    var storage1 = Current.Storages.First(o => o.Column == i + 1 && o.Floor == Common.STOR_FLOOR_COUNT - j);
                     var storage2 = Current.Storages.First(o => o.Column == i + 1 && o.Floor == j + 1);
 
                     if (type == TaskType.上料 && storage1.ProcTrayId < 1)

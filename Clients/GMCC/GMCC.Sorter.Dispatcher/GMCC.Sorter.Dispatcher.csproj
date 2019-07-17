@@ -126,6 +126,9 @@
     <Compile Include="UserControls\Machine\MachinePlc\Edit.xaml.cs">
       <DependentUpon>Edit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\MainView\Details0081.xaml.cs">
+      <DependentUpon>Details0081.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\Platform\BtsClient\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
     </Compile>
@@ -198,8 +201,8 @@
     <Compile Include="UserControls\Machine\Tray\Index.xaml.cs">
       <DependentUpon>Index.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\MainView\Details.xaml.cs">
-      <DependentUpon>Details.xaml</DependentUpon>
+    <Compile Include="UserControls\MainView\Details0079.xaml.cs">
+      <DependentUpon>Details0079.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Platform\MES\Details.xaml.cs">
       <DependentUpon>Details.xaml</DependentUpon>
@@ -343,6 +346,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="UserControls\MainView\Details0081.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UserControls\Platform\BtsClient\Details.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -439,7 +446,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\MainView\Details.xaml">
+    <Page Include="UserControls\MainView\Details0079.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -28,7 +28,7 @@ namespace GMCC.Sorter.Dispatcher.Views
 
         public string Option { get; set; }
 
-        public MainViewUC() : this("Details")
+        public MainViewUC() : this("Details" + Common.PROJ_NO)
         {
             if (SystemParameters.PrimaryScreenHeight < 800)
             {

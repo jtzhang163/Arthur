@@ -25,9 +25,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
     /// <summary>
     /// Details.xaml 的交互逻辑
     /// </summary>
-    public partial class Details : UserControl
+    public partial class Details0081 : UserControl
     {
-        public Details(int id)
+        public Details0081(int id)
         {
             InitializeComponent();
 
@@ -61,15 +61,13 @@ namespace GMCC.Sorter.Dispatcher.UserControls.MainView
 
             if (storageControl.Col < Common.STOR_COL_COUNT / 2 + 1)
             {
-                //row = 6 - storageControl.Floor;
                 row = storageControl.Floor;
                 col = 1 + storageControl.Col;
             }
             else
             {
-                //row = 13 - storageControl.Floor;
-                row = 7 + storageControl.Floor;
-                col = storageControl.Col - 8;
+                row = 5 + storageControl.Floor;
+                col = storageControl.Col - 14;
             }
 
             Grid.SetRow(storageControl, row);

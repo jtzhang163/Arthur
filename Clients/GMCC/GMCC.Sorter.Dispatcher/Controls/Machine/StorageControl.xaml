@@ -23,8 +23,8 @@
                 <!--<RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>-->
             </Grid.RowDefinitions>
-            <Label Content="{Binding ShowInfo}" MouseDoubleClick="Label_MouseDoubleClick" MouseDown="Label_MouseDown"
-                   Foreground="Gray" FontSize="12" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Label x:Name="lbShowInfo" Content="{Binding ShowInfo}" MouseDoubleClick="Label_MouseDoubleClick" MouseDown="Label_MouseDown"
+                   Foreground="Gray" Padding="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <Label.Background>
                     <MultiBinding Converter="{StaticResource storageBackgroundConverter}" ConverterParameter="StatusAndIsEnabled">
                         <Binding Path="Status"/>
