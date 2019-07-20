@@ -128,9 +128,9 @@ namespace GMCC.Sorter.Business
             var fillCount = (int)result.Data;
 
             //新建箱体
-            if (sortPack.PackId == 0 || fillCount == Current.Option.PACK_FILL_COUNT)
+            if (sortPack.PackId == 0 || fillCount == Common.PACK_FILL_COUNT)
             {
-                if (fillCount == Current.Option.PACK_FILL_COUNT)
+                if (fillCount == Common.PACK_FILL_COUNT)
                 {
                     PackManage.Finish(sortPack);
                 }

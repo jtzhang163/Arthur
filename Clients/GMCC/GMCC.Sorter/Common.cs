@@ -48,5 +48,11 @@ namespace GMCC.Sorter
         /// 托盘满盘电池数
         /// </summary>
         public static int TRAY_BATTERY_COUNT = 32;
+
+        public static int PACK_FILL_COUNT = 300;
+
+        public static string PACK_DETAILS_WEB_SITE_URL = "http://oa.gmccchina.com:96/fenxuan.aspx?XH=[pack_code]";
+
+        public static string SAVE_QRCODE_BASE_DIRECTOTY = "D:\\GMCC.Sorter\\QRCODE_FILES\\";
     }
 }

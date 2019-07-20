@@ -1078,9 +1078,5 @@ namespace GMCC.Sorter
             }
         }
 
-        public int PACK_ALARM_COUNT = 75;
-        public int PACK_FILL_COUNT = 300;
-        public string PackDetailWebSiteUrl = "http://oa.gmccchina.com:96/fenxuan.aspx?XH=[pack_code]";
-        public string SaveQRCodeBaseDirectory = "D:\\GMCC.Sorter\\QRCODE_FILES\\";
     }
 }

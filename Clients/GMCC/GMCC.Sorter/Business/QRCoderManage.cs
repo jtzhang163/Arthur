@@ -16,7 +16,7 @@ namespace GMCC.Sorter.Business
 
         public static string GetSaveQRCodeDirPath(SortResult sortResult)
         {
-            return Current.Option.SaveQRCodeBaseDirectory + string.Format("{0}\\{1}", sortResult, DateTime.Now.ToString("yyyyMM"));
+            return Common.SAVE_QRCODE_BASE_DIRECTOTY + string.Format("{0}\\{1}", sortResult, DateTime.Now.ToString("yyyyMM"));
         }
 
         public static Result Create(int packId)
@@ -26,7 +26,7 @@ namespace GMCC.Sorter.Business
             {
                 return new Result("系统中不包含箱体，ID:" + packId);
             }
-            var content = Current.Option.PackDetailWebSiteUrl.Replace("[pack_code]", pack.Code);
+            var content = Common.PACK_DETAILS_WEB_SITE_URL.Replace("[pack_code]", pack.Code);
 
             var result = Arthur.Core.Coder.QRCoder.Create(content, 5, 4, AppDomain.CurrentDomain.BaseDirectory + "Images\\gmcc_logo_4_qrcode.png", 36);
             if (result.IsFailed)
