@@ -90,7 +90,7 @@ namespace Arthur.App.Comm
                             {
                                 sw.Start();
                                 socket.Receive(Data);
-                                getStr = Encoding.ASCII.GetString(Data).Trim('\0');
+                                getStr = Encoding.ASCII.GetString(Data);
                                 connectSuccess = true;
                             }
                             catch { }
@@ -109,7 +109,7 @@ namespace Arthur.App.Comm
                         if (connectSuccess)
                         {
                             //throw new Exception("Timed out while trying to connect.");
-                            recvData = getStr.Replace("\r", "").Replace("\n", "").Trim('\0').Trim();
+                            recvData = getStr.Trim('\0', ' ','\r', '\n');
                         }
                         else
                         {
@@ -119,7 +119,7 @@ namespace Arthur.App.Comm
                     else
                     {
                         socket.Receive(Data);
-                        recvData = Encoding.ASCII.GetString(Data).Trim('\0');
+                        recvData = Encoding.ASCII.GetString(Data).Trim('\0', ' ', '\r', '\n');
                     }
                 }
                 else
