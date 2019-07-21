@@ -127,8 +127,11 @@ namespace GMCC.Sorter.ViewModel
             {
                 this.RealtimeStatus = "通信中...";
 
-                // 最小值 -5540111 最大值 805192
-                Current.Option.JawPos = ((int)ret3.Data + 5542000) / 11900;
+                //0079 最左值 -5540111 最右值 805192
+                //0081 最左值 12040249 最右值 -985910  
+
+                Current.Option.JawPos = Common.PROJ_NO == "0079" ? ((int)ret3.Data + 5542000) / 11900 :
+                    (12040000 - (int)ret3.Data) / 21200;
 
                 this.IsAlive = true;
             }
