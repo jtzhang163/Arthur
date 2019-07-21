@@ -275,7 +275,7 @@ namespace GMCC.Sorter.ViewModel
 
             if (Current.Option.TaskPriorityType == Other.TaskPriorityType.层优先)
             {
-                return (this.Column >= Current.Option.LastFeedTaskStorageColumn ? 0 : 100) - this.Floor;
+                return (this.Column > Current.Option.LastFeedTaskStorageColumn ? 0 : 100) - this.Floor;
             }
             else
             {
