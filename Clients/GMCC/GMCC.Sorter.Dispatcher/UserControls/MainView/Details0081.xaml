@@ -62,9 +62,9 @@
                     </Grid>
                     <Grid x:Name="jaw" Grid.Row="4" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="15">
                     </Grid>
-                    <Grid x:Name="bind_mach" Grid.Row="0" Grid.Column="17" Grid.RowSpan="10" Grid.ColumnSpan="2" Margin="5,20,5,5">
+                    <Grid x:Name="unbind_mach" Grid.Row="0" Grid.Column="17" Grid.RowSpan="10" Grid.ColumnSpan="2" Margin="5,20,5,5">
                     </Grid>
-                    <Grid x:Name="unbind_mach" Grid.Row="0" Grid.Column="0" Grid.RowSpan="10" Grid.ColumnSpan="2" Margin="5,20,5,5">
+                    <Grid x:Name="bind_mach" Grid.Row="0" Grid.Column="0" Grid.RowSpan="10" Grid.ColumnSpan="2" Margin="5,20,5,5">
                     </Grid>
                     <Grid x:Name="sort_pack" Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="15" Margin="0">
                     </Grid>

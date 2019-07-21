@@ -195,7 +195,7 @@ namespace GMCC.Sorter.ViewModel
                     else
                     {
                         LogHelper.WriteInfo("解盘托盘扫码NG。。。");
-                        Current.MainMachine.Commor.Write("D435", (ushort)2);
+                        Current.MainMachine.Commor.Write("D435", (ushort)(Common.PROJ_NO == "0079" ? 2 : 1));
                         this.RealtimeStatus = "扫码失败！";
                     }
 
@@ -205,7 +205,7 @@ namespace GMCC.Sorter.ViewModel
                 else
                 {
                     LogHelper.WriteInfo("解盘托盘扫码NG。。。");
-                    Current.MainMachine.Commor.Write("D435", (ushort)2);
+                    Current.MainMachine.Commor.Write("D435", (ushort)(Common.PROJ_NO == "0079" ? 2 : 1));
                     this.RealtimeStatus = ret.Msg;
                     this.IsAlive = false;
                 }
