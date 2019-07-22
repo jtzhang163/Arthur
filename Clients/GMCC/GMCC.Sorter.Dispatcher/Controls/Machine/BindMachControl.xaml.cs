@@ -51,7 +51,7 @@ namespace GMCC.Sorter.Dispatcher.Controls.Machine
                     {
                         var border = new Border()
                         {
-                            Background = i * 4 + 3 - j < batteryCount ? Brushes.LightGreen : Brushes.White,
+                            Background = i * 4 + (Common.PROJ_NO == "0079" ? 3 - j : j) < batteryCount ? Brushes.LightGreen : Brushes.White,
                             // Margin = new Thickness(0.1),
                             BorderThickness = new Thickness(0.5),
                             BorderBrush = Brushes.Black
