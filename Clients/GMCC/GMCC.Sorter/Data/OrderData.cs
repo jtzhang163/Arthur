@@ -30,7 +30,7 @@ namespace GMCC.Sorter.Data
                             orders.Add(new TrayOrder()
                             {
                                 SortOrder = (i - 1) * 4 + j,
-                                BindOrder = (i - 1) * 4 + Common.PROJ_NO == "0079" ? 5 - j : j,
+                                BindOrder = (i - 1) * 4 + (Common.PROJ_NO == "0079" ? 5 - j : j),
                                 ChargeOrder = (5 - j) * 8 - i + 1,
                                 PackOrder = (i - 1) * 4 + (j % 4 < 2 ? j : j % 4 == 2 ? j + 1 : j - 1)
                             });
