@@ -1005,7 +1005,7 @@ namespace GMCC.Sorter
             }
         }
 
-        public bool IsAlreadyBatteryScan { get; set; }
+        
 
         private bool isBindTrayScanReady;
         /// <summary>
@@ -1024,7 +1024,7 @@ namespace GMCC.Sorter
             }
         }
 
-        public bool IsAlreadyBindTrayScan { get; set; }
+
 
         private bool isUnbindTrayScanReady;
         /// <summary>
@@ -1037,13 +1037,16 @@ namespace GMCC.Sorter
             {
                 if (!isUnbindTrayScanReady && value)
                 {
-                    isAlreadyUnbindTrayScan = false;
+                    IsAlreadyUnbindTrayScan = false;
                 }
                 SetProperty(ref isUnbindTrayScanReady, value);
             }
         }
 
-        public bool isAlreadyUnbindTrayScan { get; set; }
+
+        public bool IsAlreadyBatteryScan { get; set; }
+        public bool IsAlreadyBindTrayScan { get; set; }
+        public bool IsAlreadyUnbindTrayScan { get; set; }
         #endregion
 
 

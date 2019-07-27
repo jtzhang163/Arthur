@@ -69,7 +69,7 @@ namespace Arthur.App.Comm
 
                 if (socket.Connected)
                 {
-                    var readtimeout = 500;
+                    var readtimeout = Application.EthernetReadTimeout;
 
                     Byte[] sendBytes = Encoding.UTF8.GetBytes(input + "\r");
                     socket.Send(sendBytes);

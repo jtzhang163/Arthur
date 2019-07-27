@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Arthur.Core.Transfer;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
@@ -11,6 +12,8 @@ namespace Arthur.App
     public static class Application
     {
         public static string ConnectionString = ConfigurationManager.ConnectionStrings["DefaultDatabase"].ToString();
+
+        public static int EthernetReadTimeout = _Convert.To<int>(ConfigurationManager.AppSettings["EthernetReadTimeout"].ToString(), 500);
 
         /// <summary>
         /// 软件是否已运行，防止重复打开软件

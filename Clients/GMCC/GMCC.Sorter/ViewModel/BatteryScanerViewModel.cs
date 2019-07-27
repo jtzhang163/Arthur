@@ -113,8 +113,6 @@ namespace GMCC.Sorter.ViewModel
                         Current.MainMachine.Commor.Write("D433", (ushort)2);
                         this.RealtimeStatus = "扫码失败！";
                     }
-
-                    Current.Option.IsAlreadyBatteryScan = true;
                     this.IsAlive = true;
                 }
                 else
@@ -123,6 +121,7 @@ namespace GMCC.Sorter.ViewModel
                     this.RealtimeStatus = ret.Msg;
                     this.IsAlive = false;
                 }
+                Current.Option.IsAlreadyBatteryScan = true;
             }
         }
     }

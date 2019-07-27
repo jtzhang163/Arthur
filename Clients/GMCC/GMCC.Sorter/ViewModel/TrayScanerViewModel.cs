@@ -124,8 +124,6 @@ namespace GMCC.Sorter.ViewModel
                         Current.MainMachine.Commor.Write("D434", (ushort)2);
                         this.RealtimeStatus = "扫码失败！";
                     }
-
-                    Current.Option.IsAlreadyBindTrayScan = true;
                     this.IsAlive = true;
                 }
                 else
@@ -136,8 +134,9 @@ namespace GMCC.Sorter.ViewModel
                     this.RealtimeStatus = ret.Msg;
                     this.IsAlive = false;
                 }
+                Current.Option.IsAlreadyBindTrayScan = true;
             }
-            else if (this == Current.UnbindTrayScaner && Current.Option.IsUnbindTrayScanReady && !Current.Option.isAlreadyUnbindTrayScan)
+            else if (this == Current.UnbindTrayScaner && Current.Option.IsUnbindTrayScanReady && !Current.Option.IsAlreadyUnbindTrayScan)
             {
                 LogHelper.WriteInfo("开始解盘托盘扫码。。。");
                 var ret = this.Commor.Comm(this.ScanCommand);
@@ -198,8 +197,6 @@ namespace GMCC.Sorter.ViewModel
                         Current.MainMachine.Commor.Write("D435", (ushort)(Common.PROJ_NO == "0079" ? 2 : 1));
                         this.RealtimeStatus = "扫码失败！";
                     }
-
-                    Current.Option.IsAlreadyBindTrayScan = true;
                     this.IsAlive = true;
                 }
                 else
@@ -209,6 +206,7 @@ namespace GMCC.Sorter.ViewModel
                     this.RealtimeStatus = ret.Msg;
                     this.IsAlive = false;
                 }
+                Current.Option.IsAlreadyUnbindTrayScan = true;
             }
         }
     }
