@@ -78,7 +78,12 @@
     <Compile Include="Migrations\201905290925433_GMCC_PackOptimize.Designer.cs">
       <DependentUpon>201905290925433_GMCC_PackOptimize.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907290751046_GMCC_CommOptimize.cs" />
+    <Compile Include="Migrations\201907290751046_GMCC_CommOptimize.Designer.cs">
+      <DependentUpon>201907290751046_GMCC_CommOptimize.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\Base\IScaner.cs" />
     <Compile Include="Model\BatteryScaner.cs" />
     <Compile Include="Model\MES.cs" />
     <Compile Include="Model\PLC.cs" />
@@ -145,6 +150,10 @@
     <EmbeddedResource Include="Migrations\201905290925433_GMCC_PackOptimize.resx">
       <DependentUpon>201905290925433_GMCC_PackOptimize.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907290751046_GMCC_CommOptimize.resx">
+      <DependentUpon>201907290751046_GMCC_CommOptimize.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

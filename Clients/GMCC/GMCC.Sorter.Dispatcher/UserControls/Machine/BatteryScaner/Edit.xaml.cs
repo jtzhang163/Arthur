@@ -54,6 +54,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.BatteryScaner
             var ip = this.ip.Text.Trim();
             var port = _Convert.To(this.port.Text.Trim(), -1);
             var comm_interval = this.comm_interval.Text.Trim();
+            var read_timeout = this.read_timeout.Text.Trim();
             var scan_command = this.scan_command.Text.Trim();
 
             tip.Background = new SolidColorBrush(Colors.Red);
@@ -70,6 +71,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Machine.BatteryScaner
                     Current.BatteryScaner.IP = ip;
                     Current.BatteryScaner.Port = port;
                     Current.BatteryScaner.CommInterval = Convert.ToInt32(comm_interval);
+                    Current.BatteryScaner.ReadTimeout = Convert.ToInt32(read_timeout);
                     Current.BatteryScaner.ScanCommand = scan_command;
 
                     tip.Background = new SolidColorBrush(Colors.Green);

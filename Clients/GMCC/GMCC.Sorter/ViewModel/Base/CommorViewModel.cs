@@ -247,6 +247,142 @@ namespace GMCC.Sorter.ViewModel
             }
         }
 
+        private string commType = null;
+        /// <summary>
+        /// 通信类型
+        /// </summary>
+        public string CommType
+        {
+            get
+            {
+                if (commType == null)
+                {
+                    commType = this.Commor.Communicator.CommType;
+                }
+                return commType;
+            }
+            set
+            {
+                if (commType != value)
+                {
+                    using (var db = new Data.AppContext())
+                    {
+                        if (this == Current.MainMachine)
+                        {
+                            db.PLCs.FirstOrDefault(o => o.Id == this.Id).CommType = value;
+                        }
+                        else if (this == Current.BatteryScaner)
+                        {
+                            db.BatteryScaners.FirstOrDefault(o => o.Id == this.Id).CommType = value;
+                        }
+                        else if (this == Current.Mes)
+                        {
+                            db.MESs.FirstOrDefault(o => o.Id == this.Id).CommType = value;
+                        }
+                        else if (Current.TrayScaners.Contains(this))
+                        {
+                            db.TrayScaners.FirstOrDefault(o => o.Id == this.Id).CommType = value;
+                        }
+                        db.SaveChanges();
+                    }
+
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}通信类型: [{1}] 修改为 [{2}]", Name, commType, value), Arthur.App.Model.OpType.编辑);
+                    SetProperty(ref commType, value);
+                }
+            }
+        }
+
+        private int readTimeout = -1;
+        /// <summary>
+        /// 通信超时时间（单位：ms）
+        /// </summary>
+        public int ReadTimeout
+        {
+            get
+            {
+                if (readTimeout == -1)
+                {
+                    readTimeout = this.Commor.Communicator.ReadTimeout;
+                }
+                return readTimeout;
+            }
+            set
+            {
+                if (readTimeout != value)
+                {
+                    using (var db = new Data.AppContext())
+                    {
+                        if (this == Current.MainMachine)
+                        {
+                            db.PLCs.FirstOrDefault(o => o.Id == this.Id).ReadTimeout = value;
+                        }
+                        else if (this == Current.BatteryScaner)
+                        {
+                            db.BatteryScaners.FirstOrDefault(o => o.Id == this.Id).ReadTimeout = value;
+                        }
+                        else if (this == Current.Mes)
+                        {
+                            db.MESs.FirstOrDefault(o => o.Id == this.Id).ReadTimeout = value;
+                        }
+                        else if (Current.TrayScaners.Contains(this))
+                        {
+                            db.TrayScaners.FirstOrDefault(o => o.Id == this.Id).ReadTimeout = value;
+                        }
+                        db.SaveChanges();
+                    }
+
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}超时时间: [{1}] 修改为 [{2}]", Name, readTimeout, value), Arthur.App.Model.OpType.编辑);
+                    SetProperty(ref readTimeout, value);
+                }
+            }
+        }
+
+        private int commInterval = -1;
+
+        /// <summary>
+        /// 上位机通讯时间间隔（单位：ms）
+        /// </summary>
+        public int CommInterval
+        {
+            get
+            {
+                if (commInterval == -1)
+                {
+                    commInterval = this.Commor.Communicator.CommInterval;
+                }
+                return commInterval;
+            }
+            set
+            {
+                if (commInterval != value)
+                {
+                    using (var db = new Data.AppContext())
+                    {
+                        if (this == Current.MainMachine)
+                        {
+                            db.PLCs.FirstOrDefault(o => o.Id == this.Id).CommInterval = value;
+                        }
+                        else if (this == Current.BatteryScaner)
+                        {
+                            db.BatteryScaners.FirstOrDefault(o => o.Id == this.Id).CommInterval = value;
+                        }
+                        else if (this == Current.Mes)
+                        {
+                            db.MESs.FirstOrDefault(o => o.Id == this.Id).CommInterval = value;
+                        }
+                        else if (Current.TrayScaners.Contains(this))
+                        {
+                            db.TrayScaners.FirstOrDefault(o => o.Id == this.Id).CommInterval = value;
+                        }
+                        db.SaveChanges();
+                    }
+
+                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}通信间隔: [{1}] 修改为 [{2}]", Name, commInterval, value), Arthur.App.Model.OpType.编辑);
+                    SetProperty(ref commInterval, value);
+                }
+            }
+        }
+
 
         private bool isEnabled;
         public bool IsEnabled
@@ -337,38 +473,6 @@ namespace GMCC.Sorter.ViewModel
             set
             {
                 SetProperty(ref realtimeStatus, value);
-            }
-        }
-
-
-        private int commInterval = -1;
-
-        /// <summary>
-        /// 上位机通讯时间间隔（单位：ms）
-        /// </summary>
-        public int CommInterval
-        {
-            get
-            {
-                if (commInterval < 0)
-                {
-                    commInterval = _Convert.To(Arthur.App.Business.Setting.GetOption(string.Format("CommInterval_{0}", this.Name)), -1);
-                    if (commInterval < 0)
-                    {
-                        commInterval = 1000;
-                        Arthur.App.Business.Setting.SetOption(string.Format("CommInterval_{0}", this.Name), commInterval.ToString(), string.Format("上位机-{0}通讯时间间隔", this.Name));
-                    }
-                }
-                return commInterval;
-            }
-            set
-            {
-                if (commInterval != value)
-                {
-                    Arthur.App.Business.Setting.SetOption(string.Format("CommInterval_{0}", this.Name), value.ToString());
-                    Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}与上位机通讯间隔: [{1}] 修改为 [{2}]", Name, commInterval, value), Arthur.App.Model.OpType.编辑);
-                    SetProperty(ref commInterval, value);
-                }
             }
         }
 

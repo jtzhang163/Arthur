@@ -49,7 +49,7 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Debug.Scaner
 
             new Thread(() => {
                 this.Dispatcher.Invoke(new Action(() => {
-                    var result = scaner.Commor.Comm(scanCommand as string);
+                    var result = scaner.Commor.Comm(scanCommand as string, scaner.ReadTimeout);
                     if (result.IsSucceed)
                     {
                         var tbRetMsg = ControlsSearchHelper.GetChildObject<TextBox>(this, "tbRetMsg" + index);

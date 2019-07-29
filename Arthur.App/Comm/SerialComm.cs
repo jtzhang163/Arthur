@@ -52,7 +52,7 @@ namespace Arthur.App.Comm
             return Result.Success;
         }
 
-        public Result Comm(Commor commor, string input)
+        public Result Comm(Commor commor, string input, int timeout)
         {
             var serialCommor = (SerialCommor)commor.Communicator;
             var recvData = string.Empty;
@@ -68,10 +68,10 @@ namespace Arthur.App.Comm
                     var bytes = Arthur.Core.Transfer._Convert.StrToToHexBytes(input);
                     serialPort.Write(bytes, 0, bytes.Length);
                 }
-                Thread.Sleep(800);
+                Thread.Sleep(timeout);
                 Byte[] InputBuf = new Byte[128];
                 serialPort.Read(InputBuf, 0, serialPort.BytesToRead);
-                recvData = Encoding.ASCII.GetString(InputBuf).Trim(new char[] {'\0','\r','\n'});
+                recvData = Encoding.ASCII.GetString(InputBuf).Trim(new char[] { '\0', '\r', '\n' });
 
                 if (string.IsNullOrEmpty(recvData))
                 {

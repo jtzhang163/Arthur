@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GMCC.Sorter.Model;
 
 namespace GMCC.Sorter.ViewModel
 {
@@ -30,12 +31,7 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (scanCommand == null)
                 {
-                    scanCommand = Arthur.App.Business.Setting.GetOption("ScanCommand_BatteryScaner");
-                    if (scanCommand == null)
-                    {
-                        scanCommand = "T";
-                        Arthur.App.Business.Setting.SetOption("ScanCommand_BatteryScaner", scanCommand, this.Name + "扫码指令");
-                    }
+                    scanCommand = ((BatteryScaner)this.Commor.Communicator).ScanCommand;
                 }
                 return scanCommand;
             }
@@ -43,7 +39,12 @@ namespace GMCC.Sorter.ViewModel
             {
                 if (scanCommand != value)
                 {
-                    Arthur.App.Business.Setting.SetOption("ScanCommand_BatteryScaner", value);
+                    using (var db = new Data.AppContext())
+                    {
+                        db.BatteryScaners.FirstOrDefault(o => o.Id == this.Id).ScanCommand = value;
+                        db.SaveChanges();
+                    }
+
                     Arthur.App.Business.Logging.AddOplog(string.Format("设备管理. {0}扫码指令: [{1}] 修改为 [{2}]", Name, scanCommand, value), Arthur.App.Model.OpType.编辑);
                     SetProperty(ref scanCommand, value);
                 }
@@ -52,7 +53,7 @@ namespace GMCC.Sorter.ViewModel
 
         public BatteryScanerViewModel(Commor commor) : base(commor)
         {
-            Console.WriteLine(this.ScanCommand);
+
         }
 
         public void Comm()
@@ -65,14 +66,14 @@ namespace GMCC.Sorter.ViewModel
                     Running.ShowErrorMsg("绑盘位扫码电池数超过最大值：" + Common.TRAY_BATTERY_COUNT);
                     return;
                 }
-                var ret = this.Commor.Comm(this.ScanCommand);
+                var ret = this.Commor.Comm(this.ScanCommand, this.ReadTimeout);
                 if (ret.IsSucceed)
                 {
                     var result = true;
                     var code = ret.Data.ToString();
                     if (code.StartsWith("NG"))
                     {
-                        var ret2 = this.Commor.Comm(this.ScanCommand);
+                        var ret2 = this.Commor.Comm(this.ScanCommand, this.ReadTimeout);
                         if (ret2.IsSucceed && !ret2.Data.ToString().StartsWith("NG"))
                         {
                             code = ret2.Data.ToString();

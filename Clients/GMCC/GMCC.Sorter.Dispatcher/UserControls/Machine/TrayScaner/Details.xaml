@@ -34,6 +34,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
@@ -58,8 +59,10 @@
                     <Label Content="{Binding StopBits}" Grid.Row="7" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="通信间隔(ms)：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding CommInterval}" Grid.Row="8" Grid.Column="1" Style="{StaticResource property_Label}"/>
-                    <Label Content="扫码指令：" Grid.Row="9" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding ScanCommand}" Grid.Row="9" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="超时时间(ms)：" Grid.Row="9" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding CommInterval}" Grid.Row="9" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="扫码指令：" Grid.Row="10" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <Label Content="{Binding ScanCommand}" Grid.Row="10" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

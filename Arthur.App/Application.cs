@@ -13,8 +13,6 @@ namespace Arthur.App
     {
         public static string ConnectionString = ConfigurationManager.ConnectionStrings["DefaultDatabase"].ToString();
 
-        public static int EthernetReadTimeout = _Convert.To<int>(ConfigurationManager.AppSettings["EthernetReadTimeout"].ToString(), 500);
-
         /// <summary>
         /// 软件是否已运行，防止重复打开软件
         /// </summary>

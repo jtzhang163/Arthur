@@ -26,18 +26,6 @@ namespace Arthur.App.Comm
         public Commor(Communicator communicator)
         {
             this.Communicator = communicator;
-            //if(this.Communicator is SerialCommor)
-            //{
-            //    var serialCommor = (SerialCommor)this.Communicator;
-            //}
-            //else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
-            //{
-            //    var ethernetCommor = (EthernetCommor)this.Communicator;
-            //}
-            //else if (this.Communicator is EthernetCommor)
-            //{
-            //    var ethernetCommor = (EthernetCommor)this.Communicator;
-            //}
         }
 
         public Result Connect()
@@ -46,15 +34,15 @@ namespace Arthur.App.Comm
 
             if (!this.Connected)
             {
-                if (this.Communicator is SerialCommor)
+                if (this.Communicator.CommType == "Serial")
                 {
                     result = new SerialComm().Connect(this);
                 }
-                else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
+                else if (this.Communicator.CommType == "OmronFinsTcp")
                 {
                     result = new OmronFinsTcpComm().Connect(this);
                 }
-                else if (this.Communicator is EthernetCommor)
+                else if (this.Communicator.CommType == "Ethernet")
                 {
                     result = new EthernetComm().Connect(this);
                 }
@@ -67,15 +55,15 @@ namespace Arthur.App.Comm
         public Result EndConnect()
         {
             var result = new Result();
-            if (this.Communicator is SerialCommor)
+            if (this.Communicator.CommType == "Serial")
             {
                 result = new SerialComm().EndConnect(this);
             }
-            else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
+            else if (this.Communicator.CommType == "OmronFinsTcp")
             {
                 result = new OmronFinsTcpComm().EndConnect(this);
             }
-            else if (this.Communicator is EthernetCommor)
+            else if (this.Communicator.CommType == "Ethernet")
             {
                 result = new EthernetComm().EndConnect(this);
             }
@@ -83,20 +71,20 @@ namespace Arthur.App.Comm
             return Result.Success;
         }
 
-        public Result Comm(string input)
+        public Result Comm(string input, int timeout)
         {
 
-            if (this.Communicator is SerialCommor)
+            if (this.Communicator.CommType == "Serial")
             {
-                return new SerialComm().Comm(this, input);
+                return new SerialComm().Comm(this, input, timeout);
             }
-            else if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
+            else if (this.Communicator.CommType == "OmronFinsTcp")
             {
-                return new OmronFinsTcpComm().Comm(this, input);
+                return new OmronFinsTcpComm().Comm(this, input, timeout);
             }
-            else if (this.Communicator is EthernetCommor)
+            else if (this.Communicator.CommType == "Ethernet")
             {
-                return new EthernetComm().Comm(this, input);
+                return new EthernetComm().Comm(this, input, timeout);
             }
             return new Result("连接为未知类型！");
         }
@@ -108,7 +96,7 @@ namespace Arthur.App.Comm
 
         public Result Read(string addr, ushort length)
         {
-            if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
+            if (this.Communicator.CommType == "OmronFinsTcp")
             {
                 return new OmronFinsTcpComm().Read(this, addr, length);
             }
@@ -117,7 +105,7 @@ namespace Arthur.App.Comm
 
         public Result ReadInt(string addr)
         {
-            if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
+            if (this.Communicator.CommType == "OmronFinsTcp")
             {
                 return new OmronFinsTcpComm().ReadInt(this, addr);
             }
@@ -126,7 +114,7 @@ namespace Arthur.App.Comm
 
         public Result Write(string addr, ushort value)
         {
-            if (this.Communicator.Company == "OMRON" && this.Communicator.ModelNumber == "CJ2M-CP33" && this.Communicator is EthernetCommor)
+            if (this.Communicator.CommType == "OmronFinsTcp")
             {
                 return new OmronFinsTcpComm().Write(this, addr, value);
             }

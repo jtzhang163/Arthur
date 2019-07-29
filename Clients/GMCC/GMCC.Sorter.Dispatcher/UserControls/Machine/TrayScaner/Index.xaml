@@ -270,6 +270,16 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
 
+                        <DataGridTemplateColumn Header="超时时间" Width="*"  CanUserSort="True" SortMemberPath="ReadTimeout">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding ReadTimeout}"></TextBlock>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
                         <DataGridTemplateColumn Header="扫码指令" Width="*"  CanUserSort="True" SortMemberPath="ScanCommand">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>

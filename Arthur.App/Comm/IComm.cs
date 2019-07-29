@@ -11,6 +11,6 @@ namespace Arthur.App.Comm
     {
         Result Connect(Commor commor);
         Result EndConnect(Commor commor);
-        Result Comm(Commor commor, string input);
+        Result Comm(Commor commor, string input, int timeout);
     }
 }

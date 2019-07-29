@@ -59,7 +59,7 @@ namespace Arthur.App.Comm
             return Result.Success;
         }
 
-        public Result Comm(Commor commor, string input)
+        public Result Comm(Commor commor, string input, int timeout)
         {
             var omronFinsNet = (OmronFinsNet)commor.Connector;
             var ethernetCommor = (EthernetCommor)commor.Communicator;

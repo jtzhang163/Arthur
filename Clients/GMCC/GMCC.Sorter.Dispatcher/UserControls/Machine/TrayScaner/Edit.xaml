@@ -35,6 +35,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180"/>
@@ -59,8 +60,10 @@
                     <ComboBox x:Name="stopbits" Grid.Row="7" Grid.Column="1" FontSize="14" Height="26" Width="120" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
                     <Label Content="通信间隔(ms)：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <TextBox x:Name="comm_interval" Grid.Row="8" Grid.Column="1" Text="{Binding CommInterval, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" />
-                    <Label Content="扫码指令：" Grid.Row="9" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <TextBox x:Name="scan_command" Grid.Row="9" Grid.Column="1" Text="{Binding ScanCommand, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
+                    <Label Content="超时时间(ms)：" Grid.Row="9" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="read_timeout" Grid.Row="9" Grid.Column="1" Text="{Binding ReadTimeout, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus" PreviewTextInput="level_PreviewTextInput" input:InputMethod.IsInputMethodEnabled="False" />
+                    <Label Content="扫码指令：" Grid.Row="10" Grid.Column="0" Style="{StaticResource property_title}"></Label>
+                    <TextBox x:Name="scan_command" Grid.Row="10" Grid.Column="1" Text="{Binding ScanCommand, Mode=OneWay}" Style="{StaticResource property_TextBox}" GotFocus="textbox_GotFocus"/>
                 </Grid>
             </DockPanel>
         </DockPanel>

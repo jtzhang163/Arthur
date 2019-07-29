@@ -53,7 +53,7 @@ namespace Arthur.App.Comm
             return Result.Success;
         }
 
-        public Result Comm(Commor commor, string input)
+        public Result Comm(Commor commor, string input, int timeout)
         {
             var socket = (Socket)commor.Connector;
             var ethernetCommor = (EthernetCommor)commor.Communicator;
@@ -69,7 +69,6 @@ namespace Arthur.App.Comm
 
                 if (socket.Connected)
                 {
-                    var readtimeout = Application.EthernetReadTimeout;
 
                     Byte[] sendBytes = Encoding.UTF8.GetBytes(input + "\r");
                     socket.Send(sendBytes);
@@ -78,7 +77,7 @@ namespace Arthur.App.Comm
 
                     Byte[] Data = new Byte[1024];
 
-                    if (readtimeout > 0)
+                    if (timeout > 0)
                     {
                         Stopwatch sw = new Stopwatch();
                         var getStr = string.Empty;
@@ -101,7 +100,7 @@ namespace Arthur.App.Comm
                         t.Start();
 
                         // Keep trying to join the thread until we either succeed or the timeout value has been exceeded
-                        while (readtimeout > sw.ElapsedMilliseconds)
+                        while (timeout > sw.ElapsedMilliseconds)
                             if (t.Join(1))
                                 break;
                         // IsCommunicatting = false;
@@ -109,7 +108,7 @@ namespace Arthur.App.Comm
                         if (connectSuccess)
                         {
                             //throw new Exception("Timed out while trying to connect.");
-                            recvData = getStr.Trim('\0', ' ','\r', '\n');
+                            recvData = getStr.Trim('\0', ' ', '\r', '\n');
                         }
                         else
                         {
