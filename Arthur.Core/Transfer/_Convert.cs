@@ -55,6 +55,11 @@ namespace Arthur.Core.Transfer
             }
         }
 
+        /// <summary>
+        /// 16进制字符串(如：“1F 2E 3D 49”)转换为byte[]
+        /// </summary>
+        /// <param name="hexString"></param>
+        /// <returns></returns>
         public static byte[] StrToToHexBytes(string hexString)
         {
             hexString = hexString.Replace(" ", "");

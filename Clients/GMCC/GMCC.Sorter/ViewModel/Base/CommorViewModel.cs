@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 
 namespace GMCC.Sorter.ViewModel
 {
+    /// <summary>
+    /// 通信连接抽象类ViewModel
+    /// </summary>
     public abstract class CommorViewModel : BindableObject
     {
 
@@ -370,28 +373,41 @@ namespace GMCC.Sorter.ViewModel
         }
 
 
-        private System.Threading.Timer Timer = null;// new System.Threading.Timer(new System.Threading.TimerCallback(obj.Method3), null, 0, 100);
+        private System.Threading.Timer Timer = null;
+
+        /// <summary>
+        /// 正在通信中标识
+        /// 用于防止通信间隔较短导致多个线程定时器同时进入通信方法
+        /// </summary>
+        private bool IsCommuncating = false;
 
         public virtual void Comm(object o)
         {
             if (!TimerExec.IsRunning || !this.IsEnabled)
                 return;
 
-            if (this is MainMachineViewModel)
+            if (!IsCommuncating)
             {
-                (this as MainMachineViewModel).Comm();
-            }
-            else if (this is TrayScanerViewModel)
-            {
-                (this as TrayScanerViewModel).Comm();
-            }
-            else if (this is BatteryScanerViewModel)
-            {
-                (this as BatteryScanerViewModel).Comm();
-            }
-            else if (this is MesViewModel)
-            {
-                (this as MesViewModel).Comm();
+                IsCommuncating = true;
+
+                if (this is MainMachineViewModel)
+                {
+                    (this as MainMachineViewModel).Comm();
+                }
+                else if (this is TrayScanerViewModel)
+                {
+                    (this as TrayScanerViewModel).Comm();
+                }
+                else if (this is BatteryScanerViewModel)
+                {
+                    (this as BatteryScanerViewModel).Comm();
+                }
+                else if (this is MesViewModel)
+                {
+                    (this as MesViewModel).Comm();
+                }
+
+                IsCommuncating = false;
             }
         }
 

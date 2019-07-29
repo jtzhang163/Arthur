@@ -10,6 +10,6 @@ namespace Arthur.App.Model
     /// 通信器
     /// </summary>
     public abstract class Communicator : Machine
-    {
+    { 
     }
 }

@@ -85,12 +85,9 @@ namespace GMCC.Sorter.ViewModel
 
                     if (result)
                     {
-
-                        LogHelper.WriteInfo("绑盘托盘扫码OK。。。");
-
+                        LogHelper.WriteInfo(this.Name + "扫码OK。。。");
                         this.RealtimeStatus = "+" + code;
                         Current.MainMachine.Commor.Write("D434", (ushort)1);
-
 
                         var saveRet = Result.Success;
                         if (Current.Option.Tray11_Id < 1)
@@ -114,13 +111,10 @@ namespace GMCC.Sorter.ViewModel
                         {
                             Running.StopRunAndShowMsg(saveRet.Msg);
                         }
-
-
                     }
                     else
                     {
-                        LogHelper.WriteInfo("绑盘托盘扫码NG。。。");
-
+                        LogHelper.WriteInfo(this.Name + "扫码NG。。。");
                         Current.MainMachine.Commor.Write("D434", (ushort)2);
                         this.RealtimeStatus = "扫码失败！";
                     }
@@ -128,7 +122,7 @@ namespace GMCC.Sorter.ViewModel
                 }
                 else
                 {
-                    LogHelper.WriteInfo("绑盘托盘扫码NG。。。");
+                    LogHelper.WriteInfo(this.Name + "扫码NG。。。");
 
                     Current.MainMachine.Commor.Write("D434", (ushort)2);
                     this.RealtimeStatus = ret.Msg;
@@ -161,7 +155,7 @@ namespace GMCC.Sorter.ViewModel
 
                     if (result)
                     {
-                        LogHelper.WriteInfo("解盘托盘扫码OK。。。");
+                        LogHelper.WriteInfo(this.Name + "扫码OK。。。");
                         this.RealtimeStatus = "+" + code;
                         Current.MainMachine.Commor.Write("D435", (ushort)1);
 
@@ -193,7 +187,7 @@ namespace GMCC.Sorter.ViewModel
                     }
                     else
                     {
-                        LogHelper.WriteInfo("解盘托盘扫码NG。。。");
+                        LogHelper.WriteInfo(this.Name + "扫码NG。。。");
                         Current.MainMachine.Commor.Write("D435", (ushort)(Common.PROJ_NO == "0079" ? 2 : 1));
                         this.RealtimeStatus = "扫码失败！";
                     }
@@ -201,7 +195,7 @@ namespace GMCC.Sorter.ViewModel
                 }
                 else
                 {
-                    LogHelper.WriteInfo("解盘托盘扫码NG。。。");
+                    LogHelper.WriteInfo(this.Name + "扫码NG。。。");
                     Current.MainMachine.Commor.Write("D435", (ushort)(Common.PROJ_NO == "0079" ? 2 : 1));
                     this.RealtimeStatus = ret.Msg;
                     this.IsAlive = false;
