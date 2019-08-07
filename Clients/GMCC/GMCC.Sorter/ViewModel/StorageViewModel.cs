@@ -279,6 +279,14 @@ namespace GMCC.Sorter.ViewModel
             }
             else
             {
+                //比当前低一层的料仓
+                var storageLower = Current.Storages.FirstOrDefault(o => o.Column == this.Column && o.Floor == this.Floor + 1);
+                if (storageLower != null && storageLower.Status == StorageStatus.静置完成)
+                {
+                    //若某一料仓已完成静置，则比它高一层的料仓的上料优先级变低
+                    return (this.Column > Current.Option.LastFeedTaskStorageColumn ? 0 : 100) + this.Column;
+                }
+
                 return (this.Column >= Current.Option.LastFeedTaskStorageColumn ? 0 : 100) + this.Column;
             }
         }

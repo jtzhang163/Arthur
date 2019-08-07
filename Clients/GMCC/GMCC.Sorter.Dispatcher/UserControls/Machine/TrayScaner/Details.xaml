@@ -60,7 +60,7 @@
                     <Label Content="通信间隔(ms)：" Grid.Row="8" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding CommInterval}" Grid.Row="8" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="超时时间(ms)：" Grid.Row="9" Grid.Column="0" Style="{StaticResource property_title}"></Label>
-                    <Label Content="{Binding CommInterval}" Grid.Row="9" Grid.Column="1" Style="{StaticResource property_Label}"/>
+                    <Label Content="{Binding ReadTimeout}" Grid.Row="9" Grid.Column="1" Style="{StaticResource property_Label}"/>
                     <Label Content="扫码指令：" Grid.Row="10" Grid.Column="0" Style="{StaticResource property_title}"></Label>
                     <Label Content="{Binding ScanCommand}" Grid.Row="10" Grid.Column="1" Style="{StaticResource property_Label}"/>
                 </Grid>
