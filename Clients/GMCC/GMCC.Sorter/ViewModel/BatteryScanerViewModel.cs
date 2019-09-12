@@ -66,63 +66,47 @@ namespace GMCC.Sorter.ViewModel
                     Running.ShowErrorMsg("绑盘位扫码电池数超过最大值：" + Common.TRAY_BATTERY_COUNT);
                     return;
                 }
+
+                Current.Option.IsAlreadyBatteryScan = true;
                 var ret = this.Commor.Comm(this.ScanCommand, this.ReadTimeout);
-                if (ret.IsSucceed)
+                if (!ret.IsSucceed || ret.Data.ToString().StartsWith("NG"))
                 {
-                    var result = true;
-                    var code = ret.Data.ToString();
-                    if (code.StartsWith("NG"))
+                    ret = this.Commor.Comm(this.ScanCommand, this.ReadTimeout);
+                    if (!ret.IsSucceed || ret.Data.ToString().StartsWith("NG"))
                     {
-                        var ret2 = this.Commor.Comm(this.ScanCommand, this.ReadTimeout);
-                        if (ret2.IsSucceed && !ret2.Data.ToString().StartsWith("NG"))
+                        ret = this.Commor.Comm(this.ScanCommand, this.ReadTimeout);
+                        if (!ret.IsSucceed || ret.Data.ToString().StartsWith("NG"))
                         {
-                            code = ret2.Data.ToString();
-                        }
-                        else
-                        {
-                            result = false;
-                            LogHelper.WriteError(this.Name + " 扫码失败！");
-                            Running.ShowErrorMsg(this.Name + " 扫码失败！");
+                            this.RealtimeStatus = ret.Msg;                            
+                            Current.MainMachine.Commor.Write("D433", (ushort)2);
+                            Running.ShowErrorMsg(this.Name + " 扫码失败！" + ret.Msg);
+                            this.IsAlive = false;
+                            return;
                         }
                     }
+                }
 
-                    if (result)
+                var code = ret.Data.ToString();
+                this.RealtimeStatus = "+" + code;
+                Current.MainMachine.Commor.Write("D433", (ushort)1);
+                this.IsAlive = true;
+
+                //把电池条码保存进数据库
+                var saveRet = new Business.BatteryManage().Create(new Model.Battery() { Code = code }, true);
+                if (saveRet.IsSucceed)
+                {
+                    var t = new Thread(() =>
                     {
-                        this.RealtimeStatus = "+" + code;
-                        Current.MainMachine.Commor.Write("D433", (ushort)1);
-
-                        //把电池条码保存进数据库
-                        var saveRet = new Business.BatteryManage().Create(new Model.Battery() { Code = code }, true);
-                        if (saveRet.IsSucceed)
-                        {
-                            var t = new Thread(() =>
-                            {
-                                //界面交替显示扫码状态
-                                Thread.Sleep(2000);
-                                this.RealtimeStatus = "等待扫码...";
-                            });
-                            t.Start();
-                        }
-                        else
-                        {
-                            Running.StopRunAndShowMsg(saveRet.Msg);
-                        }
-
-                    }
-                    else
-                    {
-                        Current.MainMachine.Commor.Write("D433", (ushort)2);
-                        this.RealtimeStatus = "扫码失败！";
-                    }
-                    this.IsAlive = true;
+                        //界面交替显示扫码状态
+                        Thread.Sleep(2000);
+                        this.RealtimeStatus = "等待扫码...";
+                    });
+                    t.Start();
                 }
                 else
                 {
-                    Current.MainMachine.Commor.Write("D433", (ushort)2);
-                    this.RealtimeStatus = ret.Msg;
-                    this.IsAlive = false;
+                    Running.StopRunAndShowMsg(saveRet.Msg);
                 }
-                Current.Option.IsAlreadyBatteryScan = true;
             }
         }
     }
