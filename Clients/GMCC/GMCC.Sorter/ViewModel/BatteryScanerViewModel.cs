@@ -77,9 +77,10 @@ namespace GMCC.Sorter.ViewModel
                         ret = this.Commor.Comm(this.ScanCommand, this.ReadTimeout);
                         if (!ret.IsSucceed || ret.Data.ToString().StartsWith("NG"))
                         {
-                            this.RealtimeStatus = ret.Msg;                            
+                            var msg = ret.Data.ToString().StartsWith("NG") ? "扫码NG" : " 扫码失败！" + ret.Msg;
+                            this.RealtimeStatus = msg;
                             Current.MainMachine.Commor.Write("D433", (ushort)2);
-                            Running.ShowErrorMsg(this.Name + " 扫码失败！" + ret.Msg);
+                            Running.ShowErrorMsg(this.Name + msg);
                             this.IsAlive = false;
                             return;
                         }

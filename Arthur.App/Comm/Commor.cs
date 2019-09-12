@@ -114,11 +114,21 @@ namespace Arthur.App.Comm
 
         public Result Write(string addr, ushort value)
         {
+            var result = Result.Success;
             if (this.Communicator.CommType == "OmronFinsTcp")
             {
-                return new OmronFinsTcpComm().Write(this, addr, value);
+                result = new OmronFinsTcpComm().Write(this, addr, value);
             }
-            return new Result("连接为未知类型！");
+            else
+            {
+                result = new Result("连接为未知类型！");
+            }
+
+            if (result.IsFailed)
+            {
+                LogHelper.WriteError(string.Format("给 {0} 写数据出现错误: {1}", this.Communicator.Name, result.Msg));
+            }
+            return result;
         }
     }
 }
