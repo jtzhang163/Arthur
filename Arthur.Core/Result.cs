@@ -53,7 +53,7 @@ namespace Arthur.Core
 
         }
 
-        public Result(int code, string msg) : this(code, msg, null)
+        public Result(int code, string msg) : this(code, msg, string.Empty)
         {
 
         }
