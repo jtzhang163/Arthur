@@ -64,7 +64,7 @@ namespace GMCC.Sorter.Dispatcher.Views
         {
             if (Arthur.App.Current.Option.RemainingMinutes <= 0)
             {
-                MessageBox.Show("软件已经过期，无法启动！");
+                MessageBox.Show("软件已经过期，无法操作！");
                 return;
             }
 
