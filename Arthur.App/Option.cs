@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Arthur.Core;
+using Arthur.Core.Security;
 using Arthur.Core.Transfer;
 
 namespace Arthur.App
@@ -119,6 +120,37 @@ namespace Arthur.App
                 {
                     Business.Setting.SetOption("DataGridPageSize", value.ToString());
                     dataGridPageSize = value;
+                }
+            }
+        }
+
+
+        private string remainingMinutesStr = null;
+
+        public int RemainingMinutes
+        {
+            get
+            {
+                if (remainingMinutesStr == null)
+                {
+                    remainingMinutesStr = Business.Setting.GetOption("26A610E04F74BC81");
+                    if (remainingMinutesStr == null)
+                    {
+                        var tmpStr = EncryptBase64Helper.EncodeBase64(EncryptBase64Helper.EncodeBase64("2160")) + "QXJ0aHVy";//2160 Arthur
+                        Business.Setting.SetOption("26A610E04F74BC81", tmpStr, "");
+                        remainingMinutesStr = tmpStr;
+                    }
+                }
+                var remainingMinutes = _Convert.To<int>(EncryptBase64Helper.DecodeBase64(EncryptBase64Helper.DecodeBase64(remainingMinutesStr.Replace("QXJ0aHVy", ""))), 0);
+                return remainingMinutes;
+            }
+            set
+            {
+                var tmpStr = EncryptBase64Helper.EncodeBase64(EncryptBase64Helper.EncodeBase64(value.ToString())) + "QXJ0aHVy";
+                if (remainingMinutesStr != tmpStr)
+                {
+                    Business.Setting.SetOption("26A610E04F74BC81", tmpStr);
+                    remainingMinutesStr = tmpStr;
                 }
             }
         }

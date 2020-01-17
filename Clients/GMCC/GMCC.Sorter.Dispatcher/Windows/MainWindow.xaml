@@ -434,6 +434,7 @@
                 <TextBlock VerticalAlignment="Bottom" Foreground="White" DockPanel.Dock="Right" Margin="0,0,10,5">
                     欢迎你，<Hyperlink x:Name="currentUser" Click="currentUser_Click"><TextBlock Text="{Binding UserName}" Foreground="White" FontStyle="Italic" TextDecorations="Underline"/></Hyperlink></TextBlock>
                 <Label Content="{Binding AppName}" FontSize="30" Foreground="White" VerticalAlignment="Center" FontWeight="Bold" Margin="10,0,0,0"/>
+                <Label VerticalAlignment="Center" HorizontalAlignment="Right" Content="{Binding ExpireTip}" Foreground="Red" FontSize="18" FontWeight="Bold" MouseDoubleClick="Label_MouseDoubleClick"/>
             </DockPanel>
 
             <StackPanel x:Name="nav_bar" DockPanel.Dock="Left"  Width="200" Background="#FF222D32">

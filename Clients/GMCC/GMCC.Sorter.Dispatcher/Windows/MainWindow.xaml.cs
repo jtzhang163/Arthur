@@ -26,6 +26,8 @@ namespace GMCC.Sorter.Dispatcher
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        System.Threading.Timer expireTimer;
         public MainWindow()
         {
             InitializeComponent();
@@ -47,6 +49,8 @@ namespace GMCC.Sorter.Dispatcher
             WinSet.MainWindow = this;
 
             objs = ControlsSearchHelper.GetChildObjects<RadioButton>(this.nav_bar, "");
+
+            expireTimer = new System.Threading.Timer(new TimerCallback(TimerExec.ExpireTimeExec), null, 5000, 60 * 1000);
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
@@ -286,6 +290,12 @@ namespace GMCC.Sorter.Dispatcher
         private bool IsChangeNavChecked = false;
 
         private List<RadioButton> objs;
+
+        private void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ActiveWindow window = new ActiveWindow();
+            window.ShowDialog();
+        }
     }
 
 

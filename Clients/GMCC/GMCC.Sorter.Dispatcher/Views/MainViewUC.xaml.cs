@@ -62,6 +62,12 @@ namespace GMCC.Sorter.Dispatcher.Views
 
         private void RunningControl_Click(object sender, RoutedEventArgs e)
         {
+            if (Arthur.App.Current.Option.RemainingMinutes <= 0)
+            {
+                MessageBox.Show("软件已经过期，无法启动！");
+                return;
+            }
+
             var btn = (ProcButton)sender;
             if (btn.Name == "start")
             {

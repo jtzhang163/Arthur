@@ -79,6 +79,23 @@ namespace GMCC.Sorter.ViewModel
             }
         }
 
+        private string expireTip = null;
+
+        public string ExpireTip
+        {
+            get
+            {
+                return expireTip;
+            }
+            set
+            {
+                if (expireTip != value)
+                {
+                    SetProperty(ref expireTip, value);
+                }
+            }
+        }
+
         private string companyName = null;
 
         public string CompanyName

@@ -58,6 +58,8 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
+            if (Arthur.App.Current.Option.RemainingMinutes <= 0) return;
+
             if (Current.MainMachine.IsAlive && Current.Option.IsBatteryScanReady && !Current.Option.IsAlreadyBatteryScan && Current.Option.Tray11_Id > 0)
             {
                 //绑盘位电池已满，不扫码，直到出现新托盘再扫

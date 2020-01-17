@@ -58,6 +58,8 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
+            if (Arthur.App.Current.Option.RemainingMinutes <= 0) return;
+
             if (!Current.MainMachine.IsAlive) return;
 
             if (this == Current.BindTrayScaner && Current.Option.IsBindTrayScanReady && !Current.Option.IsAlreadyBindTrayScan)

@@ -50,6 +50,7 @@ namespace GMCC.Sorter.ViewModel
 
         public void Comm()
         {
+            if (Arthur.App.Current.Option.RemainingMinutes <= 0) return;
             //发送给PLC上位机在线心跳
             this.Commor.Write("D441", (ushort)1);
 
