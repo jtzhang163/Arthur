@@ -94,5 +94,23 @@ namespace GMCC.Sorter.Business
         //{
         //    return Context.ProcTrays.SingleOrDefault(o => o.Id == id) ?? new ProcTray();
         //}
+
+        /// <summary>
+        /// 清除所有该流程托盘的信息
+        /// </summary>
+        public static void ClearProcTray(int id)
+        {
+            if (Current.Option.Tray11_Id == id) Current.Option.Tray11_Id = 0;
+            if (Current.Option.Tray12_Id == id) Current.Option.Tray12_Id = 0;
+            if (Current.Option.Tray13_Id == id) Current.Option.Tray13_Id = 0;
+            if (Current.Option.Tray21_Id == id) Current.Option.Tray21_Id = 0;
+            if (Current.Option.Tray22_Id == id) Current.Option.Tray22_Id = 0;
+            if (Current.Option.Tray23_Id == id) Current.Option.Tray23_Id = 0;
+            if (Current.Option.Tray11_PreId == id) Current.Option.Tray11_PreId = 0;
+            if (Current.Option.Tray12_PreId == id) Current.Option.Tray12_PreId = 0;
+            if (Current.Option.Tray21_PreId == id) Current.Option.Tray21_PreId = 0;
+            if (Current.Option.Tray22_PreId == id) Current.Option.Tray22_PreId = 0;
+            if (Current.Option.Tray23_PreId == id) Current.Option.Tray23_PreId = 0;
+        }
     }
 }

@@ -22,6 +22,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Arthur.Core.Transfer;
+using GMCC.Sorter.Business;
 
 namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
 {
@@ -125,6 +126,9 @@ namespace GMCC.Sorter.Dispatcher.UserControls.Query.ProcTray
             {
                 _AppContext.ProcTrays.Remove(ProcTray);
                 _AppContext.SaveChanges();
+
+                ProcTrayManage.ClearProcTray(id);
+
                 Arthur.App.Business.Logging.AddOplog(string.Format("删除流程托盘[{0}]", ProcTray.Code), Arthur.App.Model.OpType.删除);
                 UpdateDataGrid(PageIndex);
             }

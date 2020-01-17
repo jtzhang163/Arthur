@@ -51,7 +51,7 @@ namespace GMCC.Sorter.ViewModel
         public void Comm()
         {
             //发送给PLC上位机在线心跳
-            Current.MainMachine.Commor.Write("D441", (ushort)1);
+            this.Commor.Write("D441", (ushort)1);
 
             var ret = this.Commor.Read("D400", (ushort)60);
             if (ret.IsSucceed)

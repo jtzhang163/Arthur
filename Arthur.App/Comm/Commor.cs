@@ -7,7 +7,8 @@ using System.Net.Sockets;
 namespace Arthur.App.Comm
 {
     /// <summary>
-    /// 通信连接抽象类
+    /// 通信管理类
+    /// 串口、以太网通信统一接口
     /// </summary>
     public class Commor
     {
