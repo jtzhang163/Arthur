@@ -304,22 +304,21 @@ namespace GMCC.Sorter.Run
 
         public static void ExpireTimeExec(object obj)
         {
+            Arthur.App.Current.Option.RemainingMinutes--;
             if (Arthur.App.Current.Option.RemainingMinutes > 0)
             {
                 if (Arthur.App.Current.Option.RemainingMinutes < 24 * 60)
                 {
-                    Current.App.ExpireTip = string.Format("软件即将过期，剩余时间：{0}min，双击此处激活", Arthur.App.Current.Option.RemainingMinutes);
+                    Current.App.ExpireTip = string.Format("软件即将过期，剩余时间：{0}min，双击此处输入激活码", Arthur.App.Current.Option.RemainingMinutes);
                 }
                 else
                 {
                     Current.App.ExpireTip = "已激活";
                 }
-
-                Arthur.App.Current.Option.RemainingMinutes--;
             }
             else
             {
-                Current.App.ExpireTip = string.Format("软件已经过期！双击此处激活");
+                Current.App.ExpireTip = string.Format("软件已经过期！双击此处输入激活码");
             }
         }
     }
